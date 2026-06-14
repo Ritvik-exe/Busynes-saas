@@ -1,0 +1,158 @@
+# Cloud and terraform version
+terraform{
+    required_providers{
+        aws = {
+            source = "hashicorp/aws"
+            version = "~> 5.0"
+        }
+    }
+}
+
+# Region for which resources are to be deployed
+provider "aws" {
+    region = "eu-west-2"
+}
+
+# ========================== S3 Bucket ==========================
+resource "aws_s3_bucket" "invoice"{
+    bucket = var.busynes_bucket
+
+    tags = {
+        Name = var.busynes_bucket
+        Environment = "dev"
+        Project = "busynes"
+        managedby = "terraform"
+    }
+    }
+
+# S3 Versioning
+resource "aws_s3_bucket_versioning" "invoice_version"{
+    bucket = aws_s3_bucket.invoice.id
+    versioning_configuration{
+        status = "Enabled"
+    }
+}
+
+# ========================== DynamoDB ========================== 
+resource "aws_dynamodb_table" "memory"{
+    name = var.busynes_db
+    hash_key = "ClientID"
+    range_key = "Timestamp"
+    billing_mode = "PAY_PER_REQUEST"
+
+    attribute {
+        name = "ClientID"
+        type = "S"
+    }
+
+    attribute {
+        name = "Timestamp"
+        type = "S"
+    }
+
+    tags = {
+        Name = var.busynes_db
+        Environment = "dev"
+        Project = "busynes"
+        managedby = "terraform"
+    }
+}
+
+# ========================== IAM Role ========================== 
+resource "aws_iam_role" "busynes_lambda_role"{
+    name = var.busynes_lambda_role
+    assume_role_policy = jsonencode({
+        Version = "2012-10-17",
+        Statement = [
+            {
+                Action = "sts:AssumeRole",
+                Effect = "Allow",
+                Principal = {
+                    Service = "lambda.amazonaws.com"
+                }
+            }
+        ]
+    })
+    tags = {
+        Name = var.busynes_lambda_role
+        Environment = "dev"
+        Project = "busynes"
+        managedby = "terraform"
+    }
+    }
+
+# IAM Policy Attachments for lambda role
+resource "aws_iam_role_policy_attachment" "busynes_lambda_s3"{
+    role = aws_iam_role.busynes_lambda_role.name
+    policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "busynes_lambda_dynamodb"{
+    role = aws_iam_role.busynes_lambda_role.name
+    policy_arn = "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "busynes_lambda_execution"{
+    role = aws_iam_role.busynes_lambda_role.name
+    policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
+resource "aws_iam_role_policy_attachment" "busynes_lambda_rekognition"{
+    role = aws_iam_role.busynes_lambda_role.name
+    policy_arn = "arn:aws:iam::aws:policy/AmazonRekognitionReadOnlyAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "busynes_lambda_ses"{
+    role = aws_iam_role.busynes_lambda_role.name
+    policy_arn = "arn:aws:iam::aws:policy/AmazonSESFullAccess"
+}
+
+# ========================== Lambda Function ==========================
+data "archive_file" "lambda_zip"{
+    type = "zip"
+    source_file = "${path.module}/../Backend/lambda_function.py"
+    output_path = "${path.module}/lambda_function.zip"
+}
+
+resource "aws_lambda_function" "busynes_lambda_function"{
+    filename = data.archive_file.lambda_zip.output_path
+    function_name = var.busynes_lambda_function
+    role = aws_iam_role.busynes_lambda_role.arn
+    handler = "lambda_function.lambda_handler"
+    source_code_hash = data.archive_file.lambda_zip.output_base64sha256
+
+    runtime = "python3.12"
+
+    environment {
+        variables = {
+            TABLE_NAME = aws_dynamodb_table.memory.name
+        }
+    }
+
+    tags = {
+        Name = var.busynes_lambda_function
+        Environment = "dev"
+        Project = "busynes"
+        managedby = "terraform"
+    }
+}
+
+# ========================== Lambda Trigger ==========================
+resource "aws_lambda_permission" "invoice_trigger"{
+    statement_id = var.busynes_lambda_trigger
+    action = "lambda:InvokeFunction"
+    function_name = aws_lambda_function.busynes_lambda_function.arn
+    principal = "s3.amazonaws.com"
+    source_arn = aws_s3_bucket.invoice.arn
+}
+
+resource "aws_s3_bucket_notification" "bucket_notification"{
+    bucket = aws_s3_bucket.invoice.id
+
+    lambda_function {
+        lambda_function_arn = aws_lambda_function.busynes_lambda_function.arn
+        events = ["s3:ObjectCreated:*"]
+        }
+    depends_on = [aws_lambda_permission.invoice_trigger]
+}
+
