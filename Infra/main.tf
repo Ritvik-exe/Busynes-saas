@@ -81,7 +81,7 @@ resource "aws_iam_role" "busynes_lambda_role"{
     }
     }
 
-# IAM Policy Attachments for lambda role
+# ========================== Lambda IAM policies Attachments ==========================
 resource "aws_iam_role_policy_attachment" "busynes_lambda_s3"{
     role = aws_iam_role.busynes_lambda_role.name
     policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
@@ -156,3 +156,45 @@ resource "aws_s3_bucket_notification" "bucket_notification"{
     depends_on = [aws_lambda_permission.invoice_trigger]
 }
 
+# ========================== HTTP API Gateway ==========================
+resource "aws_apigatewayv2_api" "busynes_api"{
+    name = var.busynes_api
+    protocol_type = "HTTP"
+}
+
+resource "aws_apigatewayv2_integration" "busynes_api_integration"{
+    api_id = aws_apigatewayv2_api.busynes_api.id
+    integration_type = "AWS_PROXY"
+    integration_method = "POST"
+    integration_uri = aws_lambda_function.busynes_lambda_function.invoke_arn
+    payload_format_version = "2.0"
+}
+
+resource "aws_apigatewayv2_route" "busynes_api_route"{
+    api_id = aws_apigatewayv2_api.busynes_api.id
+    route_key = "ANY /"
+    target = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
+}
+
+resource "aws_apigatewayv2_stage" "busynes_api_stage"{
+    api_id = aws_apigatewayv2_api.busynes_api.id
+    name = "$default"
+    auto_deploy = true
+
+    tags = {
+        Name = var.busynes_api
+        Environment = "dev"
+        Project = "busynes"
+        managedby = "terraform"
+    }
+}
+
+
+# Lambda Trigger for API Gateway
+resource "aws_lambda_permission" "lambda_api_trigger"{
+    statement_id = var.lambda_api_trigger
+    action = "lambda:InvokeFunction"
+    function_name = aws_lambda_function.busynes_lambda_function.arn
+    principal = "apigateway.amazonaws.com"
+    source_arn = "${aws_apigatewayv2_api.busynes_api.execution_arn}/*/*"
+}

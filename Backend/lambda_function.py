@@ -5,6 +5,7 @@ import datetime
 import os
 import re
 from decimal import Decimal
+from boto3.dynamodb.conditions import Key
 
 # Initializing AWS Clients
 s3_client = boto3.client('s3')
@@ -21,11 +22,22 @@ def lambda_handler(event, context):
     try:
         invoice_total = Decimal('0.00')
         timestamp = datetime.datetime.now().isoformat()
+        today_date = datetime.date.today().strftime('%Y-%m-%d')
+        month_date = datetime.date.today().strftime('%Y-%m')
+        today_amount = Decimal('0.00')
+        month_amount = Decimal('0.00')
         all_amounts = []
 
         # Getting S3 Bucket and File Name
         bucket_name = event['Records'][0]['s3']['bucket']['name']
         file_name = event['Records'][0]['s3']['object']['key']
+        path = file_name.split('/')
+        if len(path) > 1:
+            ClientID = path[-2]
+            clean_file_name = path[-1]
+        else:
+            ClientID = 'Admin'
+            clean_file_name = file_name
 
         # Validating File Extension
         allowed_extensions = ('jpeg', 'png', 'jpg')
@@ -64,12 +76,27 @@ def lambda_handler(event, context):
             # Putting the extracted data into DynamoDB
             response = table.put_item(
                 Item = {
-                    'ClientID' : 'User_1',
+                    'ClientID' : ClientID,
                     'Timestamp' : timestamp,
                     'Amount' : invoice_total,
                     'Filename' : file_name
                 }
             )
+
+            # Fetching all items from table that meets with criteria
+            response = table.query(
+                KeyConditionExpression = Key('ClientID').eq('Admin') & Key('Timestamp').begins_with(month_date)
+
+            )
+
+            # Summing all amounts of today
+            for item in response['Items']:
+                month_amount += item['Amount']
+                if item['Timestamp'].startswith(today_date):
+                    today_amount += item['Amount']
+
+            print(f'Today invoice total = {today_amount}')
+            print(f'This month invoice total = {month_amount}')
 
             # PREPPED FOR PYTHON F-STRING (DOUBLE BRACES INCLUDED)
             html_template = f"""
@@ -93,6 +120,7 @@ def lambda_handler(event, context):
                     <p><strong>File:</strong> {file_name}</p>
                     <p><strong>Total Detected:</strong></p>
                     <div class="amount">£{invoice_total}</div>
+                    <p><strong>Today invoices Total:</strong> £{today_amount}</p>
                     <div class="footer">
                         Busynes for Business — Reclaiming your Sunday afternoons.
                     </div>

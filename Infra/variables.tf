@@ -34,3 +34,17 @@ variable "busynes_lambda_trigger" {
     description = "busynes-lambda-trigger"
     default = "busynes-lambda-trigger"
 }
+
+# HTTP API Gateway
+variable "busynes_api"{
+    type = string
+    description = "busynes-api"
+    default = "busynes-api"
+}
+
+# Lambda API Trigger 
+variable "lambda_api_trigger"{
+    type = string
+    description = "lambda-api-trigger"
+    default = "lambda-api-trigger"
+}
