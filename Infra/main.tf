@@ -1,4 +1,4 @@
-# Cloud and terraform version
+# ========================== Terraform and AWS versions ==========================
 terraform{
     required_providers{
         aws = {
@@ -6,9 +6,14 @@ terraform{
             version = "~> 5.0"
         }
     }
+    backend "s3"{
+        bucket = "busynes-tf-state-ritvik-160835721559-eu-west-2-an"
+        key = "global/s3/terraform.tfstate"
+        region = "eu-west-2"
+    }
 }
 
-# Region for which resources are to be deployed
+# ========================== AWS Region ==========================
 provider "aws" {
     region = "eu-west-2"
 }
@@ -58,7 +63,7 @@ resource "aws_dynamodb_table" "memory"{
     }
 }
 
-# ========================== IAM Role ========================== 
+# ========================== IAM Roles ========================== 
 resource "aws_iam_role" "busynes_lambda_role"{
     name = var.busynes_lambda_role
     assume_role_policy = jsonencode({
@@ -81,7 +86,41 @@ resource "aws_iam_role" "busynes_lambda_role"{
     }
     }
 
-# ========================== Lambda IAM policies Attachments ==========================
+resource "aws_iam_role" "github_action_role"{
+    name = var.github_action_role
+    assume_role_policy = jsonencode({
+        Version = "2012-10-17"
+        Statement = [
+            {
+                Action = "sts:AssumeRoleWithWebIdentity"
+                Effect = "Allow"
+                Sid = ""
+                Principal = {
+                    Federated = aws_iam_openid_connect_provider.github_actions.arn
+                }
+                Condition = {
+                    StringEquals = {
+                        "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+                    }
+                    StringLike = {
+                        "token.actions.githubusercontent.com:sub": "repo:Ritvik-exe/Busynes-saas:*"
+                    }
+                }
+
+            }
+    ]
+    }
+)
+
+tags = {
+    Name = var.github_action_role
+    Environment = "dev"
+    Project = "busynes"
+    managedby = "terraform"
+}
+}
+
+# ========================== IAM policies Attachments ==========================
 resource "aws_iam_role_policy_attachment" "busynes_lambda_s3"{
     role = aws_iam_role.busynes_lambda_role.name
     policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
@@ -105,6 +144,11 @@ resource "aws_iam_role_policy_attachment" "busynes_lambda_rekognition"{
 resource "aws_iam_role_policy_attachment" "busynes_lambda_ses"{
     role = aws_iam_role.busynes_lambda_role.name
     policy_arn = "arn:aws:iam::aws:policy/AmazonSESFullAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "busynes_github_action"{
+    role = aws_iam_role.github_action_role.name
+    policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
 
 # ========================== Lambda Function ==========================
@@ -198,3 +242,13 @@ resource "aws_lambda_permission" "lambda_api_trigger"{
     principal = "apigateway.amazonaws.com"
     source_arn = "${aws_apigatewayv2_api.busynes_api.execution_arn}/*/*"
 }
+
+# ========================== GitHub actions ==========================
+resource "aws_iam_openid_connect_provider" "github_actions"{
+    url = "https://token.actions.githubusercontent.com"
+    client_id_list = [
+        "sts.amazonaws.com"
+    ]
+    thumbprint_list = ["6938fd4d98bab03faadb97b34396831e3780aea1"]
+}
+    
