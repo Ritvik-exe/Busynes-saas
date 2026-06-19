@@ -50,8 +50,8 @@ variable "lambda_api_trigger"{
 }
 
 # Github Action Role
-variable "github_action_role"{
+variable "github_actions_role"{
     type = string
-    description = "busynes-github-action-role"
-    default = "busynes-github-action-role"
+    description = "busynes-github-actions-role"
+    default = "busynes-github-actions-role"
 }

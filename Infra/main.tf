@@ -87,7 +87,7 @@ resource "aws_iam_role" "busynes_lambda_role"{
     }
 
 resource "aws_iam_role" "github_action_role"{
-    name = var.github_action_role
+    name = var.github_actions_role
     assume_role_policy = jsonencode({
         Version = "2012-10-17"
         Statement = [
@@ -113,7 +113,7 @@ resource "aws_iam_role" "github_action_role"{
 )
 
 tags = {
-    Name = var.github_action_role
+    Name = var.github_actions_role
     Environment = "dev"
     Project = "busynes"
     managedby = "terraform"
