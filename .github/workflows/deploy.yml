@@ -1,0 +1,30 @@
+name : "Deploy Busynes Infrastructure"
+permissions:
+    id-token: write
+    contents: read
+on:
+    push: 
+        branches: ['main']
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
+            - name: Configure AWS Credentials
+              uses: aws-actions/configure-aws-credentials@v4
+              with:
+                role-to-assume: arn:aws:iam::160835721559:role/github-actions-role
+                aws-region: eu-west-2
+                audience: sts.amazonaws.com
+            - name: Setup Terraform
+              uses: hashicorp/setup-terraform@v4
+            - name: Terraform Init
+              run: terraform init
+              working-directory: ./Infra
+            - name: Terraform Validate
+              run: terraform validate
+              working-directory: ./Infra
+            - name: Terraform Apply
+              run: terraform apply -auto-approve
+              working-directory: ./Infra
