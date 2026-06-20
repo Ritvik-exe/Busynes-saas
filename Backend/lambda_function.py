@@ -87,7 +87,7 @@ def lambda_handler(event, context):
 
                 # Fetching all items from table that meets with criteria
                 response = table.query(
-                    KeyConditionExpression = Key('ClientID').eq('Admin') & Key('Timestamp').begins_with(month_date)
+                    KeyConditionExpression = Key('ClientID').eq(ClientID) & Key('Timestamp').begins_with(month_date)
 
                 )
 
@@ -123,6 +123,7 @@ def lambda_handler(event, context):
                         <p><strong>Total Detected:</strong></p>
                         <div class="amount">£{invoice_total}</div>
                         <p><strong>Today invoices Total:</strong> £{today_amount}</p>
+                        <p><strong>This Month's Total:</strong> £{month_amount}</p>
                         <div class="footer">
                             Busynes for Business — Reclaiming your Sunday afternoons.
                         </div>
