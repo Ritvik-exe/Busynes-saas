@@ -1,7 +1,7 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import {defineConfig} from 'vite';
+import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
   return {
@@ -21,6 +21,8 @@ export default defineConfig(() => {
           onboarding: path.resolve(__dirname, 'onboarding.html'),
           pricing: path.resolve(__dirname, 'pricing.html'),
           signup: path.resolve(__dirname, 'signup.html'),
+          privacy: path.resolve(__dirname, 'privacy.html'),
+          terms: path.resolve(__dirname, 'terms.html'),
         },
       },
     },
