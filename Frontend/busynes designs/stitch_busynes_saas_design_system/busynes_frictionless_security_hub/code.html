@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Busynes - Frictionless Security</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#d3e4fe",
+                        "primary-fixed": "#9af986",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "on-background": "#0b1c30",
+                        "on-primary-fixed-variant": "#005302",
+                        "primary-fixed-dim": "#7edc6d",
+                        "outline-variant": "#bfcab7",
+                        "on-primary-container": "#abff97",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#e5eeff",
+                        "on-tertiary-container": "#e9ebed",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#d5e3fd",
+                        "outline": "#707a6a",
+                        "surface-bright": "#f8f9ff",
+                        "primary-container": "#1b7a16",
+                        "inverse-surface": "#213145",
+                        "tertiary": "#4f5254",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#e0e3e5",
+                        "on-secondary-container": "#57657b",
+                        "background": "#f8f9ff",
+                        "secondary": "#515f74",
+                        "surface-container-low": "#eff4ff",
+                        "surface-tint": "#066e08",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#404a3b",
+                        "on-primary-fixed": "#002200",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "surface-variant": "#d3e4fe",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "tertiary-container": "#676a6c",
+                        "surface": "#f8f9ff",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "surface-container-high": "#dce9ff",
+                        "primary": "#005f03",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-dim": "#cbdbf5",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#0b1c30",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#7edc6d",
+                        "secondary-fixed": "#d5e3fd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "sm": "12px",
+                        "margin-mobile": "16px",
+                        "lg": "48px",
+                        "xl": "80px",
+                        "md": "24px",
+                        "xs": "4px",
+                        "base": "8px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "label-md": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .toast-enter {
+            animation: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col md:flex-row overflow-x-hidden">
+<!-- Left Side: Brand Panel -->
+<div class="relative w-full md:w-1/2 bg-primary-container flex flex-col justify-between p-lg lg:p-xl text-on-primary-container overflow-hidden min-h-[40vh] md:min-h-screen">
+<!-- Subtle Background Pattern/Gradient -->
+<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(circle at top right, #9af986 0%, transparent 60%);"></div>
+<!-- Logo -->
+<div class="relative z-10 flex items-center">
+<img alt="Busynes Logo" class="h-12 w-auto brightness-0 invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvJNcxY7iBbZqjv7U1MMyByQCFx8kBGBxIHMtF1VZGw7PTbj_kwGXBd1F9ecErDk9FjCSt-_eKmWwcetIFobcnGcLhX4qlJm-XLgyRUAWYLsPB-4m0qEuuFDXjG3AbJekFBoEIUrI1PCjfyKYdBdWf0jrg2ksEV_MP1WZfZqJhL4gzQhpvR_Ga76LrjFBJv5kXpDcWt2MkutVBLkqk7GAOjQY4eNH66ZUdlcfWRwXbl4iZpYyBCnB_ydV4B3zpQPm8gdpyMLvbKY8"/>
+</div>
+<!-- Testimonial -->
+<div class="relative z-10 my-xl max-w-lg">
+<blockquote class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-primary mb-md">
+                "Busynes saved me 12 hours this month."
+            </blockquote>
+<cite class="font-body-lg text-body-lg text-primary-fixed-dim not-italic block">
+                — James, E-com Founder
+            </cite>
+</div>
+<!-- Core Modules Grid -->
+<div class="relative z-10 grid grid-cols-2 gap-md max-w-md">
+<div class="glass-panel p-md rounded-xl flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-primary" data-icon="account_balance_wallet" data-weight="fill" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="font-body-sm text-body-sm font-medium text-on-primary">Financial Hub</span>
+</div>
+<div class="glass-panel p-md rounded-xl flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-primary" data-icon="edit_note" data-weight="fill" style="font-variation-settings: 'FILL' 1;">edit_note</span>
+<span class="font-body-sm text-body-sm font-medium text-on-primary">Smart Notes</span>
+</div>
+<div class="glass-panel p-md rounded-xl flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-primary" data-icon="inventory_2" data-weight="fill" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="font-body-sm text-body-sm font-medium text-on-primary">Inventory OS</span>
+</div>
+<div class="glass-panel p-md rounded-xl flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-primary" data-icon="groups" data-weight="fill" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-body-sm text-body-sm font-medium text-on-primary">Team Collaboration</span>
+</div>
+</div>
+</div>
+<!-- Right Side: Authentication Form -->
+<div class="w-full md:w-1/2 bg-surface-container-lowest flex items-center justify-center p-margin-mobile md:p-margin-desktop min-h-[60vh] md:min-h-screen relative">
+<div class="w-full max-w-md">
+<!-- Segmented Control Tabs -->
+<div class="flex p-1 bg-surface-container-low rounded-lg mb-xl">
+<button class="flex-1 py-sm text-center font-body-md text-body-md font-medium bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-md transition-all">
+                    Create Account
+                </button>
+<button class="flex-1 py-sm text-center font-body-md text-body-md font-medium text-secondary hover:text-on-surface transition-colors">
+                    Sign In
+                </button>
+</div>
+<div class="mb-lg">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xs">Get Started</h1>
+<p class="font-body-sm text-body-sm text-secondary">Join thousands of founders optimizing their workflow.</p>
+</div>
+<!-- Social Logins -->
+<div class="space-y-sm mb-lg">
+<button class="w-full flex items-center justify-center gap-sm py-sm px-md border border-outline-variant rounded-DEFAULT hover:bg-surface-container-low transition-colors text-on-surface font-body-sm text-body-sm font-medium">
+<img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA92MbTzklneLduJL5WgeJlkJJU1hCPTQVspbv-7IQKGOX4dIAQtIFtslnWJ8gPryDDEQaNksNFnXIqYBnmH6tnFAYlQJQd4qhDkLlNqs9_mrsPaJp9RKaZ4l3E4GiSGOt_sYPRk1VKR6Dgynm_ppH_HHGrBNocrSjPdmmD7sGPCmBXarQJelgxVXx4Tla62_HlmvE1_-kxhjxl3PLU5l3_vM1Cb7jXvgdiWgh0ry4_hXRj9FMDqvfcZhJj-E4zELsw8Mmmld8yuX0"/>
+                    Continue with Google
+                </button>
+<button class="w-full flex items-center justify-center gap-sm py-sm px-md border border-outline-variant rounded-DEFAULT hover:bg-surface-container-low transition-colors text-on-surface font-body-sm text-body-sm font-medium">
+<img alt="Microsoft" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAM9Q87gaPSUzAugGvRjTzTtsjhQJ-P4cRx8EuzFQgWjakVhrAqXAgW-UOUCIADdoM1ilcNvBd1jwuZUJNsPDxWYv43yC64URZF5p7_WKJz4aeCkNVIYbYiabB8Pq8rofG-XYaX30DMQbpt1jpbhc5EzgWd0hb7T6mokYJNDhqXZMsT3TE2UT1ey4DXoyP5f3gUNZ61nK8Is55s_ULWVdSkJxmRtsB4V2dTrtew9oRCyi7LAI8xzEA2ODNf9Mq4WobEbCn2NPsBFQk"/>
+                    Continue with Microsoft
+                </button>
+</div>
+<!-- Separator -->
+<div class="relative flex items-center py-md mb-md">
+<div class="flex-grow border-t border-outline-variant"></div>
+<span class="flex-shrink-0 mx-md font-body-sm text-body-sm text-secondary bg-surface-container-lowest px-2">or use your business email</span>
+<div class="flex-grow border-t border-outline-variant"></div>
+</div>
+<!-- Form -->
+<form class="space-y-md">
+<div>
+<label class="block font-body-sm text-body-sm font-semibold text-on-surface mb-xs" for="fullName">Full Name</label>
+<input class="w-full border border-outline-variant rounded-DEFAULT px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest" id="fullName" placeholder="Jane Doe" type="text"/>
+</div>
+<div>
+<label class="block font-body-sm text-body-sm font-semibold text-on-surface mb-xs" for="email">Business Email</label>
+<input class="w-full border border-outline-variant rounded-DEFAULT px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest" id="email" placeholder="jane@company.com" type="email"/>
+</div>
+<div>
+<label class="block font-body-sm text-body-sm font-semibold text-on-surface mb-xs" for="password">Password</label>
+<input class="w-full border border-outline-variant rounded-DEFAULT px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest" id="password" placeholder="••••••••" type="password"/>
+</div>
+<div class="flex items-start gap-sm pt-xs">
+<div class="flex items-center h-5">
+<input class="w-4 h-4 border border-outline-variant rounded text-primary-container focus:ring-primary-container bg-surface-container-lowest" id="newsletter" type="checkbox"/>
+</div>
+<label class="font-body-sm text-body-sm text-secondary cursor-pointer" for="newsletter">
+                        Send me the Weekly Efficiency Report
+                    </label>
+</div>
+<button class="w-full bg-primary-container text-on-primary py-sm px-md rounded-DEFAULT font-body-md text-body-md font-medium hover:bg-surface-tint transition-colors mt-lg shadow-sm hover:shadow-md" type="submit">
+                    Create Account
+                </button>
+</form>
+<p class="mt-lg text-center font-label-md text-label-md text-secondary max-w-xs mx-auto">
+                By signing up, you agree to the 14-day Professional Pilot. No credit card required.
+            </p>
+</div>
+</div>
+<!-- Subtle Toast/Overlay Mockup -->
+<div class="fixed bottom-margin-mobile right-margin-mobile md:bottom-margin-desktop md:right-margin-desktop bg-surface-container-lowest border border-outline-variant shadow-[0_4px_20px_rgba(0,0,0,0.05)] rounded-xl p-md max-w-sm z-50 hidden opacity-0 transition-opacity duration-300" id="welcome-toast">
+<div class="flex items-start justify-between mb-sm">
+<h4 class="font-headline-md text-body-lg font-semibold text-on-surface">Fast Start Guide</h4>
+<button class="text-secondary hover:text-on-surface" onclick="document.getElementById('welcome-toast').classList.add('hidden')">
+<span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+</button>
+</div>
+<ul class="space-y-sm">
+<li class="flex items-center gap-sm">
+<span class="flex items-center justify-center w-6 h-6 rounded-full bg-surface-container-high text-secondary font-label-md text-label-md">1</span>
+<span class="font-body-sm text-body-sm text-on-surface">Verify Email</span>
+</li>
+<li class="flex items-center gap-sm">
+<span class="flex items-center justify-center w-6 h-6 rounded-full bg-surface-container-high text-secondary font-label-md text-label-md">2</span>
+<span class="font-body-sm text-body-sm text-on-surface">Upload First Invoice</span>
+</li>
+<li class="flex items-center gap-sm">
+<span class="flex items-center justify-center w-6 h-6 rounded-full bg-surface-container-high text-secondary font-label-md text-label-md">3</span>
+<span class="font-body-sm text-body-sm text-on-surface">See Your First Total</span>
+</li>
+</ul>
+</div>
+<script>
+        // Simulate showing the toast after a short delay for demonstration
+        setTimeout(() => {
+            const toast = document.getElementById('welcome-toast');
+            toast.classList.remove('hidden');
+            // Trigger reflow
+            void toast.offsetWidth;
+            toast.classList.add('toast-enter');
+        }, 1500);
+    </script>
+</body></html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Busynes - Pricing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-background": "#0b1c30",
+                        "on-primary-fixed": "#002200",
+                        "surface-dim": "#cbdbf5",
+                        "surface": "#f8f9ff",
+                        "secondary": "#515f74",
+                        "primary-fixed": "#9af986",
+                        "surface-container": "#e5eeff",
+                        "primary-container": "#1b7a16",
+                        "surface-bright": "#f8f9ff",
+                        "on-primary-fixed-variant": "#005302",
+                        "surface-container-low": "#eff4ff",
+                        "primary": "#005f03",
+                        "on-surface": "#0b1c30",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#066e08",
+                        "inverse-primary": "#7edc6d",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#e0e3e5",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-tertiary-container": "#e9ebed",
+                        "on-surface-variant": "#404a3b",
+                        "surface-variant": "#d3e4fe",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "primary-fixed-dim": "#7edc6d",
+                        "secondary-fixed": "#d5e3fd",
+                        "secondary-container": "#d5e3fd",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "background": "#f8f9ff",
+                        "on-secondary-container": "#57657b",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-container-high": "#dce9ff",
+                        "outline": "#707a6a",
+                        "on-primary-container": "#abff97",
+                        "tertiary": "#4f5254",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "inverse-surface": "#213145",
+                        "surface-container-highest": "#d3e4fe",
+                        "tertiary-container": "#676a6c",
+                        "outline-variant": "#bfcab7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "xl": "80px",
+                        "md": "24px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "lg": "48px",
+                        "sm": "12px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-md": ["JetBrains Mono"],
+                        "headline-xl": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .custom-glow { box-shadow: 0 0 40px rgba(27, 122, 22, 0.25); }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop h-20 max-w-[1440px] mx-auto bg-surface/80 backdrop-blur-md border-b border-outline-variant dark:border-outline">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Busynes</div>
+<div class="hidden md:flex gap-md">
+<a class="text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200 font-label-md text-label-md py-2" href="#">Product</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200 font-label-md text-label-md py-2" href="#">Solutions</a>
+<a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary dark:border-primary-fixed-dim pb-1 font-label-md text-label-md py-2 hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200 scale-95 transition-transform duration-150" href="#">Pricing</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200 font-label-md text-label-md py-2" href="#">Resources</a>
+</div>
+<div class="flex gap-sm items-center">
+<select class="bg-transparent border-none text-on-surface font-label-md text-label-md focus:ring-0 cursor-pointer">
+<option value="gbp">GBP £</option>
+<option value="usd">USD $</option>
+<option value="eur">EUR €</option>
+</select>
+<button class="font-label-md text-label-md text-primary-container px-4 py-2 hover:bg-surface-variant rounded transition-colors">Log In</button>
+<button class="font-label-md text-label-md bg-primary-container text-white px-4 py-2 rounded hover:bg-surface-tint transition-colors">Get Started</button>
+</div>
+</nav>
+<main class="pt-32 pb-xl px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
+<!-- Value Hook Section -->
+<section class="text-center mb-xl">
+<h1 class="font-headline-xl text-headline-xl mb-base max-w-3xl mx-auto">Scalable Pricing for Every Stage of Your Busynes.</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl mx-auto mb-lg">Choose the plan that powers your growth.</p>
+<div class="flex items-center justify-center gap-sm mt-8">
+<span class="font-label-md text-label-md text-on-surface">Monthly</span>
+<button aria-checked="false" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-surface-variant transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2" role="switch" type="button">
+<span aria-hidden="true" class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out translate-x-5"></span>
+</button>
+<span class="font-label-md text-label-md text-on-surface">Get 2 months free with Yearly</span>
+</div>
+</section>
+<!-- Pricing Grid -->
+<div class="grid md:grid-cols-3 gap-gutter mb-xl items-start">
+<!-- Starter -->
+<div class="border border-outline-variant rounded-xl p-lg bg-surface-container-lowest h-full flex flex-col">
+<h3 class="font-headline-md text-headline-md mb-2">Starter</h3>
+<p class="font-body-sm text-body-sm text-secondary mb-6 h-10">Perfect for new founders.</p>
+<div class="mb-8">
+<span class="font-headline-xl text-headline-xl">£0</span>
+<span class="font-body-sm text-body-sm text-secondary">/ Forever</span>
+</div>
+<ul class="space-y-4 mb-8 flex-grow">
+<li class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary-container text-[20px]">check</span><span class="font-body-md text-body-md">10 scans/mo</span></li>
+<li class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary-container text-[20px]">check</span><span class="font-body-md text-body-md">Basic Dashboard</span></li>
+<li class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary-container text-[20px]">check</span><span class="font-body-md text-body-md">Community Support</span></li>
+</ul>
+<button class="w-full font-label-md text-label-md text-primary-container border border-primary-container py-3 rounded hover:bg-surface-variant transition-colors mt-auto">Start for Free</button>
+</div>
+<!-- Professional -->
+<div class="border-2 border-primary-container rounded-xl p-lg bg-surface-container-lowest h-full flex flex-col relative custom-glow z-10 scale-105">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary-container text-white px-4 py-1 rounded-full font-label-md text-label-md text-[10px] uppercase tracking-wider font-bold shadow-md">Best Value</div>
+<h3 class="font-headline-md text-headline-md mb-2">Professional</h3>
+<p class="font-body-sm text-body-sm text-secondary mb-6 h-10">Unlimited scans, AI categorization, priority support.</p>
+<div class="mb-8">
+<span class="font-headline-xl text-headline-xl">£29</span>
+<span class="font-body-sm text-body-sm text-secondary">/ month</span>
+</div>
+<ul class="space-y-4 mb-8 flex-grow">
+<li class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary-container text-[20px]">check</span><span class="font-body-md text-body-md">Unlimited Scans</span></li>
+<li class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary-container text-[20px]">check</span><span class="font-body-md text-body-md">AI Categorization</span></li>
+<li class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary-container text-[20px]">check</span><span class="font-body-md text-body-md">Priority Support</span></li>
+<li class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary-container text-[20px]">check</span><span class="font-body-md text-body-md">WhatsApp Integration</span></li>
+</ul>
+<button class="w-full font-label-md text-label-md bg-primary-container text-white py-3 rounded hover:bg-surface-tint transition-colors mt-auto shadow-md">Start 14-Day Free Pilot</button>
+</div>
+<!-- Enterprise -->
+<div class="border border-outline-variant rounded-xl p-lg bg-surface-container-lowest h-full flex flex-col">
+<h3 class="font-headline-md text-headline-md mb-2">Enterprise</h3>
+<p class="font-body-sm text-body-sm text-secondary mb-6 h-10">For international teams. Includes Odoo-style modules and multi-region data storage.</p>
+<div class="mb-8">
+<span class="font-headline-xl text-headline-xl">Custom</span>
+</div>
+<ul class="space-y-4 mb-8 flex-grow">
+<li class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary-container text-[20px]">check</span><span class="font-body-md text-body-md">Odoo-style Modules</span></li>
+<li class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary-container text-[20px]">check</span><span class="font-body-md text-body-md">Multi-region Data Storage</span></li>
+<li class="flex items-center gap-sm"><span class="material-symbols-outlined text-primary-container text-[20px]">check</span><span class="font-body-md text-body-md">Dedicated Account Manager</span></li>
+</ul>
+<button class="w-full font-label-md text-label-md text-primary-container border border-primary-container py-3 rounded hover:bg-surface-variant transition-colors mt-auto">Contact Sales</button>
+</div>
+</div>
+<!-- Cost vs. Value Graphic -->
+<section class="max-w-4xl mx-auto mb-xl bg-surface-container-low rounded-2xl p-8 border border-outline-variant">
+<div class="text-center mb-8">
+<h2 class="font-headline-md text-headline-md mb-2">Cost vs. Value</h2>
+<p class="font-body-md text-body-md text-secondary">See how the Professional plan pays for itself.</p>
+</div>
+<div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+<div class="text-center">
+<div class="font-headline-xl text-headline-xl text-on-surface mb-2">£29<span class="font-body-sm text-body-sm text-secondary">/mo</span></div>
+<div class="font-label-md text-label-md text-secondary">Software Cost</div>
+</div>
+<div class="hidden md:block text-outline-variant">
+<span class="material-symbols-outlined text-[48px]">arrow_right_alt</span>
+</div>
+<div class="block md:hidden text-outline-variant">
+<span class="material-symbols-outlined text-[32px]">arrow_downward</span>
+</div>
+<div class="text-center">
+<div class="flex items-center justify-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary-container text-[32px]">schedule</span>
+<span class="font-headline-xl text-headline-xl text-primary-container">15 hrs</span>
+</div>
+<div class="font-label-md text-label-md text-secondary">Admin time saved</div>
+</div>
+<div class="hidden md:block text-outline-variant">
+<span class="material-symbols-outlined text-[48px]">arrow_right_alt</span>
+</div>
+<div class="block md:hidden text-outline-variant">
+<span class="material-symbols-outlined text-[32px]">arrow_downward</span>
+</div>
+<div class="text-center">
+<div class="font-headline-xl text-headline-xl text-primary-container mb-2">~£750</div>
+<div class="font-label-md text-label-md text-secondary">Labor Value Saved</div>
+</div>
+</div>
+</section>
+<!-- Security Trust Bar -->
+<section class="border-t border-outline-variant pt-12 pb-8">
+<div class="text-center mb-6">
+<p class="font-label-md text-label-md text-secondary uppercase tracking-widest">Enterprise-Grade Security &amp; Reliability</p>
+</div>
+<div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[24px]">cloud_done</span>
+<span class="font-body-md text-body-md font-semibold">AWS Well-Architected</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[24px]">gpp_good</span>
+<span class="font-body-md text-body-md font-semibold">GDPR Compliant</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[24px]">lock</span>
+<span class="font-body-md text-body-md font-semibold">TLS 1.3 Encryption</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-lg px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-md bg-surface-container-low dark:bg-surface-container-lowest border-t border-outline-variant dark:border-outline">
+<div class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed-dim">Busynes</div>
+<div class="flex gap-md flex-wrap justify-center">
+<a class="text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200 font-label-md text-label-md" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200 font-label-md text-label-md" href="#">Terms of Service</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200 font-label-md text-label-md" href="#">Cookie Settings</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200 font-label-md text-label-md" href="#">Contact Support</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200 font-label-md text-label-md" href="#">Security</a>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-fixed-variant">© 2024 Busynes Inc. All rights reserved.</div>
+</footer>
+</body></html>

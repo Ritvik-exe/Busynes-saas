@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Busynes - Stop Working For Your Data</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#F8FAFC",
+                        "surface-dim": "#CBD5E1",
+                        "surface-bright": "#F8FAFC",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#F1F5F9",
+                        "surface-container": "#E2E8F0",
+                        "surface-container-high": "#CBD5E1",
+                        "surface-container-highest": "#94A3B8",
+                        "on-surface": "#0F172A",
+                        "on-surface-variant": "#475569",
+                        "inverse-surface": "#1E293B",
+                        "inverse-on-surface": "#F8FAFC",
+                        "outline": "#94A3B8",
+                        "outline-variant": "#E2E8F0",
+                        "surface-tint": "#187c13",
+                        "primary": "#187c13",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#187c13",
+                        "on-primary-container": "#ffffff",
+                        "inverse-primary": "#41bc3a",
+                        "secondary": "#475569",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "rgba(24, 124, 19, 0.1)",
+                        "on-secondary-container": "#187c13",
+                        "tertiary": "#64748B",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#E2E8F0",
+                        "on-tertiary-container": "#0F172A",
+                        "error": "#EF4444",
+                        "on-error": "#ffffff",
+                        "error-container": "#FEE2E2",
+                        "on-error-container": "#991B1B",
+                        "primary-fixed": "#A7F3D0",
+                        "primary-fixed-dim": "#6EE7B7",
+                        "on-primary-fixed": "#064E3B",
+                        "on-primary-fixed-variant": "#047857",
+                        "secondary-fixed": "#E2E8F0",
+                        "secondary-fixed-dim": "#CBD5E1",
+                        "on-secondary-fixed": "#0F172A",
+                        "on-secondary-fixed-variant": "#475569",
+                        "tertiary-fixed": "#F1F5F9",
+                        "tertiary-fixed-dim": "#E2E8F0",
+                        "on-tertiary-fixed": "#0F172A",
+                        "on-tertiary-fixed-variant": "#475569",
+                        "background": "#F8FAFC",
+                        "on-background": "#0F172A",
+                        "surface-variant": "#E2E8F0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "container-max-width": "1280px",
+                        "gutter-desktop": "24px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "sm": "12px",
+                        "md": "24px",
+                        "lg": "48px",
+                        "xl": "80px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .emerald-gradient {
+            background: linear-gradient(135deg, #24a81d 0%, #187c13 100%);
+        }
+        .soft-shadow {
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+        }
+        .inner-glow {
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-background font-body-md antialiased selection:bg-primary-container selection:text-on-primary">
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-on-background/80 backdrop-blur-md border-b border-outline-variant/30 dark:border-outline/20 shadow-sm transition-all duration-300" id="topNav">
+        <div class="max-w-[1440px] mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-margin-desktop h-20">
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="flex items-center gap-2 sm:gap-3 hover:opacity-85 transition-opacity">
+                    <img alt="Busynes Logo" class="h-7 sm:h-8 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaglyYYHQQHhZI0sXOTcaVVDVGSJuZXRoKofma9kTZsHLG0WS23LRWQF6QP0mNzpRm1_dYjnYgl4vAS3G_xMrnF2LHiqNvSIDgpIkQN7hsYsN4spBArqw8Q5r_sTBUc0_V10OyF_L9R10Bik18Mr2hR3P87XxQVxm4dfg5doaByVE6wQzLZ4zjrLwedRQPmnXaxynT_LhkMqPQxFKlzAO4RoWw0XrNs7545LYLvhi3yQdUuFg71vULTx9CmUpE-YPYT9VcrQGq4zc">
+                    <span class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed tracking-tight">Busynes</span>
+                </a>
+            </div>
+            <div class="hidden lg:flex items-center gap-6 xl:gap-8">
+                <a class="text-primary dark:text-primary-fixed border-b-2 border-primary pb-1 font-label-md text-label-md" href="index.html" id="nav-product">Product</a>
+                <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 px-3 py-2 rounded-md font-label-md text-label-md hover:bg-surface-container-low" href="innovation.html" id="nav-lab">Innovation Lab</a>
+                <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 px-3 py-2 rounded-md font-label-md text-label-md hover:bg-surface-container-low" href="pricing.html" id="nav-pricing">Pricing</a>
+            </div>
+            <div class="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+                <a class="hidden sm:inline-block text-secondary hover:text-primary font-label-md text-label-md font-semibold px-2 py-1.5 rounded hover:bg-surface-container-low transition-colors" href="signup.html">Log In</a>
+                <a class="bg-primary-container text-on-primary font-label-md text-label-md px-3 sm:px-6 py-2 sm:py-2.5 rounded-full hover:bg-primary transition-colors inner-glow active:scale-95 shadow-sm whitespace-nowrap text-[11px] sm:text-sm font-semibold" href="signup.html" id="cta-start-pilot">
+                    Start Pilot
+                </a>
+                <button id="mobile-menu-toggle" class="lg:hidden p-2 text-on-surface hover:bg-surface-container-low rounded-full transition-colors focus:outline-none cursor-pointer" aria-label="Toggle menu">
+                    <span class="material-symbols-outlined text-[24px] block">menu</span>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile/Tablet Dropdown Menu -->
+        <div id="mobile-dropdown-menu" class="hidden absolute top-20 left-0 w-full bg-white dark:bg-on-background border-b border-outline-variant/30 shadow-lg px-6 py-4 z-40 transition-all duration-300">
+            <div class="flex flex-col gap-3 py-2">
+                <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 py-2.5 rounded-lg font-label-md text-label-md hover:bg-surface-container-low px-4 font-bold" href="index.html">Product</a>
+                <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 py-2.5 rounded-lg font-label-md text-label-md hover:bg-surface-container-low px-4 font-bold" href="innovation.html">Innovation Lab</a>
+                <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 py-2.5 rounded-lg font-label-md text-label-md hover:bg-surface-container-low px-4 font-bold" href="pricing.html">Pricing</a>
+                <hr class="border-outline-variant/30 sm:hidden">
+                <a class="sm:hidden text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 py-2.5 rounded-lg font-label-md text-label-md hover:bg-surface-container-low px-4 font-bold" href="signup.html">Log In</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-28 pb-20">
+        <!-- Hero Section -->
+        <section class="max-w-[1440px] mx-auto px-4 md:px-margin-desktop py-20 flex flex-col items-center text-center">
+            <div class="font-label-md text-label-md text-primary uppercase tracking-widest mb-4">Busynes for Business</div>
+            <h1 class="font-display-lg text-display-lg md:text-headline-xl text-on-background max-w-4xl mb-6 tracking-tight">
+                Stop working for your data. Let your data work for your <span class="text-primary">Busynes.</span>
+            </h1>
+            <p class="font-body-lg text-body-lg text-secondary max-w-2xl mb-10">
+                The all-in-one ecosystem to automate your admin, track your growth, and reclaim your Sunday afternoons. Powered by AWS Secure Intelligence.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center gap-4 mb-16 w-full sm:w-auto">
+                <a href="signup.html" class="bg-primary-container text-on-primary font-label-md text-label-md px-8 py-3.5 rounded-full hover:bg-primary transition-all duration-300 inner-glow active:scale-95 shadow-sm w-full sm:w-auto justify-center text-center">
+                    Start My 14-Day Pilot
+                </a>
+                <a href="pricing.html" class="bg-surface-container-lowest text-secondary font-label-md text-label-md px-8 py-3.5 rounded-full border border-outline-variant hover:border-primary hover:text-primary transition-all duration-300 active:scale-95 shadow-sm flex items-center gap-2 w-full sm:w-auto justify-center">
+                    <span class="material-symbols-outlined text-[20px]">payments</span>
+                    View Plans & Pricing
+                </a>
+            </div>
+            <div class="w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl border border-outline-variant/20 relative group">
+                <img alt="Busynes Dashboard Interface showing automated data flows and clean UI" class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-[1.01]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVM3EKAsK19OVImX9jDveO2slAqSeEfkDN-LAn-Dr0hQm932ancaJG7osVBl7YsD8wwjanwDXqeyTT8BJpuzcb_IqYFOToQZPhG9LrrAL7hZI8qzFVulqHvTQRarsWSjr7N1WaD6j4BrHgiXKkerDrssWmbEWXn3K0dPaDv9ZpwIwjaF1gbVPWWh4Wz2itkS4OXzuGSAiV5jotXe4N9yvCTgKZu3t5BthTPd1-T4zZX5MP1s4GyoOMdSY_9tCfajfBPsI1Yk-AEpk">
+                <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/40 to-transparent pointer-events-none"></div>
+            </div>
+        </section>
+
+        <!-- Problem Section -->
+        <section class="bg-surface py-24">
+            <div class="max-w-[1440px] mx-auto px-4 md:px-margin-desktop">
+                <div class="text-center mb-16">
+                    <h2 class="font-headline-lg text-headline-lg text-on-background mb-4">The Sunday Headache</h2>
+                    <p class="font-body-md text-body-md text-secondary max-w-xl mx-auto">The traditional approach to business admin is broken. It's time to stop the manual grind.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-80 gap-gutter">
+                    <!-- Card 1 -->
+                    <div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/30 soft-shadow hover:shadow-md transition-shadow duration-300">
+                        <div class="w-12 h-12 rounded-lg bg-error-container/30 text-error flex items-center justify-center mb-6">
+                            <span class="material-symbols-outlined fill-icon">keyboard</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md text-on-background mb-3">Manual Data Entry</h3>
+                        <p class="font-body-sm text-body-sm text-secondary">Hours lost typing invoices and receipts into spreadsheets instead of focusing on sports venue growth strategies.</p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/30 soft-shadow hover:shadow-md transition-shadow duration-300">
+                        <div class="w-12 h-12 rounded-lg bg-error-container/30 text-error flex items-center justify-center mb-6">
+                            <span class="material-symbols-outlined fill-icon">warning</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md text-on-background mb-3">Human Error</h3>
+                        <p class="font-body-sm text-body-sm text-secondary">Typos and missed records that lead to inaccurate financial reporting and stressful audit compliance sessions.</p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/30 soft-shadow hover:shadow-md transition-shadow duration-300">
+                        <div class="w-12 h-12 rounded-lg bg-error-container/30 text-error flex items-center justify-center mb-6">
+                            <span class="material-symbols-outlined fill-icon">hourglass_empty</span>
+                        </div>
+                        <h3 class="font-headline-md text-headline-md text-on-background mb-3">Lost Time</h3>
+                        <p class="font-body-sm text-body-sm text-secondary">Weekends sacrificed to administrative catch-up, draining energy and passion for running your venue logistics.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solution Section -->
+        <section class="py-24">
+            <div class="max-w-[1440px] mx-auto px-4 md:px-margin-desktop">
+                <div class="text-center mb-16">
+                    <h2 class="font-headline-lg text-headline-lg text-on-background mb-4">The Busynes Flow</h2>
+                    <p class="font-body-md text-body-md text-secondary max-w-xl mx-auto">An elegant logic pipe that transforms raw data into actionable insights instantly.</p>
+                </div>
+                <div class="relative max-w-4xl mx-auto">
+                    <!-- Connection Line -->
+                    <div class="absolute top-1/2 left-0 w-full h-0.5 bg-outline-variant/30 -translate-y-1/2 hidden md:block z-0"></div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
+                        <!-- Step 1 -->
+                        <div class="flex flex-col items-center text-center group">
+                            <div class="w-20 h-20 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm flex items-center justify-center mb-6 group-hover:border-primary group-hover:shadow-md transition-all duration-300 relative bg-white">
+                                <span class="material-symbols-outlined text-secondary text-[32px] group-hover:text-primary transition-colors">cloud_upload</span>
+                                <div class="absolute -right-3 -top-3 w-6 h-6 rounded-full bg-surface-container text-primary flex items-center justify-center font-label-md text-[10px] border border-outline-variant/30">1</div>
+                            </div>
+                            <h4 class="font-headline-md text-[18px] font-semibold text-on-background mb-2">Upload</h4>
+                            <p class="font-body-sm text-body-sm text-secondary">Secure document ingestion via AWS S3.</p>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="flex flex-col items-center text-center group">
+                            <div class="w-20 h-20 rounded-xl bg-primary-container border border-primary inner-glow shadow-sm flex items-center justify-center mb-6 group-hover:scale-105 transition-all duration-300 relative">
+                                <span class="material-symbols-outlined text-on-primary text-[32px] fill-icon">memory</span>
+                                <div class="absolute -right-3 -top-3 w-6 h-6 rounded-full bg-surface-container-lowest text-primary flex items-center justify-center font-label-md text-[10px] border border-outline-variant/30">2</div>
+                            </div>
+                            <h4 class="font-headline-md text-[18px] font-semibold text-on-background mb-2">Intelligent Analysis</h4>
+                            <p class="font-body-sm text-body-sm text-secondary">Data extraction powered by AWS Textract & Intelligence.</p>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="flex flex-col items-center text-center group">
+                            <div class="w-20 h-20 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm flex items-center justify-center mb-6 group-hover:border-primary group-hover:shadow-md transition-all duration-300 relative bg-white">
+                                <span class="material-symbols-outlined text-secondary text-[32px] group-hover:text-primary transition-colors">monitoring</span>
+                                <div class="absolute -right-3 -top-3 w-6 h-6 rounded-full bg-surface-container text-primary flex items-center justify-center font-label-md text-[10px] border border-outline-variant/30">3</div>
+                            </div>
+                            <h4 class="font-headline-md text-[18px] font-semibold text-on-background mb-2">Instant Growth Reports</h4>
+                            <p class="font-body-sm text-body-sm text-secondary">Real-time analytics stored securely in DynamoDB.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vision Section -->
+        <section class="bg-surface py-24">
+            <div class="max-w-[1440px] mx-auto px-4 md:px-margin-desktop">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-outline-variant/30 pb-6">
+                    <div>
+                        <h2 class="font-headline-lg text-headline-lg text-on-background mb-2">Platform Vision</h2>
+                        <p class="font-body-md text-body-md text-secondary">The ecosystem is expanding.</p>
+                    </div>
+                    <a class="text-primary font-label-md text-label-md hover:underline underline-offset-4 flex items-center gap-1 mt-4 md:mt-0 font-semibold" href="innovation.html">
+                        View full roadmap <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                    </a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Active Card -->
+                    <div class="bg-surface-container-lowest p-6 rounded-xl border border-primary/30 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+                        <div class="absolute top-0 right-0 w-16 h-16 bg-primary-container/10 rounded-bl-full -z-10 transition-transform group-hover:scale-150"></div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-primary-container/20 text-primary flex items-center justify-center">
+                                <span class="material-symbols-outlined">receipt_long</span>
+                            </div>
+                            <span class="px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider bg-primary-container text-on-primary">Active</span>
+                        </div>
+                        <h3 class="font-label-md text-label-md text-on-background font-semibold mb-2">Financial Automation & Invoice Tracking</h3>
+                        <p class="font-body-sm text-body-sm text-secondary text-sm">Automated ingestion, matching, and categorization of all sports venue purchase documents.</p>
+                    </div>
+                    <!-- Locked Cards -->
+                    <div class="bg-surface-container-lowest/50 p-6 rounded-xl border border-outline-variant/20 relative opacity-80 cursor-not-allowed">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-surface-container text-secondary flex items-center justify-center">
+                                <span class="material-symbols-outlined">edit_note</span>
+                            </div>
+                            <span class="px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider bg-surface-container text-secondary flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[12px]">lock</span> Soon
+                            </span>
+                        </div>
+                        <h3 class="font-label-md text-label-md text-on-surface-variant font-semibold mb-2">AI-Powered Smart Notes</h3>
+                        <p class="font-body-sm text-body-sm text-tertiary text-sm">Contextual meeting summaries linked directly to corporate customer profiles.</p>
+                    </div>
+                    <div class="bg-surface-container-lowest/50 p-6 rounded-xl border border-outline-variant/20 relative opacity-80 cursor-not-allowed">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-surface-container text-secondary flex items-center justify-center">
+                                <span class="material-symbols-outlined">inventory_2</span>
+                            </div>
+                            <span class="px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider bg-surface-container text-secondary flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[12px]">lock</span> Soon
+                            </span>
+                        </div>
+                        <h3 class="font-label-md text-label-md text-on-surface-variant font-semibold mb-2">Inventory OS</h3>
+                        <p class="font-body-sm text-body-sm text-tertiary text-sm">Real-time stadium equipment tracking with predictive ordering and restock capabilities.</p>
+                    </div>
+                    <div class="bg-surface-container-lowest/50 p-6 rounded-xl border border-outline-variant/20 relative opacity-80 cursor-not-allowed">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-surface-container text-secondary flex items-center justify-center">
+                                <span class="material-symbols-outlined">groups</span>
+                            </div>
+                            <span class="px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider bg-surface-container text-secondary flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[12px]">lock</span> Soon
+                            </span>
+                        </div>
+                        <h3 class="font-label-md text-label-md text-on-surface-variant font-semibold mb-2">Team Collaboration</h3>
+                        <p class="font-body-sm text-body-sm text-tertiary text-sm">Task delegation and shared accounting spaces for your entire organizational workforce.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Section -->
+        <section class="py-16 border-b border-outline-variant/20">
+            <div class="max-w-[1440px] mx-auto px-4 md:px-margin-desktop flex flex-wrap justify-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+                <div class="flex items-center gap-2 text-secondary">
+                    <span class="material-symbols-outlined">shield</span>
+                    <span class="font-label-md text-label-md font-semibold">AWS Secure-by-Design</span>
+                </div>
+                <div class="flex items-center gap-2 text-secondary">
+                    <span class="material-symbols-outlined">gpp_good</span>
+                    <span class="font-label-md text-label-md font-semibold">GDPR Compliant (London Region)</span>
+                </div>
+                <div class="flex items-center gap-2 text-secondary">
+                    <span class="material-symbols-outlined">enhanced_encryption</span>
+                    <span class="font-label-md text-label-md font-semibold">Bank-Grade Encryption</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-20 bg-surface-container-lowest dark:bg-on-background border-t border-outline-variant dark:border-outline/20">
+        <div class="max-w-[1440px] mx-auto px-4 md:px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter">
+            <div class="col-span-1 md:col-span-2">
+                <div class="flex items-center gap-3 mb-6">
+                    <img alt="Busynes Logo" class="h-6 w-auto grayscale opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaglyYYHQQHhZI0sXOTcaVVDVGSJuZXRoKofma9kTZsHLG0WS23LRWQF6QP0mNzpRm1_dYjnYgl4vAS3G_xMrnF2LHiqNvSIDgpIkQN7hsYsN4spBArqw8Q5r_sTBUc0_V10OyF_L9R10Bik18Mr2hR3P87XxQVxm4dfg5doaByVE6wQzLZ4zjrLwedRQPmnXaxynT_LhkMqPQxFKlzAO4RoWw0XrNs7545LYLvhi3yQdUuFg71vULTx9CmUpE-YPYT9VcrQGq4zc">
+                    <span class="text-headline-md font-headline-md font-bold text-on-background dark:text-surface">Busynes</span>
+                </div>
+                <p class="font-body-sm text-body-sm text-secondary max-w-sm mb-6">
+                    © 2026 Busynes Inc. All rights reserved. Built for high-performance enterprise business ecosystems.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-label-md text-label-md font-semibold text-on-background mb-4">Platform</h4>
+                <ul class="space-y-3">
+                    <li><a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4" href="index.html">Product</a></li>
+                    <li><a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4" href="innovation.html">Innovation Lab</a></li>
+                    <li><a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4" href="pricing.html">Pricing</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-label-md text-label-md font-semibold text-on-background mb-4">Legal & Support</h4>
+                <ul class="space-y-3">
+                    <li><a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4" href="privacy.html">Privacy Policy</a></li>
+                    <li><a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4" href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple nav scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('topNav');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-md');
+                nav.classList.remove('shadow-sm');
+            } else {
+                nav.classList.remove('shadow-md');
+                nav.classList.add('shadow-sm');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggleBtn = document.getElementById('mobile-menu-toggle');
+        const mobileDropdown = document.getElementById('mobile-dropdown-menu');
+        if (menuToggleBtn && mobileDropdown) {
+            menuToggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                mobileDropdown.classList.toggle('hidden');
+            });
+            document.addEventListener('click', (e) => {
+                if (!mobileDropdown.contains(e.target) && e.target !== menuToggleBtn) {
+                    mobileDropdown.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

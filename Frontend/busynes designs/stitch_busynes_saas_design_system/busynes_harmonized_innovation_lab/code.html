@@ -1,0 +1,445 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Innovation Lab - Busynes</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#eff4ff",
+                        "tertiary-container": "#676a6c",
+                        "inverse-surface": "#213145",
+                        "tertiary-fixed": "#e0e3e5",
+                        "on-surface": "#0b1c30",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "surface-variant": "#d3e4fe",
+                        "on-error-container": "#93000a",
+                        "background": "#f8f9ff",
+                        "on-primary-fixed": "#002200",
+                        "on-primary-container": "#abff97",
+                        "secondary": "#515f74",
+                        "on-background": "#0b1c30",
+                        "inverse-on-surface": "#eaf1ff",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary": "#4f5254",
+                        "inverse-primary": "#7edc6d",
+                        "primary-container": "#1b7a16",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#bfcab7",
+                        "outline": "#707a6a",
+                        "surface-container-high": "#dce9ff",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "surface-container": "#e5eeff",
+                        "secondary-container": "#d5e3fd",
+                        "primary-fixed": "#9af986",
+                        "primary-fixed-dim": "#7edc6d",
+                        "surface": "#f8f9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f8f9ff",
+                        "on-tertiary-container": "#e9ebed",
+                        "surface-dim": "#cbdbf5",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-surface-variant": "#404a3b",
+                        "surface-tint": "#066e08",
+                        "secondary-fixed": "#d5e3fd",
+                        "on-tertiary-fixed": "#191c1e",
+                        "primary": "#005f03",
+                        "on-primary-fixed-variant": "#005302",
+                        "on-secondary-container": "#57657b",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#d3e4fe"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "9999px",
+                        "round-four": "0.5rem"
+                    },
+                    "spacing": {
+                        "lg": "48px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "xl": "80px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "margin-mobile": "16px",
+                        "sm": "12px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "body-sm": ["Geist", "Inter"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-xl": ["Hanken Grotesk"],
+                        "label-md": ["JetBrains Mono"],
+                        "body-md": ["Geist", "Inter"],
+                        "body-lg": ["Geist", "Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[style*="'FILL' 1"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Geist', 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Hanken Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased flex overflow-hidden h-screen w-full">
+<!-- SideNavBar: Exact modular dark slate sidebar from Screen 15/8 -->
+<nav class="hidden md:flex flex-col h-screen fixed left-0 top-0 py-md overflow-y-auto w-64 shadow-sm z-50 border-r border-outline-variant/10 bg-surface">
+<div class="px-md mb-8">
+<h1 class="font-headline-md text-headline-md font-black text-primary">Busynes</h1>
+<p class="font-label-md text-label-md mt-1 uppercase tracking-wider text-secondary">Innovation Hub</p>
+</div>
+<div class="flex-1 px-sm space-y-1">
+<a class="flex items-center gap-sm px-md py-sm rounded-xl transition-all scale-95 active:scale-90 text-secondary hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="dashboard">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm rounded-xl px-md py-sm scale-95 active:scale-90 bg-primary-container/10 text-primary" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="biotech" style="font-variation-settings: 'FILL' 1;">biotech</span>
+<span class="font-body-md font-semibold">Innovation Lab</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-xl transition-all scale-95 active:scale-90 text-secondary hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="assignment">assignment</span>
+<span class="font-body-md">Projects</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-xl transition-all scale-95 active:scale-90 text-secondary hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="insights">insights</span>
+<span class="font-body-md">Analytics</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-xl transition-all scale-95 active:scale-90 text-secondary hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="assessment">assessment</span>
+<span class="font-body-md">Reporting</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-xl transition-all scale-95 active:scale-90 text-secondary hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="group">group</span>
+<span class="font-body-md">Team</span>
+</a>
+</div>
+<div class="px-sm space-y-1 mt-auto">
+<a class="flex items-center gap-sm px-md py-sm rounded-xl transition-all scale-95 active:scale-90 text-secondary hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="settings">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-xl transition-all scale-95 active:scale-90 text-secondary hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="logout">logout</span>
+<span class="font-body-md">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-64 w-full h-screen overflow-hidden bg-background">
+<!-- TopNavBar: White header with Emerald Green Quick Upload -->
+<header class="flex justify-between items-center w-full px-margin-desktop py-base bg-surface-bright border-b border-outline-variant/30 z-40 sticky top-0">
+<div class="flex items-center gap-md">
+<div class="md:hidden">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="menu">menu</span>
+</div>
+<div class="hidden md:flex items-center gap-2 border border-outline-variant/50 rounded-full px-4 py-2 bg-white focus-within:border-primary-container focus-within:ring-2 focus-within:ring-primary-container/10 transition-all shadow-sm">
+<span class="material-symbols-outlined text-outline text-xl" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-64 font-body-sm placeholder:text-outline" placeholder="Search Lab..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="bg-primary-container hover:bg-primary text-on-primary px-5 py-2 rounded-full font-body-sm font-semibold transition-all shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+                Quick Upload
+            </button>
+<div class="h-8 w-px bg-outline-variant/50 mx-2"></div>
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm cursor-pointer shadow-sm">
+                JD
+            </div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-margin-mobile md:p-margin-desktop">
+<div class="max-w-[1440px] mx-auto space-y-xl pb-24">
+<!-- Title Section -->
+<section class="space-y-4">
+<h1 class="font-headline-xl text-headline-xl text-on-background tracking-tight">The Innovation Lab: <span class="text-primary-container">You build Busynes with us.</span></h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl leading-relaxed">Vote on upcoming features, track our development roadmap, and help shape the future of our platform. Your feedback directly influences what we build next.</p>
+</section>
+<!-- Proposed Features Grid -->
+<section class="space-y-6">
+<div class="flex justify-between items-end">
+<h2 class="font-headline-md text-headline-md text-on-background">Proposed Features</h2>
+<a class="font-label-md text-label-md text-primary-container hover:underline flex items-center gap-1" href="#">
+                        View All <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Feature Card 1 -->
+<div class="bg-white border border-outline-variant/30 rounded-round-four p-6 flex flex-col shadow-sm hover:shadow-md transition-all duration-300">
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 rounded-full bg-surface-container-low text-on-surface-variant font-label-md text-[10px] border border-outline-variant/30 uppercase tracking-widest font-bold">Concept</span>
+<button class="text-outline hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="bookmark_border">bookmark_border</span>
+</button>
+</div>
+<h3 class="font-headline-md text-lg font-bold text-on-background mb-2">Smart Inventory Sync</h3>
+<p class="font-body-md text-body-md text-secondary mb-6 flex-1">Seamlessly sync inventory across all warehouses. Real-time updates and low-stock predictive alerts.</p>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/10 mt-auto">
+<button class="flex items-center gap-2 bg-primary-container/10 hover:bg-primary-container text-primary-container hover:text-white px-5 py-2 rounded-full font-body-sm font-bold transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="thumb_up">thumb_up</span>
+<span class="">428</span>
+</button>
+<label class="flex items-center gap-2 cursor-pointer">
+<span class="font-label-md text-xs text-secondary">Follow</span>
+<div class="relative inline-block w-9 h-5 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-2 appearance-none cursor-pointer border-outline-variant/50 checked:right-0 checked:border-primary-container" name="toggle" type="checkbox">
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-surface-container-high cursor-pointer" for="toggle"></label>
+</div>
+</label>
+</div>
+</div>
+<!-- Feature Card 2 (In Development / Primary) -->
+<div class="bg-white border border-primary-container/30 rounded-round-four p-6 flex flex-col shadow-md ring-1 ring-primary-container/5 relative overflow-hidden transition-all duration-300">
+<div class="absolute top-0 left-0 w-full h-1 bg-primary-container"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 rounded-full bg-primary-container text-white font-label-md text-[10px] uppercase tracking-widest font-bold">In Development</span>
+<button class="text-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="bookmark" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+<h3 class="font-headline-md text-lg font-bold text-on-background mb-2">WhatsApp Quick-Invoice</h3>
+<p class="font-body-md text-body-md text-secondary mb-6 flex-1">Generate and send invoices directly via WhatsApp. Includes read receipts and quick-pay links.</p>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/10 mt-auto">
+<button class="flex items-center gap-2 bg-primary-container text-on-primary px-5 py-2 rounded-full font-body-sm font-bold shadow-sm transition-all hover:brightness-110">
+<span class="material-symbols-outlined text-lg" data-icon="thumb_up" style="font-variation-settings: 'FILL' 1;">thumb_up</span>
+<span class="">892</span>
+</button>
+<label class="flex items-center gap-2 cursor-pointer">
+<span class="font-label-md text-xs text-primary-container font-bold">Following</span>
+<div class="relative inline-block w-9 h-5 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-2 appearance-none cursor-pointer border-primary-container right-0" name="toggle2" type="checkbox">
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-primary-container/20 cursor-pointer" for="toggle2"></label>
+</div>
+</label>
+</div>
+</div>
+<!-- Feature Card 3 -->
+<div class="bg-white border border-outline-variant/30 rounded-round-four p-6 flex flex-col shadow-sm hover:shadow-md transition-all duration-300">
+<div class="flex justify-between items-start mb-4">
+<span class="px-3 py-1 rounded-full bg-surface-variant text-on-surface-variant font-label-md text-[10px] border border-outline-variant/30 uppercase tracking-widest font-bold">Testing</span>
+<button class="text-outline hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="bookmark_border">bookmark_border</span>
+</button>
+</div>
+<h3 class="font-headline-md text-lg font-bold text-on-background mb-2">Advanced Analytics API</h3>
+<p class="font-body-md text-body-md text-secondary mb-6 flex-1">Direct access to raw financial data for custom reporting. Export to BI tools seamlessly.</p>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/10 mt-auto">
+<button class="flex items-center gap-2 bg-primary-container/10 hover:bg-primary-container text-primary-container hover:text-white px-5 py-2 rounded-full font-body-sm font-bold transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="thumb_up">thumb_up</span>
+<span class="">156</span>
+</button>
+<label class="flex items-center gap-2 cursor-pointer">
+<span class="font-label-md text-xs text-secondary">Follow</span>
+<div class="relative inline-block w-9 h-5 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-2 appearance-none cursor-pointer border-outline-variant/50 checked:right-0 checked:border-primary-container" name="toggle3" type="checkbox">
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-surface-container-high cursor-pointer" for="toggle3"></label>
+</div>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- Roadmap Section -->
+<section class="space-y-8">
+<h2 class="font-headline-md text-headline-md text-on-background flex items-center gap-3">
+                    The Roadmap
+                    <div class="h-px flex-1 bg-outline-variant/20 ml-4"></div>
+</h2>
+<div class="grid grid-cols-1 gap-8 relative pl-6 border-l-2 border-outline-variant/20">
+<!-- Q2 2024 -->
+<div class="relative pb-8">
+<div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-primary-container border-4 border-background"></div>
+<div class="mb-4">
+<div class="flex items-center gap-3">
+<h3 class="font-label-md text-sm font-bold text-primary-container uppercase tracking-widest">Q2 2024</h3>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-surface-container-low text-secondary border border-outline-variant/30">Completed</span>
+</div>
+</div>
+<div class="bg-white border border-outline-variant/20 rounded-round-four p-5 shadow-sm max-w-4xl">
+<div class="space-y-4">
+<div class="flex items-start gap-4">
+<div class="mt-1 flex items-center justify-center w-6 h-6 rounded-full bg-primary-container/10 text-primary-container">
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<h4 class="font-headline-md text-base font-bold">AI Invoice Parsing</h4>
+<p class="font-body-sm text-secondary mt-1">Automated extraction of line items and totals for high-volume accounts.</p>
+</div>
+</div>
+<div class="h-px bg-outline-variant/10"></div>
+<div class="flex items-start gap-4">
+<div class="mt-1 flex items-center justify-center w-6 h-6 rounded-full bg-primary-container/10 text-primary-container">
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<h4 class="font-headline-md text-base font-bold">Financial Hub 1.0</h4>
+<p class="font-body-sm text-secondary mt-1">Centralized dashboard for all incoming revenue streams and real-time reconciliation.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Q3 2024 -->
+<div class="relative pb-8">
+<div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-background ring-4 ring-primary/10 animate-pulse"></div>
+<div class="mb-4">
+<div class="flex items-center gap-3">
+<h3 class="font-label-md text-sm font-bold text-on-background uppercase tracking-widest">Q3 2024</h3>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-primary-container/10 text-primary-container border border-primary-container/20">Active Focus</span>
+</div>
+</div>
+<div class="bg-white border-2 border-primary-container/30 rounded-round-four p-5 shadow-md max-w-4xl">
+<div class="space-y-4">
+<div class="flex items-start gap-4">
+<div class="mt-1 flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-base animate-spin">sync</span>
+</div>
+<div>
+<h4 class="font-headline-md text-base font-bold">Multi-Currency Support</h4>
+<p class="font-body-sm text-secondary mt-1">Real-time exchange rates and multi-ledger balancing for international trade.</p>
+</div>
+</div>
+<div class="h-px bg-outline-variant/10"></div>
+<div class="flex items-start gap-4">
+<div class="mt-1 flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-base">smartphone</span>
+</div>
+<div>
+<h4 class="font-headline-md text-base font-bold">Mobile App Pilot</h4>
+<p class="font-body-sm text-secondary mt-1">Beta testing core features on iOS and Android for on-the-go management.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Lab Resources & Contact -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter items-start">
+<!-- FAQ -->
+<section class="lg:col-span-2 space-y-6">
+<h2 class="font-headline-md text-headline-md text-on-background">Lab Resources</h2>
+<div class="space-y-3">
+<details class="group bg-white border border-outline-variant/30 rounded-round-four overflow-hidden">
+<summary class="flex items-center justify-between p-5 cursor-pointer font-body-md font-semibold text-on-background hover:bg-surface-container-low transition-colors list-none">
+                                How do I vote?
+                                <span class="material-symbols-outlined transition-transform duration-300 group-open:-rotate-180 text-outline" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="px-5 pb-5 pt-2 text-secondary font-body-sm border-t border-outline-variant/10">
+                                Simply click the "Upvote" button on any feature card in the Proposed Features section. You can only vote once per feature. Your votes help us prioritize our engineering resources.
+                            </div>
+</details>
+<details class="group bg-white border border-outline-variant/30 rounded-round-four overflow-hidden">
+<summary class="flex items-center justify-between p-5 cursor-pointer font-body-md font-semibold text-on-background hover:bg-surface-container-low transition-colors list-none">
+                                What is the Bug Bounty?
+                                <span class="material-symbols-outlined transition-transform duration-300 group-open:-rotate-180 text-outline" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="px-5 pb-5 pt-2 text-secondary font-body-sm border-t border-outline-variant/10">
+                                Our Bug Bounty program rewards users who find and report verifiable bugs. Earn subscription credits ranging from $10 to $500 depending on severity.
+                            </div>
+</details>
+</div>
+<!-- Bug Bounty Banner: Stripe/Linear style -->
+<div class="bg-inverse-surface rounded-round-four p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-lg border border-white/10 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-container/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
+<div class="flex items-center gap-6 relative z-10">
+<div class="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center text-primary-fixed shadow-inner">
+<span class="material-symbols-outlined text-3xl" data-icon="bug_report">bug_report</span>
+</div>
+<div>
+<h3 class="font-headline-md text-xl font-bold text-white mb-1">Found a bug?</h3>
+<p class="font-body-md text-surface-variant/70">Report it here and earn credits toward your subscription.</p>
+</div>
+</div>
+<button class="bg-primary-container hover:bg-primary text-on-primary font-body-sm font-bold px-8 py-3 rounded-full transition-all shadow-md active:scale-95 relative z-10">
+                            Submit Report
+                        </button>
+</div>
+</section>
+<!-- Contact Form Sidebar -->
+<aside class="space-y-6 lg:sticky lg:top-margin-desktop">
+<div class="bg-white border border-outline-variant/30 rounded-round-four p-6 shadow-sm">
+<h2 class="font-headline-md text-xl font-bold text-on-background mb-6">Need Help?</h2>
+<form class="space-y-5">
+<div>
+<label class="block font-body-sm font-bold text-on-background mb-2" for="subject">Subject</label>
+<input class="w-full border border-outline-variant/30 rounded-round-four px-4 py-3 font-body-sm focus:border-primary-container focus:ring-4 focus:ring-primary-container/5 outline-none transition-all placeholder:text-outline/50" id="subject" placeholder="E.g. Feature request" type="text">
+</div>
+<div>
+<label class="block font-body-sm font-bold text-on-background mb-2" for="message">Message</label>
+<textarea class="w-full border border-outline-variant/30 rounded-round-four px-4 py-3 font-body-sm focus:border-primary-container focus:ring-4 focus:ring-primary-container/5 outline-none transition-all resize-none placeholder:text-outline/50" id="message" placeholder="How can we help?" rows="4"></textarea>
+</div>
+<button class="w-full bg-on-background text-white font-body-sm font-bold px-4 py-3.5 rounded-full hover:bg-black transition-all shadow-sm active:scale-95" type="button">
+                                Send Message
+                            </button>
+</form>
+<div class="relative flex py-8 items-center">
+<div class="flex-grow border-t border-outline-variant/10"></div>
+<span class="flex-shrink-0 mx-4 font-label-md text-[10px] text-outline uppercase tracking-widest font-bold">OR</span>
+<div class="flex-grow border-t border-outline-variant/10"></div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 bg-white border-2 border-primary-container text-primary-container font-body-sm font-bold px-4 py-3.5 rounded-full hover:bg-primary-container hover:text-white transition-all">
+<span class="material-symbols-outlined text-xl" data-icon="smart_toy">smart_toy</span>
+                            Chat with Busynes AI
+                        </button>
+</div>
+</aside>
+</div>
+</div>
+</div>
+</main>
+<script>
+    document.querySelectorAll('.toggle-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const label = this.closest('label').querySelector('span:first-child');
+            if (this.checked) {
+                label.textContent = 'Following';
+                label.classList.remove('text-secondary');
+                label.classList.add('text-primary-container', 'font-bold');
+            } else {
+                label.textContent = 'Follow';
+                label.classList.add('text-secondary');
+                label.classList.remove('text-primary-container', 'font-bold');
+            }
+        });
+    });
+</script>
+
+
+</body></html>

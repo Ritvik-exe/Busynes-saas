@@ -1,0 +1,6 @@
+{
+  "name": "Busynes SaaS",
+  "description": "An elegant corporate SaaS platform with automated data ingestion, real-time analytics dashboards, invoice vaulting, and dynamic AWS metrics reporting tailored to financial growth and sports venue ecosystems.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

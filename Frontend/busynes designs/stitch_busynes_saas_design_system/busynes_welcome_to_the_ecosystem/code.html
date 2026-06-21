@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Busynes - Welcome to the Ecosystem</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#707a6a",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "secondary-container": "#d5e3fd",
+                        "on-surface-variant": "#404a3b",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#066e08",
+                        "inverse-surface": "#213145",
+                        "error": "#ba1a1a",
+                        "surface-container": "#e5eeff",
+                        "on-tertiary-container": "#e9ebed",
+                        "inverse-primary": "#7edc6d",
+                        "on-surface": "#0b1c30",
+                        "on-secondary-container": "#57657b",
+                        "on-primary-fixed": "#002200",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#191c1e",
+                        "background": "#f8f9ff",
+                        "tertiary": "#4f5254",
+                        "surface": "#f8f9ff",
+                        "secondary-fixed": "#d5e3fd",
+                        "on-primary-container": "#abff97",
+                        "primary-fixed-dim": "#7edc6d",
+                        "primary": "#005f03",
+                        "inverse-on-surface": "#eaf1ff",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container-high": "#dce9ff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#1b7a16",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#cbdbf5",
+                        "surface-container-low": "#eff4ff",
+                        "surface-variant": "#d3e4fe",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "tertiary-fixed": "#e0e3e5",
+                        "secondary": "#515f74",
+                        "outline-variant": "#bfcab7",
+                        "on-background": "#0b1c30",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "primary-fixed": "#9af986",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "surface-container-highest": "#d3e4fe",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#676a6c",
+                        "on-primary-fixed-variant": "#005302"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "lg": "48px",
+                        "base": "8px",
+                        "margin-desktop": "64px",
+                        "sm": "12px",
+                        "md": "24px",
+                        "xl": "80px",
+                        "xs": "4px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "body-sm": ["Inter"],
+                        "headline-xl": ["Hanken Grotesk"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["JetBrains Mono"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    },
+                    "animation": {
+                        "bounce-in": "bounce-in 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both",
+                        "fade-in-up": "fade-in-up 0.6s ease-out both"
+                    },
+                    "keyframes": {
+                        "bounce-in": {
+                            "0%": { transform: "scale(0)", opacity: "0" },
+                            "100%": { transform: "scale(1)", opacity: "1" }
+                        },
+                        "fade-in-up": {
+                            "0%": { transform: "translateY(20px)", opacity: "0" },
+                            "100%": { transform: "translateY(0)", opacity: "1" }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+    </style>
+</head>
+<body class="h-full bg-surface-container-lowest text-on-surface font-body-md antialiased flex flex-col items-center justify-center min-h-screen">
+<main class="w-full max-w-3xl mx-auto px-margin-mobile md:px-gutter py-xl flex flex-col items-center text-center">
+<!-- Animated Checkmark -->
+<div class="mb-md animate-bounce-in">
+<div class="w-20 h-20 bg-surface-container-low rounded-full flex items-center justify-center mx-auto border border-surface-variant shadow-sm">
+<span class="material-symbols-outlined text-[48px] text-primary-container" style="font-variation-settings: 'FILL' 1;">
+                    check_circle
+                </span>
+</div>
+</div>
+<!-- Headline & Subtext -->
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-base animate-fade-in-up delay-100">
+            Welcome to the Ecosystem, <span class="text-primary-container">Sarah</span>.
+        </h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-xl mx-auto mb-xl animate-fade-in-up delay-200">
+            Your 14-Day Professional Pilot is now active. Your Sunday afternoons belong to you again.
+        </p>
+<!-- Onboarding Steps -->
+<div class="w-full grid grid-cols-1 md:grid-cols-3 gap-gutter mb-xl animate-fade-in-up delay-300 text-left">
+<!-- Step 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-lg flex flex-col hover:shadow-md transition-shadow duration-300">
+<div class="w-10 h-10 bg-surface-container-low rounded-full flex items-center justify-center mb-md border border-surface-variant">
+<span class="font-label-md text-label-md text-primary-container">01</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">First Invoice</h3>
+<p class="font-body-sm text-body-sm text-secondary mb-md flex-grow">Get started by uploading your first document for AI processing.</p>
+<button class="w-full bg-primary-container hover:bg-primary text-on-primary font-body-sm text-body-sm font-semibold py-sm px-md rounded-lg transition-colors duration-200 flex items-center justify-center gap-xs">
+                    Upload Now
+                    <span class="material-symbols-outlined text-[16px]">upload_file</span>
+</button>
+</div>
+<!-- Step 2 -->
+<div class="bg-surface-bright border border-outline-variant p-md rounded-lg flex flex-col opacity-75 grayscale-[20%]">
+<div class="w-10 h-10 bg-surface-container-low rounded-full flex items-center justify-center mb-md border border-surface-variant">
+<span class="font-label-md text-label-md text-secondary">02</span>
+</div>
+<div class="flex items-center gap-xs mb-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface">Connect Bank</h3>
+<span class="bg-surface-variant text-on-surface-variant font-label-md text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider">Locked</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary mb-md flex-grow">Sync your accounts for automated reconciliation. Unlocks after first invoice.</p>
+<button class="w-full border border-outline-variant text-secondary font-body-sm text-body-sm py-sm px-md rounded-lg cursor-not-allowed flex items-center justify-center gap-xs bg-surface-container-low" disabled="">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+                    Coming Soon
+                </button>
+</div>
+<!-- Step 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-lg flex flex-col hover:shadow-md transition-shadow duration-300">
+<div class="w-10 h-10 bg-surface-container-low rounded-full flex items-center justify-center mb-md border border-surface-variant">
+<span class="font-label-md text-label-md text-secondary">03</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Invite Accountant</h3>
+<p class="font-body-sm text-body-sm text-secondary mb-md flex-grow">Give your CPA read-only access to your organized financial data.</p>
+<a class="w-full border border-primary-container text-primary-container hover:bg-surface-container-low font-body-sm text-body-sm font-semibold py-sm px-md rounded-lg transition-colors duration-200 flex items-center justify-center gap-xs text-center" href="#">
+                    Copy Invite Link
+                    <span class="material-symbols-outlined text-[16px]">content_copy</span>
+</a>
+</div>
+</div>
+<!-- Founder Message -->
+<div class="bg-surface-container-low border border-outline-variant rounded-xl p-md flex items-start gap-md max-w-2xl w-full mx-auto mb-xl animate-fade-in-up delay-400 text-left">
+<img alt="Ritvik - Founder of Busynes" class="w-12 h-12 rounded-full border border-surface-variant" data-alt="A professional headshot of a young male tech founder smiling warmly, set against a clean, light-mode background. The aesthetic is crisp and modern, reflecting a trustworthy B2B SaaS environment. Lighting is soft and bright, emphasizing approachability and professionalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxWWO6F_F7ddhPm_Qa_vcv8JmcCDBLzccfV9K88CIOtVRDqaEvY07igFBFNwMVT2i7iiwc23O5aOz1VU69XSx6wP252pwP9xtANI3G35ne7mEc7uXEEw8fVwxWZ0yCa9YYQzz7FdHarQ9TjAReFpBZ1RsV11kwbMjG-rJH-67UCT1AslmNb9xR6cpIIGONiuP0_LbGIOBEOUdOLsX02YolKe_sc3w2y0VtqgToLBgk8ciLsf4kxmdcatK46JaIfmk15IcbFG9umdI"/>
+<div>
+<p class="font-body-sm text-body-sm text-on-surface italic leading-relaxed mb-sm">
+                    "I’m Ritvik, the founder of Busynes. If you need any help getting set up, just click the AI assistant in the corner. Let’s grow your business together."
+                </p>
+<p class="font-label-md text-label-md text-secondary font-bold uppercase tracking-widest">
+                    Ritvik, Founder
+                </p>
+</div>
+</div>
+<!-- Main CTA -->
+<div class="animate-fade-in-up delay-500 w-full flex justify-center">
+<button class="bg-primary-container hover:bg-primary text-on-primary font-headline-md text-headline-md py-md px-xl rounded-lg shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-sm transform hover:-translate-y-1">
+                Go to My Dashboard
+                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</main>
+</body></html>

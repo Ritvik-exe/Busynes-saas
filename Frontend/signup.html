@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Busynes - Register Account</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#F8FAFC",
+                        "surface-dim": "#CBD5E1",
+                        "surface-bright": "#F8FAFC",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#F1F5F9",
+                        "surface-container": "#E2E8F0",
+                        "surface-container-high": "#CBD5E1",
+                        "surface-container-highest": "#94A3B8",
+                        "on-surface": "#0F172A",
+                        "on-surface-variant": "#475569",
+                        "inverse-surface": "#1E293B",
+                        "inverse-on-surface": "#F8FAFC",
+                        "outline": "#94A3B8",
+                        "outline-variant": "#E2E8F0",
+                        "surface-tint": "#187c13",
+                        "primary": "#187c13",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#187c13",
+                        "on-primary-container": "#ffffff",
+                        "inverse-primary": "#41bc3a",
+                        "secondary": "#475569",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "rgba(24, 124, 19, 0.1)",
+                        "on-secondary-container": "#187c13",
+                        "tertiary": "#64748B",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#E2E8F0",
+                        "on-tertiary-container": "#0F172A",
+                        "error": "#EF4444",
+                        "on-error": "#ffffff",
+                        "error-container": "#FEE2E2",
+                        "on-error-container": "#991B1B",
+                        "primary-fixed": "#A7F3D0",
+                        "primary-fixed-dim": "#6EE7B7",
+                        "on-primary-fixed": "#064E3B",
+                        "on-primary-fixed-variant": "#047857",
+                        "secondary-fixed": "#E2E8F0",
+                        "secondary-fixed-dim": "#CBD5E1",
+                        "on-secondary-fixed": "#0F172A",
+                        "on-secondary-fixed-variant": "#475569",
+                        "tertiary-fixed": "#F1F5F9",
+                        "tertiary-fixed-dim": "#E2E8F0",
+                        "on-tertiary-fixed": "#0F172A",
+                        "on-tertiary-fixed-variant": "#475569",
+                        "background": "#F8FAFC",
+                        "on-background": "#0F172A",
+                        "surface-variant": "#E2E8F0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "sm": "12px",
+                        "margin-mobile": "16px",
+                        "lg": "48px",
+                        "xl": "80px",
+                        "md": "24px",
+                        "xs": "4px",
+                        "base": "8px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .toast-enter {
+            animation: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .emerald-gradient {
+            background: linear-gradient(135deg, #24a81d 0%, #187c13 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col md:flex-row overflow-x-hidden">
+    <!-- Left Side: Brand Panel -->
+    <div class="relative w-full md:w-1/2 emerald-gradient flex flex-col justify-between p-md sm:p-lg lg:p-xl text-white overflow-hidden min-h-[40vh] md:min-h-screen">
+        <!-- Subtle Background Pattern/Gradient -->
+        <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(circle at top right, #9af986 0%, transparent 60%);"></div>
+        <!-- Logo -->
+        <div class="relative z-10 flex items-center">
+            <a href="index.html" class="flex items-center gap-3 hover:opacity-85 transition-opacity">
+                <img alt="Busynes Logo" class="h-10 w-auto brightness-0 invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaglyYYHQQHhZI0sXOTcaVVDVGSJuZXRoKofma9kTZsHLG0WS23LRWQF6QP0mNzpRm1_dYjnYgl4vAS3G_xMrnF2LHiqNvSIDgpIkQN7hsYsN4spBArqw8Q5r_sTBUc0_V10OyF_L9R10Bik18Mr2hR3P87XxQVxm4dfg5doaByVE6wQzLZ4zjrLwedRQPmnXaxynT_LhkMqPQxFKlzAO4RoWw0XrNs7545LYLvhi3yQdUuFg71vULTx9CmUpE-YPYT9VcrQGq4zc"/>
+                <span class="text-headline-md font-headline-md font-bold text-white tracking-tight">Busynes</span>
+            </a>
+        </div>
+        <!-- Brand Slogan/Goal -->
+        <div class="relative z-10 my-md sm:my-xl max-w-lg">
+            <h1 class="font-headline-xl text-[26px] sm:text-[32px] md:text-headline-xl text-white mb-4 sm:mb-md font-bold leading-tight">
+                Automate your sports venue overheads.
+            </h1>
+            <p class="font-body-lg text-sm sm:text-body-lg text-emerald-100 font-medium">
+                The preferred digital invoice automation and compliance platform built strictly for UK sports clubs and stadium CPAs.
+            </p>
+        </div>
+        <!-- Core Modules Grid -->
+        <div class="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-md w-full">
+            <div class="glass-panel p-3 sm:p-md rounded-xl flex items-center gap-2 sm:gap-sm hover:bg-white/15 transition-colors">
+                <span class="material-symbols-outlined text-white text-[18px] sm:text-[24px] fill-icon" data-icon="account_balance_wallet">account_balance_wallet</span>
+                <span class="text-[11px] sm:text-body-sm font-semibold text-white whitespace-nowrap">Financial Hub</span>
+            </div>
+            <div class="glass-panel p-3 sm:p-md rounded-xl flex items-center gap-2 sm:gap-sm hover:bg-white/15 transition-colors">
+                <span class="material-symbols-outlined text-white text-[18px] sm:text-[24px] fill-icon" data-icon="edit_note">edit_note</span>
+                <span class="text-[11px] sm:text-body-sm font-semibold text-white whitespace-nowrap">Smart Notes</span>
+            </div>
+            <div class="glass-panel p-3 sm:p-md rounded-xl flex items-center gap-2 sm:gap-sm hover:bg-white/15 transition-colors">
+                <span class="material-symbols-outlined text-white text-[18px] sm:text-[24px] fill-icon" data-icon="inventory_2">inventory_2</span>
+                <span class="text-[11px] sm:text-body-sm font-semibold text-white whitespace-nowrap">Inventory OS</span>
+            </div>
+            <div class="glass-panel p-3 sm:p-md rounded-xl flex items-center gap-2 sm:gap-sm hover:bg-white/15 transition-colors">
+                <span class="material-symbols-outlined text-white text-[18px] sm:text-[24px] fill-icon" data-icon="groups">groups</span>
+                <span class="text-[11px] sm:text-body-sm font-semibold text-white whitespace-nowrap">Team Collaboration</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Side: Authentication Form -->
+    <div class="w-full md:w-1/2 bg-surface-container-lowest flex items-center justify-center p-margin-mobile md:p-margin-desktop min-h-[60vh] md:min-h-screen relative">
+        <div class="w-full max-w-md">
+            <!-- Segmented Control Tabs -->
+            <div class="flex p-1 bg-surface-container-low rounded-lg mb-xl">
+                <button id="tab-signup" type="button" onclick="setAuthMode('signup')" class="flex-1 py-sm text-center font-body-md text-body-md font-medium bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-md transition-all cursor-pointer">
+                    Create Account
+                </button>
+                <button id="tab-signin" type="button" onclick="setAuthMode('signin')" class="flex-1 py-sm text-center font-body-md text-body-md font-medium text-secondary hover:text-on-surface transition-colors cursor-pointer">
+                    Sign In
+                </button>
+            </div>
+            <div class="mb-lg">
+                <h1 id="auth-title" class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xs">Get Started</h1>
+                <p id="auth-subtitle" class="font-body-sm text-body-sm text-secondary">Join thousands of founders optimizing their workflow.</p>
+            </div>
+            <!-- Social Logins -->
+            <div class="space-y-sm mb-lg">
+                <button type="button" onclick="window.location.href='onboarding.html'" class="w-full flex items-center justify-center gap-sm py-sm px-md border border-outline-variant rounded hover:bg-surface-container-low transition-colors text-on-surface font-body-sm text-body-sm font-medium cursor-pointer">
+                    <img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA92MbTzklneLduJL5WgeJlkJJU1hCPTQVspbv-7IQKGOX4dIAQtIFtslnWJ8gPryDDEQaNksNFnXIqYBnmH6tnFAYlQJQd4qhDkLlNqs9_mrsPaJp9RKaZ4l3E4GiSGOt_sYPRk1VKR6Dgynm_ppH_HHGrBNocrSjPdmmD7sGPCmBXarQJelgxVXx4Tla62_HlmvE1_-kxhjxl3PLU5l3_vM1Cb7jXvgdiWgh0ry4_hXRj9FMDqvfcZhJj-E4zELsw8Mmmld8yuX0"/>
+                    Continue with Google
+                </button>
+                <button type="button" onclick="window.location.href='onboarding.html'"  class="w-full flex items-center justify-center gap-sm py-sm px-md border border-outline-variant rounded hover:bg-surface-container-low transition-colors text-on-surface font-body-sm text-body-sm font-medium cursor-pointer">
+                    <img alt="Microsoft" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAM9Q87gaPSUzAugGvRjTzTtsjhQJ-P4cRx8EuzFQgWjakVhrAqXAgW-UOUCIADdoM1ilcNvBd1jwuZUJNsPDxWYv43yC64URZF5p7_WKJz4aeCkNVIYbYiabB8Pq8rofG-XYaX30DMQbpt1jpbhc5EzgWd0hb7T6mokYJNDhqXZMsT3TE2UT1ey4DXoyP5f3gUNZ61nK8Is55s_ULWVdSkJxmRtsB4V2dTrtew9oRCyi7LAI8xzEA2ODNf9Mq4WobEbCn2NPsBFQk"/>
+                    Continue with Microsoft
+                </button>
+            </div>
+            <!-- Separator -->
+            <div class="relative flex items-center py-md mb-md">
+                <div class="flex-grow border-t border-outline-variant"></div>
+                <span class="flex-shrink-0 mx-md font-body-sm text-body-sm text-secondary bg-surface-container-lowest px-2">or use your business email</span>
+                <div class="flex-grow border-t border-outline-variant"></div>
+            </div>
+            <!-- Form -->
+            <form id="signup-form" class="space-y-md">
+                <div id="fullNameGroup" class="transition-all duration-300">
+                    <label class="block font-body-sm text-body-sm font-semibold text-on-surface mb-xs" id="fullNameLabel" for="fullName">Full Name</label>
+                    <input required class="w-full border border-outline-variant rounded px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest" id="fullName" placeholder="Jane Doe" type="text"/>
+                </div>
+                <div>
+                    <label class="block font-body-sm text-body-sm font-semibold text-on-surface mb-xs" for="email">Business Email</label>
+                    <input required class="w-full border border-outline-variant rounded px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest" id="email" placeholder="jane@company.com" type="email"/>
+                </div>
+                <div>
+                    <label class="block font-body-sm text-body-sm font-semibold text-on-surface mb-xs" for="password">Password</label>
+                    <input required class="w-full border border-outline-variant rounded px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest" id="password" placeholder="••••••••" type="password"/>
+                </div>
+                <div id="newsletterGroup" class="flex items-start gap-sm pt-xs">
+                    <div class="flex items-center h-5">
+                        <input class="w-4 h-4 border border-outline-variant rounded text-primary-container focus:ring-primary-container bg-surface-container-lowest" id="newsletter" type="checkbox"/>
+                    </div>
+                    <label class="font-body-sm text-body-sm text-secondary cursor-pointer" for="newsletter">
+                        Send me the Weekly Efficiency Report for Venue Owners
+                    </label>
+                </div>
+                <button id="submitBtn" class="w-full bg-primary-container text-on-primary py-sm px-md rounded font-body-md text-body-md font-medium hover:bg-surface-tint transition-colors mt-lg shadow-sm hover:shadow-md cursor-pointer" type="submit">
+                    Create Account
+                </button>
+            </form>
+            <p id="auth-footer" class="mt-lg text-center font-label-md text-label-md text-secondary max-w-xs mx-auto">
+                By signing up, you agree to the 14-day Professional Pilot. No credit card required.
+            </p>
+        </div>
+    </div>
+    <!-- Subtle Toast/Overlay Mockup -->
+    <div class="fixed bottom-margin-mobile right-margin-mobile md:bottom-margin-desktop md:right-margin-desktop bg-surface-container-lowest border border-outline-variant shadow-[0_4px_20px_rgba(0,0,0,0.05)] rounded-xl p-md max-w-sm z-50 hidden opacity-0 transition-opacity duration-300" id="welcome-toast">
+        <div class="flex items-start justify-between mb-sm">
+            <h4 class="font-headline-md text-body-lg font-semibold text-on-surface">Fast Start Guide</h4>
+            <button class="text-secondary hover:text-on-surface cursor-pointer" onclick="document.getElementById('welcome-toast').classList.add('hidden')">
+                <span class="material-symbols-outlined text-sm">close</span>
+            </button>
+        </div>
+        <ul class="space-y-sm">
+            <li class="flex items-center gap-sm">
+                <span class="flex items-center justify-center w-6 h-6 rounded-full bg-surface-container-high text-primary-container font-label-md text-label-md font-bold">1</span>
+                <span class="font-body-sm text-body-sm text-on-surface">Verify Email</span>
+            </li>
+            <li class="flex items-center gap-sm">
+                <span class="flex items-center justify-center w-6 h-6 rounded-full bg-surface-container-high text-secondary font-label-md text-label-md font-bold">2</span>
+                <span class="font-body-sm text-body-sm text-on-surface">Upload First Invoice</span>
+            </li>
+            <li class="flex items-center gap-sm">
+                <span class="flex items-center justify-center w-6 h-6 rounded-full bg-surface-container-high text-secondary font-label-md text-label-md font-bold">3</span>
+                <span class="font-body-sm text-body-sm text-on-surface">See Your First Total</span>
+            </li>
+        </ul>
+    </div>
+    <script>
+        let authMode = 'signup';
+
+        function setAuthMode(mode) {
+            authMode = mode;
+            const tabSignup = document.getElementById('tab-signup');
+            const tabSignin = document.getElementById('tab-signin');
+            const fullNameGroup = document.getElementById('fullNameGroup');
+            const newsletterGroup = document.getElementById('newsletterGroup');
+            const authTitle = document.getElementById('auth-title');
+            const authSubtitle = document.getElementById('auth-subtitle');
+            const submitBtn = document.getElementById('submitBtn');
+            const authFooter = document.getElementById('auth-footer');
+            const fullNameInput = document.getElementById('fullName');
+
+            if (mode === 'signup') {
+                tabSignup.className = "flex-1 py-sm text-center font-body-md text-body-md font-medium bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-md transition-all cursor-pointer";
+                tabSignin.className = "flex-1 py-sm text-center font-body-md text-body-md font-medium text-secondary hover:text-on-surface transition-colors cursor-pointer";
+                fullNameGroup.style.display = 'block';
+                newsletterGroup.style.display = 'flex';
+                fullNameInput.setAttribute('required', 'true');
+                authTitle.textContent = "Get Started";
+                authSubtitle.textContent = "Join thousands of founders optimizing their workflow.";
+                submitBtn.textContent = "Create Account";
+                authFooter.textContent = "By signing up, you agree to the 14-day Professional Pilot. No credit card required.";
+            } else {
+                tabSignup.className = "flex-1 py-sm text-center font-body-md text-body-md font-medium text-secondary hover:text-on-surface transition-colors cursor-pointer";
+                tabSignin.className = "flex-1 py-sm text-center font-body-md text-body-md font-medium bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-md transition-all cursor-pointer";
+                fullNameGroup.style.display = 'none';
+                newsletterGroup.style.display = 'none';
+                fullNameInput.removeAttribute('required');
+                authTitle.textContent = "Welcome Back";
+                authSubtitle.textContent = "Welcome back! Enter your business credentials to log in.";
+                submitBtn.textContent = "Sign In";
+                authFooter.textContent = "Access your full intelligence workspace. Forgot your password?";
+            }
+        }
+
+        // Simulate showing the toast after a short delay for demonstration
+        setTimeout(() => {
+            const toast = document.getElementById('welcome-toast');
+            toast.classList.remove('hidden');
+            // Trigger reflow
+            void toast.offsetWidth;
+            toast.classList.add('toast-enter', 'opacity-100');
+            toast.classList.remove('opacity-0');
+        }, 1200);
+
+        // Handle Form Submission with relative redirection
+        document.getElementById('signup-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (authMode === 'signup') {
+                const fullName = document.getElementById('fullName').value;
+                // Store the full name in localStorage so onboarding.html can greet dynamically!
+                localStorage.setItem('busynes_user_name', fullName || 'Sarah');
+                window.location.href = 'onboarding.html';
+            } else {
+                // If signing in, ensure active name is in place and go directly to dashboard
+                const existing = localStorage.getItem('busynes_user_name');
+                if (!existing) {
+                    localStorage.setItem('busynes_user_name', 'Sarah');
+                }
+                window.location.href = 'dashboard.html';
+            }
+        });
+    </script>
+</body>
+</html>
