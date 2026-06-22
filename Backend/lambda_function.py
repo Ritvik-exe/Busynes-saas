@@ -135,7 +135,7 @@ def lambda_handler(event, context):
 
             # Sending Email Notification via SES
             response = ses_client.send_email(
-                Source = 'busynes.platform@gmail.com',
+                Source = 'support@busynes.com',
 
                 Destination = {
                     'ToAddresses': ['ritvikyalala@gmail.com']
