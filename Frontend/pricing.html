@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html class="light" lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>SaaS Plans & Pricing - Busynes</title>
+    <link rel="icon" type="image/png" href="/favicon.png?v=1" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -106,55 +111,75 @@
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
+
         .fill-icon {
             font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
+
         .inner-glow {
             box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
         }
+
         .glass-card {
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(226, 232, 240, 0.8);
         }
+
         .emerald-gradient {
             background: linear-gradient(135deg, #24a81d 0%, #187c13 100%);
         }
     </style>
 </head>
+
 <body class="bg-surface-container-lowest text-on-background font-body-md antialiased pt-28">
     <!-- TopNavBar -->
-    <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-on-background/80 backdrop-blur-md border-b border-outline-variant/30 dark:border-outline/20 shadow-sm transition-all duration-300" id="topNav">
+    <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-on-background/80 backdrop-blur-md border-b border-outline-variant/30 dark:border-outline/20 shadow-sm transition-all duration-300"
+        id="topNav">
         <div class="max-w-[1440px] mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-margin-desktop h-20">
             <div class="flex items-center gap-3">
                 <a href="index.html" class="flex items-center gap-2 sm:gap-3 hover:opacity-85 transition-opacity">
-                    <img alt="Busynes Logo" class="h-7 sm:h-8 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaglyYYHQQHhZI0sXOTcaVVDVGSJuZXRoKofma9kTZsHLG0WS23LRWQF6QP0mNzpRm1_dYjnYgl4vAS3G_xMrnF2LHiqNvSIDgpIkQN7hsYsN4spBArqw8Q5r_sTBUc0_V10OyF_L9R10Bik18Mr2hR3P87XxQVxm4dfg5doaByVE6wQzLZ4zjrLwedRQPmnXaxynT_LhkMqPQxFKlzAO4RoWw0XrNs7545LYLvhi3yQdUuFg71vULTx9CmUpE-YPYT9VcrQGq4zc">
-                    <span class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed tracking-tight">Busynes</span>
+                    <img alt="Busynes Logo" class="h-7 sm:h-8 w-auto"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaglyYYHQQHhZI0sXOTcaVVDVGSJuZXRoKofma9kTZsHLG0WS23LRWQF6QP0mNzpRm1_dYjnYgl4vAS3G_xMrnF2LHiqNvSIDgpIkQN7hsYsN4spBArqw8Q5r_sTBUc0_V10OyF_L9R10Bik18Mr2hR3P87XxQVxm4dfg5doaByVE6wQzLZ4zjrLwedRQPmnXaxynT_LhkMqPQxFKlzAO4RoWw0XrNs7545LYLvhi3yQdUuFg71vULTx9CmUpE-YPYT9VcrQGq4zc">
+                    <span
+                        class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed tracking-tight">Busynes</span>
                 </a>
             </div>
             <div class="hidden lg:flex items-center gap-6 xl:gap-8">
-                <a class="text-secondary hover:text-primary transition-all duration-200 px-3 py-2 rounded-md font-label-md text-label-md hover:bg-surface-container-low" href="index.html" id="nav-product">Product</a>
-                <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 px-3 py-2 rounded-md font-label-md text-label-md hover:bg-surface-container-low" href="innovation.html" id="nav-lab">Innovation Lab</a>
-                <a class="text-primary dark:text-primary-fixed border-b-2 border-primary pb-1 font-label-md text-label-md" href="pricing.html" id="nav-pricing">Pricing</a>
+                <a class="text-secondary hover:text-primary transition-all duration-200 px-3 py-2 rounded-md font-label-md text-label-md hover:bg-surface-container-low"
+                    href="index.html" id="nav-product">Product</a>
+                <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 px-3 py-2 rounded-md font-label-md text-label-md hover:bg-surface-container-low"
+                    href="innovation.html" id="nav-lab">Innovation Lab</a>
+                <a class="text-primary dark:text-primary-fixed border-b-2 border-primary pb-1 font-label-md text-label-md"
+                    href="pricing.html" id="nav-pricing">Pricing</a>
             </div>
             <div class="flex items-center gap-2 sm:gap-4 flex-shrink-0">
-                <a class="hidden sm:inline-block text-secondary hover:text-primary font-label-md text-label-md font-semibold px-2 py-1.5 rounded hover:bg-surface-container-low transition-colors" href="signup.html">Log In</a>
-                <a class="bg-primary-container text-on-primary font-label-md text-label-md px-3 sm:px-6 py-2 sm:py-2.5 rounded-full hover:bg-primary transition-colors inner-glow active:scale-95 shadow-sm whitespace-nowrap text-[11px] sm:text-sm font-semibold" href="signup.html" id="cta-start-pilot">
+                <a class="hidden sm:inline-block text-secondary hover:text-primary font-label-md text-label-md font-semibold px-2 py-1.5 rounded hover:bg-surface-container-low transition-colors"
+                    href="signup.html">Log In</a>
+                <a class="bg-primary-container text-on-primary font-label-md text-label-md px-3 sm:px-6 py-2 sm:py-2.5 rounded-full hover:bg-primary transition-colors inner-glow active:scale-95 shadow-sm whitespace-nowrap text-[11px] sm:text-sm font-semibold"
+                    href="signup.html" id="cta-start-pilot">
                     Start Pilot
                 </a>
-                <button id="mobile-menu-toggle" class="lg:hidden p-2 text-on-surface hover:bg-surface-container-low rounded-full transition-colors focus:outline-none cursor-pointer" aria-label="Toggle menu">
+                <button id="mobile-menu-toggle"
+                    class="lg:hidden p-2 text-on-surface hover:bg-surface-container-low rounded-full transition-colors focus:outline-none cursor-pointer"
+                    aria-label="Toggle menu">
                     <span class="material-symbols-outlined text-[24px] block">menu</span>
                 </button>
             </div>
         </div>
         <!-- Mobile/Tablet Dropdown Menu -->
-        <div id="mobile-dropdown-menu" class="hidden absolute top-20 left-0 w-full bg-white dark:bg-on-background border-b border-outline-variant/30 shadow-lg px-6 py-4 z-40 transition-all duration-300">
+        <div id="mobile-dropdown-menu"
+            class="hidden absolute top-20 left-0 w-full bg-white dark:bg-on-background border-b border-outline-variant/30 shadow-lg px-6 py-4 z-40 transition-all duration-300">
             <div class="flex flex-col gap-3 py-2">
-                <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 py-2.5 rounded-lg font-label-md text-label-md hover:bg-surface-container-low px-4 font-bold" href="index.html">Product</a>
-                <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 py-2.5 rounded-lg font-label-md text-label-md hover:bg-surface-container-low px-4 font-bold" href="innovation.html">Innovation Lab</a>
-                <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 py-2.5 rounded-lg font-label-md text-label-md hover:bg-surface-container-low px-4 font-bold" href="pricing.html">Pricing</a>
+                <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 py-2.5 rounded-lg font-label-md text-label-md hover:bg-surface-container-low px-4 font-bold"
+                    href="index.html">Product</a>
+                <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 py-2.5 rounded-lg font-label-md text-label-md hover:bg-surface-container-low px-4 font-bold"
+                    href="innovation.html">Innovation Lab</a>
+                <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 py-2.5 rounded-lg font-label-md text-label-md hover:bg-surface-container-low px-4 font-bold"
+                    href="pricing.html">Pricing</a>
                 <hr class="border-outline-variant/30 sm:hidden">
-                <a class="sm:hidden text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 py-2.5 rounded-lg font-label-md text-label-md hover:bg-surface-container-low px-4 font-bold" href="signup.html">Log In</a>
+                <a class="sm:hidden text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 py-2.5 rounded-lg font-label-md text-label-md hover:bg-surface-container-low px-4 font-bold"
+                    href="signup.html">Log In</a>
             </div>
         </div>
     </nav>
@@ -162,17 +187,25 @@
     <main class="py-16">
         <!-- Title Page -->
         <section class="max-w-4xl mx-auto text-center px-margin-mobile md:px-gutter mb-16">
-            <h1 class="font-display-lg text-headline-xl text-on-background mb-4 font-black">Scalable Pricing for Every Stage of Your Busynes.</h1>
-            <p class="font-body-lg text-body-lg text-secondary max-w-2xl mx-auto mb-8">Choose the pilot program that fits your corporate requirements. All plans host GDPR compliant extraction stored on secure S3 layers.</p>
-            
+            <h1 class="font-display-lg text-headline-xl text-on-background mb-4 font-black">Scalable Pricing for Every
+                Stage of Your Busynes.</h1>
+            <p class="font-body-lg text-body-lg text-secondary max-w-2xl mx-auto mb-8">Choose the pilot program that
+                fits your corporate requirements. All plans host GDPR compliant extraction stored on secure S3 layers.
+            </p>
+
             <!-- Plan Toggle control -->
-            <div class="inline-flex items-center gap-sm bg-surface-container-low p-1.5 rounded-full border border-outline-variant/30">
-                <button onclick="toggleBillingPeriod('monthly')" id="btn-toggle-monthly" class="px-5 py-2 font-label-md text-label-md font-semibold bg-white text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-full transition-all duration-200 cursor-pointer">
+            <div
+                class="inline-flex items-center gap-sm bg-surface-container-low p-1.5 rounded-full border border-outline-variant/30">
+                <button onclick="toggleBillingPeriod('monthly')" id="btn-toggle-monthly"
+                    class="px-5 py-2 font-label-md text-label-md font-semibold bg-white text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-full transition-all duration-200 cursor-pointer">
                     Monthly
                 </button>
-                <button onclick="toggleBillingPeriod('yearly')" id="btn-toggle-yearly" class="px-5 py-2 font-label-md text-label-md font-semibold text-secondary hover:text-on-surface transition-all duration-200 cursor-pointer flex items-center gap-2">
+                <button onclick="toggleBillingPeriod('yearly')" id="btn-toggle-yearly"
+                    class="px-5 py-2 font-label-md text-label-md font-semibold text-secondary hover:text-on-surface transition-all duration-200 cursor-pointer flex items-center gap-2">
                     Annually
-                    <span class="bg-primary-container text-on-primary font-label-md text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-bold">Save 15%</span>
+                    <span
+                        class="bg-primary-container text-on-primary font-label-md text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-bold">Save
+                        15%</span>
                 </button>
             </div>
         </section>
@@ -180,11 +213,14 @@
         <!-- Pricing Tier Grid -->
         <section class="max-w-[1440px] mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
             <!-- Tier 1 -->
-            <div class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-md flex flex-col hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <div
+                class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-md flex flex-col hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                 <div class="mb-6">
-                    <span class="font-label-md text-label-md text-secondary uppercase font-bold tracking-wider">Starter</span>
+                    <span
+                        class="font-label-md text-label-md text-secondary uppercase font-bold tracking-wider">Starter</span>
                     <h2 class="font-headline-lg text-headline-lg text-on-background mt-2 font-semibold">Free Sprint</h2>
-                    <p class="font-body-sm text-body-sm text-secondary mt-1">Excellent for single entrepreneurs getting familiar with automated extraction.</p>
+                    <p class="font-body-sm text-body-sm text-secondary mt-1">Excellent for single entrepreneurs getting
+                        familiar with automated extraction.</p>
                 </div>
                 <div class="mb-8">
                     <span class="font-headline-xl text-[44px] text-on-background font-extrabold">£0</span>
@@ -192,15 +228,18 @@
                 </div>
                 <ul class="space-y-sm flex-1 mb-8">
                     <li class="flex items-center gap-2 text-on-surface text-sm">
-                        <span class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
+                        <span
+                            class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
                         10 monthly processed invoices
                     </li>
                     <li class="flex items-center gap-2 text-on-surface text-sm">
-                        <span class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
+                        <span
+                            class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
                         Base AI extraction algorithm
                     </li>
                     <li class="flex items-center gap-2 text-on-surface text-sm">
-                        <span class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
+                        <span
+                            class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
                         Secure S3 file sandbox
                     </li>
                     <li class="flex items-center gap-2 text-on-surface text-sm opacity-50">
@@ -208,117 +247,158 @@
                         No QuickBooks share vault
                     </li>
                 </ul>
-                <button onclick="window.location.href='signup.html'" class="w-full text-center border border-outline-variant text-on-surface hover:border-primary-container hover:text-primary-container py-3 rounded-full font-label-md text-label-md font-bold transition-all cursor-pointer">
+                <button onclick="window.location.href='signup.html'"
+                    class="w-full text-center border border-outline-variant text-on-surface hover:border-primary-container hover:text-primary-container py-3 rounded-full font-label-md text-label-md font-bold transition-all cursor-pointer">
                     Start for Free
                 </button>
             </div>
 
             <!-- Tier 2 (Highlighted) -->
-            <div class="bg-surface-container-lowest border-2 border-primary-container rounded-2xl p-md flex flex-col hover:shadow-lg transition-all duration-300 relative transform hover:-translate-y-1">
-                <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary-container text-on-primary font-label-md text-[10px] px-4 py-1 rounded-full uppercase font-black tracking-widest shadow-sm">
+            <div
+                class="bg-surface-container-lowest border-2 border-primary-container rounded-2xl p-md flex flex-col hover:shadow-lg transition-all duration-300 relative transform hover:-translate-y-1">
+                <div
+                    class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary-container text-on-primary font-label-md text-[10px] px-4 py-1 rounded-full uppercase font-black tracking-widest shadow-sm">
                     Best Value
                 </div>
                 <div class="mb-6">
-                    <span class="font-label-md text-label-md text-primary-container uppercase font-bold tracking-wider">Professional Pilot</span>
-                    <h2 class="font-headline-lg text-headline-lg text-on-background mt-2 font-bold">The Sunday Saver</h2>
-                    <p class="font-body-sm text-body-sm text-secondary mt-1">Our flagship program to automate stadium invoice processing and reconcile logs instantly.</p>
+                    <span
+                        class="font-label-md text-label-md text-primary-container uppercase font-bold tracking-wider">Professional
+                        Pilot</span>
+                    <h2 class="font-headline-lg text-headline-lg text-on-background mt-2 font-bold">The Sunday Saver
+                    </h2>
+                    <p class="font-body-sm text-body-sm text-secondary mt-1">Our flagship program to automate stadium
+                        invoice processing and reconcile logs instantly.</p>
                 </div>
                 <div class="mb-8">
-                    <span id="price-professional" class="font-headline-xl text-[44px] text-on-background font-extrabold">£29</span>
+                    <span id="price-professional"
+                        class="font-headline-xl text-[44px] text-on-background font-extrabold">£29</span>
                     <span class="font-body-sm text-secondary">/ month</span>
                 </div>
                 <ul class="space-y-sm flex-1 mb-8">
                     <li class="flex items-center gap-2 text-on-surface text-sm font-semibold">
-                        <span class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
+                        <span
+                            class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
                         Unlimited processed invoices
                     </li>
                     <li class="flex items-center gap-2 text-on-surface text-sm">
-                        <span class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
+                        <span
+                            class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
                         99.8% core extraction accuracy
                     </li>
                     <li class="flex items-center gap-2 text-on-surface text-sm">
-                        <span class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
+                        <span
+                            class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
                         Live AWS interactive dashboard
                     </li>
                     <li class="flex items-center gap-2 text-on-surface text-sm">
-                        <span class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
+                        <span
+                            class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
                         Accounting CPA Share Vault
                     </li>
                     <li class="flex items-center gap-2 text-on-surface text-sm">
-                        <span class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
+                        <span
+                            class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
                         WhatsApp integration updates
                     </li>
                 </ul>
-                <button onclick="window.location.href='signup.html'" class="w-full text-center bg-primary-container text-on-primary py-3 rounded-full font-label-md text-label-md font-bold hover:bg-primary transition-all cursor-pointer inner-glow shadow-md shadow-primary-container/25">
+                <button onclick="window.location.href='signup.html'"
+                    class="w-full text-center bg-primary-container text-on-primary py-3 rounded-full font-label-md text-label-md font-bold hover:bg-primary transition-all cursor-pointer inner-glow shadow-md shadow-primary-container/25">
                     Start 14-Day Free Pilot
                 </button>
             </div>
 
             <!-- Tier 3 -->
-            <div class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-md flex flex-col hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+            <div
+                class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-md flex flex-col hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                 <div class="mb-6">
-                    <span class="font-label-md text-label-md text-secondary uppercase font-bold tracking-wider">Enterprise Plan</span>
-                    <h2 class="font-headline-lg text-headline-lg text-on-background mt-2 font-semibold">Custom Stadium</h2>
-                    <p class="font-body-sm text-body-sm text-secondary mt-1">Bespoke integrations for professional football clubs, sports venues, or multi-franchise ERPs.</p>
+                    <span
+                        class="font-label-md text-label-md text-secondary uppercase font-bold tracking-wider">Enterprise
+                        Plan</span>
+                    <h2 class="font-headline-lg text-headline-lg text-on-background mt-2 font-semibold">Custom Stadium
+                    </h2>
+                    <p class="font-body-sm text-body-sm text-secondary mt-1">Bespoke integrations for professional
+                        football clubs, sports venues, or multi-franchise ERPs.</p>
                 </div>
                 <div class="mb-8">
                     <span class="font-headline-xl text-[44px] text-on-background font-extrabold">Custom</span>
                 </div>
                 <ul class="space-y-sm flex-1 mb-8">
                     <li class="flex items-center gap-2 text-on-surface text-sm">
-                        <span class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
+                        <span
+                            class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
                         Dedicated AWS S3 bucket partitions
                     </li>
                     <li class="flex items-center gap-2 text-on-surface text-sm">
-                        <span class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
+                        <span
+                            class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
                         Custom NLP vocabulary training
                     </li>
                     <li class="flex items-center gap-2 text-on-surface text-sm">
-                        <span class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
+                        <span
+                            class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
                         24/7 dedicated support priority
                     </li>
                     <li class="flex items-center gap-2 text-on-surface text-sm">
-                        <span class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
+                        <span
+                            class="material-symbols-outlined text-primary-container text-lg fill-icon">check_circle</span>
                         Direct API JSON database hooks
                     </li>
                 </ul>
-                <button onclick="window.location.href='mailto:enterprise@busynes.com?subject=Enterprise%20Stadium%20Quote'" class="w-full text-center border border-outline-variant text-on-surface hover:border-primary-container hover:text-primary-container py-3 rounded-full font-label-md text-label-md font-bold transition-all cursor-pointer">
+                <button
+                    onclick="window.location.href='mailto:enterprise@busynes.com?subject=Enterprise%20Stadium%20Quote'"
+                    class="w-full text-center border border-outline-variant text-on-surface hover:border-primary-container hover:text-primary-container py-3 rounded-full font-label-md text-label-md font-bold transition-all cursor-pointer">
                     Contact Sales
                 </button>
             </div>
         </section>
 
         <!-- ROI Calculator/Graphic Graphic -->
-        <section class="max-w-[1200px] border border-outline-variant/50 rounded-2xl mx-auto px-md py-md bg-surface-container-low mb-24 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+        <section
+            class="max-w-[1200px] border border-outline-variant/50 rounded-2xl mx-auto px-md py-md bg-surface-container-low mb-24 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
             <div class="md:col-span-1 text-left">
-                <span class="font-label-md text-label-md text-primary font-bold uppercase tracking-widest block mb-1">Value-First Metrics</span>
-                <h3 class="font-headline-md text-headline-md text-on-surface font-extrabold mb-2">Cost vs Value Reclaimed</h3>
-                <p class="font-body-sm text-body-sm text-secondary">Traditional paper entry sucks your profits. See the numerical return on your monthly pilot spend:</p>
+                <span
+                    class="font-label-md text-label-md text-primary font-bold uppercase tracking-widest block mb-1">Value-First
+                    Metrics</span>
+                <h3 class="font-headline-md text-headline-md text-on-surface font-extrabold mb-2">Cost vs Value
+                    Reclaimed</h3>
+                <p class="font-body-sm text-body-sm text-secondary">Traditional paper entry sucks your profits. See the
+                    numerical return on your monthly pilot spend:</p>
             </div>
             <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <!-- Stat 1 -->
                 <div class="bg-white p-6 rounded-xl border border-outline-variant/30 text-center shadow-sm">
-                    <span class="text-[11px] font-bold text-secondary uppercase tracking-widest font-label-md">Professional Cost</span>
+                    <span
+                        class="text-[11px] font-bold text-secondary uppercase tracking-widest font-label-md">Professional
+                        Cost</span>
                     <p class="font-headline-xl text-headline-xl text-on-surface mt-2 font-black">£29</p>
-                    <span class="font-body-sm text-xs text-on-surface-variant font-medium text-[10px]">Per Month Plan Fee</span>
+                    <span class="font-body-sm text-xs text-on-surface-variant font-medium text-[10px]">Per Month Plan
+                        Fee</span>
                 </div>
                 <!-- Stat 2 -->
                 <div class="bg-white p-6 rounded-xl border border-outline-variant/30 text-center shadow-sm">
-                    <span class="text-[11px] font-bold text-primary-container uppercase tracking-widest font-label-md">Hours Saved</span>
+                    <span
+                        class="text-[11px] font-bold text-primary-container uppercase tracking-widest font-label-md">Hours
+                        Saved</span>
                     <p class="font-headline-xl text-headline-xl text-primary-container mt-2 font-black">15 Hrs</p>
-                    <span class="font-body-sm text-xs text-on-surface-variant font-medium text-[10px]">Average CPA Admin/mo</span>
+                    <span class="font-body-sm text-xs text-on-surface-variant font-medium text-[10px]">Average CPA
+                        Admin/mo</span>
                 </div>
                 <!-- Stat 3 -->
-                <div class="bg-white p-6 rounded-xl border border-outline-variant/30 text-center shadow-sm ring-2 ring-primary-container/20">
-                    <span class="text-[11px] font-bold text-primary-container uppercase tracking-widest font-label-md">Reclaimed Value</span>
+                <div
+                    class="bg-white p-6 rounded-xl border border-outline-variant/30 text-center shadow-sm ring-2 ring-primary-container/20">
+                    <span
+                        class="text-[11px] font-bold text-primary-container uppercase tracking-widest font-label-md">Reclaimed
+                        Value</span>
                     <p class="font-headline-xl text-headline-xl text-primary-container mt-2 font-black">~£750</p>
-                    <span class="font-body-sm text-xs text-on-surface-variant font-medium text-[10px]">In Recovered Labor Value</span>
+                    <span class="font-body-sm text-xs text-on-surface-variant font-medium text-[10px]">In Recovered
+                        Labor Value</span>
                 </div>
             </div>
         </section>
 
         <!-- Trust Block -->
-        <section class="max-w-[1440px] mx-auto px-margin-desktop py-12 border-t border-b border-outline-variant/20 flex flex-wrap justify-center gap-12 text-center text-sm font-medium text-secondary">
+        <section
+            class="max-w-[1440px] mx-auto px-margin-desktop py-12 border-t border-b border-outline-variant/20 flex flex-wrap justify-center gap-12 text-center text-sm font-medium text-secondary">
             <div class="flex items-center gap-2">
                 <span class="material-symbols-outlined text-primary-container">gpp_good</span>
                 Secure AWS GuardDuty SSL
@@ -335,12 +415,15 @@
     </main>
 
     <!-- Footer -->
-    <footer class="w-full py-20 bg-surface-container-lowest dark:bg-on-background border-t border-outline-variant dark:border-outline/20">
+    <footer
+        class="w-full py-20 bg-surface-container-lowest dark:bg-on-background border-t border-outline-variant dark:border-outline/20">
         <div class="max-w-[1440px] mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter">
             <div class="col-span-1 md:col-span-2">
                 <div class="flex items-center gap-3 mb-6">
-                    <img alt="Busynes Logo" class="h-6 w-auto grayscale opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaglyYYHQQHhZI0sXOTcaVVDVGSJuZXRoKofma9kTZsHLG0WS23LRWQF6QP0mNzpRm1_dYjnYgl4vAS3G_xMrnF2LHiqNvSIDgpIkQN7hsYsN4spBArqw8Q5r_sTBUc0_V10OyF_L9R10Bik18Mr2hR3P87XxQVxm4dfg5doaByVE6wQzLZ4zjrLwedRQPmnXaxynT_LhkMqPQxFKlzAO4RoWw0XrNs7545LYLvhi3yQdUuFg71vULTx9CmUpE-YPYT9VcrQGq4zc">
-                    <span class="text-headline-md font-headline-md font-bold text-on-background dark:text-surface">Busynes</span>
+                    <img alt="Busynes Logo" class="h-6 w-auto grayscale opacity-80"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaglyYYHQQHhZI0sXOTcaVVDVGSJuZXRoKofma9kTZsHLG0WS23LRWQF6QP0mNzpRm1_dYjnYgl4vAS3G_xMrnF2LHiqNvSIDgpIkQN7hsYsN4spBArqw8Q5r_sTBUc0_V10OyF_L9R10Bik18Mr2hR3P87XxQVxm4dfg5doaByVE6wQzLZ4zjrLwedRQPmnXaxynT_LhkMqPQxFKlzAO4RoWw0XrNs7545LYLvhi3yQdUuFg71vULTx9CmUpE-YPYT9VcrQGq4zc">
+                    <span
+                        class="text-headline-md font-headline-md font-bold text-on-background dark:text-surface">Busynes</span>
                 </div>
                 <p class="font-body-sm text-body-sm text-secondary max-w-sm mb-6">
                     © 2026 Busynes Inc. All rights reserved. Built for high-performance enterprise business ecosystems.
@@ -349,16 +432,21 @@
             <div>
                 <h4 class="font-label-md text-label-md font-semibold text-on-background mb-4">Platform</h4>
                 <ul class="space-y-3">
-                    <li><a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4" href="index.html">Product</a></li>
-                    <li><a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4" href="innovation.html">Innovation Lab</a></li>
-                    <li><a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4" href="pricing.html">Pricing</a></li>
+                    <li><a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4"
+                            href="index.html">Product</a></li>
+                    <li><a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4"
+                            href="innovation.html">Innovation Lab</a></li>
+                    <li><a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4"
+                            href="pricing.html">Pricing</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="font-label-md text-label-md font-semibold text-on-background mb-4">Legal & Support</h4>
                 <ul class="space-y-3">
-                    <li><a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4" href="privacy.html">Privacy Policy</a></li>
-                    <li><a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4" href="terms.html">Terms of Service</a></li>
+                    <li><a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4"
+                            href="privacy.html">Privacy Policy</a></li>
+                    <li><a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4"
+                            href="terms.html">Terms of Service</a></li>
                 </ul>
             </div>
         </div>
@@ -370,7 +458,7 @@
             const btnMonthly = document.getElementById('btn-toggle-monthly');
             const btnYearly = document.getElementById('btn-toggle-yearly');
             const priceTag = document.getElementById('price-professional');
-            
+
             if (period === 'monthly') {
                 btnMonthly.className = "px-5 py-2 font-label-md text-label-md font-semibold bg-white text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-full transition-all duration-200 cursor-pointer";
                 btnYearly.className = "px-5 py-2 font-label-md text-label-md font-semibold text-secondary hover:text-on-surface transition-all duration-200 cursor-pointer flex items-center gap-2";
@@ -398,4 +486,5 @@
         }
     </script>
 </body>
+
 </html>

@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html class="h-full" lang="en">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Busynes - Welcome to the Ecosystem</title>
+    <link rel="icon" type="image/png" href="/favicon.png?v=1" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -117,33 +122,53 @@
         }
     </script>
     <style>
-        .delay-100 { animation-delay: 100ms; }
-        .delay-200 { animation-delay: 200ms; }
-        .delay-300 { animation-delay: 300ms; }
-        .delay-400 { animation-delay: 400ms; }
-        .delay-500 { animation-delay: 500ms; }
+        .delay-100 {
+            animation-delay: 100ms;
+        }
+
+        .delay-200 {
+            animation-delay: 200ms;
+        }
+
+        .delay-300 {
+            animation-delay: 300ms;
+        }
+
+        .delay-400 {
+            animation-delay: 400ms;
+        }
+
+        .delay-500 {
+            animation-delay: 500ms;
+        }
+
         .glass-card {
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(226, 232, 240, 0.8);
         }
+
         .emerald-gradient {
             background: linear-gradient(135deg, #24a81d 0%, #187c13 100%);
         }
     </style>
 </head>
-<body class="h-full bg-surface-container-lowest text-on-surface font-body-md antialiased flex flex-col items-center justify-center min-h-screen pt-20 relative">
+
+<body
+    class="h-full bg-surface-container-lowest text-on-surface font-body-md antialiased flex flex-col items-center justify-center min-h-screen pt-20 relative">
     <!-- Top-left Branding Logo -->
     <div class="absolute top-6 left-6 z-50">
         <a href="index.html" class="flex items-center gap-3 hover:opacity-85 transition-opacity">
-            <img alt="Busynes Logo" class="h-8 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaglyYYHQQHhZI0sXOTcaVVDVGSJuZXRoKofma9kTZsHLG0WS23LRWQF6QP0mNzpRm1_dYjnYgl4vAS3G_xMrnF2LHiqNvSIDgpIkQN7hsYsN4spBArqw8Q5r_sTBUc0_V10OyF_L9R10Bik18Mr2hR3P87XxQVxm4dfg5doaByVE6wQzLZ4zjrLwedRQPmnXaxynT_LhkMqPQxFKlzAO4RoWw0XrNs7545LYLvhi3yQdUuFg71vULTx9CmUpE-YPYT9VcrQGq4zc">
+            <img alt="Busynes Logo" class="h-8 w-auto"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaglyYYHQQHhZI0sXOTcaVVDVGSJuZXRoKofma9kTZsHLG0WS23LRWQF6QP0mNzpRm1_dYjnYgl4vAS3G_xMrnF2LHiqNvSIDgpIkQN7hsYsN4spBArqw8Q5r_sTBUc0_V10OyF_L9R10Bik18Mr2hR3P87XxQVxm4dfg5doaByVE6wQzLZ4zjrLwedRQPmnXaxynT_LhkMqPQxFKlzAO4RoWw0XrNs7545LYLvhi3yQdUuFg71vULTx9CmUpE-YPYT9VcrQGq4zc">
             <span class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Busynes</span>
         </a>
     </div>
     <main class="w-full max-w-3xl mx-auto px-margin-mobile md:px-gutter py-xl flex flex-col items-center text-center">
         <!-- Animated Checkmark -->
         <div class="mb-md animate-bounce-in">
-            <div class="w-20 h-20 bg-surface-container-low rounded-full flex items-center justify-center mx-auto border border-surface-variant shadow-sm">
+            <div
+                class="w-20 h-20 bg-surface-container-low rounded-full flex items-center justify-center mx-auto border border-surface-variant shadow-sm">
                 <span class="material-symbols-outlined text-[48px] text-primary-container fill-icon">
                     check_circle
                 </span>
@@ -159,51 +184,69 @@
         <!-- Onboarding Steps -->
         <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-gutter mb-xl animate-fade-in-up delay-300 text-left">
             <!-- Step 1 -->
-            <div class="bg-surface-container-lowest border border-outline-variant p-md rounded-xl flex flex-col hover:shadow-md transition-shadow duration-300">
-                <div class="w-10 h-10 bg-surface-container-low rounded-full flex items-center justify-center mb-md border border-surface-variant">
+            <div
+                class="bg-surface-container-lowest border border-outline-variant p-md rounded-xl flex flex-col hover:shadow-md transition-shadow duration-300">
+                <div
+                    class="w-10 h-10 bg-surface-container-low rounded-full flex items-center justify-center mb-md border border-surface-variant">
                     <span class="font-label-md text-label-md text-primary-container font-bold">01</span>
                 </div>
                 <h3 class="font-headline-md text-headline-md text-on-surface mb-xs font-semibold">First Invoice</h3>
-                <p class="font-body-sm text-body-sm text-secondary mb-md flex-grow">Get started by uploading your first document for automated AI extraction.</p>
-                <button onclick="window.location.href='transactions.html'" class="w-full bg-primary-container hover:bg-primary text-on-primary font-body-sm text-body-sm font-semibold py-sm px-md rounded-lg transition-colors duration-200 flex items-center justify-center gap-xs cursor-pointer">
+                <p class="font-body-sm text-body-sm text-secondary mb-md flex-grow">Get started by uploading your first
+                    document for automated AI extraction.</p>
+                <button onclick="window.location.href='transactions.html'"
+                    class="w-full bg-primary-container hover:bg-primary text-on-primary font-body-sm text-body-sm font-semibold py-sm px-md rounded-lg transition-colors duration-200 flex items-center justify-center gap-xs cursor-pointer">
                     Upload Now
                     <span class="material-symbols-outlined text-[16px]">upload_file</span>
                 </button>
             </div>
             <!-- Step 2 -->
-            <div class="bg-surface-bright border border-outline-variant p-md rounded-xl flex flex-col opacity-75 grayscale-[20%]">
-                <div class="w-10 h-10 bg-surface-container-low rounded-full flex items-center justify-center mb-md border border-surface-variant">
+            <div
+                class="bg-surface-bright border border-outline-variant p-md rounded-xl flex flex-col opacity-75 grayscale-[20%]">
+                <div
+                    class="w-10 h-10 bg-surface-container-low rounded-full flex items-center justify-center mb-md border border-surface-variant">
                     <span class="font-label-md text-label-md text-secondary font-bold">02</span>
                 </div>
                 <div class="flex items-center gap-xs mb-xs">
                     <h3 class="font-headline-md text-headline-md text-on-surface font-semibold">Connect Bank</h3>
-                    <span class="bg-surface-variant text-on-surface-variant font-label-md text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-bold">Locked</span>
+                    <span
+                        class="bg-surface-variant text-on-surface-variant font-label-md text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-bold">Locked</span>
                 </div>
-                <p class="font-body-sm text-body-sm text-secondary mb-md flex-grow">Sync bank accounts for automated reconciliation. Unlocks after first invoice.</p>
-                <button class="w-full border border-outline-variant text-secondary font-body-sm text-body-sm py-sm px-md rounded-lg cursor-not-allowed flex items-center justify-center gap-xs bg-surface-container-low" disabled="">
+                <p class="font-body-sm text-body-sm text-secondary mb-md flex-grow">Sync bank accounts for automated
+                    reconciliation. Unlocks after first invoice.</p>
+                <button
+                    class="w-full border border-outline-variant text-secondary font-body-sm text-body-sm py-sm px-md rounded-lg cursor-not-allowed flex items-center justify-center gap-xs bg-surface-container-low"
+                    disabled="">
                     <span class="material-symbols-outlined text-[16px]">lock</span>
                     Coming Soon
                 </button>
             </div>
             <!-- Step 3 -->
-            <div class="bg-surface-container-lowest border border-outline-variant p-md rounded-xl flex flex-col hover:shadow-md transition-shadow duration-300">
-                <div class="w-10 h-10 bg-surface-container-low rounded-full flex items-center justify-center mb-md border border-surface-variant">
+            <div
+                class="bg-surface-container-lowest border border-outline-variant p-md rounded-xl flex flex-col hover:shadow-md transition-shadow duration-300">
+                <div
+                    class="w-10 h-10 bg-surface-container-low rounded-full flex items-center justify-center mb-md border border-surface-variant">
                     <span class="font-label-md text-label-md text-secondary font-bold">03</span>
                 </div>
                 <h3 class="font-headline-md text-headline-md text-on-surface mb-xs font-semibold">Invite Accountant</h3>
-                <p class="font-body-sm text-body-sm text-secondary mb-md flex-grow">Give your CPA or team read-only access to your organized financial metrics.</p>
-                <button id="copy-invite-btn" class="w-full border border-primary-container text-primary-container hover:bg-surface-container-low font-body-sm text-body-sm font-semibold py-sm px-md rounded-lg transition-colors duration-200 flex items-center justify-center gap-xs text-center cursor-pointer">
+                <p class="font-body-sm text-body-sm text-secondary mb-md flex-grow">Give your CPA or team read-only
+                    access to your organized financial metrics.</p>
+                <button id="copy-invite-btn"
+                    class="w-full border border-primary-container text-primary-container hover:bg-surface-container-low font-body-sm text-body-sm font-semibold py-sm px-md rounded-lg transition-colors duration-200 flex items-center justify-center gap-xs text-center cursor-pointer">
                     Copy Invite Link
                     <span class="material-symbols-outlined text-[16px]">content_copy</span>
                 </button>
             </div>
         </div>
         <!-- Founder Message -->
-        <div class="bg-surface-container-low border border-outline-variant rounded-xl p-md flex items-start gap-md max-w-2xl w-full mx-auto mb-xl animate-fade-in-up delay-400 text-left">
-            <img alt="Ritvik - Founder of Busynes" class="w-12 h-12 rounded-full border border-surface-variant object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxWWO6F_F7ddhPm_Qa_vcv8JmcCDBLzccfV9K88CIOtVRDqaEvY07igFBFNwMVT2i7iiwc23O5aOz1VU69XSx6wP252pwP9xtANI3G35ne7mEc7uXEEw8fVwxWZ0yCa9YYQzz7FdHarQ9TjAReFpBZ1RsV11kwbMjG-rJH-67UCT1AslmNb9xR6cpIIGONiuP0_LbGIOBEOUdOLsX02YolKe_sc3w2y0VtqgToLBgk8ciLsf4kxmdcatK46JaIfmk15IcbFG9umdI"/>
+        <div
+            class="bg-surface-container-low border border-outline-variant rounded-xl p-md flex items-start gap-md max-w-2xl w-full mx-auto mb-xl animate-fade-in-up delay-400 text-left">
+            <img alt="Ritvik - Founder of Busynes"
+                class="w-12 h-12 rounded-full border border-surface-variant object-cover"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxWWO6F_F7ddhPm_Qa_vcv8JmcCDBLzccfV9K88CIOtVRDqaEvY07igFBFNwMVT2i7iiwc23O5aOz1VU69XSx6wP252pwP9xtANI3G35ne7mEc7uXEEw8fVwxWZ0yCa9YYQzz7FdHarQ9TjAReFpBZ1RsV11kwbMjG-rJH-67UCT1AslmNb9xR6cpIIGONiuP0_LbGIOBEOUdOLsX02YolKe_sc3w2y0VtqgToLBgk8ciLsf4kxmdcatK46JaIfmk15IcbFG9umdI" />
             <div>
                 <p class="font-body-sm text-body-sm text-on-surface italic leading-relaxed mb-sm">
-                    "I’m Ritvik, the founder of Busynes. If you need any help setting up your venue accounts, just click the AI assistant in the corner. Let’s grow your business together."
+                    "I’m Ritvik, the founder of Busynes. If you need any help setting up your venue accounts, just click
+                    the AI assistant in the corner. Let’s grow your business together."
                 </p>
                 <p class="font-label-md text-label-md text-secondary font-bold uppercase tracking-widest">
                     Ritvik, Founder
@@ -212,7 +255,8 @@
         </div>
         <!-- Main CTA -->
         <div class="animate-fade-in-up delay-500 w-full flex justify-center">
-            <button onclick="window.location.href='dashboard.html'" class="bg-primary-container hover:bg-primary text-on-primary font-headline-md text-body-lg py-md px-xl rounded-lg shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-sm transform hover:-translate-y-1 cursor-pointer font-bold">
+            <button onclick="window.location.href='dashboard.html'"
+                class="bg-primary-container hover:bg-primary text-on-primary font-headline-md text-body-lg py-md px-xl rounded-lg shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-sm transform hover:-translate-y-1 cursor-pointer font-bold">
                 Go to My Dashboard
                 <span class="material-symbols-outlined">arrow_forward</span>
             </button>
@@ -220,7 +264,8 @@
     </main>
 
     <!-- Simple Notification Toast -->
-    <div id="toast" class="fixed bottom-margin-mobile right-margin-mobile bg-inverse-surface text-inverse-on-surface px-md py-sm rounded-xl shadow-lg border border-outline/20 font-body-sm text-body-sm opacity-0 transition-opacity duration-300 pointer-events-none z-50">
+    <div id="toast"
+        class="fixed bottom-margin-mobile right-margin-mobile bg-inverse-surface text-inverse-on-surface px-md py-sm rounded-xl shadow-lg border border-outline/20 font-body-sm text-body-sm opacity-0 transition-opacity duration-300 pointer-events-none z-50">
         Link copied to clipboard!
     </div>
 
@@ -247,4 +292,5 @@
         });
     </script>
 </body>
+
 </html>

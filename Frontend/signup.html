@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Busynes - Register Account</title>
+    <link rel="icon" type="image/png" href="/favicon.png?v=1" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -109,121 +114,174 @@
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
+
         .toast-enter {
             animation: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+
         @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
+
         .glass-card {
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(226, 232, 240, 0.8);
         }
+
         .emerald-gradient {
             background: linear-gradient(135deg, #24a81d 0%, #187c13 100%);
         }
     </style>
 </head>
-<body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col md:flex-row overflow-x-hidden">
+
+<body
+    class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col md:flex-row overflow-x-hidden">
     <!-- Left Side: Brand Panel -->
-    <div class="relative w-full md:w-1/2 emerald-gradient flex flex-col justify-between p-md sm:p-lg lg:p-xl text-white overflow-hidden min-h-[40vh] md:min-h-screen">
+    <div
+        class="relative w-full md:w-1/2 emerald-gradient flex flex-col justify-between p-md sm:p-lg lg:p-xl text-white overflow-hidden min-h-[40vh] md:min-h-screen">
         <!-- Subtle Background Pattern/Gradient -->
-        <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(circle at top right, #9af986 0%, transparent 60%);"></div>
+        <div class="absolute inset-0 opacity-20 pointer-events-none"
+            style="background-image: radial-gradient(circle at top right, #9af986 0%, transparent 60%);"></div>
         <!-- Logo -->
         <div class="relative z-10 flex items-center">
             <a href="index.html" class="flex items-center gap-3 hover:opacity-85 transition-opacity">
-                <img alt="Busynes Logo" class="h-10 w-auto brightness-0 invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaglyYYHQQHhZI0sXOTcaVVDVGSJuZXRoKofma9kTZsHLG0WS23LRWQF6QP0mNzpRm1_dYjnYgl4vAS3G_xMrnF2LHiqNvSIDgpIkQN7hsYsN4spBArqw8Q5r_sTBUc0_V10OyF_L9R10Bik18Mr2hR3P87XxQVxm4dfg5doaByVE6wQzLZ4zjrLwedRQPmnXaxynT_LhkMqPQxFKlzAO4RoWw0XrNs7545LYLvhi3yQdUuFg71vULTx9CmUpE-YPYT9VcrQGq4zc"/>
+                <img alt="Busynes Logo" class="h-10 w-auto brightness-0 invert"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaglyYYHQQHhZI0sXOTcaVVDVGSJuZXRoKofma9kTZsHLG0WS23LRWQF6QP0mNzpRm1_dYjnYgl4vAS3G_xMrnF2LHiqNvSIDgpIkQN7hsYsN4spBArqw8Q5r_sTBUc0_V10OyF_L9R10Bik18Mr2hR3P87XxQVxm4dfg5doaByVE6wQzLZ4zjrLwedRQPmnXaxynT_LhkMqPQxFKlzAO4RoWw0XrNs7545LYLvhi3yQdUuFg71vULTx9CmUpE-YPYT9VcrQGq4zc" />
                 <span class="text-headline-md font-headline-md font-bold text-white tracking-tight">Busynes</span>
             </a>
         </div>
         <!-- Brand Slogan/Goal -->
         <div class="relative z-10 my-md sm:my-xl max-w-lg">
-            <h1 class="font-headline-xl text-[26px] sm:text-[32px] md:text-headline-xl text-white mb-4 sm:mb-md font-bold leading-tight">
+            <h1
+                class="font-headline-xl text-[26px] sm:text-[32px] md:text-headline-xl text-white mb-4 sm:mb-md font-bold leading-tight">
                 Automate your sports venue overheads.
             </h1>
             <p class="font-body-lg text-sm sm:text-body-lg text-emerald-100 font-medium">
-                The preferred digital invoice automation and compliance platform built strictly for UK sports clubs and stadium CPAs.
+                The preferred digital invoice automation and compliance platform built strictly for UK sports clubs and
+                stadium CPAs.
             </p>
         </div>
         <!-- Core Modules Grid -->
         <div class="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-md w-full">
-            <div class="glass-panel p-3 sm:p-md rounded-xl flex items-center gap-2 sm:gap-sm hover:bg-white/15 transition-colors">
-                <span class="material-symbols-outlined text-white text-[18px] sm:text-[24px] fill-icon" data-icon="account_balance_wallet">account_balance_wallet</span>
-                <span class="text-[11px] sm:text-body-sm font-semibold text-white whitespace-nowrap">Financial Hub</span>
+            <div
+                class="glass-panel p-3 sm:p-md rounded-xl flex items-center gap-2 sm:gap-sm hover:bg-white/15 transition-colors">
+                <span class="material-symbols-outlined text-white text-[18px] sm:text-[24px] fill-icon"
+                    data-icon="account_balance_wallet">account_balance_wallet</span>
+                <span class="text-[11px] sm:text-body-sm font-semibold text-white whitespace-nowrap">Financial
+                    Hub</span>
             </div>
-            <div class="glass-panel p-3 sm:p-md rounded-xl flex items-center gap-2 sm:gap-sm hover:bg-white/15 transition-colors">
-                <span class="material-symbols-outlined text-white text-[18px] sm:text-[24px] fill-icon" data-icon="edit_note">edit_note</span>
+            <div
+                class="glass-panel p-3 sm:p-md rounded-xl flex items-center gap-2 sm:gap-sm hover:bg-white/15 transition-colors">
+                <span class="material-symbols-outlined text-white text-[18px] sm:text-[24px] fill-icon"
+                    data-icon="edit_note">edit_note</span>
                 <span class="text-[11px] sm:text-body-sm font-semibold text-white whitespace-nowrap">Smart Notes</span>
             </div>
-            <div class="glass-panel p-3 sm:p-md rounded-xl flex items-center gap-2 sm:gap-sm hover:bg-white/15 transition-colors">
-                <span class="material-symbols-outlined text-white text-[18px] sm:text-[24px] fill-icon" data-icon="inventory_2">inventory_2</span>
+            <div
+                class="glass-panel p-3 sm:p-md rounded-xl flex items-center gap-2 sm:gap-sm hover:bg-white/15 transition-colors">
+                <span class="material-symbols-outlined text-white text-[18px] sm:text-[24px] fill-icon"
+                    data-icon="inventory_2">inventory_2</span>
                 <span class="text-[11px] sm:text-body-sm font-semibold text-white whitespace-nowrap">Inventory OS</span>
             </div>
-            <div class="glass-panel p-3 sm:p-md rounded-xl flex items-center gap-2 sm:gap-sm hover:bg-white/15 transition-colors">
-                <span class="material-symbols-outlined text-white text-[18px] sm:text-[24px] fill-icon" data-icon="groups">groups</span>
-                <span class="text-[11px] sm:text-body-sm font-semibold text-white whitespace-nowrap">Team Collaboration</span>
+            <div
+                class="glass-panel p-3 sm:p-md rounded-xl flex items-center gap-2 sm:gap-sm hover:bg-white/15 transition-colors">
+                <span class="material-symbols-outlined text-white text-[18px] sm:text-[24px] fill-icon"
+                    data-icon="groups">groups</span>
+                <span class="text-[11px] sm:text-body-sm font-semibold text-white whitespace-nowrap">Team
+                    Collaboration</span>
             </div>
         </div>
     </div>
 
     <!-- Right Side: Authentication Form -->
-    <div class="w-full md:w-1/2 bg-surface-container-lowest flex items-center justify-center p-margin-mobile md:p-margin-desktop min-h-[60vh] md:min-h-screen relative">
+    <div
+        class="w-full md:w-1/2 bg-surface-container-lowest flex items-center justify-center p-margin-mobile md:p-margin-desktop min-h-[60vh] md:min-h-screen relative">
         <div class="w-full max-w-md">
             <!-- Segmented Control Tabs -->
             <div class="flex p-1 bg-surface-container-low rounded-lg mb-xl">
-                <button id="tab-signup" type="button" onclick="setAuthMode('signup')" class="flex-1 py-sm text-center font-body-md text-body-md font-medium bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-md transition-all cursor-pointer">
+                <button id="tab-signup" type="button" onclick="setAuthMode('signup')"
+                    class="flex-1 py-sm text-center font-body-md text-body-md font-medium bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-md transition-all cursor-pointer">
                     Create Account
                 </button>
-                <button id="tab-signin" type="button" onclick="setAuthMode('signin')" class="flex-1 py-sm text-center font-body-md text-body-md font-medium text-secondary hover:text-on-surface transition-colors cursor-pointer">
+                <button id="tab-signin" type="button" onclick="setAuthMode('signin')"
+                    class="flex-1 py-sm text-center font-body-md text-body-md font-medium text-secondary hover:text-on-surface transition-colors cursor-pointer">
                     Sign In
                 </button>
             </div>
             <div class="mb-lg">
-                <h1 id="auth-title" class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xs">Get Started</h1>
-                <p id="auth-subtitle" class="font-body-sm text-body-sm text-secondary">Join thousands of founders optimizing their workflow.</p>
+                <h1 id="auth-title"
+                    class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xs">Get
+                    Started</h1>
+                <p id="auth-subtitle" class="font-body-sm text-body-sm text-secondary">Join thousands of founders
+                    optimizing their workflow.</p>
             </div>
             <!-- Social Logins -->
             <div class="space-y-sm mb-lg">
-                <button type="button" onclick="window.location.href='onboarding.html'" class="w-full flex items-center justify-center gap-sm py-sm px-md border border-outline-variant rounded hover:bg-surface-container-low transition-colors text-on-surface font-body-sm text-body-sm font-medium cursor-pointer">
-                    <img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA92MbTzklneLduJL5WgeJlkJJU1hCPTQVspbv-7IQKGOX4dIAQtIFtslnWJ8gPryDDEQaNksNFnXIqYBnmH6tnFAYlQJQd4qhDkLlNqs9_mrsPaJp9RKaZ4l3E4GiSGOt_sYPRk1VKR6Dgynm_ppH_HHGrBNocrSjPdmmD7sGPCmBXarQJelgxVXx4Tla62_HlmvE1_-kxhjxl3PLU5l3_vM1Cb7jXvgdiWgh0ry4_hXRj9FMDqvfcZhJj-E4zELsw8Mmmld8yuX0"/>
+                <button type="button" onclick="window.location.href='onboarding.html'"
+                    class="w-full flex items-center justify-center gap-sm py-sm px-md border border-outline-variant rounded hover:bg-surface-container-low transition-colors text-on-surface font-body-sm text-body-sm font-medium cursor-pointer">
+                    <img alt="Google" class="w-5 h-5"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA92MbTzklneLduJL5WgeJlkJJU1hCPTQVspbv-7IQKGOX4dIAQtIFtslnWJ8gPryDDEQaNksNFnXIqYBnmH6tnFAYlQJQd4qhDkLlNqs9_mrsPaJp9RKaZ4l3E4GiSGOt_sYPRk1VKR6Dgynm_ppH_HHGrBNocrSjPdmmD7sGPCmBXarQJelgxVXx4Tla62_HlmvE1_-kxhjxl3PLU5l3_vM1Cb7jXvgdiWgh0ry4_hXRj9FMDqvfcZhJj-E4zELsw8Mmmld8yuX0" />
                     Continue with Google
                 </button>
-                <button type="button" onclick="window.location.href='onboarding.html'"  class="w-full flex items-center justify-center gap-sm py-sm px-md border border-outline-variant rounded hover:bg-surface-container-low transition-colors text-on-surface font-body-sm text-body-sm font-medium cursor-pointer">
-                    <img alt="Microsoft" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAM9Q87gaPSUzAugGvRjTzTtsjhQJ-P4cRx8EuzFQgWjakVhrAqXAgW-UOUCIADdoM1ilcNvBd1jwuZUJNsPDxWYv43yC64URZF5p7_WKJz4aeCkNVIYbYiabB8Pq8rofG-XYaX30DMQbpt1jpbhc5EzgWd0hb7T6mokYJNDhqXZMsT3TE2UT1ey4DXoyP5f3gUNZ61nK8Is55s_ULWVdSkJxmRtsB4V2dTrtew9oRCyi7LAI8xzEA2ODNf9Mq4WobEbCn2NPsBFQk"/>
+                <button type="button" onclick="window.location.href='onboarding.html'"
+                    class="w-full flex items-center justify-center gap-sm py-sm px-md border border-outline-variant rounded hover:bg-surface-container-low transition-colors text-on-surface font-body-sm text-body-sm font-medium cursor-pointer">
+                    <img alt="Microsoft" class="w-5 h-5"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAM9Q87gaPSUzAugGvRjTzTtsjhQJ-P4cRx8EuzFQgWjakVhrAqXAgW-UOUCIADdoM1ilcNvBd1jwuZUJNsPDxWYv43yC64URZF5p7_WKJz4aeCkNVIYbYiabB8Pq8rofG-XYaX30DMQbpt1jpbhc5EzgWd0hb7T6mokYJNDhqXZMsT3TE2UT1ey4DXoyP5f3gUNZ61nK8Is55s_ULWVdSkJxmRtsB4V2dTrtew9oRCyi7LAI8xzEA2ODNf9Mq4WobEbCn2NPsBFQk" />
                     Continue with Microsoft
                 </button>
             </div>
             <!-- Separator -->
             <div class="relative flex items-center py-md mb-md">
                 <div class="flex-grow border-t border-outline-variant"></div>
-                <span class="flex-shrink-0 mx-md font-body-sm text-body-sm text-secondary bg-surface-container-lowest px-2">or use your business email</span>
+                <span
+                    class="flex-shrink-0 mx-md font-body-sm text-body-sm text-secondary bg-surface-container-lowest px-2">or
+                    use your business email</span>
                 <div class="flex-grow border-t border-outline-variant"></div>
             </div>
             <!-- Form -->
             <form id="signup-form" class="space-y-md">
                 <div id="fullNameGroup" class="transition-all duration-300">
-                    <label class="block font-body-sm text-body-sm font-semibold text-on-surface mb-xs" id="fullNameLabel" for="fullName">Full Name</label>
-                    <input required class="w-full border border-outline-variant rounded px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest" id="fullName" placeholder="Jane Doe" type="text"/>
+                    <label class="block font-body-sm text-body-sm font-semibold text-on-surface mb-xs"
+                        id="fullNameLabel" for="fullName">Full Name</label>
+                    <input required
+                        class="w-full border border-outline-variant rounded px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest"
+                        id="fullName" placeholder="Jane Doe" type="text" />
                 </div>
                 <div>
-                    <label class="block font-body-sm text-body-sm font-semibold text-on-surface mb-xs" for="email">Business Email</label>
-                    <input required class="w-full border border-outline-variant rounded px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest" id="email" placeholder="jane@company.com" type="email"/>
+                    <label class="block font-body-sm text-body-sm font-semibold text-on-surface mb-xs"
+                        for="email">Business Email</label>
+                    <input required
+                        class="w-full border border-outline-variant rounded px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest"
+                        id="email" placeholder="jane@company.com" type="email" />
                 </div>
                 <div>
-                    <label class="block font-body-sm text-body-sm font-semibold text-on-surface mb-xs" for="password">Password</label>
-                    <input required class="w-full border border-outline-variant rounded px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest" id="password" placeholder="••••••••" type="password"/>
+                    <label class="block font-body-sm text-body-sm font-semibold text-on-surface mb-xs"
+                        for="password">Password</label>
+                    <input required
+                        class="w-full border border-outline-variant rounded px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest"
+                        id="password" placeholder="••••••••" type="password" />
                 </div>
                 <div id="newsletterGroup" class="flex items-start gap-sm pt-xs">
                     <div class="flex items-center h-5">
-                        <input class="w-4 h-4 border border-outline-variant rounded text-primary-container focus:ring-primary-container bg-surface-container-lowest" id="newsletter" type="checkbox"/>
+                        <input
+                            class="w-4 h-4 border border-outline-variant rounded text-primary-container focus:ring-primary-container bg-surface-container-lowest"
+                            id="newsletter" type="checkbox" />
                     </div>
                     <label class="font-body-sm text-body-sm text-secondary cursor-pointer" for="newsletter">
                         Send me the Weekly Efficiency Report for Venue Owners
                     </label>
                 </div>
-                <button id="submitBtn" class="w-full bg-primary-container text-on-primary py-sm px-md rounded font-body-md text-body-md font-medium hover:bg-surface-tint transition-colors mt-lg shadow-sm hover:shadow-md cursor-pointer" type="submit">
+                <button id="submitBtn"
+                    class="w-full bg-primary-container text-on-primary py-sm px-md rounded font-body-md text-body-md font-medium hover:bg-surface-tint transition-colors mt-lg shadow-sm hover:shadow-md cursor-pointer"
+                    type="submit">
                     Create Account
                 </button>
             </form>
@@ -233,24 +291,29 @@
         </div>
     </div>
     <!-- Subtle Toast/Overlay Mockup -->
-    <div class="fixed bottom-margin-mobile right-margin-mobile md:bottom-margin-desktop md:right-margin-desktop bg-surface-container-lowest border border-outline-variant shadow-[0_4px_20px_rgba(0,0,0,0.05)] rounded-xl p-md max-w-sm z-50 hidden opacity-0 transition-opacity duration-300" id="welcome-toast">
+    <div class="fixed bottom-margin-mobile right-margin-mobile md:bottom-margin-desktop md:right-margin-desktop bg-surface-container-lowest border border-outline-variant shadow-[0_4px_20px_rgba(0,0,0,0.05)] rounded-xl p-md max-w-sm z-50 hidden opacity-0 transition-opacity duration-300"
+        id="welcome-toast">
         <div class="flex items-start justify-between mb-sm">
             <h4 class="font-headline-md text-body-lg font-semibold text-on-surface">Fast Start Guide</h4>
-            <button class="text-secondary hover:text-on-surface cursor-pointer" onclick="document.getElementById('welcome-toast').classList.add('hidden')">
+            <button class="text-secondary hover:text-on-surface cursor-pointer"
+                onclick="document.getElementById('welcome-toast').classList.add('hidden')">
                 <span class="material-symbols-outlined text-sm">close</span>
             </button>
         </div>
         <ul class="space-y-sm">
             <li class="flex items-center gap-sm">
-                <span class="flex items-center justify-center w-6 h-6 rounded-full bg-surface-container-high text-primary-container font-label-md text-label-md font-bold">1</span>
+                <span
+                    class="flex items-center justify-center w-6 h-6 rounded-full bg-surface-container-high text-primary-container font-label-md text-label-md font-bold">1</span>
                 <span class="font-body-sm text-body-sm text-on-surface">Verify Email</span>
             </li>
             <li class="flex items-center gap-sm">
-                <span class="flex items-center justify-center w-6 h-6 rounded-full bg-surface-container-high text-secondary font-label-md text-label-md font-bold">2</span>
+                <span
+                    class="flex items-center justify-center w-6 h-6 rounded-full bg-surface-container-high text-secondary font-label-md text-label-md font-bold">2</span>
                 <span class="font-body-sm text-body-sm text-on-surface">Upload First Invoice</span>
             </li>
             <li class="flex items-center gap-sm">
-                <span class="flex items-center justify-center w-6 h-6 rounded-full bg-surface-container-high text-secondary font-label-md text-label-md font-bold">3</span>
+                <span
+                    class="flex items-center justify-center w-6 h-6 rounded-full bg-surface-container-high text-secondary font-label-md text-label-md font-bold">3</span>
                 <span class="font-body-sm text-body-sm text-on-surface">See Your First Total</span>
             </li>
         </ul>
@@ -322,4 +385,5 @@
         });
     </script>
 </body>
+
 </html>
