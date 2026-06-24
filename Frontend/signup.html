@@ -202,20 +202,22 @@
     </div>
 
     <!-- Right Side: Authentication Form -->
+    <!-- Replace your Right-Side Authentication Form Container in signup.html with this complete block -->
     <div
         class="w-full md:w-1/2 bg-surface-container-lowest flex items-center justify-center p-margin-mobile md:p-margin-desktop min-h-[60vh] md:min-h-screen relative">
         <div class="w-full max-w-md">
             <!-- Segmented Control Tabs -->
             <div class="flex p-1 bg-surface-container-low rounded-lg mb-xl">
-                <button id="tab-signup" type="button" onclick="setAuthMode('signup')"
-                    class="flex-1 py-sm text-center font-body-md text-body-md font-medium bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-md transition-all cursor-pointer">
+                <button id="tab-signup"
+                    class="flex-1 py-sm text-center font-body-md text-body-md font-medium bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-md transition-all">
                     Create Account
                 </button>
-                <button id="tab-signin" type="button" onclick="setAuthMode('signin')"
-                    class="flex-1 py-sm text-center font-body-md text-body-md font-medium text-secondary hover:text-on-surface transition-colors cursor-pointer">
+                <button id="tab-signin"
+                    class="flex-1 py-sm text-center font-body-md text-body-md font-medium text-secondary hover:text-on-surface transition-colors">
                     Sign In
                 </button>
             </div>
+
             <div class="mb-lg">
                 <h1 id="auth-title"
                     class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xs">Get
@@ -223,101 +225,250 @@
                 <p id="auth-subtitle" class="font-body-sm text-body-sm text-secondary">Join thousands of founders
                     optimizing their workflow.</p>
             </div>
+
             <!-- Social Logins -->
             <div class="space-y-sm mb-lg">
-                <button type="button" onclick="window.location.href='onboarding.html'"
-                    class="w-full flex items-center justify-center gap-sm py-sm px-md border border-outline-variant rounded hover:bg-surface-container-low transition-colors text-on-surface font-body-sm text-body-sm font-medium cursor-pointer">
-                    <img alt="Google" class="w-5 h-5"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA92MbTzklneLduJL5WgeJlkJJU1hCPTQVspbv-7IQKGOX4dIAQtIFtslnWJ8gPryDDEQaNksNFnXIqYBnmH6tnFAYlQJQd4qhDkLlNqs9_mrsPaJp9RKaZ4l3E4GiSGOt_sYPRk1VKR6Dgynm_ppH_HHGrBNocrSjPdmmD7sGPCmBXarQJelgxVXx4Tla62_HlmvE1_-kxhjxl3PLU5l3_vM1Cb7jXvgdiWgh0ry4_hXRj9FMDqvfcZhJj-E4zELsw8Mmmld8yuX0" />
+                <button
+                    onclick="alert('Social logins are scheduled for our V1.1.0 release. Please use your business email for the V1.0.0 pilot!')"
+                    class="w-full flex items-center justify-center gap-sm py-sm px-md border border-outline-variant rounded-DEFAULT hover:bg-surface-container-low transition-colors text-on-surface font-body-sm text-body-sm font-medium">
+                    <!-- SVG Google Logo -->
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.18 1-.74 1.85-1.59 2.42v3.01h2.58c1.51-2.39 2.65-5.92 2.65-10.44z"
+                            fill="#4285F4" />
+                        <path
+                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-2.58-3.01c-.72.48-1.64.77-2.7.77-2.81 0-5.19-1.9-6.04-4.46H1.28v3.1C3.1 21.09 7.27 23 12 23z"
+                            fill="#34A853" />
+                        <path
+                            d="M5.96 13.64c-.22-.66-.35-1.37-.35-2.1s.13-1.44.35-2.1V6.34H1.28C.46 7.97 0 9.87 0 11.8s.46 3.83 1.28 5.46l4.68-3.62z"
+                            fill="#FBBC05" />
+                        <path
+                            d="M12 4.75c1.62 0 3.08.56 4.22 1.66l3.15-3.15C17.45 1.49 14.96 1 12 1 7.27 1 3.11 2.91 1.28 6.34l4.68 3.62c.85-2.56 3.23-4.46 6.04-4.46z"
+                            fill="#EA4335" />
+                    </svg>
                     Continue with Google
                 </button>
-                <button type="button" onclick="window.location.href='onboarding.html'"
-                    class="w-full flex items-center justify-center gap-sm py-sm px-md border border-outline-variant rounded hover:bg-surface-container-low transition-colors text-on-surface font-body-sm text-body-sm font-medium cursor-pointer">
-                    <img alt="Microsoft" class="w-5 h-5"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAM9Q87gaPSUzAugGvRjTzTtsjhQJ-P4cRx8EuzFQgWjakVhrAqXAgW-UOUCIADdoM1ilcNvBd1jwuZUJNsPDxWYv43yC64URZF5p7_WKJz4aeCkNVIYbYiabB8Pq8rofG-XYaX30DMQbpt1jpbhc5EzgWd0hb7T6mokYJNDhqXZMsT3TE2UT1ey4DXoyP5f3gUNZ61nK8Is55s_ULWVdSkJxmRtsB4V2dTrtew9oRCyi7LAI8xzEA2ODNf9Mq4WobEbCn2NPsBFQk" />
+                <button
+                    onclick="alert('Social logins are scheduled for our V1.1.0 release. Please use your business email for the V1.0.0 pilot!')"
+                    class="w-full flex items-center justify-center gap-sm py-sm px-md border border-outline-variant rounded-DEFAULT hover:bg-surface-container-low transition-colors text-on-surface font-body-sm text-body-sm font-medium">
+                    <!-- SVG Microsoft Logo -->
+                    <svg class="w-5 h-5" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#f35325" d="M0 0h11v11H0z" />
+                        <path fill="#81bc06" d="M12 0h11v11H12z" />
+                        <path fill="#05a6f0" d="M0 12h11v11H0z" />
+                        <path fill="#ffba08" d="M12 12h11v11H12z" />
+                    </svg>
                     Continue with Microsoft
                 </button>
             </div>
+
             <!-- Separator -->
             <div class="relative flex items-center py-md mb-md">
                 <div class="flex-grow border-t border-outline-variant"></div>
-                <span
+                <span id="separator-text"
                     class="flex-shrink-0 mx-md font-body-sm text-body-sm text-secondary bg-surface-container-lowest px-2">or
                     use your business email</span>
                 <div class="flex-grow border-t border-outline-variant"></div>
             </div>
+
             <!-- Form -->
-            <form id="signup-form" class="space-y-md">
-                <div id="fullNameGroup" class="transition-all duration-300">
+            <form class="space-y-md">
+                <div id="name-container">
                     <label class="block font-body-sm text-body-sm font-semibold text-on-surface mb-xs"
-                        id="fullNameLabel" for="fullName">Full Name</label>
-                    <input required
-                        class="w-full border border-outline-variant rounded px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest"
+                        for="fullName">Full Name</label>
+                    <input
+                        class="w-full border border-outline-variant rounded-DEFAULT px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest"
                         id="fullName" placeholder="Jane Doe" type="text" />
                 </div>
                 <div>
                     <label class="block font-body-sm text-body-sm font-semibold text-on-surface mb-xs"
                         for="email">Business Email</label>
-                    <input required
-                        class="w-full border border-outline-variant rounded px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest"
+                    <input
+                        class="w-full border border-outline-variant rounded-DEFAULT px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest"
                         id="email" placeholder="jane@company.com" type="email" />
                 </div>
                 <div>
                     <label class="block font-body-sm text-body-sm font-semibold text-on-surface mb-xs"
                         for="password">Password</label>
-                    <input required
-                        class="w-full border border-outline-variant rounded px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest"
+                    <input
+                        class="w-full border border-outline-variant rounded-DEFAULT px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest"
                         id="password" placeholder="••••••••" type="password" />
                 </div>
-                <div id="newsletterGroup" class="flex items-start gap-sm pt-xs">
+                <div id="newsletter-container" class="flex items-start gap-sm pt-xs">
                     <div class="flex items-center h-5">
                         <input
                             class="w-4 h-4 border border-outline-variant rounded text-primary-container focus:ring-primary-container bg-surface-container-lowest"
                             id="newsletter" type="checkbox" />
                     </div>
                     <label class="font-body-sm text-body-sm text-secondary cursor-pointer" for="newsletter">
-                        Send me the Weekly Efficiency Report for Venue Owners
+                        Send me the Weekly Efficiency Report
                     </label>
                 </div>
-                <button id="signup-btn"
-                    class="w-full bg-primary-container text-on-primary py-sm px-md rounded font-body-md text-body-md font-medium hover:bg-surface-tint transition-colors mt-lg shadow-sm hover:shadow-md cursor-pointer"
+
+                <!-- Dual Action Submit Button -->
+                <button id="auth-submit-btn"
+                    class="w-full bg-primary-container text-on-primary py-sm px-md rounded-DEFAULT font-body-md text-body-md font-medium hover:bg-surface-tint transition-colors mt-lg shadow-sm hover:shadow-md"
                     type="submit">
                     Create Account
                 </button>
             </form>
-            <p id="auth-footer" class="mt-lg text-center font-label-md text-label-md text-secondary max-w-xs mx-auto">
+            <p id="auth-footer-text"
+                class="mt-lg text-center font-label-md text-label-md text-secondary max-w-xs mx-auto">
                 By signing up, you agree to the 14-day Professional Pilot. No credit card required.
             </p>
         </div>
     </div>
-    <!-- Subtle Toast/Overlay Mockup -->
-    <div class="fixed bottom-margin-mobile right-margin-mobile md:bottom-margin-desktop md:right-margin-desktop bg-surface-container-lowest border border-outline-variant shadow-[0_4px_20px_rgba(0,0,0,0.05)] rounded-xl p-md max-w-sm z-50 hidden opacity-0 transition-opacity duration-300"
-        id="welcome-toast">
-        <div class="flex items-start justify-between mb-sm">
-            <h4 class="font-headline-md text-body-lg font-semibold text-on-surface">Fast Start Guide</h4>
-            <button class="text-secondary hover:text-on-surface cursor-pointer"
-                onclick="document.getElementById('welcome-toast').classList.add('hidden')">
-                <span class="material-symbols-outlined text-sm">close</span>
-            </button>
-        </div>
-        <ul class="space-y-sm">
-            <li class="flex items-center gap-sm">
-                <span
-                    class="flex items-center justify-center w-6 h-6 rounded-full bg-surface-container-high text-primary-container font-label-md text-label-md font-bold">1</span>
-                <span class="font-body-sm text-body-sm text-on-surface">Verify Email</span>
-            </li>
-            <li class="flex items-center gap-sm">
-                <span
-                    class="flex items-center justify-center w-6 h-6 rounded-full bg-surface-container-high text-secondary font-label-md text-label-md font-bold">2</span>
-                <span class="font-body-sm text-body-sm text-on-surface">Upload First Invoice</span>
-            </li>
-            <li class="flex items-center gap-sm">
-                <span
-                    class="flex items-center justify-center w-6 h-6 rounded-full bg-surface-container-high text-secondary font-label-md text-label-md font-bold">3</span>
-                <span class="font-body-sm text-body-sm text-on-surface">See Your First Total</span>
-            </li>
-        </ul>
-    </div>
+
+    <script type="module">
+        import { CognitoUserPool, CognitoUserAttribute, CognitoUser, AuthenticationDetails } from 'https://cdn.jsdelivr.net/npm/amazon-cognito-identity-js@6.3.7/+esm';
+
+        // 1. Initialize Cognito Pool
+        const poolData = {
+            UserPoolId: "eu-west-2_CL264NQ0Y",
+            ClientId: "4p948h27ndof1i2r3ubeg31h8p"
+        };
+        const userPool = new CognitoUserPool(poolData);
+
+        let isSignUpMode = true;
+        let registeredUser = null;
+
+        // 2. Tab Toggling Logic (Sign Up vs. Sign In)
+        const tabSignUp = document.getElementById('tab-signup');
+        const tabSignIn = document.getElementById('tab-signin');
+        const nameContainer = document.getElementById('name-container');
+        const newsletterContainer = document.getElementById('newsletter-container');
+        const authTitle = document.getElementById('auth-title');
+        const authSubtitle = document.getElementById('auth-subtitle');
+        const authSubmitBtn = document.getElementById('auth-submit-btn');
+        const authFooterText = document.getElementById('auth-footer-text');
+
+        function toggleMode(toSignUp) {
+            isSignUpMode = toSignUp;
+            if (toSignUp) {
+                tabSignUp.className = "flex-1 py-sm text-center font-body-md text-body-md font-medium bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-md transition-all";
+                tabSignIn.className = "flex-1 py-sm text-center font-body-md text-body-md font-medium text-secondary hover:text-on-surface transition-colors";
+                nameContainer.classList.remove('hidden');
+                newsletterContainer.classList.remove('hidden');
+                authTitle.textContent = "Get Started";
+                authSubtitle.textContent = "Join thousands of founders optimizing their workflow.";
+                authSubmitBtn.textContent = "Create Account";
+                authFooterText.classList.remove('hidden');
+            } else {
+                tabSignIn.className = "flex-1 py-sm text-center font-body-md text-body-md font-medium bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-md transition-all";
+                tabSignUp.className = "flex-1 py-sm text-center font-body-md text-body-md font-medium text-secondary hover:text-on-surface transition-colors";
+                nameContainer.classList.add('hidden');
+                newsletterContainer.classList.add('hidden');
+                authTitle.textContent = "Welcome Back";
+                authSubtitle.textContent = "Welcome back! Enter your business credentials to log in.";
+                authSubmitBtn.textContent = "Sign In";
+                authFooterText.classList.add('hidden');
+            }
+        }
+
+        tabSignUp.addEventListener('click', () => toggleMode(true));
+        tabSignIn.addEventListener('click', () => toggleMode(false));
+
+        // 3. Form Submission Handler
+        authSubmitBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (!email || !password) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            if (isSignUpMode) {
+                // ================== SIGN UP FLOW ==================
+                const fullName = document.getElementById('fullName').value.trim();
+                const attributeList = [
+                    new CognitoUserAttribute({ Name: 'email', Value: email }),
+                    new CognitoUserAttribute({ Name: 'name', Value: fullName || email.split('@')[0] })
+                ];
+
+                userPool.signUp(email, password, attributeList, null, (err, result) => {
+                    if (err) {
+                        alert("Sign-up failed: " + err.message);
+                        return;
+                    }
+                    registeredUser = result.user;
+                    showVerificationForm(email, fullName || email.split('@')[0]);
+                });
+            } else {
+                // ================== SIGN IN FLOW ==================
+                const authDetails = new AuthenticationDetails({
+                    Username: email,
+                    Password: password
+                });
+
+                const userData = { Username: email, Pool: userPool };
+                const cognitoUser = new CognitoUser(userData);
+
+                cognitoUser.authenticateUser(authDetails, {
+                    onSuccess: (result) => {
+                        console.log("Authentication successful!");
+
+                        // Decode token to get name dynamically
+                        const idToken = result.getIdToken().getJwtToken();
+                        const payload = JSON.parse(atob(idToken.split('.')[1]));
+                        const userName = payload.name || email.split('@')[0];
+
+                        // Save session details locally
+                        localStorage.setItem('busynes_user_name', userName);
+                        localStorage.setItem('busynes_client_id', email.replace(/[@.]/g, '_'));
+
+                        // Redirect to dashboard!
+                        window.location.href = "dashboard.html";
+                    },
+                    onFailure: (err) => {
+                        alert("Sign-In failed: " + err.message);
+                    }
+                });
+            }
+        });
+
+        // 4. Verification Form Handler
+        function showVerificationForm(email, fullName) {
+            const verificationHTML = `
+            <div id="verification-overlay" class="fixed inset-0 bg-on-background/80 backdrop-blur-md flex items-center justify-center p-4 z-50">
+                <div class="bg-white border border-outline-variant p-8 max-w-md w-full rounded-2xl shadow-2xl text-center">
+                    <span class="material-symbols-outlined text-primary-container text-4xl mb-4">mark_email_unread</span>
+                    <h3 class="font-headline-md text-xl font-bold text-on-surface mb-2">Verify Your Email</h3>
+                    <p class="font-body-sm text-body-sm text-secondary mb-6">We've sent a 6-digit confirmation code to <strong class="text-on-surface">${email}</strong>. Enter it below to activate your pilot.</p>
+                    <input id="verification-code" type="text" maxlength="6" class="w-full text-center tracking-[1em] font-mono text-xl border border-outline-variant rounded-xl py-3 mb-6 focus:ring-primary-container" placeholder="000000" />
+                    <button id="verify-btn" class="w-full bg-primary-container text-on-primary py-3.5 rounded-full font-body-sm font-semibold hover:bg-primary transition-colors">Confirm Code</button>
+                </div>
+            </div>
+        `;
+            document.body.insertAdjacentHTML('beforeend', verificationHTML);
+
+            document.getElementById('verify-btn')?.addEventListener('click', () => {
+                const code = document.getElementById('verification-code').value.trim();
+                if (code.length !== 6) {
+                    alert("Please enter a valid 6-digit code.");
+                    return;
+                }
+
+                const userData = { Username: email, Pool: userPool };
+                const cognitoUser = new CognitoUser(userData);
+
+                cognitoUser.confirmRegistration(code, true, (err, result) => {
+                    if (err) {
+                        alert("Verification failed: " + err.message);
+                        return;
+                    }
+
+                    // Save user registration data locally
+                    localStorage.setItem('busynes_user_name', fullName);
+                    localStorage.setItem('busynes_client_id', email.replace(/[@.]/g, '_'));
+
+                    window.location.href = "onboarding.html";
+                });
+            });
+        }
+    </script>
     <script>
         let authMode = 'signup';
 
@@ -383,96 +534,6 @@
                 window.location.href = 'dashboard.html';
             }
         });
-    </script>
-    <!-- Cognito SDK & Integration Script -->
-    <script type="module">
-        import { CognitoUserPool, CognitoUserAttribute, CognitoUser } from 'https://cdn.jsdelivr.net/npm/amazon-cognito-identity-js@6.3.7/+esm';
-
-        // 1. Initialize your secure Cognito User Pool
-        const poolData = {
-            UserPoolId: "eu-west-2_CL264NQ0Y",
-            ClientId: "4p948h27ndof1i2r3ubeg31h8p"
-        };
-        const userPool = new CognitoUserPool(poolData);
-
-        let registeredUser = null;
-
-        // 2. Handle the Sign-Up Form Submission
-        document.getElementById('signup-btn')?.addEventListener('click', async (e) => {
-            e.preventDefault();
-
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
-
-            if (!email || !password) {
-                alert("Please enter both email and password.");
-                return;
-            }
-
-            // Map the email attribute
-            const attributeList = [
-                new CognitoUserAttribute({ Name: 'email', Value: email })
-            ];
-
-            // Call the Cognito Sign-Up API
-            userPool.signUp(email, password, attributeList, null, (err, result) => {
-                if (err) {
-                    alert("Error during sign-up: " + err.message);
-                    console.error(err);
-                    return;
-                }
-
-                registeredUser = result.user;
-                console.log("User registered successfully:", registeredUser.getUsername());
-
-                // UI Update: Hide signup form and show the Verification Code overlay
-                showVerificationForm(email);
-            });
-        });
-
-        // 3. UI Function: Switch to Verification Mode
-        function showVerificationForm(email) {
-            // We inject a clean, themed overlay to ask the user for their 6-digit confirmation code
-            const verificationHTML = `
-                <div id="verification-overlay" class="fixed inset-0 bg-on-background/80 backdrop-blur-md flex items-center justify-center p-4 z-50">
-                    <div class="bg-white border border-outline-variant p-8 max-w-md w-full rounded-2xl shadow-2xl text-center">
-                        <span class="material-symbols-outlined text-primary-container text-4xl mb-4">mark_email_unread</span>
-                        <h3 class="font-headline-md text-xl font-bold text-on-surface mb-2">Verify Your Email</h3>
-                        <p class="font-body-sm text-body-sm text-secondary mb-6">We've sent a 6-digit confirmation code to <strong class="text-on-surface">${email}</strong>. Enter it below to activate your pilot.</p>
-                        <input id="verification-code" type="text" maxlength="6" class="w-full text-center tracking-[1em] font-mono text-xl border border-outline-variant rounded-xl py-3 mb-6 focus:ring-primary-container" placeholder="000000" />
-                        <button id="verify-btn" class="w-full bg-primary-container text-on-primary py-3.5 rounded-full font-body-sm font-semibold hover:bg-primary transition-colors">Confirm Code</button>
-                    </div>
-                </div>
-            `;
-            document.body.insertAdjacentHTML('beforeend', verificationHTML);
-
-            // Bind the verification confirm button
-            document.getElementById('verify-btn')?.addEventListener('click', () => {
-                const code = document.getElementById('verification-code').value.trim();
-                if (code.length !== 6) {
-                    alert("Please enter a valid 6-digit code.");
-                    return;
-                }
-
-                const userData = { Username: email, Pool: userPool };
-                const cognitoUser = new CognitoUser(userData);
-
-                // Call Cognito Confirm Registration API
-                cognitoUser.confirmRegistration(code, true, (err, result) => {
-                    if (err) {
-                        alert("Verification failed: " + err.message);
-                        return;
-                    }
-
-                    // Save the dynamic user details in local storage for the dashboard to read
-                    localStorage.setItem('busynes_user_name', email.split('@')[0]);
-                    localStorage.setItem('busynes_client_id', email.replace(/[@.]/g, '_')); // Creates a clean folder key like "jane_company_com"
-
-                    // Redirect to Onboarding Success page!
-                    window.location.href = "onboarding.html";
-                });
-            });
-        }
     </script>
 </body>
 
