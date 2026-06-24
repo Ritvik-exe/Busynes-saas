@@ -55,3 +55,17 @@ variable "github_actions_role"{
     description = "busynes-github-actions-role"
     default = "busynes-github-actions-role"
 }
+
+# Cognito User Pool
+variable "cognito_user_pool"{
+    type = string
+    description = "busynes-user-pool"
+    default = "busynes-user-pool"
+}
+
+# Cognito App Client
+variabe "cognito_app_client"{
+    type = string
+    description = "busynes-app-client"
+    default = "busynes-app-client"
+}

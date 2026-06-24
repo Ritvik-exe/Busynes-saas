@@ -116,7 +116,7 @@ def lambda_handler(event, context):
                 <div class="wrapper">
                     <div class="container">
                         <div class="header">
-                            <h2 style="margin:0;">Busynes Platform</h2>
+                            <h2 style="margin:0;">Busynes</h2>
                         </div>
                         <p>Hello, your invoice has been processed successfully.</p>
                         <p><strong>File:</strong> {file_name}</p>

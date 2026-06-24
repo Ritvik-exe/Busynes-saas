@@ -251,4 +251,17 @@ resource "aws_iam_openid_connect_provider" "github_actions"{
     ]
     thumbprint_list = ["6938fd4d98bab03faadb97b34396831e3780aea1"]
 }
-    
+
+# ========================== Cognito User Pool ==========================
+resource "aws_cognito_user_pool" "busynes_user_pool"{
+    name = var.cognito_user_pool
+    username_attributes = ["email"]
+    auto_verified_attributes = ["email"]
+}
+
+# ========================== Cognito User Pool Client ==========================
+resource "aws_cognito_user_pool_client" "busynes_app_client"{
+    name = var.cognito_app_client
+    user_pool_id = aws_cognito_user_pool.busynes_user_pool.id
+    generate_secret = false
+}
