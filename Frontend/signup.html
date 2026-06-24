@@ -2,106 +2,29 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Busynes - Register Account</title>
-    <link rel="icon" type="image/png" href="/favicon.png?v=1" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Busynes - Get Started</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&family=Inter:wght@400;600&family=JetBrains+Mono:wght@500&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet" />
+        rel="stylesheet">
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     "colors": {
-                        "surface": "#F8FAFC",
-                        "surface-dim": "#CBD5E1",
-                        "surface-bright": "#F8FAFC",
-                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#1B7A16",
+                        "on-primary": "#ffffff",
                         "surface-container-low": "#F1F5F9",
-                        "surface-container": "#E2E8F0",
-                        "surface-container-high": "#CBD5E1",
-                        "surface-container-highest": "#94A3B8",
                         "on-surface": "#0F172A",
                         "on-surface-variant": "#475569",
-                        "inverse-surface": "#1E293B",
-                        "inverse-on-surface": "#F8FAFC",
-                        "outline": "#94A3B8",
-                        "outline-variant": "#E2E8F0",
-                        "surface-tint": "#187c13",
-                        "primary": "#187c13",
-                        "on-primary": "#ffffff",
-                        "primary-container": "#187c13",
-                        "on-primary-container": "#ffffff",
-                        "inverse-primary": "#41bc3a",
                         "secondary": "#475569",
-                        "on-secondary": "#ffffff",
-                        "secondary-container": "rgba(24, 124, 19, 0.1)",
-                        "on-secondary-container": "#187c13",
-                        "tertiary": "#64748B",
-                        "on-tertiary": "#ffffff",
-                        "tertiary-container": "#E2E8F0",
-                        "on-tertiary-container": "#0F172A",
-                        "error": "#EF4444",
-                        "on-error": "#ffffff",
-                        "error-container": "#FEE2E2",
-                        "on-error-container": "#991B1B",
-                        "primary-fixed": "#A7F3D0",
-                        "primary-fixed-dim": "#6EE7B7",
-                        "on-primary-fixed": "#064E3B",
-                        "on-primary-fixed-variant": "#047857",
-                        "secondary-fixed": "#E2E8F0",
-                        "secondary-fixed-dim": "#CBD5E1",
-                        "on-secondary-fixed": "#0F172A",
-                        "on-secondary-fixed-variant": "#475569",
-                        "tertiary-fixed": "#F1F5F9",
-                        "tertiary-fixed-dim": "#E2E8F0",
-                        "on-tertiary-fixed": "#0F172A",
-                        "on-tertiary-fixed-variant": "#475569",
-                        "background": "#F8FAFC",
-                        "on-background": "#0F172A",
-                        "surface-variant": "#E2E8F0"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "spacing": {
-                        "margin-desktop": "64px",
-                        "sm": "12px",
-                        "margin-mobile": "16px",
-                        "lg": "48px",
-                        "xl": "80px",
-                        "md": "24px",
-                        "xs": "4px",
-                        "base": "8px",
-                        "gutter": "24px"
-                    },
-                    "fontFamily": {
-                        "headline-md": ["Inter"],
-                        "body-sm": ["Inter"],
-                        "body-md": ["Inter"],
-                        "headline-xl": ["Inter"],
-                        "headline-lg": ["Inter"],
-                        "label-md": ["Inter"],
-                        "headline-lg-mobile": ["Inter"],
-                        "body-lg": ["Inter"]
-                    },
-                    "fontSize": {
-                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
-                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
-                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
-                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
-                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
-                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
-                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                        "outline-variant": "#E2E8F0",
+                        "surface-container-lowest": "#ffffff"
                     }
                 }
             }
@@ -114,125 +37,74 @@
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-
-        .toast-enter {
-            animation: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(226, 232, 240, 0.8);
-        }
-
-        .emerald-gradient {
-            background: linear-gradient(135deg, #24a81d 0%, #187c13 100%);
-        }
     </style>
 </head>
 
 <body
-    class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col md:flex-row overflow-x-hidden">
+    class="bg-slate-50 font-body-md text-on-surface antialiased min-h-screen flex flex-col md:flex-row overflow-x-hidden">
     <!-- Left Side: Brand Panel -->
     <div
-        class="relative w-full md:w-1/2 emerald-gradient flex flex-col justify-between p-md sm:p-lg lg:p-xl text-white overflow-hidden min-h-[40vh] md:min-h-screen">
-        <!-- Subtle Background Pattern/Gradient -->
+        class="relative w-full md:w-1/2 bg-[#1B7A16] flex flex-col justify-between p-12 text-white overflow-hidden min-h-[40vh] md:min-h-screen">
         <div class="absolute inset-0 opacity-20 pointer-events-none"
             style="background-image: radial-gradient(circle at top right, #9af986 0%, transparent 60%);"></div>
-        <!-- Logo -->
         <div class="relative z-10 flex items-center">
-            <a href="index.html" class="flex items-center gap-3 hover:opacity-85 transition-opacity">
-                <img alt="Busynes Logo" class="h-10 w-auto brightness-0 invert"
+            <a href="index.html" class="flex items-center gap-3">
+                <img alt="Busynes Logo" class="h-12 w-auto brightness-0 invert"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaglyYYHQQHhZI0sXOTcaVVDVGSJuZXRoKofma9kTZsHLG0WS23LRWQF6QP0mNzpRm1_dYjnYgl4vAS3G_xMrnF2LHiqNvSIDgpIkQN7hsYsN4spBArqw8Q5r_sTBUc0_V10OyF_L9R10Bik18Mr2hR3P87XxQVxm4dfg5doaByVE6wQzLZ4zjrLwedRQPmnXaxynT_LhkMqPQxFKlzAO4RoWw0XrNs7545LYLvhi3yQdUuFg71vULTx9CmUpE-YPYT9VcrQGq4zc" />
-                <span class="text-headline-md font-headline-md font-bold text-white tracking-tight">Busynes</span>
+                <span class="font-bold text-2xl tracking-tight">Busynes</span>
             </a>
         </div>
-        <!-- Brand Slogan/Goal -->
-        <div class="relative z-10 my-md sm:my-xl max-w-lg">
-            <h1
-                class="font-headline-xl text-[26px] sm:text-[32px] md:text-headline-xl text-white mb-4 sm:mb-md font-bold leading-tight">
-                Automate your sports venue overheads.
-            </h1>
-            <p class="font-body-lg text-sm sm:text-body-lg text-emerald-100 font-medium">
-                The preferred digital invoice automation and compliance platform built strictly for UK sports clubs and
-                stadium CPAs.
-            </p>
+        <div class="relative z-10 my-12 max-w-lg">
+            <blockquote class="font-bold text-3xl md:text-5xl leading-tight mb-6">
+                "Busynes saved me 12 hours this month."
+            </blockquote>
+            <cite class="text-lg text-emerald-200 not-italic block">
+                — James, E-com Founder
+            </cite>
         </div>
-        <!-- Core Modules Grid -->
-        <div class="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-md w-full">
-            <div
-                class="glass-panel p-3 sm:p-md rounded-xl flex items-center gap-2 sm:gap-sm hover:bg-white/15 transition-colors">
-                <span class="material-symbols-outlined text-white text-[18px] sm:text-[24px] fill-icon"
-                    data-icon="account_balance_wallet">account_balance_wallet</span>
-                <span class="text-[11px] sm:text-body-sm font-semibold text-white whitespace-nowrap">Financial
-                    Hub</span>
+        <div class="relative z-10 grid grid-cols-2 gap-4 max-w-md">
+            <div class="glass-panel p-4 rounded-xl flex items-center gap-3">
+                <span class="material-symbols-outlined text-white"
+                    style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+                <span class="text-sm font-medium text-white">Financial Hub</span>
             </div>
-            <div
-                class="glass-panel p-3 sm:p-md rounded-xl flex items-center gap-2 sm:gap-sm hover:bg-white/15 transition-colors">
-                <span class="material-symbols-outlined text-white text-[18px] sm:text-[24px] fill-icon"
-                    data-icon="edit_note">edit_note</span>
-                <span class="text-[11px] sm:text-body-sm font-semibold text-white whitespace-nowrap">Smart Notes</span>
-            </div>
-            <div
-                class="glass-panel p-3 sm:p-md rounded-xl flex items-center gap-2 sm:gap-sm hover:bg-white/15 transition-colors">
-                <span class="material-symbols-outlined text-white text-[18px] sm:text-[24px] fill-icon"
-                    data-icon="inventory_2">inventory_2</span>
-                <span class="text-[11px] sm:text-body-sm font-semibold text-white whitespace-nowrap">Inventory OS</span>
-            </div>
-            <div
-                class="glass-panel p-3 sm:p-md rounded-xl flex items-center gap-2 sm:gap-sm hover:bg-white/15 transition-colors">
-                <span class="material-symbols-outlined text-white text-[18px] sm:text-[24px] fill-icon"
-                    data-icon="groups">groups</span>
-                <span class="text-[11px] sm:text-body-sm font-semibold text-white whitespace-nowrap">Team
-                    Collaboration</span>
+            <div class="glass-panel p-4 rounded-xl flex items-center gap-3">
+                <span class="material-symbols-outlined text-white"
+                    style="font-variation-settings: 'FILL' 1;">edit_note</span>
+                <span class="text-sm font-medium text-white">Smart Notes</span>
             </div>
         </div>
     </div>
 
     <!-- Right Side: Authentication Form -->
-    <!-- Replace your Right-Side Authentication Form Container in signup.html with this complete block -->
     <div
-        class="w-full md:w-1/2 bg-surface-container-lowest flex items-center justify-center p-margin-mobile md:p-margin-desktop min-h-[60vh] md:min-h-screen relative">
+        class="w-full md:w-1/2 bg-white flex items-center justify-center p-6 md:p-12 min-h-[60vh] md:min-h-screen relative">
         <div class="w-full max-w-md">
             <!-- Segmented Control Tabs -->
-            <div class="flex p-1 bg-surface-container-low rounded-lg mb-xl">
+            <div class="flex p-1 bg-slate-100 rounded-lg mb-8">
                 <button id="tab-signup"
-                    class="flex-1 py-sm text-center font-body-md text-body-md font-medium bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-md transition-all">
+                    class="flex-1 py-2 text-center font-medium bg-white text-slate-900 shadow-sm rounded-md transition-all cursor-pointer">
                     Create Account
                 </button>
                 <button id="tab-signin"
-                    class="flex-1 py-sm text-center font-body-md text-body-md font-medium text-secondary hover:text-on-surface transition-colors">
+                    class="flex-1 py-2 text-center font-medium text-slate-500 hover:text-slate-900 transition-colors cursor-pointer">
                     Sign In
                 </button>
             </div>
 
-            <div class="mb-lg">
-                <h1 id="auth-title"
-                    class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xs">Get
-                    Started</h1>
-                <p id="auth-subtitle" class="font-body-sm text-body-sm text-secondary">Join thousands of founders
-                    optimizing their workflow.</p>
+            <div class="mb-8">
+                <h1 id="auth-title" class="text-3xl font-bold text-slate-900 mb-2">Get Started</h1>
+                <p id="auth-subtitle" class="text-sm text-slate-500">Join thousands of founders optimizing their
+                    workflow.</p>
             </div>
 
             <!-- Social Logins -->
-            <div class="space-y-sm mb-lg">
+            <div class="space-y-3 mb-8">
                 <button
                     onclick="alert('Social logins are scheduled for our V1.1.0 release. Please use your business email for the V1.0.0 pilot!')"
-                    class="w-full flex items-center justify-center gap-sm py-sm px-md border border-outline-variant rounded-DEFAULT hover:bg-surface-container-low transition-colors text-on-surface font-body-sm text-body-sm font-medium">
-                    <!-- SVG Google Logo -->
-                    <svg class="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    class="w-full flex items-center justify-center gap-4 py-2.5 px-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors text-slate-900 text-sm font-semibold cursor-pointer">
+                    <!-- Google SVG -->
+                    <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.18 1-.74 1.85-1.59 2.42v3.01h2.58c1.51-2.39 2.65-5.92 2.65-10.44z"
                             fill="#4285F4" />
@@ -250,9 +122,9 @@
                 </button>
                 <button
                     onclick="alert('Social logins are scheduled for our V1.1.0 release. Please use your business email for the V1.0.0 pilot!')"
-                    class="w-full flex items-center justify-center gap-sm py-sm px-md border border-outline-variant rounded-DEFAULT hover:bg-surface-container-low transition-colors text-on-surface font-body-sm text-body-sm font-medium">
-                    <!-- SVG Microsoft Logo -->
-                    <svg class="w-5 h-5" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
+                    class="w-full flex items-center justify-center gap-4 py-2.5 px-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors text-slate-900 text-sm font-semibold cursor-pointer">
+                    <!-- Microsoft SVG -->
+                    <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg">
                         <path fill="#f35325" d="M0 0h11v11H0z" />
                         <path fill="#81bc06" d="M12 0h11v11H12z" />
                         <path fill="#05a6f0" d="M0 12h11v11H0z" />
@@ -263,66 +135,62 @@
             </div>
 
             <!-- Separator -->
-            <div class="relative flex items-center py-md mb-md">
-                <div class="flex-grow border-t border-outline-variant"></div>
-                <span id="separator-text"
-                    class="flex-shrink-0 mx-md font-body-sm text-body-sm text-secondary bg-surface-container-lowest px-2">or
-                    use your business email</span>
-                <div class="flex-grow border-t border-outline-variant"></div>
+            <div class="relative flex items-center py-4 mb-4">
+                <div class="flex-grow border-t border-slate-200"></div>
+                <span id="separator-text" class="flex-shrink-0 mx-4 text-sm text-slate-500 bg-white px-2">or use your
+                    business email</span>
+                <div class="flex-grow border-t border-slate-200"></div>
             </div>
 
             <!-- Form -->
-            <form class="space-y-md">
+            <form class="space-y-4">
                 <div id="name-container">
-                    <label class="block font-body-sm text-body-sm font-semibold text-on-surface mb-xs"
-                        for="fullName">Full Name</label>
+                    <label class="block text-sm font-semibold text-slate-900 mb-1" for="fullName">Full Name</label>
                     <input
-                        class="w-full border border-outline-variant rounded-DEFAULT px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest"
+                        class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow"
                         id="fullName" placeholder="Jane Doe" type="text" />
                 </div>
                 <div>
-                    <label class="block font-body-sm text-body-sm font-semibold text-on-surface mb-xs"
-                        for="email">Business Email</label>
+                    <label class="block text-sm font-semibold text-slate-900 mb-1" for="email">Business Email</label>
                     <input
-                        class="w-full border border-outline-variant rounded-DEFAULT px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest"
+                        class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow"
                         id="email" placeholder="jane@company.com" type="email" />
                 </div>
                 <div>
-                    <label class="block font-body-sm text-body-sm font-semibold text-on-surface mb-xs"
-                        for="password">Password</label>
+                    <label class="block text-sm font-semibold text-slate-900 mb-1" for="password">Password</label>
                     <input
-                        class="w-full border border-outline-variant rounded-DEFAULT px-md py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow bg-surface-container-lowest"
+                        class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-shadow"
                         id="password" placeholder="••••••••" type="password" />
                 </div>
-                <div id="newsletter-container" class="flex items-start gap-sm pt-xs">
+                <div id="newsletter-container" class="flex items-start gap-3 pt-1">
                     <div class="flex items-center h-5">
                         <input
-                            class="w-4 h-4 border border-outline-variant rounded text-primary-container focus:ring-primary-container bg-surface-container-lowest"
+                            class="w-4 h-4 border border-slate-300 rounded text-primary-container focus:ring-primary-container"
                             id="newsletter" type="checkbox" />
                     </div>
-                    <label class="font-body-sm text-body-sm text-secondary cursor-pointer" for="newsletter">
+                    <label class="text-sm text-slate-500 cursor-pointer" for="newsletter">
                         Send me the Weekly Efficiency Report
                     </label>
                 </div>
 
-                <!-- Dual Action Submit Button -->
+                <!-- Submit Button -->
                 <button id="auth-submit-btn"
-                    class="w-full bg-primary-container text-on-primary py-sm px-md rounded-DEFAULT font-body-md text-body-md font-medium hover:bg-surface-tint transition-colors mt-lg shadow-sm hover:shadow-md"
+                    class="w-full bg-[#1B7A16] text-white py-3 px-4 rounded-lg text-sm font-semibold hover:bg-emerald-800 transition-colors mt-6 shadow-sm hover:shadow-md cursor-pointer"
                     type="submit">
                     Create Account
                 </button>
             </form>
-            <p id="auth-footer-text"
-                class="mt-lg text-center font-label-md text-label-md text-secondary max-w-xs mx-auto">
+            <p id="auth-footer-text" class="mt-6 text-center text-xs text-slate-400 max-w-xs mx-auto">
                 By signing up, you agree to the 14-day Professional Pilot. No credit card required.
             </p>
         </div>
     </div>
 
+    <!-- Script Block -->
     <script type="module">
         import { CognitoUserPool, CognitoUserAttribute, CognitoUser, AuthenticationDetails } from 'https://cdn.jsdelivr.net/npm/amazon-cognito-identity-js@6.3.7/+esm';
 
-        // 1. Initialize Cognito Pool
+        // Initialize Cognito Pool
         const poolData = {
             UserPoolId: "eu-west-2_CL264NQ0Y",
             ClientId: "4p948h27ndof1i2r3ubeg31h8p"
@@ -332,7 +200,7 @@
         let isSignUpMode = true;
         let registeredUser = null;
 
-        // 2. Tab Toggling Logic (Sign Up vs. Sign In)
+        // Selectors
         const tabSignUp = document.getElementById('tab-signup');
         const tabSignIn = document.getElementById('tab-signin');
         const nameContainer = document.getElementById('name-container');
@@ -342,38 +210,40 @@
         const authSubmitBtn = document.getElementById('auth-submit-btn');
         const authFooterText = document.getElementById('auth-footer-text');
 
+        // Safe Tab Toggling Function
         function toggleMode(toSignUp) {
             isSignUpMode = toSignUp;
             if (toSignUp) {
-                tabSignUp.className = "flex-1 py-sm text-center font-body-md text-body-md font-medium bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-md transition-all";
-                tabSignIn.className = "flex-1 py-sm text-center font-body-md text-body-md font-medium text-secondary hover:text-on-surface transition-colors";
-                nameContainer.classList.remove('hidden');
-                newsletterContainer.classList.remove('hidden');
-                authTitle.textContent = "Get Started";
-                authSubtitle.textContent = "Join thousands of founders optimizing their workflow.";
-                authSubmitBtn.textContent = "Create Account";
-                authFooterText.classList.remove('hidden');
+                tabSignUp.className = "flex-1 py-2 text-center font-medium bg-white text-slate-900 shadow-sm rounded-md transition-all cursor-pointer";
+                tabSignIn.className = "flex-1 py-2 text-center font-medium text-slate-500 hover:text-slate-900 transition-colors cursor-pointer";
+                nameContainer?.classList.remove('hidden');
+                newsletterContainer?.classList.remove('hidden');
+                if (authTitle) authTitle.textContent = "Get Started";
+                if (authSubtitle) authSubtitle.textContent = "Join thousands of founders optimizing their workflow.";
+                if (authSubmitBtn) authSubmitBtn.textContent = "Create Account";
+                authFooterText?.classList.remove('hidden');
             } else {
-                tabSignIn.className = "flex-1 py-sm text-center font-body-md text-body-md font-medium bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-md transition-all";
-                tabSignUp.className = "flex-1 py-sm text-center font-body-md text-body-md font-medium text-secondary hover:text-on-surface transition-colors";
-                nameContainer.classList.add('hidden');
-                newsletterContainer.classList.add('hidden');
-                authTitle.textContent = "Welcome Back";
-                authSubtitle.textContent = "Welcome back! Enter your business credentials to log in.";
-                authSubmitBtn.textContent = "Sign In";
-                authFooterText.classList.add('hidden');
+                tabSignIn.className = "flex-1 py-2 text-center font-medium bg-white text-slate-900 shadow-sm rounded-md transition-all cursor-pointer";
+                tabSignUp.className = "flex-1 py-2 text-center font-medium text-slate-500 hover:text-slate-900 transition-colors cursor-pointer";
+                nameContainer?.classList.add('hidden');
+                newsletterContainer?.classList.add('hidden');
+                if (authTitle) authTitle.textContent = "Welcome Back";
+                if (authSubtitle) authSubtitle.textContent = "Welcome back! Enter your business credentials to log in.";
+                if (authSubmitBtn) authSubmitBtn.textContent = "Sign In";
+                authFooterText?.classList.add('hidden');
             }
         }
 
-        tabSignUp.addEventListener('click', () => toggleMode(true));
-        tabSignIn.addEventListener('click', () => toggleMode(false));
+        // Bind events safely
+        if (tabSignUp) tabSignUp.addEventListener('click', () => toggleMode(true));
+        if (tabSignIn) tabSignIn.addEventListener('click', () => toggleMode(false));
 
-        // 3. Form Submission Handler
-        authSubmitBtn.addEventListener('click', async (e) => {
+        // Submit Handler
+        authSubmitBtn?.addEventListener('click', async (e) => {
             e.preventDefault();
 
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
+            const email = document.getElementById('email')?.value.trim();
+            const password = document.getElementById('password')?.value.trim();
 
             if (!email || !password) {
                 alert("Please fill in all fields.");
@@ -382,10 +252,10 @@
 
             if (isSignUpMode) {
                 // ================== SIGN UP FLOW ==================
-                const fullName = document.getElementById('fullName').value.trim();
+                const fullName = document.getElementById('fullName')?.value.trim() || email.split('@')[0];
                 const attributeList = [
                     new CognitoUserAttribute({ Name: 'email', Value: email }),
-                    new CognitoUserAttribute({ Name: 'name', Value: fullName || email.split('@')[0] })
+                    new CognitoUserAttribute({ Name: 'name', Value: fullName })
                 ];
 
                 userPool.signUp(email, password, attributeList, null, (err, result) => {
@@ -394,7 +264,7 @@
                         return;
                     }
                     registeredUser = result.user;
-                    showVerificationForm(email, fullName || email.split('@')[0]);
+                    showVerificationForm(email, fullName);
                 });
             } else {
                 // ================== SIGN IN FLOW ==================
@@ -410,12 +280,11 @@
                     onSuccess: (result) => {
                         console.log("Authentication successful!");
 
-                        // Decode token to get name dynamically
                         const idToken = result.getIdToken().getJwtToken();
                         const payload = JSON.parse(atob(idToken.split('.')[1]));
                         const userName = payload.name || email.split('@')[0];
 
-                        // Save session details locally
+                        // Save session
                         localStorage.setItem('busynes_user_name', userName);
                         localStorage.setItem('busynes_client_id', email.replace(/[@.]/g, '_'));
 
@@ -429,19 +298,19 @@
             }
         });
 
-        // 4. Verification Form Handler
+        // Verification Modal Injection
         function showVerificationForm(email, fullName) {
             const verificationHTML = `
-            <div id="verification-overlay" class="fixed inset-0 bg-on-background/80 backdrop-blur-md flex items-center justify-center p-4 z-50">
-                <div class="bg-white border border-outline-variant p-8 max-w-md w-full rounded-2xl shadow-2xl text-center">
-                    <span class="material-symbols-outlined text-primary-container text-4xl mb-4">mark_email_unread</span>
-                    <h3 class="font-headline-md text-xl font-bold text-on-surface mb-2">Verify Your Email</h3>
-                    <p class="font-body-sm text-body-sm text-secondary mb-6">We've sent a 6-digit confirmation code to <strong class="text-on-surface">${email}</strong>. Enter it below to activate your pilot.</p>
-                    <input id="verification-code" type="text" maxlength="6" class="w-full text-center tracking-[1em] font-mono text-xl border border-outline-variant rounded-xl py-3 mb-6 focus:ring-primary-container" placeholder="000000" />
-                    <button id="verify-btn" class="w-full bg-primary-container text-on-primary py-3.5 rounded-full font-body-sm font-semibold hover:bg-primary transition-colors">Confirm Code</button>
+                <div id="verification-overlay" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md flex items-center justify-center p-4 z-50">
+                    <div class="bg-white border border-slate-200 p-8 max-w-md w-full rounded-2xl shadow-2xl text-center">
+                        <span class="material-symbols-outlined text-[#1B7A16] text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">mark_email_unread</span>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Verify Your Email</h3>
+                        <p class="text-sm text-slate-500 mb-6">We've sent a 6-digit confirmation code to <strong class="text-slate-900">${email}</strong>. Enter it below to activate your pilot.</p>
+                        <input id="verification-code" type="text" maxlength="6" class="w-full text-center tracking-[1em] font-mono text-xl border border-slate-200 rounded-xl py-3 mb-6 focus:ring-[#1B7A16]" placeholder="000000" />
+                        <button id="verify-btn" class="w-full bg-[#1B7A16] text-white py-3.5 rounded-full text-sm font-semibold hover:bg-emerald-800 transition-colors cursor-pointer">Confirm Code</button>
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
             document.body.insertAdjacentHTML('beforeend', verificationHTML);
 
             document.getElementById('verify-btn')?.addEventListener('click', () => {
@@ -460,7 +329,7 @@
                         return;
                     }
 
-                    // Save user registration data locally
+                    // Save user data
                     localStorage.setItem('busynes_user_name', fullName);
                     localStorage.setItem('busynes_client_id', email.replace(/[@.]/g, '_'));
 
@@ -468,72 +337,6 @@
                 });
             });
         }
-    </script>
-    <script>
-        let authMode = 'signup';
-
-        function setAuthMode(mode) {
-            authMode = mode;
-            const tabSignup = document.getElementById('tab-signup');
-            const tabSignin = document.getElementById('tab-signin');
-            const fullNameGroup = document.getElementById('fullNameGroup');
-            const newsletterGroup = document.getElementById('newsletterGroup');
-            const authTitle = document.getElementById('auth-title');
-            const authSubtitle = document.getElementById('auth-subtitle');
-            const submitBtn = document.getElementById('submitBtn');
-            const authFooter = document.getElementById('auth-footer');
-            const fullNameInput = document.getElementById('fullName');
-
-            if (mode === 'signup') {
-                tabSignup.className = "flex-1 py-sm text-center font-body-md text-body-md font-medium bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-md transition-all cursor-pointer";
-                tabSignin.className = "flex-1 py-sm text-center font-body-md text-body-md font-medium text-secondary hover:text-on-surface transition-colors cursor-pointer";
-                fullNameGroup.style.display = 'block';
-                newsletterGroup.style.display = 'flex';
-                fullNameInput.setAttribute('required', 'true');
-                authTitle.textContent = "Get Started";
-                authSubtitle.textContent = "Join thousands of founders optimizing their workflow.";
-                submitBtn.textContent = "Create Account";
-                authFooter.textContent = "By signing up, you agree to the 14-day Professional Pilot. No credit card required.";
-            } else {
-                tabSignup.className = "flex-1 py-sm text-center font-body-md text-body-md font-medium text-secondary hover:text-on-surface transition-colors cursor-pointer";
-                tabSignin.className = "flex-1 py-sm text-center font-body-md text-body-md font-medium bg-surface-container-lowest text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-md transition-all cursor-pointer";
-                fullNameGroup.style.display = 'none';
-                newsletterGroup.style.display = 'none';
-                fullNameInput.removeAttribute('required');
-                authTitle.textContent = "Welcome Back";
-                authSubtitle.textContent = "Welcome back! Enter your business credentials to log in.";
-                submitBtn.textContent = "Sign In";
-                authFooter.textContent = "Access your full intelligence workspace. Forgot your password?";
-            }
-        }
-
-        // Simulate showing the toast after a short delay for demonstration
-        setTimeout(() => {
-            const toast = document.getElementById('welcome-toast');
-            toast.classList.remove('hidden');
-            // Trigger reflow
-            void toast.offsetWidth;
-            toast.classList.add('toast-enter', 'opacity-100');
-            toast.classList.remove('opacity-0');
-        }, 1200);
-
-        // Handle Form Submission with relative redirection
-        document.getElementById('signup-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            if (authMode === 'signup') {
-                const fullName = document.getElementById('fullName').value;
-                // Store the full name in localStorage so onboarding.html can greet dynamically!
-                localStorage.setItem('busynes_user_name', fullName || 'Sarah');
-                window.location.href = 'onboarding.html';
-            } else {
-                // If signing in, ensure active name is in place and go directly to dashboard
-                const existing = localStorage.getItem('busynes_user_name');
-                if (!existing) {
-                    localStorage.setItem('busynes_user_name', 'Sarah');
-                }
-                window.location.href = 'dashboard.html';
-            }
-        });
     </script>
 </body>
 
