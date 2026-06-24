@@ -64,7 +64,7 @@ variable "cognito_user_pool"{
 }
 
 # Cognito App Client
-variabe "cognito_app_client"{
+variable "cognito_app_client"{
     type = string
     description = "busynes-app-client"
     default = "busynes-app-client"
