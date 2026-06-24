@@ -279,7 +279,7 @@
                         Send me the Weekly Efficiency Report for Venue Owners
                     </label>
                 </div>
-                <button id="submitBtn"
+                <button id="signup-btn"
                     class="w-full bg-primary-container text-on-primary py-sm px-md rounded font-body-md text-body-md font-medium hover:bg-surface-tint transition-colors mt-lg shadow-sm hover:shadow-md cursor-pointer"
                     type="submit">
                     Create Account
@@ -383,6 +383,96 @@
                 window.location.href = 'dashboard.html';
             }
         });
+    </script>
+    <!-- Cognito SDK & Integration Script -->
+    <script type="module">
+        import { CognitoUserPool, CognitoUserAttribute, CognitoUser } from 'https://cdn.jsdelivr.net/npm/amazon-cognito-identity-js@6.3.7/+esm';
+
+        // 1. Initialize your secure Cognito User Pool
+        const poolData = {
+            UserPoolId: "eu-west-2_CL264NQ0Y",
+            ClientId: "4p948h27ndof1i2r3ubeg31h8p"
+        };
+        const userPool = new CognitoUserPool(poolData);
+
+        let registeredUser = null;
+
+        // 2. Handle the Sign-Up Form Submission
+        document.getElementById('signup-btn')?.addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (!email || !password) {
+                alert("Please enter both email and password.");
+                return;
+            }
+
+            // Map the email attribute
+            const attributeList = [
+                new CognitoUserAttribute({ Name: 'email', Value: email })
+            ];
+
+            // Call the Cognito Sign-Up API
+            userPool.signUp(email, password, attributeList, null, (err, result) => {
+                if (err) {
+                    alert("Error during sign-up: " + err.message);
+                    console.error(err);
+                    return;
+                }
+
+                registeredUser = result.user;
+                console.log("User registered successfully:", registeredUser.getUsername());
+
+                // UI Update: Hide signup form and show the Verification Code overlay
+                showVerificationForm(email);
+            });
+        });
+
+        // 3. UI Function: Switch to Verification Mode
+        function showVerificationForm(email) {
+            // We inject a clean, themed overlay to ask the user for their 6-digit confirmation code
+            const verificationHTML = `
+                <div id="verification-overlay" class="fixed inset-0 bg-on-background/80 backdrop-blur-md flex items-center justify-center p-4 z-50">
+                    <div class="bg-white border border-outline-variant p-8 max-w-md w-full rounded-2xl shadow-2xl text-center">
+                        <span class="material-symbols-outlined text-primary-container text-4xl mb-4">mark_email_unread</span>
+                        <h3 class="font-headline-md text-xl font-bold text-on-surface mb-2">Verify Your Email</h3>
+                        <p class="font-body-sm text-body-sm text-secondary mb-6">We've sent a 6-digit confirmation code to <strong class="text-on-surface">${email}</strong>. Enter it below to activate your pilot.</p>
+                        <input id="verification-code" type="text" maxlength="6" class="w-full text-center tracking-[1em] font-mono text-xl border border-outline-variant rounded-xl py-3 mb-6 focus:ring-primary-container" placeholder="000000" />
+                        <button id="verify-btn" class="w-full bg-primary-container text-on-primary py-3.5 rounded-full font-body-sm font-semibold hover:bg-primary transition-colors">Confirm Code</button>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', verificationHTML);
+
+            // Bind the verification confirm button
+            document.getElementById('verify-btn')?.addEventListener('click', () => {
+                const code = document.getElementById('verification-code').value.trim();
+                if (code.length !== 6) {
+                    alert("Please enter a valid 6-digit code.");
+                    return;
+                }
+
+                const userData = { Username: email, Pool: userPool };
+                const cognitoUser = new CognitoUser(userData);
+
+                // Call Cognito Confirm Registration API
+                cognitoUser.confirmRegistration(code, true, (err, result) => {
+                    if (err) {
+                        alert("Verification failed: " + err.message);
+                        return;
+                    }
+
+                    // Save the dynamic user details in local storage for the dashboard to read
+                    localStorage.setItem('busynes_user_name', email.split('@')[0]);
+                    localStorage.setItem('busynes_client_id', email.replace(/[@.]/g, '_')); // Creates a clean folder key like "jane_company_com"
+
+                    // Redirect to Onboarding Success page!
+                    window.location.href = "onboarding.html";
+                });
+            });
+        }
     </script>
 </body>
 
