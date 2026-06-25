@@ -7,13 +7,10 @@
     <title>Busynes - Welcome to the Ecosystem</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
         rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
-
-    <!-- Favicon link -->
     <link rel="icon" type="image/png" href="/favicon.png?v=1" />
 
     <script id="tailwind-config">
@@ -22,101 +19,33 @@
             theme: {
                 extend: {
                     "colors": {
-                        "outline": "#707a6a",
-                        "secondary-fixed-dim": "#b9c7e0",
-                        "secondary-container": "#d5e3fd",
-                        "on-surface-variant": "#404a3b",
-                        "on-error": "#ffffff",
-                        "surface-tint": "#066e08",
-                        "inverse-surface": "#213145",
-                        "error": "#ba1a1a",
-                        "surface-container": "#e5eeff",
-                        "on-tertiary-container": "#e9ebed",
-                        "inverse-primary": "#7edc6d",
-                        "on-surface": "#0b1c30",
-                        "on-secondary-container": "#57657b",
-                        "on-primary-fixed": "#002200",
-                        "on-primary": "#ffffff",
-                        "on-tertiary-fixed": "#191c1e",
-                        "on-tertiary-fixed-variant": "#444749",
-                        "background": "#f8f9ff",
-                        "tertiary": "#4f5254",
-                        "surface": "#f8f9ff",
-                        "secondary-fixed": "#d5e3fd",
-                        "on-primary-container": "#abff97",
-                        "primary-fixed-dim": "#7edc6d",
                         "primary": "#005f03",
-                        "inverse-on-surface": "#eaf1ff",
-                        "error-container": "#ffdad6",
-                        "surface-bright": "#f8f9ff",
-                        "surface-container-high": "#dce9ff",
-                        "on-secondary": "#ffffff",
-                        "on-error-container": "#93000a",
                         "primary-container": "#1b7a16",
-                        "on-tertiary": "#ffffff",
-                        "surface-dim": "#cbdbf5",
+                        "on-primary": "#ffffff",
+                        "secondary": "#515f74",
+                        "on-surface": "#0b1c30",
+                        "on-surface-variant": "#404a3b",
+                        "surface": "#f8f9ff",
+                        "surface-container-lowest": "#ffffff",
                         "surface-container-low": "#eff4ff",
                         "surface-variant": "#d3e4fe",
-                        "on-secondary-fixed": "#0d1c2f",
-                        "tertiary-fixed": "#e0e3e5",
-                        "secondary": "#515f74",
-                        "outline-variant": "#bfcab7",
-                        "on-background": "#0b1c30",
-                        "tertiary-fixed-dim": "#c4c7c9",
-                        "primary-fixed": "#9af986",
-                        "on-secondary-fixed-variant": "#3a485c",
-                        "surface-container-highest": "#d3e4fe",
-                        "surface-container-lowest": "#ffffff",
-                        "tertiary-container": "#676a6c",
-                        "on-primary-fixed-variant": "#005302"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "spacing": {
-                        "gutter": "24px",
-                        "lg": "48px",
-                        "base": "8px",
-                        "margin-desktop": "64px",
-                        "sm": "12px",
-                        "md": "24px",
-                        "xl": "80px",
-                        "xs": "4px",
-                        "margin-mobile": "16px"
+                        "outline-variant": "#bfcab7"
                     },
                     "fontFamily": {
-                        "headline-lg-mobile": ["Hanken Grotesk"],
-                        "body-sm": ["Inter"],
-                        "headline-xl": ["Hanken Grotesk"],
-                        "body-lg": ["Inter"],
-                        "label-md": ["JetBrains Mono"],
-                        "headline-md": ["Hanken Grotesk"],
-                        "headline-lg": ["Hanken Grotesk"],
-                        "body-md": ["Inter"]
-                    },
-                    "fontSize": {
-                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
-                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
-                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
-                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
-                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
-                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
-                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                        "sans": ["Inter", "sans-serif"],
+                        "display": ["Hanken Grotesk", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
                     },
                     "animation": {
-                        "bounce-in": "bounce-in 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both",
-                        "fade-in-up": "fade-in-up 0.6s ease-out both"
+                        "bounce-in": "bounceIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) both",
+                        "fade-in-up": "fadeInUp 0.6s ease-out both"
                     },
                     "keyframes": {
-                        "bounce-in": {
+                        "bounceIn": {
                             "0%": { transform: "scale(0)", opacity: "0" },
                             "100%": { transform: "scale(1)", opacity: "1" }
                         },
-                        "fade-in-up": {
+                        "fadeInUp": {
                             "0%": { transform: "translateY(20px)", opacity: "0" },
                             "100%": { transform: "translateY(0)", opacity: "1" }
                         }
@@ -149,32 +78,31 @@
 </head>
 
 <body
-    class="h-full bg-surface-container-lowest text-on-surface font-body-md antialiased flex flex-col items-center justify-center min-h-screen">
+    class="h-full bg-slate-50 text-on-surface font-sans antialiased flex flex-col min-h-screen selection:bg-primary-container selection:text-white">
     <!-- TopNavBar: Fixed Brand Header -->
     <nav
-        class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-outline-variant/30 shadow-sm transition-all duration-300">
-        <div class="max-w-[1280px] mx-auto flex items-center justify-between px-6 md:px-margin-desktop h-20">
-            <div class="flex items-center gap-4">
+        class="fixed top-0 w-full z-50 bg-white/85 backdrop-blur-md border-b border-outline-variant/40 shadow-2xs transition-all duration-300">
+        <div class="max-w-[1280px] mx-auto flex items-center justify-between px-6 md:px-12 h-20">
+            <a href="index.html" class="flex items-center gap-3.5 hover:opacity-85 transition-opacity">
                 <img alt="Busynes Logo" class="h-8 w-auto"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaglyYYHQQHhZI0sXOTcaVVDVGSJuZXRoKofma9kTZsHLG0WS23LRWQF6QP0mNzpRm1_dYjnYgl4vAS3G_xMrnF2LHiqNvSIDgpIkQN7hsYsN4spBArqw8Q5r_sTBUc0_V10OyF_L9R10Bik18Mr2hR3P87XxQVxm4dfg5doaByVE6wQzLZ4zjrLwedRQPmnXaxynT_LhkMqPQxFKlzAO4RoWw0XrNs7545LYLvhi3yQdUuFg71vULTx9CmUpE-YPYT9VcrQGq4zc">
-                <span
-                    class="text-headline-md font-headline-md font-bold text-primary tracking-tight hidden md:block">Busynes</span>
-            </div>
+                <span class="font-display text-2xl font-bold text-primary tracking-tight">Busynes</span>
+            </a>
             <div class="flex items-center">
                 <span
-                    class="bg-primary-container/10 text-primary-container font-label-md text-[10px] px-3 py-1 rounded-full uppercase tracking-wider font-bold">14-Day
-                    Pilot Active</span>
+                    class="bg-primary-container/10 text-primary-container font-mono text-xs px-3 py-1 rounded-full uppercase tracking-wider font-bold border border-primary-container/20">
+                    14-Day Pilot Active
+                </span>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content Area: Padding Top (pt-28) fixed to sit cleanly below fixed navbar -->
-    <main
-        class="w-full max-w-3xl mx-auto px-margin-mobile md:px-gutter pt-28 pb-xl flex flex-col items-center text-center">
+    <!-- Main Content Area -->
+    <main class="w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-12 pt-32 pb-16 flex flex-col items-center text-center">
         <!-- Animated Checkmark -->
-        <div class="mb-md animate-bounce-in">
+        <div class="mb-6 animate-bounce-in">
             <div
-                class="w-20 h-20 bg-surface-container-low rounded-full flex items-center justify-center mx-auto border border-surface-variant shadow-sm">
+                class="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto border border-emerald-200 shadow-sm">
                 <span class="material-symbols-outlined text-[48px] text-primary-container"
                     style="font-variation-settings: 'FILL' 1;">
                     check_circle
@@ -182,82 +110,93 @@
             </div>
         </div>
 
-        <!-- Headline & Subtext (Dynamic User Name) -->
-        <h1 class="font-headline-xl text-headline-xl text-on-surface mb-base animate-fade-in-up delay-100">
+        <!-- Headline & Subtext -->
+        <h1
+            class="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mb-3 animate-fade-in-up delay-100 tracking-tight">
             Welcome to the Ecosystem, <span id="display-user-name" class="text-primary-container">Sarah</span>.
         </h1>
-        <p class="font-body-lg text-body-lg text-secondary max-w-xl mx-auto mb-xl animate-fade-in-up delay-200">
+        <p
+            class="text-base sm:text-lg text-slate-600 max-w-xl mx-auto mb-12 animate-fade-in-up delay-200 leading-relaxed">
             Your 14-Day Professional Pilot is now active. Your Sunday afternoons belong to you again.
         </p>
 
         <!-- Onboarding Steps -->
-        <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-gutter mb-xl animate-fade-in-up delay-300 text-left">
+        <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 animate-fade-in-up delay-300 text-left">
             <!-- Step 1 -->
             <div
-                class="bg-surface-container-lowest border border-outline-variant p-md rounded-lg flex flex-col hover:shadow-md transition-shadow duration-300 bg-white">
+                class="bg-white border border-slate-200/80 p-6 rounded-2xl flex flex-col hover:shadow-md transition-all duration-300 shadow-xs relative overflow-hidden group">
                 <div
-                    class="w-10 h-10 bg-surface-container-low rounded-full flex items-center justify-center mb-md border border-surface-variant">
-                    <span class="font-label-md text-label-md text-primary-container">01</span>
+                    class="absolute top-0 left-0 right-0 h-1 bg-primary-container opacity-0 group-hover:opacity-100 transition-opacity">
                 </div>
-                <h3 class="font-headline-md text-headline-md text-on-surface mb-xs">First Invoice</h3>
-                <p class="font-body-sm text-body-sm text-secondary mb-md flex-grow">Get started by uploading your first
-                    document for AI processing.</p>
+                <div
+                    class="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center mb-5 border border-emerald-200/60">
+                    <span class="font-mono text-xs font-bold text-primary-container">01</span>
+                </div>
+                <h3 class="font-display text-xl font-bold text-slate-900 mb-2">First Invoice</h3>
+                <p class="text-sm text-slate-600 mb-6 flex-grow leading-relaxed">Get started by uploading your first
+                    corporate receipt or invoice for instant AI extraction.</p>
                 <button onclick="window.location.href='transactions.html'"
-                    class="w-full bg-primary-container hover:bg-primary text-on-primary font-body-sm text-body-sm font-semibold py-sm px-md rounded-lg transition-colors duration-200 flex items-center justify-center gap-xs cursor-pointer shadow-sm">
-                    Upload Now
-                    <span class="material-symbols-outlined text-[16px]">upload_file</span>
+                    class="w-full bg-primary-container hover:bg-primary text-white text-sm font-bold py-3 px-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-sm active:scale-[0.98]">
+                    <span>Upload Now</span>
+                    <span class="material-symbols-outlined text-[18px]">upload_file</span>
                 </button>
             </div>
+
             <!-- Step 2 -->
-            <div
-                class="bg-surface-bright border border-outline-variant p-md rounded-lg flex flex-col opacity-75 grayscale-[20%]">
+            <div class="bg-slate-50 border border-slate-200/80 p-6 rounded-2xl flex flex-col opacity-80 select-none">
                 <div
-                    class="w-10 h-10 bg-surface-container-low rounded-full flex items-center justify-center mb-md border border-surface-variant">
-                    <span class="font-label-md text-label-md text-secondary">02</span>
+                    class="w-10 h-10 bg-slate-200/60 rounded-xl flex items-center justify-center mb-5 border border-slate-300/60">
+                    <span class="font-mono text-xs font-bold text-slate-600">02</span>
                 </div>
-                <div class="flex items-center gap-xs mb-xs">
-                    <h3 class="font-headline-md text-headline-md text-on-surface">Connect Bank</h3>
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="font-display text-xl font-bold text-slate-800">Connect Bank</h3>
                     <span
-                        class="bg-surface-variant text-on-surface-variant font-label-md text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider">Locked</span>
+                        class="bg-slate-200 text-slate-700 font-mono text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider font-bold">Locked</span>
                 </div>
-                <p class="font-body-sm text-body-sm text-secondary mb-md flex-grow">Sync your accounts for automated
-                    reconciliation. Unlocks after first invoice.</p>
+                <p class="text-sm text-slate-500 mb-6 flex-grow leading-relaxed">Sync your accounts for automated
+                    real-time reconciliation. Unlocks after your first invoice ingest.</p>
                 <button
-                    class="w-full border border-outline-variant text-secondary font-body-sm text-body-sm py-sm px-md rounded-lg cursor-not-allowed flex items-center justify-center gap-xs bg-surface-container-low"
-                    disabled="">
-                    <span class="material-symbols-outlined text-[16px]">lock</span>
-                    Coming Soon
+                    class="w-full border border-slate-300 text-slate-400 font-semibold text-sm py-3 px-4 rounded-xl cursor-not-allowed flex items-center justify-center gap-2 bg-slate-100"
+                    disabled>
+                    <span class="material-symbols-outlined text-[18px]">lock</span>
+                    <span>Unlocks Step 2</span>
                 </button>
             </div>
+
             <!-- Step 3 -->
             <div
-                class="bg-surface-container-lowest border border-outline-variant p-md rounded-lg flex flex-col hover:shadow-md transition-shadow duration-300 bg-white">
+                class="bg-white border border-slate-200/80 p-6 rounded-2xl flex flex-col hover:shadow-md transition-all duration-300 shadow-xs relative overflow-hidden group">
                 <div
-                    class="w-10 h-10 bg-surface-container-low rounded-full flex items-center justify-center mb-md border border-surface-variant">
-                    <span class="font-label-md text-label-md text-secondary">03</span>
+                    class="absolute top-0 left-0 right-0 h-1 bg-primary-container opacity-0 group-hover:opacity-100 transition-opacity">
                 </div>
-                <h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Invite Accountant</h3>
-                <p class="font-body-sm text-body-sm text-secondary mb-md flex-grow">Give your CPA read-only access to
-                    your organized financial data.</p>
-                <button onclick="alert('Invitation link copied to clipboard!')"
-                    class="w-full border border-primary-container text-primary-container hover:bg-surface-container-low font-body-sm text-body-sm font-semibold py-sm px-md rounded-lg transition-colors duration-200 flex items-center justify-center gap-xs text-center cursor-pointer">
-                    Copy Invite Link
-                    <span class="material-symbols-outlined text-[16px]">content_copy</span>
+                <div
+                    class="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center mb-5 border border-slate-200">
+                    <span class="font-mono text-xs font-bold text-slate-700">03</span>
+                </div>
+                <h3 class="font-display text-xl font-bold text-slate-900 mb-2">Invite Accountant</h3>
+                <p class="text-sm text-slate-600 mb-6 flex-grow leading-relaxed">Give your CPA read-only access to your
+                    verified ledger and categorized management dashboard.</p>
+                <button onclick="alert('Invitation portal link copied to clipboard! Share it with your CPA.');"
+                    class="w-full border-2 border-primary-container/30 hover:border-primary-container text-primary-container hover:bg-emerald-50/50 text-sm font-bold py-2.5 px-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 text-center cursor-pointer">
+                    <span>Copy Invite Link</span>
+                    <span class="material-symbols-outlined text-[18px]">content_copy</span>
                 </button>
             </div>
         </div>
 
         <!-- Founder Message -->
         <div
-            class="bg-surface-container-low border border-outline-variant rounded-xl p-md flex items-start gap-md max-w-2xl w-full mx-auto mb-xl animate-fade-in-up delay-400 text-left">
-            <img alt="Ritvik - Founder of Busynes" class="w-12 h-12 rounded-full border border-surface-variant"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxWWO6F_F7ddhPm_Qa_vcv8JmcCDBLzccfV9K88CIOtVRDqaEvY07igFBFNwMVT2i7iiwc23O5aOz1VU69XSx6wP252pwP9xtANI3G35ne7mEc7uXEEw8fVwxWZ0yCa9YYQzz7FdHarQ9TjAReFpBZ1RsV11kwbMjG-rJH-67UCT1AslmNb9xR6cpIIGONiuP0_LbGIOBEOUdOLsX02YolKe_sc3w2y0VtqgToLBgk8ciLsf4kxmdcatK46JaIfmk15IcbFG9umdI" />
-            <div>
-                <p class="font-body-sm text-body-sm text-on-surface italic leading-relaxed mb-sm">
-                    "I’m Ritvik, the founder of Busynes. If you need any help getting set up, just click the AI
-                    assistant in the corner. Let’s grow your business together."
+            class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 flex items-start gap-5 max-w-2xl w-full mx-auto mb-10 animate-fade-in-up delay-400 text-left shadow-xs">
+            <img alt="Ritvik - Founder of Busynes"
+                class="w-14 h-14 rounded-full border-2 border-primary-container/20 flex-shrink-0 object-cover shadow-2xs"
+                src="./assets/ritvik.jpg"
+                onerror="this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuAxWWO6F_F7ddhPm_Qa_vcv8JmcCDBLzccfV9K88CIOtVRDqaEvY07igFBFNwMVT2i7iiwc23O5aOz1VU69XSx6wP252pwP9xtANI3G35ne7mEc7uXEEw8fVwxWZ0yCa9YYQzz7FdHarQ9TjAReFpBZ1RsV11kwbMjG-rJH-67UCT1AslmNb9xR6cpIIGONiuP0_LbGIOBEOUdOLsX02YolKe_sc3w2y0VtqgToLBgk8ciLsf4kxmdcatK46JaIfmk15IcbFG9umdI'" />
+            <div class="space-y-2">
+                <p class="text-sm sm:text-base text-slate-700 italic leading-relaxed">
+                    "I’m Ritvik, the founder of Busynes. If you need any assistance getting your pipeline configured,
+                    just click the AI assistant in the corner. Let’s automate your books together."
                 </p>
-                <p class="font-label-md text-label-md text-secondary font-bold uppercase tracking-widest">
+                <p class="font-mono text-xs text-primary font-bold uppercase tracking-widest pt-1">
                     Ritvik, Founder
                 </p>
             </div>
@@ -266,9 +205,9 @@
         <!-- Main CTA -->
         <div class="animate-fade-in-up delay-500 w-full flex justify-center">
             <button onclick="window.location.href='dashboard.html'"
-                class="bg-primary-container hover:bg-primary text-on-primary font-headline-md text-headline-md py-md px-xl rounded-lg shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-sm transform hover:-translate-y-1 cursor-pointer">
-                Go to My Dashboard
-                <span class="material-symbols-outlined">arrow_forward</span>
+                class="bg-primary-container hover:bg-primary text-white font-display font-bold text-lg py-4 px-10 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 flex items-center gap-3 transform hover:-translate-y-0.5 cursor-pointer active:scale-95">
+                <span>Go to My Dashboard</span>
+                <span class="material-symbols-outlined text-[24px]">arrow_forward</span>
             </button>
         </div>
     </main>
