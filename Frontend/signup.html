@@ -358,9 +358,28 @@
                             window.location.href = "dashboard.html";
                         },
                         onFailure: (err) => {
-                            submitBtn.disabled = false;
-                            submitBtn.innerHTML = originalBtnText;
-                            showError("AWS Cognito Login Notice: " + err.message);
+                            // If the user exists but never verified their email, rescue them!
+                            if (err.code === 'UserNotConfirmedException') {
+                                console.warn("User is unconfirmed. Triggering verification flow...");
+
+                                // 1. Initialize the Cognito User
+                                const userData = { Username: email, Pool: userPool };
+                                const cognitoUser = new CognitoUser(userData);
+
+                                // 2. Resend a fresh 6-digit confirmation code
+                                cognitoUser.resendConfirmationCode((resendErr, resendResult) => {
+                                    if (resendErr) {
+                                        alert("Error resending verification code: " + resendErr.message);
+                                        return;
+                                    }
+                                    alert("We noticed your email address hasn't been verified yet. We have sent a fresh 6-digit confirmation code to your inbox!");
+
+                                    // 3. Pop up your secure verification form
+                                    showVerificationForm(email, email.split('@')[0]);
+                                });
+                            } else {
+                                alert("Sign-In failed: " + err.message);
+                            }
                         }
                     });
                 }
