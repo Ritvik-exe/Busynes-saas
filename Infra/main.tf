@@ -257,6 +257,19 @@ resource "aws_cognito_user_pool" "busynes_user_pool"{
     name = var.cognito_user_pool
     username_attributes = ["email"]
     auto_verified_attributes = ["email"]
+
+    email_configuration{
+        email_sending_account = "DEVELOPER" 
+        from_email_address = "support@busynes.com"
+        source_arn = "arn:aws:ses:eu-west-2:160835721559:identity/busynes.com"
+    }
+
+    tags = {
+        Name = var.cognito_user_pool
+        Environment = "dev"
+        Project = "busynes"
+        managedby = "terraform"
+    }
 }
 
 # ========================== Cognito User Pool Client ==========================
