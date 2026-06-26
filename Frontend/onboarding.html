@@ -2,6 +2,58 @@
 <html class="h-full" lang="en">
 
 <head>
+    <!-- Reverse Route Guard: If already logged in, skip the login form and go to dashboard -->
+    <script>
+        (function () {
+            const token = sessionStorage.getItem('busynes_id_token');
+            if (token) {
+                try {
+                    const parts = token.split('.');
+                    if (parts.length === 3) {
+                        const payload = JSON.parse(atob(parts[1]));
+                        const now = Math.floor(Date.now() / 1000);
+                        if (payload.exp && payload.exp > now) {
+                            // User has a valid session! Bypass login.
+                            window.location.href = "dashboard.html";
+                        }
+                    }
+                } catch (e) {
+                    // Ignore parsing errors
+                }
+            }
+        })();
+    </script>
+    <!-- Task 2: Reusable Route Guard (Instantly verifies Cognito ID Token in sessionStorage) -->
+    <script>
+        (function () {
+            function validateCognitoSession() {
+                const token = sessionStorage.getItem('busynes_id_token');
+                if (!token) return false;
+                try {
+                    const parts = token.split('.');
+                    if (parts.length === 3) {
+                        const payload = JSON.parse(atob(parts[1]));
+                        const now = Math.floor(Date.now() / 1000);
+                        if (payload.exp && payload.exp < now) {
+                            console.warn("Cognito ID token expired. Clearing session...");
+                            sessionStorage.removeItem('busynes_id_token');
+                            sessionStorage.removeItem('busynes_user_name');
+                            sessionStorage.removeItem('busynes_client_id');
+                            return false;
+                        }
+                    }
+                } catch (e) {
+                    // Fallback for non-standard test/dummy pilot tokens
+                }
+                return true;
+            }
+
+            if (!validateCognitoSession()) {
+                console.warn("Unauthenticated access blocked. Redirecting to signup...");
+                window.location.href = "signup.html";
+            }
+        })();
+    </script>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Busynes - Welcome to the Ecosystem</title>
@@ -189,8 +241,7 @@
             class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 flex items-start gap-5 max-w-2xl w-full mx-auto mb-10 animate-fade-in-up delay-400 text-left shadow-xs">
             <img alt="Ritvik - Founder of Busynes"
                 class="w-14 h-14 rounded-full border-2 border-primary-container/20 flex-shrink-0 object-cover shadow-2xs"
-                src="./assets/ritvik.jpg"
-                onerror="this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuAxWWO6F_F7ddhPm_Qa_vcv8JmcCDBLzccfV9K88CIOtVRDqaEvY07igFBFNwMVT2i7iiwc23O5aOz1VU69XSx6wP252pwP9xtANI3G35ne7mEc7uXEEw8fVwxWZ0yCa9YYQzz7FdHarQ9TjAReFpBZ1RsV11kwbMjG-rJH-67UCT1AslmNb9xR6cpIIGONiuP0_LbGIOBEOUdOLsX02YolKe_sc3w2y0VtqgToLBgk8ciLsf4kxmdcatK46JaIfmk15IcbFG9umdI'" />
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxWWO6F_F7ddhPm_Qa_vcv8JmcCDBLzccfV9K88CIOtVRDqaEvY07igFBFNwMVT2i7iiwc23O5aOz1VU69XSx6wP252pwP9xtANI3G35ne7mEc7uXEEw8fVwxWZ0yCa9YYQzz7FdHarQ9TjAReFpBZ1RsV11kwbMjG-rJH-67UCT1AslmNb9xR6cpIIGONiuP0_LbGIOBEOUdOLsX02YolKe_sc3w2y0VtqgToLBgk8ciLsf4kxmdcatK46JaIfmk15IcbFG9umdI" />
             <div class="space-y-2">
                 <p class="text-sm sm:text-base text-slate-700 italic leading-relaxed">
                     "I’m Ritvik, the founder of Busynes. If you need any assistance getting your pipeline configured,
@@ -212,10 +263,10 @@
         </div>
     </main>
 
-    <!-- Dynamic Session Greeting Script -->
+    <!-- Task 1: Dynamic Session Greeting Script (sessionStorage) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const savedName = localStorage.getItem('busynes_user_name');
+            const savedName = sessionStorage.getItem('busynes_user_name') || localStorage.getItem('busynes_user_name');
             if (savedName) {
                 const displayNameEl = document.getElementById('display-user-name');
                 if (displayNameEl) {
