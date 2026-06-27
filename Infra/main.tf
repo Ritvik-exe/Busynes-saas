@@ -204,6 +204,13 @@ resource "aws_s3_bucket_notification" "bucket_notification"{
 resource "aws_apigatewayv2_api" "busynes_api"{
     name = var.busynes_api
     protocol_type = "HTTP"
+
+    cors_configuration {
+        allow_headers = ["content-type", "authorization"]
+        allow_methods = ["GET", "POST", "PUT", "OPTIONS"]
+        allow_origins = ["https://busynes.com", "http://localhost:5173", "http://localhost:8080", "http://localhost:3000"]
+        max_age = 300
+    }
 }
 
 resource "aws_apigatewayv2_integration" "busynes_api_integration"{

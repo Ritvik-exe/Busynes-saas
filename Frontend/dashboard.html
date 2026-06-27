@@ -570,7 +570,7 @@
             try {
                 // Task 3: Attach active Cognito ID Token from sessionStorage in Authorization header
                 const idToken = sessionStorage.getItem('busynes_id_token') || '';
-                const response = await fetch('/api/chat', {
+                const response = await fetch('https://aqwkzc2r0d.execute-api.eu-west-2.amazonaws.com/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -626,7 +626,7 @@
             const monthlyOverheadVal = document.getElementById('monthly-overhead-value');
 
             // Task 3: Removed hardcoded '?client_id=client_777' parameter
-            const apiEndpoint = '/api/metrics';
+            const apiEndpoint = 'https://aqwkzc2r0d.execute-api.eu-west-2.amazonaws.com/';
             const idToken = sessionStorage.getItem('busynes_id_token') || '';
 
             fetch(apiEndpoint, {
