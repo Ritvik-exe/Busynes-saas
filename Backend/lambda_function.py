@@ -4,16 +4,15 @@ import boto3
 import datetime
 import os
 import re
+import logging
 from decimal import Decimal
 from boto3.dynamodb.conditions import Key
 
 # Initializing AWS Clients
 s3_client = boto3.client('s3')
-
 dynamo_resource = boto3.resource('dynamodb')
 table_name = os.environ.get('TABLE_NAME')
 table = dynamo_resource.Table(table_name)
-
 ses_client = boto3.client('ses')
 rekog_client = boto3.client('rekognition')
 
@@ -155,22 +154,43 @@ def lambda_handler(event, context):
 
             )
         else:
-            ClientID = event.get('queryStringParameters', {}).get('client_id', 'Admin')
+            method = event.get('requestContext',{}).get('http',{}).get('method', 'GET')
+            if method == 'GET':
+                ClientID = event.get('queryStringParameters', {}).get('client_id', 'Admin')
 
-            response = table.query(
-                KeyConditionExpression = Key('ClientID').eq(ClientID) & Key('Timestamp').begins_with(month_date)
-            )
+                response = table.query(
+                    KeyConditionExpression = Key('ClientID').eq(ClientID) & Key('Timestamp').begins_with(month_date)
+                )
 
-            for items in response['Items']:
-                month_amount += items['Amount']
-                if items['Timestamp'].startswith(today_date):
-                    today_amount += items['Amount']
+                for items in response['Items']:
+                    month_amount += items['Amount']
+                    if items['Timestamp'].startswith(today_date):
+                        today_amount += items['Amount']
 
-            return {
-                'statusCode' : 200,
-                'headers' : {'Content-Type' : 'Application/json', 'Access-Control-Allow-Origin' : '*'},
-                'body' : json.dumps({'ClientID' : ClientID, 'This_Month_Total' : float(month_amount), 'Today_Total' : float(today_amount)})
-            }
+                return {
+                    'statusCode' : 200,
+                    'headers' : {'Content-Type' : 'Application/json', 'Access-Control-Allow-Origin' : '*'},
+                    'body' : json.dumps({'ClientID' : ClientID, 'This_Month_Total' : float(month_amount), 'Today_Total' : float(today_amount)})
+                }
+            elif method == 'POST':
+                bucket_name = os.environ.get('INVOICE_BUCKET')
+                body_data = json.loads(event.get('body', '{}'))
+                file_name = body_data.get('file_name')
+                file_type = body_data.get('file_type')
+
+                user_id = event.get('requestContext',{}).get('authorizer',{}).get('jwt',{}).get('claims',{}).get('sub')
+                s3_key = f'uploads/{user_id}/{file_name}'
+                response = s3_client.generate_presigned_url(
+                    'put_object',
+                    Params = {'Bucket' : bucket_name, 'Key' : s3_key, 'ContentType' : file_type},
+                    ExpiresIn = 300
+                )
+
+                return {
+                    'statusCode' : 200,
+                    'headers' : {'Content-Type' : 'Application/json','Access-Control-Allow-Origin': '*'},
+                    'body' : json.dumps({'upload_url' : response, 'file_name' : s3_key})
+                }
             
     # Error handling
     except Exception as e:

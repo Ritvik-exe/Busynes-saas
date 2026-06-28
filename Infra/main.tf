@@ -189,6 +189,7 @@ resource "aws_lambda_function" "busynes_lambda_function"{
     environment {
         variables = {
             TABLE_NAME = aws_dynamodb_table.memory.name
+            INVOICE_BUCKET = aws_s3_bucket.invoice.id
         }
     }
 
