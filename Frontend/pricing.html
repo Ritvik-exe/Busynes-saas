@@ -269,10 +269,15 @@
                     <p class="font-body-sm text-body-sm text-secondary mt-1">Our flagship program to automate stadium
                         invoice processing and reconcile logs instantly.</p>
                 </div>
-                <div class="mb-8">
-                    <span id="price-professional"
-                        class="font-headline-xl text-[44px] text-on-background font-extrabold">£29</span>
-                    <span class="font-body-sm text-secondary">/ month</span>
+                <div class="mb-8 flex flex-col">
+                    <div>
+                        <span id="price-professional"
+                            class="font-headline-xl text-[44px] text-on-background font-extrabold">£29</span>
+                        <span class="font-body-sm text-secondary">/ month</span>
+                    </div>
+                    <span id="annual-billed-text"
+                        class="font-body-sm text-xs text-on-surface-variant hidden mt-1">Billed annually
+                        (£288/year)</span>
                 </div>
                 <ul class="space-y-sm flex-1 mb-8">
                     <li class="flex items-center gap-2 text-on-surface text-sm font-semibold">
@@ -303,7 +308,7 @@
                 </ul>
                 <button onclick="window.location.href='signup.html'"
                     class="w-full text-center bg-primary-container text-on-primary py-3 rounded-full font-label-md text-label-md font-bold hover:bg-primary transition-all cursor-pointer inner-glow shadow-md shadow-primary-container/25">
-                    Start 14-Day Free Pilot
+                    Get Started Now
                 </button>
             </div>
 
@@ -344,11 +349,10 @@
                         Direct API JSON database hooks
                     </li>
                 </ul>
-                <button
-                    onclick="window.location.href='mailto:enterprise@busynes.com?subject=Enterprise%20Stadium%20Quote'"
-                    class="w-full text-center border border-outline-variant text-on-surface hover:border-primary-container hover:text-primary-container py-3 rounded-full font-label-md text-label-md font-bold transition-all cursor-pointer">
+                <a href="mailto:support@busynes.com?subject=Enterprise%20Inquiry%20-%20Custom%20Stadium%20Plan&body=Hi%20Busynes%20Team%2C%20I%20am%20interested%20in%20learning%20more%20about%20your%20Enterprise%20Custom%20Stadium%20plan%20for%20our%20venue.%20Please%20get%20in%20touch!"
+                    class="block w-full text-center border border-outline-variant text-on-surface hover:border-primary-container hover:text-primary-container py-3 rounded-full font-label-md text-label-md font-bold transition-all cursor-pointer">
                     Contact Sales
-                </button>
+                </a>
             </div>
         </section>
 
@@ -459,14 +463,18 @@
             const btnYearly = document.getElementById('btn-toggle-yearly');
             const priceTag = document.getElementById('price-professional');
 
+            const annualBilledText = document.getElementById('annual-billed-text');
+
             if (period === 'monthly') {
                 btnMonthly.className = "px-5 py-2 font-label-md text-label-md font-semibold bg-white text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-full transition-all duration-200 cursor-pointer";
                 btnYearly.className = "px-5 py-2 font-label-md text-label-md font-semibold text-secondary hover:text-on-surface transition-all duration-200 cursor-pointer flex items-center gap-2";
                 priceTag.textContent = "£29";
+                if (annualBilledText) annualBilledText.classList.add('hidden');
             } else {
                 btnYearly.className = "px-5 py-2 font-label-md text-label-md font-semibold bg-white text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-full transition-all duration-200 cursor-pointer flex items-center gap-2";
                 btnMonthly.className = "px-5 py-2 font-label-md text-label-md font-semibold text-secondary hover:text-on-surface transition-all duration-200 cursor-pointer";
                 priceTag.textContent = "£24";
+                if (annualBilledText) annualBilledText.classList.remove('hidden');
             }
         }
 
