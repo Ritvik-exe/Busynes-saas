@@ -241,9 +241,17 @@ resource "aws_apigatewayv2_integration" "busynes_api_integration"{
     payload_format_version = "2.0"
 }
 
-resource "aws_apigatewayv2_route" "busynes_api_route"{
+resource "aws_apigatewayv2_route" "busynes_api_get_route"{
     api_id = aws_apigatewayv2_api.busynes_api.id
-    route_key = "ANY /"
+    route_key = "GET /"
+    target = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
+    authorization_type = "JWT"
+    authorizer_id = aws_apigatewayv2_authorizer.busynes_api_authorizer.id
+}
+
+resource "aws_apigatewayv2_route" "busynes_api_post_route"{
+    api_id = aws_apigatewayv2_api.busynes_api.id
+    route_key = "POST /"
     target = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
     authorization_type = "JWT"
     authorizer_id = aws_apigatewayv2_authorizer.busynes_api_authorizer.id
