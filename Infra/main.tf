@@ -245,6 +245,8 @@ resource "aws_apigatewayv2_route" "busynes_api_route"{
     api_id = aws_apigatewayv2_api.busynes_api.id
     route_key = "ANY /"
     target = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
+    authorization_type = "JWT"
+    authorizer_id = aws_apigatewayv2_authorizer.busynes_api_authorizer.id
 }
 
 resource "aws_apigatewayv2_stage" "busynes_api_stage"{
@@ -257,6 +259,17 @@ resource "aws_apigatewayv2_stage" "busynes_api_stage"{
         Environment = "dev"
         Project = "busynes"
         managedby = "terraform"
+    }
+}
+
+resource "aws_apigatewayv2_authorizer" "busynes_api_authorizer"{
+    api_id = aws_apigatewayv2_api.busynes_api.id
+    authorizer_type = "JWT"
+    identity_sources = ["$request.header.Authorization"]
+    name = "busynes-cognito-authorizer"
+    jwt_configuration {
+        audience = [aws_cognito_user_pool_client.busynes_app_client.id]
+        issuer = "https://${aws_cognito_user_pool.busynes_user_pool.endpoint}"
     }
 }
 
