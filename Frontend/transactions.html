@@ -281,7 +281,8 @@
                             <span>Select Files from Computer</span>
                         </button>
                         <!-- Hidden input for file selection -->
-                        <input type="file" id="invoice-upload-input" class="hidden" accept="image/png, image/jpeg, image/jpg, application/pdf"
+                        <input type="file" id="invoice-upload-input" class="hidden"
+                            accept="image/png, image/jpeg, image/jpg, application/pdf"
                             onchange="handleLiveUpload(this)" />
                     </div>
                     <!-- Live upload state card -->
@@ -333,15 +334,15 @@
                 </section>
                 <!-- 3. The Vault (Document Table) -->
                 <section
-                    class="bg-surface-container-lowest border border-outline-variant rounded-xl flex flex-col overflow-hidden shadow-[0px_4px_20px_rgba(0,0,0,0.05)]">
+                    class="min-h-[400px] bg-surface-container-lowest border border-outline-variant rounded-xl flex flex-col overflow-hidden shadow-[0px_4px_20px_rgba(0,0,0,0.05)]">
                     <div
                         class="px-md py-sm border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
                         <h3 class="font-headline-md text-headline-md text-on-surface font-bold">Document Vault</h3>
                         <span
                             class="px-2.5 py-1 rounded bg-[#eaf1ff] text-primary-container font-label-md text-[10px] font-bold"
-                            id="total-entries-badge">Showing 3 of 3 entries</span>
+                            id="total-entries-badge">Showing 0 entries</span>
                     </div>
-                    <div class="overflow-x-auto">
+                    <div class="overflow-x-auto p-4">
                         <table class="w-full text-left border-collapse">
                             <thead>
                                 <tr
@@ -357,114 +358,15 @@
                             </thead>
                             <tbody id="transaction-rows"
                                 class="font-body-sm text-body-sm divide-y divide-outline-variant/30 bg-surface-container-lowest">
-                                <!-- Row 1 -->
-                                <tr id="row-1" onclick="selectRow(1)"
-                                    class="hover:bg-surface transition-colors group cursor-pointer transaction-row border-primary-container">
-                                    <td class="py-sm px-md">
-                                        <div
-                                            class="w-10 h-12 bg-surface-container-low border border-outline-variant rounded flex items-center justify-center text-on-surface-variant relative overflow-hidden">
-                                            <span
-                                                class="material-symbols-outlined text-xl opacity-60">description</span>
-                                        </div>
-                                    </td>
-                                    <td class="py-sm px-md">
-                                        <p class="font-body-sm text-body-sm font-semibold text-on-surface file-name">
-                                            INV-2023-001.pdf</p>
-                                        <p class="font-label-md text-label-md text-on-surface-variant text-[10px]">1.2
-                                            MB</p>
-                                    </td>
-                                    <td class="py-sm px-md text-on-surface-variant">Oct 24, 2026</td>
-                                    <td class="py-sm px-md">
-                                        <div class="flex items-center space-x-2">
-                                            <span class="font-semibold text-on-surface supplier">Cloudflare Inc.</span>
-                                            <span class="material-symbols-outlined text-[14px] text-primary-container"
-                                                data-icon="auto_awesome" title="AI Detected">auto_awesome</span>
-                                        </div>
-                                    </td>
-                                    <td class="py-sm px-md text-right font-semibold text-on-surface">£1,250.00</td>
-                                    <td class="py-sm px-md">
-                                        <span
-                                            class="inline-block bg-[#eaf1ff] text-primary-container px-2 py-[2px] rounded-full font-label-md text-[10px] font-bold">Processed</span>
-                                    </td>
-                                    <td class="py-sm px-md text-center">
-                                        <div class="flex items-center justify-center space-x-2">
-                                            <button onclick="selectRow(1); event.stopPropagation();"
-                                                class="text-on-surface-variant hover:text-primary-container p-1 rounded hover:bg-surface-container-low transition-colors"
-                                                title="Edit details">
-                                                <span class="material-symbols-outlined text-sm">edit</span>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <!-- Row 2 -->
-                                <tr id="row-2" onclick="selectRow(2)"
-                                    class="hover:bg-surface transition-colors group cursor-pointer transaction-row">
-                                    <td class="py-sm px-md">
-                                        <div
-                                            class="w-10 h-12 bg-surface-container-low border border-outline-variant rounded flex items-center justify-center text-on-surface-variant relative overflow-hidden">
-                                            <span class="material-symbols-outlined text-xl opacity-60">receipt</span>
-                                        </div>
-                                    </td>
-                                    <td class="py-sm px-md">
-                                        <p class="font-body-sm text-body-sm font-semibold text-on-surface file-name">
-                                            AWS_Billing_Oct.pdf</p>
-                                        <p class="font-label-md text-label-md text-on-surface-variant text-[10px]">3.4
-                                            MB</p>
-                                    </td>
-                                    <td class="py-sm px-md text-on-surface-variant">Oct 23, 2026</td>
-                                    <td class="py-sm px-md">
-                                        <div class="flex items-center space-x-2">
-                                            <span class="font-semibold text-on-surface supplier">Amazon Web
-                                                Services</span>
-                                            <span class="material-symbols-outlined text-[14px] text-primary-container"
-                                                data-icon="auto_awesome" title="AI Detected">auto_awesome</span>
-                                        </div>
-                                    </td>
-                                    <td class="py-sm px-md text-right font-semibold text-on-surface">£4,890.50</td>
-                                    <td class="py-sm px-md">
-                                        <span
-                                            class="inline-block bg-surface-container-high text-on-surface-variant px-2 py-[2px] rounded-full font-label-md text-[10px] font-bold">Pending</span>
-                                    </td>
-                                    <td class="py-sm px-md text-center">
-                                        <div class="flex items-center justify-center space-x-2">
-                                            <button onclick="selectRow(2); event.stopPropagation();"
-                                                class="text-on-surface-variant hover:text-primary-container p-1 rounded hover:bg-surface-container-low transition-colors"
-                                                title="Edit details">
-                                                <span class="material-symbols-outlined text-sm">edit</span>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <!-- Row 3 -->
-                                <tr id="row-3" onclick="selectRow(3)"
-                                    class="hover:bg-surface transition-colors group cursor-pointer transaction-row">
-                                    <td class="py-sm px-md">
-                                        <div
-                                            class="w-10 h-12 bg-surface-container-low border border-error/30 rounded flex items-center justify-center text-error relative overflow-hidden">
-                                            <span class="material-symbols-outlined text-xl opacity-75">warning</span>
-                                        </div>
-                                    </td>
-                                    <td class="py-sm px-md">
-                                        <p class="font-body-sm text-body-sm font-semibold text-on-surface file-name">
-                                            Unknown_Receipt.jpg</p>
-                                        <p class="font-label-md text-label-md text-on-surface-variant text-[10px]">0.8
-                                            MB</p>
-                                    </td>
-                                    <td class="py-sm px-md text-on-surface-variant">Oct 22, 2026</td>
-                                    <td class="py-sm px-md text-on-surface-variant italic supplier font-medium">Requires
-                                        Review</td>
-                                    <td class="py-sm px-md text-right font-semibold text-on-surface">--</td>
-                                    <td class="py-sm px-md">
-                                        <span
-                                            class="inline-block bg-[#ffdad6] text-error px-2 py-[2px] rounded-full font-label-md text-[10px] font-bold">Flagged</span>
-                                    </td>
-                                    <td class="py-sm px-md text-center">
-                                        <div class="flex items-center justify-center space-x-2">
-                                            <button onclick="selectRow(3); event.stopPropagation();"
-                                                class="text-on-surface-variant hover:text-primary-container p-1 rounded hover:bg-surface-container-low transition-colors"
-                                                title="Edit details">
-                                                <span class="material-symbols-outlined text-sm">edit</span>
-                                            </button>
+                                <tr>
+                                    <td colspan="7" class="py-16 text-center">
+                                        <div class="flex flex-col items-center justify-center text-on-surface-variant">
+                                            <span class="material-symbols-outlined text-5xl mb-4 opacity-50"
+                                                data-icon="folder_open">folder_open</span>
+                                            <p class="font-medium text-lg text-on-surface">Your Document Vault is empty.
+                                            </p>
+                                            <p class="mt-1 max-w-sm">Drag & drop or select files above to begin
+                                                uploading!</p>
                                         </div>
                                     </td>
                                 </tr>
