@@ -142,7 +142,7 @@ tags = {
 # ========================== IAM policies Attachments ==========================
 resource "aws_iam_role_policy_attachment" "busynes_lambda_s3"{
     role = aws_iam_role.busynes_lambda_role.name
-    policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+    policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
 }
 
 resource "aws_iam_role_policy_attachment" "busynes_lambda_dynamodb"{

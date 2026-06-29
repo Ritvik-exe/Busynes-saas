@@ -217,10 +217,6 @@
                             class="material-symbols-outlined text-amber-600 text-base flex-shrink-0 mt-0.5">warning</span>
                         <p id="auth-error-msg" class="font-medium leading-relaxed"></p>
                     </div>
-                    <button type="button" id="demo-bypass-btn"
-                        class="w-full bg-[#1B7A16] hover:bg-emerald-800 text-white font-bold py-2.5 px-3 rounded-lg transition-colors text-center block shadow-sm cursor-pointer">
-                        ⚡ Quick Demo Bypass: Continue to Pilot →
-                    </button>
                 </div>
 
                 <!-- Submit Button -->
@@ -277,25 +273,6 @@
 
             tabSignUp.addEventListener('click', () => toggleMode(true));
             tabSignIn.addEventListener('click', () => toggleMode(false));
-
-            // Task 1 & 3: Demo Bypass Handler using sessionStorage
-            document.getElementById('demo-bypass-btn').addEventListener('click', () => {
-                const email = document.getElementById('email').value.trim() || 'founder@busynes.com';
-                const fullName = document.getElementById('fullName').value.trim() || email.split('@')[0] || 'Sarah';
-
-                // Generate simulated unexpired ID token for sessionStorage
-                const dummyIdToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." + btoa(JSON.stringify({
-                    sub: "demo_user_777",
-                    name: fullName,
-                    email: email,
-                    exp: Math.floor(Date.now() / 1000) + 86400
-                })) + ".dummy_signature";
-
-                sessionStorage.setItem('busynes_id_token', dummyIdToken);
-                sessionStorage.setItem('busynes_user_name', fullName);
-                sessionStorage.setItem('busynes_client_id', email.replace(/[@.]/g, '_'));
-                window.location.href = isSignUpMode ? 'onboarding.html' : 'dashboard.html';
-            });
 
             function showError(msg) {
                 errorMsgEl.textContent = msg;
