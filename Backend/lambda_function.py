@@ -156,7 +156,9 @@ def lambda_handler(event, context):
         else:
             method = event.get('requestContext',{}).get('http',{}).get('method', 'GET')
             if method == 'GET':
-                ClientID = event.get('queryStringParameters', {}).get('client_id', 'Admin')
+                ClientID = event.get('requestContext', {}).get('authorizer', {}).get('jwt', {}).get('claims', {}).get('sub')
+                if not ClientID:
+                    ClientID = event.get('queryStringParameters',{}).get('client_id', 'Admin')
 
                 response = table.query(
                     KeyConditionExpression = Key('ClientID').eq(ClientID) & Key('Timestamp').begins_with(month_date)
