@@ -154,6 +154,7 @@ def lambda_handler(event, context):
 
             )
         else:
+            invoice_list = []
             method = event.get('requestContext',{}).get('http',{}).get('method', 'GET')
             if method == 'GET':
                 ClientID = event.get('requestContext', {}).get('authorizer', {}).get('jwt', {}).get('claims', {}).get('sub')
@@ -165,6 +166,7 @@ def lambda_handler(event, context):
                 )
 
                 for items in response['Items']:
+                    invoice_list.append({ 'Timestamp': items['Timestamp'], 'Amount': float(items['Amount']), 'Filename': items['Filename'] })
                     month_amount += items['Amount']
                     if items['Timestamp'].startswith(today_date):
                         today_amount += items['Amount']
@@ -172,7 +174,7 @@ def lambda_handler(event, context):
                 return {
                     'statusCode' : 200,
                     'headers' : {'Content-Type' : 'Application/json', 'Access-Control-Allow-Origin' : '*'},
-                    'body' : json.dumps({'ClientID' : ClientID, 'This_Month_Total' : float(month_amount), 'Today_Total' : float(today_amount)})
+                    'body' : json.dumps({'ClientID' : ClientID, 'This_Month_Total' : float(month_amount), 'Today_Total' : float(today_amount), 'Invoices' : invoice_list})
                 }
             elif method == 'POST':
                 bucket_name = os.environ.get('INVOICE_BUCKET')
