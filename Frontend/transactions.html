@@ -218,7 +218,7 @@
                 Support
             </a>
             <a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-all font-body-sm text-body-sm cursor-pointer"
-                href="index.html">
+                onclick="logoutSession()">
                 <span class="material-symbols-outlined" data-icon="logout">logout</span>
                 Logout
             </a>
@@ -280,9 +280,9 @@
                             <span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
                             <span>Select Files from Computer</span>
                         </button>
-                        <!-- Hidden input for file selection -->
+                        <!-- Hidden input for parallel file selection -->
                         <input type="file" id="invoice-upload-input" class="hidden"
-                            accept="image/png, image/jpeg, image/jpg" onchange="handleLiveUpload(this)" />
+                            accept="image/png, image/jpeg, image/jpg" multiple onchange="handleLiveUpload(this)" />
                     </div>
                     <!-- Live upload state card -->
                     <div id="ai-loader-card"
@@ -293,8 +293,8 @@
                             <div>
                                 <h4 class="font-body-sm font-semibold text-primary">AWS Secure Copilot is Extracting...
                                 </h4>
-                                <p class="text-xs text-on-surface-variant" id="uploading-file-name">Analyzing document
-                                    catering_order.pdf</p>
+                                <p class="text-xs text-on-surface-variant" id="uploading-file-name">Analyzing
+                                    documents...</p>
                             </div>
                         </div>
                         <div class="text-right">
@@ -333,7 +333,7 @@
                 </section>
                 <!-- 3. The Vault (Document Table) -->
                 <section
-                    class="min-h-[400px] bg-surface-container-lowest border border-outline-variant rounded-xl flex flex-col overflow-hidden shadow-[0px_4px_20px_rgba(0,0,0,0.05)]">
+                    class="min-h-[450px] bg-surface-container-lowest border border-outline-variant rounded-xl flex flex-col shadow-[0px_4px_20px_rgba(0,0,0,0.05)]">
                     <div
                         class="px-md py-sm border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
                         <h3 class="font-headline-md text-headline-md text-on-surface font-bold">Document Vault</h3>
@@ -341,7 +341,7 @@
                             class="px-2.5 py-1 rounded bg-[#eaf1ff] text-primary-container font-label-md text-[10px] font-bold"
                             id="total-entries-badge">Showing 0 entries</span>
                     </div>
-                    <div class="overflow-x-auto p-4">
+                    <div class="overflow-x-auto p-4 flex-grow">
                         <table class="w-full text-left border-collapse">
                             <thead>
                                 <tr
@@ -512,46 +512,39 @@
     </div>
 
     <script>
-        // Form field data store
-        const rowData = {
-            1: { supplier: "Cloudflare Inc.", invoice: "INV-2023-001", vat: "US84930291", currency: "GBP (£)", tax: "£120.00", accuracy: "99.8% Conf", status: "Sync Active" },
-            2: { supplier: "Amazon Web Services", invoice: "AWS-BILL-2026-X", vat: "EU12039201", currency: "GBP (£)", tax: "£480.00", accuracy: "98.4% Conf", status: "Pending Review" },
-            3: { supplier: "Requires Manual Input", invoice: "", vat: "", currency: "", tax: "", accuracy: "Requires Review", status: "Needs Input" }
-        };
+        // Global storage for loaded invoices
+        let loadedInvoicesList = [];
 
-        let currentRowId = 1;
-
-        // Select a row and dynamically update sidebar inputs
-        function selectRow(id) {
-            currentRowId = id;
-
-            // Manage styling classes
+        // Select a row and dynamically update sidebar inputs based on live database data
+        function selectInvoiceRow(index) {
+            // Manage active class styling on rows
             document.querySelectorAll('.transaction-row').forEach(row => {
                 row.classList.remove('bg-primary-container/5', 'ring-2', 'ring-primary-container/20');
             });
-            const selectedRow = document.getElementById('row-' + id);
+            const selectedRow = document.getElementById('row-' + index);
             if (selectedRow) {
                 selectedRow.classList.add('bg-primary-container/5', 'ring-2', 'ring-primary-container/20');
             }
 
-            // Load values to fields
-            const data = rowData[id];
-            if (data) {
-                document.getElementById('side-supplier').value = data.supplier;
-                document.getElementById('side-invoice-number').value = data.invoice;
-                document.getElementById('side-vat').value = data.vat;
-                document.getElementById('side-currency').value = data.currency;
-                document.getElementById('side-tax').value = data.tax;
+            const item = loadedInvoicesList[index];
+            if (item) {
+                const cleanFilename = item.Filename.split('/').pop();
 
-                // Update badge & status
+                // Populate dynamic inputs
+                document.getElementById('side-supplier').value = "Processed Invoice";
+                document.getElementById('side-invoice-number').value = cleanFilename.split('.')[0] || "INV-Vault";
+                document.getElementById('side-vat').value = "HMRC-GB-Synced";
+                document.getElementById('side-currency').value = "GBP (£)";
+
+                // Calculate simulated VAT (20% UK Standard)
+                const vatAmount = (parseFloat(item.Amount) * 0.20).toFixed(2);
+                document.getElementById('side-tax').value = `£${vatAmount}`;
+
+                // Update badge and sync status
                 const badge = document.getElementById('visual-ai-badge');
-                badge.textContent = data.accuracy;
-                if (data.accuracy.includes('Conf')) {
-                    badge.className = "absolute top-2 right-2 bg-primary-container text-on-primary text-[10px] font-bold px-2 py-0.5 rounded-full z-10 flex items-center gap-1 shadow-sm";
-                } else {
-                    badge.className = "absolute top-2 right-2 bg-error text-on-error text-[10px] font-bold px-2 py-0.5 rounded-full z-10 flex items-center gap-1 shadow-sm";
-                }
-                document.getElementById('extraction-status').textContent = data.status;
+                badge.textContent = "99.8% Conf";
+                badge.className = "absolute top-2 right-2 bg-primary-container text-on-primary text-[10px] font-bold px-2 py-0.5 rounded-full z-10 flex items-center gap-1 shadow-sm";
+                document.getElementById('extraction-status').textContent = "Synced";
             }
         }
 
@@ -560,30 +553,28 @@
             document.getElementById('invoice-upload-input').click();
         }
 
-        // Handle live file uploads to S3 via API Gateway
+        // Handle live multi-file parallel S3 uploads via API Gateway
         async function handleLiveUpload(input) {
             if (!input.files || input.files.length === 0) return;
-            const file = input.files[0];
+            const files = Array.from(input.files);
 
-            // Strict extension check
-            const fileName = file.name;
-            const lastDotIndex = fileName.lastIndexOf('.');
-            const fileExtension = lastDotIndex !== -1 ? fileName.substring(lastDotIndex + 1).toLowerCase() : '';
+            // 1. Strict frontend extension check for all files first
             const allowedExtensions = ['png', 'jpg', 'jpeg'];
-
-            if (!allowedExtensions.includes(fileExtension)) {
-                alert("Unsupported File Type! Please upload only PNG, JPG, or JPEG images.");
-                input.value = ''; // clear the input
-                return;
+            for (const file of files) {
+                const lastDotIndex = file.name.lastIndexOf('.');
+                const fileExtension = lastDotIndex !== -1 ? file.name.substring(lastDotIndex + 1).toLowerCase() : '';
+                if (!allowedExtensions.includes(fileExtension)) {
+                    alert(`Unsupported File Type: "${file.name}"! Please upload only PNG, JPG, or JPEG images.`);
+                    input.value = ''; // clear input
+                    return;
+                }
             }
 
-            // Show AI progress loader
+            // 2. Show AI loader progress cards
             const loaderCard = document.getElementById('ai-loader-card');
             const nameLabel = document.getElementById('uploading-file-name');
-            nameLabel.textContent = `Analyzing and extracting parameters from ${file.name}...`;
             loaderCard.classList.remove('hidden');
 
-            // Change upload buttons text
             const quickUploadBtnTexts = document.querySelectorAll('button[onclick="triggerFileInput()"] span:not(.material-symbols-outlined)');
             const originalBtnTexts = [];
             quickUploadBtnTexts.forEach(btn => {
@@ -592,53 +583,56 @@
             });
 
             try {
-                // 1. Get pre-signed URL (POST)
                 const token = sessionStorage.getItem('busynes_id_token');
                 if (!token) throw new Error("No active session token found. Please log in again.");
 
-                const response = await fetch('https://aqwkzc2r0d.execute-api.eu-west-2.amazonaws.com/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + token
-                    },
-                    body: JSON.stringify({ file_name: file.name, file_type: file.type })
-                });
+                // 3. Process uploads in parallel
+                await Promise.all(files.map(async (file) => {
+                    nameLabel.textContent = `Requesting secure upload link for ${file.name}...`;
 
-                if (!response.ok) {
-                    throw new Error(`Upload failed. API returned status: ${response.status}`);
-                }
+                    // Step A: Request pre-signed S3 URL (POST)
+                    const response = await fetch('https://aqwkzc2r0d.execute-api.eu-west-2.amazonaws.com/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + token
+                        },
+                        body: JSON.stringify({ file_name: file.name, file_type: file.type })
+                    });
 
-                const data = await response.json();
-                if (!data.upload_url) {
-                    throw new Error("Invalid response from server. Missing upload_url.");
-                }
+                    if (!response.ok) {
+                        throw new Error(`Upload handshake failed for ${file.name}. Status: ${response.status}`);
+                    }
 
-                quickUploadBtnTexts.forEach(btn => {
-                    btn.textContent = "Processing...";
-                });
+                    const data = await response.json();
+                    if (!data.upload_url) {
+                        throw new Error(`Invalid S3 url received for ${file.name}`);
+                    }
 
-                // 2. Upload directly to S3 (PUT)
-                const s3Response = await fetch(data.upload_url, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': file.type
-                    },
-                    body: file
-                });
+                    nameLabel.textContent = `Uploading ${file.name} directly to S3...`;
 
-                if (!s3Response.ok) {
-                    throw new Error(`S3 upload failed. Status: ${s3Response.status}`);
-                }
+                    // Step B: Direct S3 upload (PUT)
+                    const s3Response = await fetch(data.upload_url, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': file.type
+                        },
+                        body: file
+                    });
 
-                // 3. Success state
-                showToast("Invoice uploaded successfully! Processing started.");
+                    if (!s3Response.ok) {
+                        throw new Error(`S3 upload failed for ${file.name}. Status: ${s3Response.status}`);
+                    }
+                }));
+
+                // 4. Success State
+                showToast("All invoices uploaded successfully! Background processing started.");
                 setTimeout(() => {
                     window.location.reload();
                 }, 2000);
 
             } catch (err) {
-                console.error("Upload error:", err);
+                console.error("Upload process error:", err);
                 showToast(err.message, true);
                 loaderCard.classList.add('hidden');
                 quickUploadBtnTexts.forEach((btn, i) => {
@@ -686,20 +680,94 @@
             }, 3000);
         }
 
+        // Load live database invoices on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const tableBody = document.getElementById('transaction-rows');
+            const totalEntriesBadge = document.getElementById('total-entries-badge');
+
+            const apiEndpoint = 'https://aqwkzc2r0d.execute-api.eu-west-2.amazonaws.com/';
+            const idToken = sessionStorage.getItem('busynes_id_token') || '';
+
+            fetch(apiEndpoint, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${idToken}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error("Failed to load dynamic document vault");
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Vault invoices loaded successfully:", data);
+
+                    if (data.Invoices && data.Invoices.length > 0) {
+                        // Sort most recent first based on Timestamp
+                        loadedInvoicesList = data.Invoices.sort((a, b) => new Date(b.Timestamp) - new Date(a.Timestamp));
+
+                        let rowsHtml = '';
+                        loadedInvoicesList.forEach((item, index) => {
+                            const dateFormatted = new Date(item.Timestamp).toLocaleDateString('en-GB', {
+                                day: '2-digit',
+                                month: 'short',
+                                year: 'numeric'
+                            });
+                            const cleanFilename = item.Filename.split('/').pop();
+                            const amountFormatted = '£' + parseFloat(item.Amount).toLocaleString('en-GB', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            });
+
+                            rowsHtml += `
+                            <tr id="row-${index}" onclick="selectInvoiceRow(${index})" class="transaction-row hover:bg-surface-container-low/50 transition-colors cursor-pointer">
+                                <td class="py-4 px-6 text-on-surface-variant font-medium">
+                                    <span class="material-symbols-outlined text-emerald-600">image</span>
+                                </td>
+                                <td class="py-4 px-6 font-semibold text-on-surface file-name">${cleanFilename}</td>
+                                <td class="py-4 px-6 text-on-surface-variant">${dateFormatted}</td>
+                                <td class="py-4 px-6 text-on-surface-variant supplier">Processed Invoice</td>
+                                <td class="py-4 px-6 text-on-surface font-semibold text-right">${amountFormatted}</td>
+                                <td class="py-4 px-6">
+                                    <span class="bg-[#eaf1ff] text-primary px-2.5 py-1 rounded-full text-xs font-bold">Synced</span>
+                                </td>
+                                <td class="py-4 px-6 text-center">
+                                    <button class="text-primary hover:text-surface-tint font-label-md text-xs font-bold">View</button>
+                                </td>
+                            </tr>
+                        `;
+                        });
+
+                        tableBody.innerHTML = rowsHtml;
+                        totalEntriesBadge.textContent = `Showing ${loadedInvoicesList.length} of ${loadedInvoicesList.length} entries`;
+
+                        // Automatically select first row in sidebar
+                        selectInvoiceRow(0);
+                    } else {
+                        totalEntriesBadge.textContent = "Showing 0 entries";
+                    }
+                })
+                .catch(err => {
+                    console.error("Error loading dynamic document vault:", err);
+                    totalEntriesBadge.textContent = "Showing 0 entries";
+                });
+        });
+
         // Filter standard table based on search box or selectors
         function filterTransactions() {
             const searchVal = document.getElementById('transactions-search').value.toLowerCase();
             const catVal = document.getElementById('category-filter').value;
 
+            let visibleCount = 0;
             document.querySelectorAll('.transaction-row').forEach(row => {
                 const fName = row.querySelector('.file-name').textContent.toLowerCase();
                 const supp = row.querySelector('.supplier').textContent.toLowerCase();
 
-                // category logic checks preview icon or text context
                 const matchesSearch = fName.includes(searchVal) || supp.includes(searchVal);
 
                 if (matchesSearch) {
                     row.classList.remove('hidden');
+                    visibleCount++;
                 } else {
                     row.classList.add('hidden');
                 }
@@ -707,34 +775,26 @@
 
             // Recalculate entries visible
             const total = document.querySelectorAll('.transaction-row').length;
-            const visible = document.querySelectorAll('.transaction-row:not(.hidden)').length;
-            document.getElementById('total-entries-badge').textContent = `Showing ${visible} of ${total} entries`;
+            document.getElementById('total-entries-badge').textContent = `Showing ${visibleCount} of ${total} entries`;
         }
 
         // Commit Invoice action
         function commitInvoice() {
-            const supp = document.getElementById('side-supplier').value || "No Supplier";
-            const inv = document.getElementById('side-invoice-number').value || "unspecified";
             showToast(`Invoice verified and successfully committed to Xero Ledger!`);
-
-            // Simulate updating active status in row
-            const activeRowStatusTag = document.querySelector(`.transaction-row.bg-primary-container\\/5 span.bg-surface-container-high`);
-            if (activeRowStatusTag) {
-                activeRowStatusTag.textContent = "Synced";
-                activeRowStatusTag.className = "inline-block bg-[#eaf1ff] text-primary-container px-2 py-[2px] rounded-full font-label-md text-[10px] font-bold";
-            }
         }
 
         // Flag Invoice Action
         function flagInvoice() {
-            const name = document.getElementById('side-supplier').value || "Unknown";
             showToast(`Document marked as 'Flagged' for audit review.`, true);
         }
 
-        // Initialize state on start
-        document.addEventListener('DOMContentLoaded', () => {
-            selectRow(1);
-        });
+        // Logout function
+        function logoutSession() {
+            sessionStorage.removeItem('busynes_id_token');
+            sessionStorage.removeItem('busynes_user_name');
+            sessionStorage.removeItem('busynes_client_id');
+            window.location.href = "signup.html";
+        }
     </script>
 </body>
 
