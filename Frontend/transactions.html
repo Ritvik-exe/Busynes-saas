@@ -274,7 +274,7 @@
                         <h2 class="font-headline-md text-headline-md text-on-surface mb-2 font-bold">Upload to Vault
                         </h2>
                         <p class="font-body-md text-body-md text-on-surface-variant mb-6 max-w-md">Drag & drop stadium
-                            invoices or food receipts here to process instantly. Supports PDF, JPG, PNG.</p>
+                            invoices or food receipts here to process instantly. Supports PNG, JPG, JPEG.</p>
                         <button
                             class="bg-primary-container text-on-primary px-6 py-2.5 rounded-full font-label-md text-label-md hover:bg-primary transition-colors flex items-center space-x-2 shadow-sm cursor-pointer">
                             <span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
@@ -282,8 +282,7 @@
                         </button>
                         <!-- Hidden input for file selection -->
                         <input type="file" id="invoice-upload-input" class="hidden"
-                            accept="image/png, image/jpeg, image/jpg, application/pdf"
-                            onchange="handleLiveUpload(this)" />
+                            accept="image/png, image/jpeg, image/jpg" onchange="handleLiveUpload(this)" />
                     </div>
                     <!-- Live upload state card -->
                     <div id="ai-loader-card"
@@ -566,6 +565,18 @@
             if (!input.files || input.files.length === 0) return;
             const file = input.files[0];
 
+            // Strict extension check
+            const fileName = file.name;
+            const lastDotIndex = fileName.lastIndexOf('.');
+            const fileExtension = lastDotIndex !== -1 ? fileName.substring(lastDotIndex + 1).toLowerCase() : '';
+            const allowedExtensions = ['png', 'jpg', 'jpeg'];
+
+            if (!allowedExtensions.includes(fileExtension)) {
+                alert("Unsupported File Type! Please upload only PNG, JPG, or JPEG images.");
+                input.value = ''; // clear the input
+                return;
+            }
+
             // Show AI progress loader
             const loaderCard = document.getElementById('ai-loader-card');
             const nameLabel = document.getElementById('uploading-file-name');
@@ -591,7 +602,7 @@
                         'Content-Type': 'application/json',
                         'Authorization': 'Bearer ' + token
                     },
-                    body: JSON.stringify({ filename: file.name, file_type: file.type })
+                    body: JSON.stringify({ file_name: file.name, file_type: file.type })
                 });
 
                 if (!response.ok) {
