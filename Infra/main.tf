@@ -257,6 +257,14 @@ resource "aws_apigatewayv2_route" "busynes_api_post_route"{
     authorizer_id = aws_apigatewayv2_authorizer.busynes_api_authorizer.id
 }
 
+resource "aws_apigatewayv2_route" "busynes_api_delete_route"{
+    api_id = aws_apigatewayv2_api.busynes_api.id
+    route_key = "DELETE /"
+    target = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
+    authorization_type = "JWT"
+    authorizer_id = aws_apigatewayv2_authorizer.busynes_api_authorizer.id
+}
+
 resource "aws_apigatewayv2_stage" "busynes_api_stage"{
     api_id = aws_apigatewayv2_api.busynes_api.id
     name = "$default"
