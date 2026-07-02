@@ -50,7 +50,7 @@ resource "aws_s3_bucket_cors_configuration" "invoice_cors"{
     bucket = aws_s3_bucket.invoice.id
     cors_rule {
         allowed_headers = ["*"]
-        allowed_methods = ["GET", "PUT", "POST", "HEAD"]
+        allowed_methods = ["GET", "PUT", "POST", "HEAD", "DELETE"]
         allowed_origins = ["https://busynes.com", "http://localhost:5173", "http://localhost:8080", "http://localhost:3000"]
         expose_headers = ["ETag"]
         max_age_seconds = 300
@@ -227,7 +227,7 @@ resource "aws_apigatewayv2_api" "busynes_api"{
 
     cors_configuration {
         allow_headers = ["content-type", "authorization"]
-        allow_methods = ["GET", "POST", "PUT", "OPTIONS"]
+        allow_methods = ["GET", "POST", "PUT", "OPTIONS", "DELETE"]
         allow_origins = ["https://busynes.com", "http://localhost:5173", "http://localhost:8080", "http://localhost:3000"]
         max_age = 300
     }
