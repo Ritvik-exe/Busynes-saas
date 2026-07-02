@@ -36,7 +36,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Dashboard - Busynes</title>
-    <link rel="icon" type="image/png" href="/favicon.png?v=1" />
+    <link class="light" rel="icon" type="image/png" href="/favicon.png?v=1" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
@@ -292,7 +292,7 @@
                         </span>
                     </div>
                     <div class="mt-4">
-                        <div class="text-3xl font-bold text-on-surface" id="daily-spend-value">£0</div>
+                        <div class="text-3xl font-bold text-on-surface" id="daily-spend-value">£0.00</div>
                         <p class="text-xs text-on-surface-variant mt-1">AWS Live Sync</p>
                     </div>
                 </div>
@@ -306,7 +306,7 @@
                             data-icon="account_balance">account_balance</span>
                     </div>
                     <div class="mt-4">
-                        <div class="text-3xl font-bold text-on-surface" id="monthly-overhead-value">£0</div>
+                        <div class="text-3xl font-bold text-on-surface" id="monthly-overhead-value">£0.00</div>
                         <p class="text-xs text-on-surface-variant mt-1">Active Ledger Accumulation</p>
                     </div>
                 </div>
@@ -351,72 +351,14 @@
                             </h3>
                             <p class="text-xs text-on-surface-variant">Active processing cycles over last 6 months</p>
                         </div>
-                        <span
+                        <span id="chart-header-label"
                             class="text-xs font-label-md text-on-surface-variant bg-surface-container-low px-3 py-1 rounded-full">Jan
                             - Jun 2026</span>
                     </div>
-                    <!-- Custom Bar Chart Visual representing invoice processing metrics -->
-                    <div class="h-64 flex items-end justify-between gap-4 pt-4 border-b border-outline-variant pb-2">
-                        <!-- Jan -->
-                        <div class="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
-                            <div
-                                class="w-full bg-primary-container/20 group-hover:bg-primary-container/40 h-24 rounded-t-md transition-all relative">
-                                <span
-                                    class="absolute -top-7 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-[10px] font-bold px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">24
-                                    Files</span>
-                            </div>
-                            <span class="font-label-md text-xs text-on-surface-variant">Jan</span>
-                        </div>
-                        <!-- Feb -->
-                        <div class="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
-                            <div
-                                class="w-full bg-primary-container/20 group-hover:bg-primary-container/40 h-32 rounded-t-md transition-all relative">
-                                <span
-                                    class="absolute -top-7 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-[10px] font-bold px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">32
-                                    Files</span>
-                            </div>
-                            <span class="font-label-md text-xs text-on-surface-variant">Feb</span>
-                        </div>
-                        <!-- Mar -->
-                        <div class="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
-                            <div
-                                class="w-full bg-primary-container/20 group-hover:bg-primary-container/40 h-44 rounded-t-md transition-all relative">
-                                <span
-                                    class="absolute -top-7 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-[10px] font-bold px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">44
-                                    Files</span>
-                            </div>
-                            <span class="font-label-md text-xs text-on-surface-variant">Mar</span>
-                        </div>
-                        <!-- Apr -->
-                        <div class="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
-                            <div
-                                class="w-full bg-primary-container/20 group-hover:bg-primary-container/40 h-40 rounded-t-md transition-all relative">
-                                <span
-                                    class="absolute -top-7 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-[10px] font-bold px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">40
-                                    Files</span>
-                            </div>
-                            <span class="font-label-md text-xs text-on-surface-variant">Apr</span>
-                        </div>
-                        <!-- May -->
-                        <div class="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
-                            <div
-                                class="w-full bg-primary-container/20 group-hover:bg-primary-container/40 h-52 rounded-t-md transition-all relative">
-                                <span
-                                    class="absolute -top-7 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-[10px] font-bold px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">52
-                                    Files</span>
-                            </div>
-                            <span class="font-label-md text-xs text-on-surface-variant">May</span>
-                        </div>
-                        <!-- Jun (current) -->
-                        <div class="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
-                            <div
-                                class="w-full bg-primary-container h-56 rounded-t-md transition-all relative shadow-sm">
-                                <span
-                                    class="absolute -top-7 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-[10px] font-bold px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">56
-                                    Files</span>
-                            </div>
-                            <span class="font-label-md text-xs text-primary font-bold">Jun</span>
-                        </div>
+                    <!-- Dynamic Bar Chart Container -->
+                    <div id="monthly-chart-container"
+                        class="h-64 flex items-end justify-between gap-4 pt-4 border-b border-outline-variant pb-2">
+                        <!-- Bars dynamically loaded via JavaScript -->
                     </div>
                 </div>
 
@@ -550,6 +492,75 @@
             btn.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
         }
 
+        // Render dynamic monthly trend chart based on live database data
+        function renderDynamicChart(invoices) {
+            const chartContainer = document.getElementById('monthly-chart-container');
+            if (!chartContainer) return;
+
+            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+            // 1. Calculate sliding 6-month window ending at the current month
+            const now = new Date();
+            const last6Months = [];
+            for (let i = 5; i >= 0; i--) {
+                const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+                last6Months.push({
+                    monthIndex: d.getMonth(),
+                    year: d.getFullYear(),
+                    name: monthNames[d.getMonth()],
+                    count: 0
+                });
+            }
+
+            // 2. Count total invoices for each of the last 6 months
+            invoices.forEach(item => {
+                const itemDate = new Date(item.Timestamp);
+                const itemMonth = itemDate.getMonth();
+                const itemYear = itemDate.getFullYear();
+
+                const match = last6Months.find(m => m.monthIndex === itemMonth && m.year === itemYear);
+                if (match) {
+                    match.count++;
+                }
+            });
+
+            // 3. Find max count to scale heights proportionally
+            const maxCount = Math.max(...last6Months.map(m => m.count));
+
+            // 4. Generate HTML for bars
+            let chartHtml = '';
+            last6Months.forEach(m => {
+                const heightPercent = maxCount === 0 ? 5 : Math.max(5, (m.count / maxCount) * 90);
+                const isCurrentMonth = m.monthIndex === now.getMonth() && m.year === now.getFullYear();
+
+                const barBgClass = isCurrentMonth
+                    ? 'bg-primary shadow-sm'
+                    : 'bg-primary-container/20 group-hover:bg-primary-container/40';
+                const labelTextClass = isCurrentMonth
+                    ? 'text-primary font-bold'
+                    : 'text-on-surface-variant';
+
+                chartHtml += `
+                    <div class="flex-1 flex flex-col items-center gap-2 group cursor-pointer h-full justify-end">
+                        <div class="w-full ${barBgClass} rounded-t-md transition-all relative" style="height: ${heightPercent}%">
+                            <span class="absolute -top-7 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-[10px] font-bold px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20">
+                                ${m.count} ${m.count === 1 ? 'File' : 'Files'}
+                            </span>
+                        </div>
+                        <span class="font-label-md text-xs ${labelTextClass}">${m.name}</span>
+                    </div>
+                `;
+            });
+
+            chartContainer.innerHTML = chartHtml;
+
+            // Update sliding window subtitle
+            const chartHeaderLabel = document.getElementById('chart-header-label');
+            if (chartHeaderLabel) {
+                chartHeaderLabel.textContent = `${last6Months[0].name} - ${last6Months[5].name} ${now.getFullYear()}`;
+            }
+        }
+
         // Load dashboard stats & dynamic recent invoices list on DOM load
         document.addEventListener('DOMContentLoaded', () => {
             // Load user display name
@@ -629,6 +640,12 @@
                         `;
                         });
                         tableBody.innerHTML = rowsHtml;
+
+                        // Render dynamic monthly trend chart
+                        renderDynamicChart(data.Invoices);
+                    } else {
+                        // If no invoices, render empty state chart
+                        renderDynamicChart([]);
                     }
                 })
                 .catch(err => {
@@ -641,6 +658,9 @@
                     errorNotice.textContent = "(Serving cached metrics)";
                     dailySpendVal.parentNode.appendChild(errorNotice.cloneNode(true));
                     monthlyOverheadVal.parentNode.appendChild(errorNotice);
+
+                    // Fallback chart render
+                    renderDynamicChart([]);
                 });
         });
 
