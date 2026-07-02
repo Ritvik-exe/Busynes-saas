@@ -195,7 +195,28 @@ def lambda_handler(event, context):
                     'headers' : {'Content-Type' : 'Application/json','Access-Control-Allow-Origin': '*'},
                     'body' : json.dumps({'upload_url' : response, 'file_name' : s3_key})
                 }
-            
+            elif method == 'DELETE':
+                user_id = event.get('requestContext', {}).get('authorizer', {}).get('jwt', {}).get('claims', {}).get('sub')
+                if not user_id:
+                    user_id = event.get('queryStringParameters',{}).get('client_id', 'Admin')
+                bucket_name = os.environ.get('INVOICE_BUCKET')
+                body_data = json.loads(event.get('body', '{}'))
+                timestamp = body_data.get('timestamp')
+                filename = body_data.get('filename')
+
+                table.delete_item(Key={'ClientID' : user_id, 'Timestamp' : timestamp})
+
+                s3_client.delete_object(
+                    Bucket = bucket_name,
+                    Key = filename
+                )
+
+                return {
+                    'statusCode' : 200,
+                    'headers' : {'Content-Type' : 'Application/json', 'Access-Control-Allow-Origin' : '*'},
+                    'body' : json.dumps({'message' : 'Invoice successfully deleted'})
+                }
+        
     # Error handling
     except Exception as e:
         print(f'Error : {str(e)}')
