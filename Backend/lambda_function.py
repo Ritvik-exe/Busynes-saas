@@ -156,6 +156,8 @@ def lambda_handler(event, context):
         else:
             invoice_list = []
             method = event.get('requestContext',{}).get('http',{}).get('method', 'GET')
+
+            # GET method used to fetch invoice data for client
             if method == 'GET':
                 ClientID = event.get('requestContext', {}).get('authorizer', {}).get('jwt', {}).get('claims', {}).get('sub')
                 if not ClientID:
@@ -176,25 +178,49 @@ def lambda_handler(event, context):
                     'headers' : {'Content-Type' : 'Application/json', 'Access-Control-Allow-Origin' : '*'},
                     'body' : json.dumps({'ClientID' : ClientID, 'This_Month_Total' : float(month_amount), 'Today_Total' : float(today_amount), 'Invoices' : invoice_list})
                 }
+
+            # POST method used to create a new client in DynamoDB
             elif method == 'POST':
-                bucket_name = os.environ.get('INVOICE_BUCKET')
-                body_data = json.loads(event.get('body', '{}'))
-                file_name = body_data.get('file_name')
-                file_type = body_data.get('file_type')
-
+                # Filtering out valid user to upload invoices
                 user_id = event.get('requestContext',{}).get('authorizer',{}).get('jwt',{}).get('claims',{}).get('sub')
-                s3_key = f'uploads/{user_id}/{file_name}'
-                response = s3_client.generate_presigned_url(
-                    'put_object',
-                    Params = {'Bucket' : bucket_name, 'Key' : s3_key, 'ContentType' : file_type},
-                    ExpiresIn = 300
-                )
+                if not user_id:
+                    user_id = event.get('queryStringParameters',{}).get('client_id', 'Admin')
+                user_email = event.get('requestContext',{}).get('authorizer',{}).get('jwt',{}).get('claims',{}).get('email','')
+                user_plan = 'Free'
 
-                return {
-                    'statusCode' : 200,
-                    'headers' : {'Content-Type' : 'Application/json','Access-Control-Allow-Origin': '*'},
-                    'body' : json.dumps({'upload_url' : response, 'file_name' : s3_key})
-                }
+                count_check = table.query(KeyConditionExpression = Key('ClientID').eq(user_id) & Key('Timestamp').begins_with(month_date), Select = 'COUNT')
+                count = count_check.get('Count', 0)
+
+                if user_email == 'ritvikyalala@gmail.com' or user_email.endswith('@busynes.com'):
+                    user_plan = 'Pro'
+                if user_plan != 'Pro' and count >= 10:
+                    return {
+                        'statusCode' : 403,
+                        'headers' : {'Content-Type' : 'Application/json', 'Access-Control-Allow-Origin' : '*'},
+                        'body' : json.dumps({'error': "Must upgrade to 'The Sunday Saver' plan to upload more than 10 invoices."})
+                    }
+                else: 
+                    # Generating presigned URL for client to upload invoice
+                    bucket_name = os.environ.get('INVOICE_BUCKET')
+                    body_data = json.loads(event.get('body', '{}'))
+                    file_name = body_data.get('file_name')
+                    file_type = body_data.get('file_type')
+
+                    user_id = event.get('requestContext',{}).get('authorizer',{}).get('jwt',{}).get('claims',{}).get('sub')
+                    s3_key = f'uploads/{user_id}/{file_name}'
+                    response = s3_client.generate_presigned_url(
+                        'put_object',
+                        Params = {'Bucket' : bucket_name, 'Key' : s3_key, 'ContentType' : file_type},
+                        ExpiresIn = 300
+                    )
+
+                    return {
+                        'statusCode' : 200,
+                        'headers' : {'Content-Type' : 'Application/json','Access-Control-Allow-Origin': '*'},
+                        'body' : json.dumps({'upload_url' : response, 'file_name' : s3_key})
+                    }
+            
+            # DELETE method used to delete invoice from DynamoDB and S3
             elif method == 'DELETE':
                 user_id = event.get('requestContext', {}).get('authorizer', {}).get('jwt', {}).get('claims', {}).get('sub')
                 if not user_id:
