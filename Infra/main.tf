@@ -57,6 +57,37 @@ resource "aws_s3_bucket_cors_configuration" "invoice_cors"{
     }
 }
 
+resource "aws_s3_bucket_lifecycle_configuration" "invoice_lifecycle"{
+    bucket = aws_s3_bucket.invoice.id
+    rule {
+        id = "invoice-6year-retention"
+
+        filter{
+            prefix = "uploads/"
+        }
+
+        status = "Enabled"
+
+        transition {
+            storage_class = "STANDARD_IA"
+            days = 90
+        }
+
+        transition {
+            storage_class = "GLACIER_IR"
+            days = 180
+        }
+
+        expiration{
+            days = 2190
+        }
+
+        noncurrent_version_expiration {
+            noncurrent_days = 90
+        }
+    }
+}
+
 # ========================== DynamoDB ========================== 
 resource "aws_dynamodb_table" "memory"{
     name = var.busynes_db
