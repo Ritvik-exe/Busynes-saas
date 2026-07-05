@@ -201,6 +201,11 @@ resource "aws_iam_role_policy_attachment" "busynes_github_action"{
     policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
 
+resource "aws_iam_role_policy_attachment" "busynes_lambda_cognito"{
+    role = aws_iam_role.busynes_lambda_role.name
+    policy_arn = "arn:aws:iam::aws:policy/AmazonCognitoReadOnly"
+}
+
 # ========================== Lambda Function ==========================
 data "archive_file" "lambda_zip"{
     type = "zip"
@@ -221,6 +226,7 @@ resource "aws_lambda_function" "busynes_lambda_function"{
         variables = {
             TABLE_NAME = aws_dynamodb_table.memory.name
             INVOICE_BUCKET = aws_s3_bucket.invoice.id
+            USER_POOL_ID = aws_cognito_user_pool.busynes_user_pool.id 
         }
     }
 
