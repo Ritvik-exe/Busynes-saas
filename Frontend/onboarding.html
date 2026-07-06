@@ -1,279 +1,236 @@
 <!DOCTYPE html>
-<html class="h-full" lang="en">
+<html class="light" lang="en">
 
 <head>
-    <!-- Reverse Route Guard: If already logged in, skip the login form and go to dashboard -->
-    <script>
-        (function () {
-            const token = sessionStorage.getItem('busynes_id_token');
-            if (token) {
-                try {
-                    const parts = token.split('.');
-                    if (parts.length === 3) {
-                        const payload = JSON.parse(atob(parts[1]));
-                        const now = Math.floor(Date.now() / 1000);
-                        if (payload.exp && payload.exp > now) {
-                            // User has a valid session! Bypass login.
-                            window.location.href = "dashboard.html";
-                        }
-                    }
-                } catch (e) {
-                    // Ignore parsing errors
-                }
-            }
-        })();
-    </script>
-    <!-- Task 2: Reusable Route Guard (Instantly verifies Cognito ID Token in sessionStorage) -->
-    <script>
-        (function () {
-            function validateCognitoSession() {
-                const token = sessionStorage.getItem('busynes_id_token');
-                if (!token) return false;
-                try {
-                    const parts = token.split('.');
-                    if (parts.length === 3) {
-                        const payload = JSON.parse(atob(parts[1]));
-                        const now = Math.floor(Date.now() / 1000);
-                        if (payload.exp && payload.exp < now) {
-                            console.warn("Cognito ID token expired. Clearing session...");
-                            sessionStorage.removeItem('busynes_id_token');
-                            sessionStorage.removeItem('busynes_user_name');
-                            sessionStorage.removeItem('busynes_client_id');
-                            return false;
-                        }
-                    }
-                } catch (e) {
-                    // Fallback for non-standard test/dummy pilot tokens
-                }
-                return true;
-            }
-
-            if (!validateCognitoSession()) {
-                console.warn("Unauthenticated access blocked. Redirecting to signup...");
-                window.location.href = "signup.html";
-            }
-        })();
-    </script>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Busynes - Welcome to the Ecosystem</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Verify Account - Busynes</title>
+    <link rel="icon" type="image/png" href="/favicon.png?v=1" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
-        rel="stylesheet" />
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet" />
-    <link rel="icon" type="image/png" href="/favicon.png?v=1" />
-
+        rel="stylesheet">
+    <!-- Load AWS Cognito Identity SDK from CDN -->
+    <script src="https://rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js"></script>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     "colors": {
-                        "primary": "#005f03",
-                        "primary-container": "#1b7a16",
-                        "on-primary": "#ffffff",
-                        "secondary": "#515f74",
-                        "on-surface": "#0b1c30",
-                        "on-surface-variant": "#404a3b",
-                        "surface": "#f8f9ff",
+                        "surface": "#F8FAFC",
+                        "surface-dim": "#CBD5E1",
+                        "surface-bright": "#F8FAFC",
                         "surface-container-lowest": "#ffffff",
-                        "surface-container-low": "#eff4ff",
-                        "surface-variant": "#d3e4fe",
-                        "outline-variant": "#bfcab7"
+                        "surface-container-low": "#F1F5F9",
+                        "surface-container": "#E2E8F0",
+                        "surface-container-high": "#CBD5E1",
+                        "surface-container-highest": "#94A3B8",
+                        "on-surface": "#0F172A",
+                        "on-surface-variant": "#475569",
+                        "inverse-surface": "#1E293B",
+                        "inverse-on-surface": "#F8FAFC",
+                        "outline": "#94A3B8",
+                        "outline-variant": "#E2E8F0",
+                        "surface-tint": "#187c13",
+                        "primary": "#187c13",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#187c13",
+                        "on-primary-container": "#ffffff",
+                        "inverse-primary": "#41bc3a",
+                        "secondary": "#475569",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "rgba(24, 124, 19, 0.1)",
+                        "on-secondary-container": "#187c13",
+                        "tertiary": "#64748B",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#E2E8F0",
+                        "on-tertiary-container": "#0F172A",
+                        "error": "#EF4444",
+                        "on-error": "#ffffff",
+                        "error-container": "#FEE2E2",
+                        "on-error-container": "#991B1B",
+                        "background": "#F8FAFC",
+                        "on-background": "#0F172A",
+                        "surface-variant": "#E2E8F0"
                     },
-                    "fontFamily": {
-                        "sans": ["Inter", "sans-serif"],
-                        "display": ["Hanken Grotesk", "sans-serif"],
-                        "mono": ["JetBrains Mono", "monospace"]
-                    },
-                    "animation": {
-                        "bounce-in": "bounceIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) both",
-                        "fade-in-up": "fadeInUp 0.6s ease-out both"
-                    },
-                    "keyframes": {
-                        "bounceIn": {
-                            "0%": { transform: "scale(0)", opacity: "0" },
-                            "100%": { transform: "scale(1)", opacity: "1" }
-                        },
-                        "fadeInUp": {
-                            "0%": { transform: "translateY(20px)", opacity: "0" },
-                            "100%": { transform: "translateY(0)", opacity: "1" }
-                        }
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
                     }
                 }
             }
         }
     </script>
-    <style>
-        .delay-100 {
-            animation-delay: 100ms;
-        }
-
-        .delay-200 {
-            animation-delay: 200ms;
-        }
-
-        .delay-300 {
-            animation-delay: 300ms;
-        }
-
-        .delay-400 {
-            animation-delay: 400ms;
-        }
-
-        .delay-500 {
-            animation-delay: 500ms;
-        }
-    </style>
 </head>
 
-<body
-    class="h-full bg-slate-50 text-on-surface font-sans antialiased flex flex-col min-h-screen selection:bg-primary-container selection:text-white">
-    <!-- TopNavBar: Fixed Brand Header -->
-    <nav
-        class="fixed top-0 w-full z-50 bg-white/85 backdrop-blur-md border-b border-outline-variant/40 shadow-2xs transition-all duration-300">
-        <div class="max-w-[1280px] mx-auto flex items-center justify-between px-6 md:px-12 h-20">
-            <a href="index.html" class="flex items-center gap-3.5 hover:opacity-85 transition-opacity">
+<body class="bg-background text-on-background font-body-md h-screen flex items-center justify-center p-4">
+    <div
+        class="w-full max-w-md bg-surface-container-lowest p-8 rounded-2xl border border-outline-variant shadow-lg flex flex-col gap-6">
+        <!-- Logo and Heading -->
+        <div class="text-center">
+            <div class="flex justify-center items-center gap-3 mb-2">
                 <img alt="Busynes Logo" class="h-8 w-auto"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaglyYYHQQHhZI0sXOTcaVVDVGSJuZXRoKofma9kTZsHLG0WS23LRWQF6QP0mNzpRm1_dYjnYgl4vAS3G_xMrnF2LHiqNvSIDgpIkQN7hsYsN4spBArqw8Q5r_sTBUc0_V10OyF_L9R10Bik18Mr2hR3P87XxQVxm4dfg5doaByVE6wQzLZ4zjrLwedRQPmnXaxynT_LhkMqPQxFKlzAO4RoWw0XrNs7545LYLvhi3yQdUuFg71vULTx9CmUpE-YPYT9VcrQGq4zc">
-                <span class="font-display text-2xl font-bold text-primary tracking-tight">Busynes</span>
-            </a>
-            <div class="flex items-center">
-                <span
-                    class="bg-primary-container/10 text-primary-container font-mono text-xs px-3 py-1 rounded-full uppercase tracking-wider font-bold border border-primary-container/20">
-                    14-Day Pilot Active
-                </span>
+                <span class="font-headline-md text-2xl font-bold text-primary tracking-tight">Busynes</span>
             </div>
+            <h2 class="text-xl font-bold text-on-surface">Verify Your Account</h2>
+            <p class="text-xs text-on-surface-variant mt-1" id="verification-notice">
+                We sent a 6-digit confirmation code to your email. Enter it below to complete registration.
+            </p>
         </div>
-    </nav>
 
-    <!-- Main Content Area -->
-    <main class="w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-12 pt-32 pb-16 flex flex-col items-center text-center">
-        <!-- Animated Checkmark -->
-        <div class="mb-6 animate-bounce-in">
-            <div
-                class="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto border border-emerald-200 shadow-sm">
-                <span class="material-symbols-outlined text-[48px] text-primary-container"
-                    style="font-variation-settings: 'FILL' 1;">
-                    check_circle
-                </span>
+        <!-- Alert Notification Panel -->
+        <div id="alert-panel" class="hidden p-4 rounded-xl border flex items-start gap-3">
+            <span id="alert-icon" class="material-symbols-outlined text-lg">error</span>
+            <div class="flex-1">
+                <p id="alert-message" class="text-xs font-semibold">Error message goes here</p>
             </div>
         </div>
 
-        <!-- Headline & Subtext -->
-        <h1
-            class="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mb-3 animate-fade-in-up delay-100 tracking-tight">
-            Welcome to the Ecosystem, <span id="display-user-name" class="text-primary-container">Sarah</span>.
-        </h1>
-        <p
-            class="text-base sm:text-lg text-slate-600 max-w-xl mx-auto mb-12 animate-fade-in-up delay-200 leading-relaxed">
-            Your 14-Day Professional Pilot is now active. Your Sunday afternoons belong to you again.
-        </p>
-
-        <!-- Onboarding Steps -->
-        <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 animate-fade-in-up delay-300 text-left">
-            <!-- Step 1 -->
-            <div
-                class="bg-white border border-slate-200/80 p-6 rounded-2xl flex flex-col hover:shadow-md transition-all duration-300 shadow-xs relative overflow-hidden group">
-                <div
-                    class="absolute top-0 left-0 right-0 h-1 bg-primary-container opacity-0 group-hover:opacity-100 transition-opacity">
-                </div>
-                <div
-                    class="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center mb-5 border border-emerald-200/60">
-                    <span class="font-mono text-xs font-bold text-primary-container">01</span>
-                </div>
-                <h3 class="font-display text-xl font-bold text-slate-900 mb-2">First Invoice</h3>
-                <p class="text-sm text-slate-600 mb-6 flex-grow leading-relaxed">Get started by uploading your first
-                    corporate receipt or invoice for instant AI extraction.</p>
-                <button onclick="window.location.href='transactions.html'"
-                    class="w-full bg-primary-container hover:bg-primary text-white text-sm font-bold py-3 px-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-sm active:scale-[0.98]">
-                    <span>Upload Now</span>
-                    <span class="material-symbols-outlined text-[18px]">upload_file</span>
-                </button>
+        <!-- Verification Form -->
+        <form id="verification-form" class="flex flex-col gap-4">
+            <div>
+                <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2"
+                    for="verification-code">
+                    6-Digit Code
+                </label>
+                <input id="verification-code" type="text" maxlength="6" autocomplete="off" required
+                    class="w-full bg-surface border border-outline-variant rounded-lg p-3 text-center font-mono text-xl tracking-widest focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                    placeholder="000000">
             </div>
 
-            <!-- Step 2 -->
-            <div class="bg-slate-50 border border-slate-200/80 p-6 rounded-2xl flex flex-col opacity-80 select-none">
-                <div
-                    class="w-10 h-10 bg-slate-200/60 rounded-xl flex items-center justify-center mb-5 border border-slate-300/60">
-                    <span class="font-mono text-xs font-bold text-slate-600">02</span>
-                </div>
-                <div class="flex items-center justify-between mb-2">
-                    <h3 class="font-display text-xl font-bold text-slate-800">Connect Bank</h3>
-                    <span
-                        class="bg-slate-200 text-slate-700 font-mono text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider font-bold">Locked</span>
-                </div>
-                <p class="text-sm text-slate-500 mb-6 flex-grow leading-relaxed">Sync your accounts for automated
-                    real-time reconciliation. Unlocks after your first invoice ingest.</p>
-                <button
-                    class="w-full border border-slate-300 text-slate-400 font-semibold text-sm py-3 px-4 rounded-xl cursor-not-allowed flex items-center justify-center gap-2 bg-slate-100"
-                    disabled>
-                    <span class="material-symbols-outlined text-[18px]">lock</span>
-                    <span>Unlocks Step 2</span>
-                </button>
-            </div>
-
-            <!-- Step 3 -->
-            <div
-                class="bg-white border border-slate-200/80 p-6 rounded-2xl flex flex-col hover:shadow-md transition-all duration-300 shadow-xs relative overflow-hidden group">
-                <div
-                    class="absolute top-0 left-0 right-0 h-1 bg-primary-container opacity-0 group-hover:opacity-100 transition-opacity">
-                </div>
-                <div
-                    class="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center mb-5 border border-slate-200">
-                    <span class="font-mono text-xs font-bold text-slate-700">03</span>
-                </div>
-                <h3 class="font-display text-xl font-bold text-slate-900 mb-2">Invite Accountant</h3>
-                <p class="text-sm text-slate-600 mb-6 flex-grow leading-relaxed">Give your CPA read-only access to your
-                    verified ledger and categorized management dashboard.</p>
-                <button onclick="alert('Invitation portal link copied to clipboard! Share it with your CPA.');"
-                    class="w-full border-2 border-primary-container/30 hover:border-primary-container text-primary-container hover:bg-emerald-50/50 text-sm font-bold py-2.5 px-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 text-center cursor-pointer">
-                    <span>Copy Invite Link</span>
-                    <span class="material-symbols-outlined text-[18px]">content_copy</span>
-                </button>
-            </div>
-        </div>
-
-        <!-- Founder Message -->
-        <div
-            class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 flex items-start gap-5 max-w-2xl w-full mx-auto mb-10 animate-fade-in-up delay-400 text-left shadow-xs">
-            <img alt="Ritvik - Founder of Busynes"
-                class="w-14 h-14 rounded-full border-2 border-primary-container/20 flex-shrink-0 object-cover shadow-2xs"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxWWO6F_F7ddhPm_Qa_vcv8JmcCDBLzccfV9K88CIOtVRDqaEvY07igFBFNwMVT2i7iiwc23O5aOz1VU69XSx6wP252pwP9xtANI3G35ne7mEc7uXEEw8fVwxWZ0yCa9YYQzz7FdHarQ9TjAReFpBZ1RsV11kwbMjG-rJH-67UCT1AslmNb9xR6cpIIGONiuP0_LbGIOBEOUdOLsX02YolKe_sc3w2y0VtqgToLBgk8ciLsf4kxmdcatK46JaIfmk15IcbFG9umdI" />
-            <div class="space-y-2">
-                <p class="text-sm sm:text-base text-slate-700 italic leading-relaxed">
-                    "I’m Ritvik, the founder of Busynes. If you need any assistance getting your pipeline configured,
-                    just click the AI assistant in the corner. Let’s automate your books together."
-                </p>
-                <p class="font-mono text-xs text-primary font-bold uppercase tracking-widest pt-1">
-                    Ritvik, Founder
-                </p>
-            </div>
-        </div>
-
-        <!-- Main CTA -->
-        <div class="animate-fade-in-up delay-500 w-full flex justify-center">
-            <button onclick="window.location.href='dashboard.html'"
-                class="bg-primary-container hover:bg-primary text-white font-display font-bold text-lg py-4 px-10 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 flex items-center gap-3 transform hover:-translate-y-0.5 cursor-pointer active:scale-95">
-                <span>Go to My Dashboard</span>
-                <span class="material-symbols-outlined text-[24px]">arrow_forward</span>
+            <button type="submit" id="submit-btn"
+                class="w-full bg-primary text-white py-3 rounded-full font-bold hover:bg-primary-container transition-all flex items-center justify-center gap-2 cursor-pointer">
+                <span>Confirm Account</span>
             </button>
-        </div>
-    </main>
+        </form>
 
-    <!-- Task 1: Dynamic Session Greeting Script (sessionStorage) -->
+        <!-- Footer options -->
+        <div class="text-center pt-4 border-t border-outline-variant/30 flex flex-col gap-2">
+            <button onclick="resendCode()" class="text-xs text-primary font-semibold hover:underline cursor-pointer">
+                Didn't receive a code? Resend Code
+            </button>
+            <a href="signup.html" class="text-xs text-on-surface-variant hover:underline mt-1">
+                Back to Sign Up
+            </a>
+        </div>
+    </div>
+
     <script>
+        // CONFIGURATION: Replace these values with your exact AWS Cognito Pool IDs
+        const POOL_DATA = {
+            UserPoolId: 'eu-west-2_oJdCgUuI4', // Your exact Cognito User Pool ID
+            ClientId: '3vvep20pksv75is4b0kicqdtor'   // Your exact Cognito App Client ID
+        };
+
+        const userPool = new AmazonCognitoIdentity.CognitoUserPool(POOL_DATA);
+        const signupEmail = sessionStorage.getItem('busynes_signup_email') || '';
+
+        // Display targeted email in notice
         document.addEventListener('DOMContentLoaded', () => {
-            const savedName = sessionStorage.getItem('busynes_user_name') || localStorage.getItem('busynes_user_name');
-            if (savedName) {
-                const displayNameEl = document.getElementById('display-user-name');
-                if (displayNameEl) {
-                    displayNameEl.textContent = savedName;
-                }
+            if (signupEmail) {
+                document.getElementById('verification-notice').innerHTML = `We sent a 6-digit confirmation code to <strong class="text-on-surface">${signupEmail}</strong>. Enter it below to complete registration.`;
             }
         });
+
+        // Form Submit Handler
+        document.getElementById('verification-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const codeInput = document.getElementById('verification-code');
+            const code = codeInput.value.trim();
+            const submitBtn = document.getElementById('submit-btn');
+
+            if (code.length !== 6) {
+                showAlert("Please enter a valid 6-digit code.", true);
+                return;
+            }
+
+            if (!signupEmail) {
+                showAlert("No active registration email found. Please sign up again.", true);
+                return;
+            }
+
+            // Set Loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span>Verifying...</span>`;
+            hideAlert();
+
+            const userData = {
+                Username: signupEmail,
+                Pool: userPool
+            };
+
+            const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+
+            cognitoUser.confirmRegistration(code, true, (err, result) => {
+                if (err) {
+                    console.error("Verification failed:", err);
+                    showAlert(err.message || "Invalid verification code.", true);
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = `<span>Confirm Account</span>`;
+                    return;
+                }
+
+                // Success
+                showAlert("Account verified successfully! Redirecting to login...", false);
+                sessionStorage.removeItem('busynes_signup_email');
+                setTimeout(() => {
+                    window.location.href = "signup.html";
+                }, 2000);
+            });
+        });
+
+        // Resend Verification Code
+        function resendCode() {
+            if (!signupEmail) {
+                showAlert("No email address found to resend code.", true);
+                return;
+            }
+
+            hideAlert();
+            const userData = {
+                Username: signupEmail,
+                Pool: userPool
+            };
+
+            const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+
+            cognitoUser.resendConfirmationCode((err, result) => {
+                if (err) {
+                    console.error("Resend failed:", err);
+                    showAlert(err.message || "Failed to resend confirmation code.", true);
+                    return;
+                }
+                showAlert("A fresh verification code has been sent to your inbox!", false);
+            });
+        }
+
+        // Show/Hide Alert Banner helper
+        function showAlert(message, isError = true) {
+            const panel = document.getElementById('alert-panel');
+            const icon = document.getElementById('alert-icon');
+            const msgText = document.getElementById('alert-message');
+
+            msgText.textContent = message;
+            panel.classList.remove('hidden');
+
+            if (isError) {
+                panel.className = "p-4 rounded-xl border bg-error-container border-error/20 text-on-error-container flex items-start gap-3";
+                icon.textContent = "error";
+            } else {
+                panel.className = "p-4 rounded-xl border bg-emerald-50 text-emerald-800 border-emerald-500/20 flex items-start gap-3";
+                icon.textContent = "check_circle";
+            }
+        }
+
+        function hideAlert() {
+            document.getElementById('alert-panel').classList.add('hidden');
+        }
     </script>
 </body>
 
