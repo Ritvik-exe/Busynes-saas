@@ -15,6 +15,7 @@ table_name = os.environ.get('TABLE_NAME')
 table = dynamo_resource.Table(table_name)
 ses_client = boto3.client('ses')
 rekog_client = boto3.client('rekognition')
+cognito_client = boto3.client('cognito-idp')
 
 # Main Lambda Function
 def lambda_handler(event, context):
@@ -26,6 +27,7 @@ def lambda_handler(event, context):
         today_amount = Decimal('0.00')
         month_amount = Decimal('0.00')
         if 'Records' in event:
+            email_address = 'ritvikyalala@gmail.com'
             invoice_total = Decimal('0.00')
             all_amounts = []
 
@@ -36,6 +38,21 @@ def lambda_handler(event, context):
             if len(path) > 1:
                 ClientID = path[-2]
                 clean_file_name = path[-1]
+                user_pool_id = os.environ.get('USER_POOL_ID')
+                try:
+                    cognito_user = cognito_client.admin_get_user(
+                        UserPoolId = user_pool_id,
+                        Username = ClientID
+                    )
+
+                    email_address = ''
+                    for attr in cognito_user.get(['UserAttributes'], []):
+                        if attr['Name'] == 'email':
+                            email_address = attr['Value']
+                            break
+                except Exception as e:
+                    print(f'Error getting user info: {e}')
+
             else:
                 ClientID = 'Admin'
                 clean_file_name = file_name
@@ -137,7 +154,7 @@ def lambda_handler(event, context):
                 Source = 'support@busynes.com',
 
                 Destination = {
-                    'ToAddresses': ['ritvikyalala@gmail.com']
+                    'ToAddresses':[email_address]
                 },
 
                 Message = {
