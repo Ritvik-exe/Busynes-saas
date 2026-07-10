@@ -35,5 +35,5 @@ jobs:
               run: terraform apply -auto-approve
               working-directory: ./Infra
               env:
-                TF_VAR_stripe_secert_key: ${{ secrets.STRIPE_SECRET_KEY }}
+                TF_VAR_stripe_secret_key: ${{ secrets.STRIPE_SECRET_KEY }}
                 TF_VAR_stripe_webhook_secret: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
