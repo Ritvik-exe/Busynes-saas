@@ -227,6 +227,8 @@ resource "aws_lambda_function" "busynes_lambda_function"{
             TABLE_NAME = aws_dynamodb_table.memory.name
             INVOICE_BUCKET = aws_s3_bucket.invoice.id
             USER_POOL_ID = aws_cognito_user_pool.busynes_user_pool.id 
+            STRIPE_SECRET_KEY = var.stripe_secret_key
+            STRIPE_WEBHOOK_SECRET = var.stripe_webhook_secret
         }
     }
 
@@ -300,6 +302,20 @@ resource "aws_apigatewayv2_route" "busynes_api_delete_route"{
     target = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
     authorization_type = "JWT"
     authorizer_id = aws_apigatewayv2_authorizer.busynes_api_authorizer.id
+}
+
+resource "aws_apigatewayv2_route" "stripe_secure_route"{
+    api_id = aws_apigatewayv2_api.busynes_api.id
+    route_key = "POST /checkout"
+    target = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
+    authorization_type = "JWT"
+    authorizer_id = aws_apigatewayv2_authorizer.busynes_api_authorizer.id
+}
+
+resource "aws_apigatewayv2_route" "stripe_public_route"{
+    api_id = aws_apigatewayv2_api.busynes_api.id
+    route_key = "POST /webhook/stripe"
+    target = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
 }
 
 resource "aws_apigatewayv2_stage" "busynes_api_stage"{

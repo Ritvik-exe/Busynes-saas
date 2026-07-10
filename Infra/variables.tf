@@ -69,3 +69,17 @@ variable "cognito_app_client"{
     description = "busynes-app-client"
     default = "busynes-app-client"
 }
+
+# Stripe Secret Key
+variable "stripe_secret_key"{
+    type = string
+    description = "Stripe Secret Key for payment processing"
+    sensitive = true
+}
+
+# Stripe Webhook Key
+variable "stripe_webhook_secret"{
+    type = string
+    description = "Stripe Webhook Secret for payment processing"
+    sensitive = true
+}

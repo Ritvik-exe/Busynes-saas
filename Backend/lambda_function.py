@@ -7,6 +7,8 @@ import re
 import logging
 from decimal import Decimal
 from boto3.dynamodb.conditions import Key
+import stripe
+import base64
 
 # Initializing AWS Clients
 s3_client = boto3.client('s3')
@@ -16,6 +18,7 @@ table = dynamo_resource.Table(table_name)
 ses_client = boto3.client('ses')
 rekog_client = boto3.client('rekognition')
 cognito_client = boto3.client('cognito-idp')
+stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
 
 # Main Lambda Function
 def lambda_handler(event, context):
@@ -173,9 +176,10 @@ def lambda_handler(event, context):
         else:
             invoice_list = []
             method = event.get('requestContext',{}).get('http',{}).get('method', 'GET')
+            path = event.get('requestContext',{}).get('http',{}).get('path', '/')
 
             # GET method used to fetch invoice data for client
-            if method == 'GET':
+            if method == 'GET' and path == '/':
                 ClientID = event.get('requestContext', {}).get('authorizer', {}).get('jwt', {}).get('claims', {}).get('sub')
                 if not ClientID:
                     ClientID = event.get('queryStringParameters',{}).get('client_id', 'Admin')
@@ -197,13 +201,15 @@ def lambda_handler(event, context):
                 }
 
             # POST method used to create a new client in DynamoDB
-            elif method == 'POST':
+            elif method == 'POST' and path == '/':
                 # Filtering out valid user to upload invoices
                 user_id = event.get('requestContext',{}).get('authorizer',{}).get('jwt',{}).get('claims',{}).get('sub')
                 if not user_id:
                     user_id = event.get('queryStringParameters',{}).get('client_id', 'Admin')
                 user_email = event.get('requestContext',{}).get('authorizer',{}).get('jwt',{}).get('claims',{}).get('email','')
-                user_plan = 'Free'
+                user_plan_query = table.get_item(Key = {'ClientID' : user_id, 'Timestamp' : 'USER_PLAN'})
+                if user_plan_query:
+                    user_plan = user_plan_query.get('Item', {}).get('plan', 'Free')
 
                 count_check = table.query(KeyConditionExpression = Key('ClientID').eq(user_id) & Key('Timestamp').begins_with(month_date), Select = 'COUNT')
                 count = count_check.get('Count', 0)
@@ -236,9 +242,67 @@ def lambda_handler(event, context):
                         'headers' : {'Content-Type' : 'Application/json','Access-Control-Allow-Origin': '*'},
                         'body' : json.dumps({'upload_url' : response, 'file_name' : s3_key})
                     }
+
+            # POST method used to create a checkout session for client
+            elif method == 'POST' and path == '/checkout':
+                body_data = json.loads(event.get('body', '{}'))
+                price_id = body_data.get('price_id')
+                user_id = event.get('requestContext', {}).get('authorizer', {}).get('jwt', {}).get('claims', {}).get('sub')
+                session = stripe.checkout.Session.create(
+                    payment_method_types = ['card'],
+                    line_items = [{'price' : price_id, 'quantity': 1}],
+                    mode = 'subscription',
+                    success_url = 'https://busynes.com/dashboard.html?session_id={CHECKOUT_SESSION_ID}',
+                    cancel_url = 'https://busynes.com/pricing.html',
+                    client_reference_id = user_id
+                )
+                return {
+                    'statusCode' : 200,
+                    'headers' : {'Content-Type' : 'Application/json', 'Access-Control-Allow-Origin' : '*'}, 
+                    'body' : json.dumps({'checkout_url' : session.url})
+                }
             
+            # POST method used to handle stripe webhooks
+            elif method == 'POST' and path == '/webhook/stripe':
+                payload = event.get('body', '')
+                if event.get('isBase64Encoded', False) == True:
+                    payload = base64.b64decode(payload)
+                sig_header = event.get('headers', {}).get('stripe-signature') or event.get('headers', {}).get('Stripe-Signature')
+                webhook_secret = os.environ.get('STRIPE_WEBHOOK_SECRET')
+                try:
+                    stripe_event = stripe.Webhook.construct_event(payload, sig_header, webhook_secret)
+                except ValueError:
+                    return {
+                        'statusCode' : 400,
+                        'headers' : {'Content-Type' : 'Application/json', 'Access-Control-Allow-Origin' : '*'},
+                        'body' : json.dumps({'error' : 'Invalid payload'})
+                    }
+                except stripe.error.SignatureVerificationError:
+                    return {
+                        'statusCode' : 400,
+                        'headers' : {'Content-Type' : 'Application/json', 'Access-Control-Allow-Origin' : '*'},                            'body' : json.dumps({'error' : 'Invalid signature'})
+                    }
+
+                if stripe_event.get('type') == 'checkout.session.completed':
+                    session = stripe_event['data']['object']
+                    user_id = session.get('client_reference_id')
+
+                    table.put_item(
+                        Item = {
+                            'ClientID' : user_id,
+                            'Timestamp' : 'USER_PLAN',
+                            'plan' : 'Pro'
+                        }
+                    )
+
+                return {
+                    'statusCode' : 200,
+                    'headers' : {'Content-Type' : 'Application/json', 'Access-Control-Allow-Origin' : '*'},
+                    'body' : json.dumps({'success' : 'Webhook received and processed'})
+                }
+  
             # DELETE method used to delete invoice from DynamoDB and S3
-            elif method == 'DELETE':
+            elif method == 'DELETE' and path == '/':
                 user_id = event.get('requestContext', {}).get('authorizer', {}).get('jwt', {}).get('claims', {}).get('sub')
                 if not user_id:
                     user_id = event.get('queryStringParameters',{}).get('client_id', 'Admin')
