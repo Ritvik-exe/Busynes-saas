@@ -349,10 +349,10 @@
                         Direct API JSON database hooks
                     </li>
                 </ul>
-                <a href="mailto:support@busynes.com?subject=Enterprise%20Inquiry%20-%20Custom%20Stadium%20Plan&body=Hi%20Busynes%20Team%2C%20I%20am%20interested%20in%20learning%20more%20about%20your%20Enterprise%20Custom%20Stadium%20plan%20for%20our%20venue.%20Please%20get%20in%20touch!"
+                <button onclick="handleContactSales(event)"
                     class="block w-full text-center border border-outline-variant text-on-surface hover:border-primary-container hover:text-primary-container py-3 rounded-full font-label-md text-label-md font-bold transition-all cursor-pointer">
                     Contact Sales
-                </a>
+                </button>
             </div>
         </section>
 
@@ -545,6 +545,25 @@
                 btn.disabled = false;
                 btn.style.opacity = '1';
             }
+        }
+
+        // Handle Contact Sales by copying email and opening mailto as fallback
+        function handleContactSales(event) {
+            event.preventDefault();
+            const email = "support@busynes.com";
+
+            // Copy email to user's clipboard
+            navigator.clipboard.writeText(email).then(() => {
+                // Native alert notification to confirm copy
+                alert("Email address (support@busynes.com) copied to your clipboard!");
+
+                // Try to trigger their mail client as fallback
+                window.location.href = `mailto:${email}?subject=Enterprise Inquiry - Custom Stadium Plan&body=Hi Busynes Team, I am interested in learning more about your Enterprise Custom Stadium plan.`;
+            }).catch(err => {
+                console.error("Failed to copy email:", err);
+                // Fallback if browser blocks clipboard access
+                window.location.href = `mailto:${email}`;
+            });
         }
 
         // Mobile menu toggle
