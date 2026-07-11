@@ -209,7 +209,7 @@ resource "aws_iam_role_policy_attachment" "busynes_lambda_cognito"{
 # ========================== Lambda Function ==========================
 data "archive_file" "lambda_zip"{
     type = "zip"
-    source_file = "${path.module}/../Backend"
+    source_dir = "${path.module}/../Backend"
     output_path = "${path.module}/lambda_function.zip"
 }
 
