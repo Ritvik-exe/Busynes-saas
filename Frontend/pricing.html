@@ -306,7 +306,7 @@
                         WhatsApp integration updates
                     </li>
                 </ul>
-                <button onclick="window.location.href='signup.html'"
+                <button id="btn-get-started" onclick="handleCheckout()"
                     class="w-full text-center bg-primary-container text-on-primary py-3 rounded-full font-label-md text-label-md font-bold hover:bg-primary transition-all cursor-pointer inner-glow shadow-md shadow-primary-container/25">
                     Get Started Now
                 </button>
@@ -457,13 +457,26 @@
     </footer>
 
     <script>
+        // Track the current billing period state (default is monthly)
+        let currentBillingPeriod = 'monthly';
+
+        // Stripe Test Price IDs
+        const STRIPE_PRICE_IDS = {
+            monthly: 'price_1TrEPC5q8xOeTPrT5DX48ouY',
+            yearly: 'price_1TrEPj5q8xOeTPrTsRfWuTJh'
+        };
+
+        // Live API Gateway Checkout URL
+        const CHECKOUT_API_URL = 'https://aqwkzc2r0d.execute-api.eu-west-2.amazonaws.com/checkout';
+
         // Toggle Billing Period and live-update price tags
         function toggleBillingPeriod(period) {
             const btnMonthly = document.getElementById('btn-toggle-monthly');
             const btnYearly = document.getElementById('btn-toggle-yearly');
             const priceTag = document.getElementById('price-professional');
-
             const annualBilledText = document.getElementById('annual-billed-text');
+
+            currentBillingPeriod = period;
 
             if (period === 'monthly') {
                 btnMonthly.className = "px-5 py-2 font-label-md text-label-md font-semibold bg-white text-on-surface shadow-[0_1px_3px_rgba(0,0,0,0.1)] rounded-full transition-all duration-200 cursor-pointer";
@@ -475,6 +488,62 @@
                 btnMonthly.className = "px-5 py-2 font-label-md text-label-md font-semibold text-secondary hover:text-on-surface transition-all duration-200 cursor-pointer";
                 priceTag.textContent = "£24";
                 if (annualBilledText) annualBilledText.classList.remove('hidden');
+            }
+        }
+
+        // Handle the Stripe Checkout flow
+        async function handleCheckout() {
+            const btn = document.getElementById('btn-get-started');
+
+            // 1. Authentication Check: Look for active Cognito tokens in sessionStorage
+            const cognitoToken = sessionStorage.getItem('accessToken') || sessionStorage.getItem('idToken');
+
+            if (!cognitoToken) {
+                // If not authenticated, redirect to sign-up / log-in first
+                window.location.href = 'signup.html?redirect=pricing';
+                return;
+            }
+
+            // 2. Fetch price ID matching active toggle
+            const priceId = STRIPE_PRICE_IDS[currentBillingPeriod];
+
+            // 3. Set visual loading state
+            const originalText = btn.textContent;
+            btn.textContent = 'Processing...';
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+
+            try {
+                // 4. Invoke API Gateway checkout endpoint
+                const response = await fetch(CHECKOUT_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': cognitoToken // Maps to your Cognito JWT Authorizer on API Gateway
+                    },
+                    body: JSON.stringify({ price_id: priceId })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data.checkout_url) {
+                    // 5. Redirect browser directly to secure Stripe portal
+                    window.location.href = data.checkout_url;
+                } else {
+                    throw new Error('No checkout URL returned from server.');
+                }
+            } catch (error) {
+                console.error('Checkout Redirection Error:', error);
+                alert('An error occurred while generating your secure checkout session. Please try again.');
+
+                // Reset visual button state on failure
+                btn.textContent = originalText;
+                btn.disabled = false;
+                btn.style.opacity = '1';
             }
         }
 
