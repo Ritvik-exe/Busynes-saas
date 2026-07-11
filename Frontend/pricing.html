@@ -496,7 +496,7 @@
             const btn = document.getElementById('btn-get-started');
 
             // 1. Authentication Check: Look for active Cognito tokens in sessionStorage
-            const cognitoToken = sessionStorage.getItem('accessToken') || sessionStorage.getItem('idToken');
+            const cognitoToken = sessionStorage.getItem('busynes_id_token');
 
             if (!cognitoToken) {
                 // If not authenticated, redirect to sign-up / log-in first
