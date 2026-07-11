@@ -222,6 +222,9 @@ resource "aws_lambda_function" "busynes_lambda_function"{
 
     runtime = "python3.12"
 
+    memory = 512
+    timeout = 15
+
     environment {
         variables = {
             TABLE_NAME = aws_dynamodb_table.memory.name
