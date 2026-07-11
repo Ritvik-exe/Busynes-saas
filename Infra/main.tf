@@ -222,7 +222,7 @@ resource "aws_lambda_function" "busynes_lambda_function"{
 
     runtime = "python3.12"
 
-    memory = 512
+    memory_size = 512
     timeout = 15
 
     environment {
