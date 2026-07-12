@@ -283,9 +283,9 @@ def lambda_handler(event, context):
                         'headers' : {'Content-Type' : 'Application/json', 'Access-Control-Allow-Origin' : '*'},                            'body' : json.dumps({'error' : 'Invalid signature'})
                     }
 
-                if stripe_event.get('type') == 'checkout.session.completed':
-                    session = stripe_event['data']['object']
-                    user_id = session.get('client_reference_id')
+                if stripe_event.type == 'checkout.session.completed':
+                    session = stripe_event.data.object
+                    user_id = session.get.client_reference_id
 
                     table.put_item(
                         Item = {
