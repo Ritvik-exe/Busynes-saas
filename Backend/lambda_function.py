@@ -285,7 +285,7 @@ def lambda_handler(event, context):
 
                 if stripe_event.type == 'checkout.session.completed':
                     session = stripe_event.data.object
-                    user_id = session.get.client_reference_id
+                    user_id = session.client_reference_id
 
                     table.put_item(
                         Item = {
