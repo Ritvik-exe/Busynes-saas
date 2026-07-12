@@ -326,9 +326,9 @@ def lambda_handler(event, context):
         
     # Error handling
     except Exception as e:
-        print(f'Error : {str(e)}')
         return {
             'statusCode' : 500,
-            'Error' : f'Error: {str(e)}'
+            'headers' : {'Content-Type' : 'Application/json', 'Access-Control-Allow-Origin' : '*'},
+            'body' : json.dumps({'Error' : str(e)})
         }
         
