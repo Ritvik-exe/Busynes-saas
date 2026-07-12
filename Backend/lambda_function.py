@@ -264,6 +264,7 @@ def lambda_handler(event, context):
             
             # POST method used to handle stripe webhooks
             elif method == 'POST' and path == '/webhook/stripe':
+                amount_paid = Decimal('0.00')
                 payload = event.get('body', '')
                 if event.get('isBase64Encoded', False) == True:
                     payload = base64.b64decode(payload)
@@ -286,12 +287,132 @@ def lambda_handler(event, context):
                 if stripe_event.type == 'checkout.session.completed':
                     session = stripe_event.data.object
                     user_id = session.client_reference_id
+                    customer_name = session.customer_details.name
+                    user_email = session.customer_details.email
+                    amount_paid = Decimal(session.amount_total) / 100
+                    invoice_id = session.invoice
+                    success_email_html = f"""
+                    <html>
+                    <head>
+                        <style>
+                            .wrapper {{ font-family: Arial, sans-serif; background-color: #f4f7f6; padding: 30px; }}
+                            .container {{ background-color: #ffffff; padding: 20px; border-radius: 10px; border: 1px solid #e0e0e0; max-width: 500px; margin: auto; }}
+                            .header {{ border-bottom: 2px solid #10b981; padding-bottom: 10px; margin-bottom: 20px; }}
+                            .amount {{ font-size: 24px; color: #10b981; font-weight: bold; }}
+                            .footer {{ font-size: 10px; color: #999; margin-top: 20px; text-align: center; }}
+                        </style>
+                    </head>
+                    <body>
+                        <div class="wrapper">
+                            <div class="container">
+                                <div class="header">
+                                    <h2 style="margin:0; color: #187c13;">Busynes</h2>
+                                </div>
+                                <p>Hello {customer_name},</p>
+                                <p>Thank you for subscribing to <strong>The Sunday Saver Plan</strong>!</p>
+                                <p>Your payment has been successfully processed, and your account has been upgraded to <strong>Pro</strong>. Unlimited invoice processing is now active on your dashboard.</p>
+                                <div class="amount">£{amount_paid:.2f} Paid</div>
+                                <p style="margin-top: 15px; font-size: 13px; color: #555;">
+                                    <strong>Billing Status:</strong> Active<br>
+                                    <strong>Invoice ID:</strong> {invoice_id}
+                                </p>
+                                <div class="footer">
+                                    Busynes for Business — Reclaiming your Sunday afternoons.
+                                </div>
+                            </div>
+                        </div>
+                    </body>
+                    </html>
+                    """
 
                     table.put_item(
                         Item = {
                             'ClientID' : user_id,
                             'Timestamp' : 'USER_PLAN',
                             'plan' : 'Pro'
+                        }
+                    )
+
+                    ses_client.send_email(
+                        Source = 'support@busynes.com',
+                        Destination = {'ToAddresses' : [user_email]},
+                        Message = {
+                            'Subject':{
+                                'Data' : 'Payment Successful !' 
+                            },
+                            'Body':{
+                                'Html':{
+                                    'Data' : success_email_html
+                                }
+                            } 
+                        }
+                    )
+
+                elif stripe_event.type == 'invoice.payment_failed':
+                    invoice = stripe_event.data.object
+                    user_email = invoice.customer_email
+                    customer_name = invoice.customer_name or "Valued Customer"
+                    response = cognito_client.list_users(
+                        UserPoolId = os.environ.get('USER_POOL_ID'),
+                        Filter = f'email = "{user_email}"'
+                        )
+                    amount_due = Decimal(invoice.amount_due) / 100
+                    invoice_id = invoice.id
+                    failure_email_html = f"""
+                    <html>
+                    <head>
+                        <style>
+                            .wrapper {{ font-family: Arial, sans-serif; background-color: #f4f7f6; padding: 30px; }}
+                            .container {{ background-color: #ffffff; padding: 20px; border-radius: 10px; border: 1px solid #ef4444; max-width: 500px; margin: auto; }}
+                            .header {{ border-bottom: 2px solid #ef4444; padding-bottom: 10px; margin-bottom: 20px; }}
+                            .alert {{ font-size: 24px; color: #ef4444; font-weight: bold; }}
+                            .footer {{ font-size: 10px; color: #999; margin-top: 20px; text-align: center; }}
+                        </style>
+                    </head>
+                    <body>
+                        <div class="wrapper">
+                            <div class="container">
+                                <div class="header">
+                                    <h2 style="margin:0; color: #ef4444;">Busynes Alert</h2>
+                                </div>
+                                <p>Hello {customer_name},</p>
+                                <p>We were unable to process your payment for <strong>The Sunday Saver Plan</strong>.</p>
+                                <div class="alert">Payment Declined</div>
+                                <p>Your bank or card issuer declined the transaction of <strong>£{amount_due:.2f}</strong>.</p>
+                                <p>Please log in to your Busynes billing portal or check your Stripe subscription settings to update your card. Your account has entered a 3-day grace period to prevent service disruption before reverting to the Free tier limits.</p>
+                                <p style="margin-top: 15px; font-size: 13px; color: #555;">
+                                    <strong>Invoice ID:</strong> {invoice_id}
+                                </p>
+                                <div class="footer">
+                                    Busynes for Business — Reclaiming your Sunday afternoons.
+                                </div>
+                            </div>
+                        </div>
+                    </body>
+                    </html>
+                    """
+                    if response.get('Users'):
+                        user_id = response['Users'][0]['Username']
+                        table.put_item(
+                            Item = {
+                                'ClientID' : user_id,
+                                'Timestamp' : 'USER_PLAN',
+                                'plan' : 'Free'
+                            }
+                        )
+
+                        ses_client.send_email(
+                        Source = 'support@busynes.com',
+                        Destination = {'ToAddresses' : [user_email]},
+                        Message = {
+                            'Subject':{
+                                'Data' : 'Payment Failed !' 
+                            },
+                            'Body':{
+                                'Html':{
+                                    'Data' : failure_email_html
+                                }
+                            } 
                         }
                     )
 
