@@ -306,29 +306,13 @@
                 <!-- 2. Search & Filter Bar -->
                 <section
                     class="flex flex-col sm:flex-row gap-4 items-center justify-between w-full bg-surface-container-lowest p-4 rounded-xl border border-outline-variant shadow-[0px_4px_20px_rgba(0,0,0,0.05)]">
-                    <div class="relative w-full sm:w-1/2">
+                    <div class="relative w-full">
                         <span
                             class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
                             data-icon="search">search</span>
                         <input id="transactions-search" oninput="filterTransactions()"
                             class="w-full pl-10 pr-4 py-2 bg-surface border border-outline-variant rounded-full font-body-sm text-body-sm text-on-surface placeholder-on-surface-variant focus:outline-none focus:ring-1 focus:ring-primary-container focus:border-transparent transition-all"
                             placeholder="Search by supplier, filename, or category..." type="text">
-                    </div>
-                    <div class="flex gap-3 w-full sm:w-auto">
-                        <div class="relative flex-1 sm:flex-none">
-                            <select id="category-filter" onchange="filterTransactions()"
-                                class="appearance-none bg-surface border border-outline-variant rounded-full py-2 pl-4 pr-10 font-body-sm text-body-sm text-on-surface focus:outline-none focus:ring-1 focus:ring-primary-container focus:border-transparent cursor-pointer">
-                                <option value="all">All Categories</option>
-                                <option value="Software">Software</option>
-                                <option value="Logistics">Logistics</option>
-                                <option value="Infrastructure">Infrastructure</option>
-                                <option value="Utilities">Utilities</option>
-                                <option value="Catering">Catering</option>
-                            </select>
-                            <span
-                                class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none"
-                                data-icon="expand_more">expand_more</span>
-                        </div>
                     </div>
                 </section>
                 <!-- 3. The Vault (Document Table) -->
@@ -605,7 +589,16 @@
                     });
 
                     if (!response.ok) {
-                        throw new Error(`Upload handshake failed for ${file.name}. Status: ${response.status}`);
+                        let errMsg = `Upload handshake failed for ${file.name}. Status: ${response.status}`;
+                        try {
+                            const errorData = await response.json();
+                            if (errorData && errorData.error) {
+                                errMsg = errorData.error; // Displays your raw custom upgrade message!
+                            }
+                        } catch (e) {
+                            // Fallback if parsing fails
+                        }
+                        throw new Error(errMsg);
                     }
 
                     const data = await response.json();
@@ -807,7 +800,6 @@
         // Filter standard table based on search box or selectors
         function filterTransactions() {
             const searchVal = document.getElementById('transactions-search').value.toLowerCase();
-            const catVal = document.getElementById('category-filter').value;
 
             let visibleCount = 0;
             document.querySelectorAll('.transaction-row').forEach(row => {
