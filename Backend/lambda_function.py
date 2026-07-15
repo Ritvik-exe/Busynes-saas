@@ -49,7 +49,7 @@ def lambda_handler(event, context):
                     )
 
                     email_address = ''
-                    for attr in cognito_user.get(['UserAttributes'], []):
+                    for attr in cognito_user.get('UserAttributes', []):
                         if attr['Name'] == 'email':
                             email_address = attr['Value']
                             break
