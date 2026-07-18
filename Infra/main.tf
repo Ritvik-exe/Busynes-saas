@@ -321,6 +321,12 @@ resource "aws_apigatewayv2_route" "stripe_public_route"{
     target = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
 }
 
+resource "aws_apigatewayv2_route" "busynes_support"{
+    api_id = aws_apigatewayv2_api.busynes_api.id
+    route_key = "POST /support"
+    target = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
+}
+
 resource "aws_apigatewayv2_stage" "busynes_api_stage"{
     api_id = aws_apigatewayv2_api.busynes_api.id
     name = "$default"
