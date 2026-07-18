@@ -496,6 +496,9 @@
     </div>
 
     <script>
+        // CONFIGURATION: Set this to your live AWS API Gateway base URL
+        const API_BASE_URL = "https://your-api-id.execute-api.eu-west-2.amazonaws.com";
+
         const votedFeatures = {};
 
         function voteUp(btn, key) {
@@ -525,61 +528,155 @@
             }
         }
 
-        // Handle Bug Report Form Submission via mailto fallback
-        document.getElementById('bug-report-form').addEventListener('submit', (e) => {
+        // Helper to extract verified email from Cognito ID Token in sessionStorage
+        function getUserEmailFromSession() {
+            const token = sessionStorage.getItem('busynes_id_token');
+            if (!token) return 'SaaS Pilot User';
+            try {
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                return payload.email || 'SaaS Pilot User';
+            } catch (e) {
+                return 'SaaS Pilot User';
+            }
+        }
+
+        // Handle Bug Report Form Submission (Async 2-Step S3 Presigned URL + Metadata submission)
+        document.getElementById('bug-report-form').addEventListener('submit', async (e) => {
             e.preventDefault();
+            const submitBtn = e.target.querySelector('button[type="submit"]');
             const desc = document.getElementById('bug-desc').value.trim();
             const fileInput = document.getElementById('bug-screenshot-input');
-            const fileName = fileInput && fileInput.files && fileInput.files[0] ? fileInput.files[0].name : 'None';
-            const userEmail = sessionStorage.getItem('busynes_client_id') || 'SaaS Pilot User';
+            const file = fileInput && fileInput.files && fileInput.files[0] ? fileInput.files[0] : null;
 
-            const subject = encodeURIComponent("[Bug Report] Busynes Innovation Lab");
-            const body = encodeURIComponent(
-                `Hi Busynes Team,\n\n` +
-                `I found a bug while using the platform.\n\n` +
-                `Description:\n${desc}\n\n` +
-                `Selected Screenshot: ${fileName} ${fileName !== 'None' ? '(Please attach this file manually to your email draft)' : ''}\n\n` +
-                `Sender: ${userEmail}`
-            );
+            const userEmail = getUserEmailFromSession();
 
-            // Open Mailto
-            window.location.href = `mailto:support@busynes.com?subject=${subject}&body=${body}`;
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = "Submitting...";
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
 
-            // Reset Form & show feedback
-            document.getElementById('bug-desc').value = '';
-            if (fileInput) fileInput.value = '';
+            try {
+                let filename = null;
 
-            // Reset labels to default state
-            const uploadLabel = document.getElementById('bug-file-name-label');
-            if (uploadLabel) uploadLabel.textContent = "Upload snapshot";
-            const uploadSublabel = document.getElementById('bug-file-sublabel');
-            if (uploadSublabel) uploadSublabel.textContent = "Max 5MB. Log diagnostic files or screenshots.";
+                // Step 1: If a snapshot is attached, request upload ticket and upload to S3
+                if (file) {
+                    showToast("Requesting upload session...");
+                    const preUrlResponse = await fetch(`${API_BASE_URL}/support`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            action: 'get_upload_url',
+                            filename: file.name,
+                            type: 'bug'
+                        })
+                    });
 
-            showToast("Report drafted! Opening your email client to submit.");
+                    const preUrlData = await preUrlResponse.json();
+                    if (!preUrlResponse.ok) {
+                        throw new Error(preUrlData.error || 'Failed to acquire upload ticket.');
+                    }
+
+                    showToast("Transferring snapshot to S3...");
+                    const uploadResponse = await fetch(preUrlData.upload_url, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': file.type
+                        },
+                        body: file
+                    });
+
+                    if (!uploadResponse.ok) {
+                        throw new Error('Direct-to-S3 snapshot transfer failed.');
+                    }
+
+                    filename = file.name;
+                }
+
+                // Step 2: Send metadata to trigger the support email
+                showToast("Dispatching report details...");
+                const supportResponse = await fetch(`${API_BASE_URL}/support`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        type: 'bug',
+                        email: userEmail,
+                        message: desc,
+                        filename: filename
+                    })
+                });
+
+                const data = await supportResponse.json();
+                if (!supportResponse.ok) {
+                    throw new Error(data.error || 'Failed to file bug report.');
+                }
+
+                showToast("Bug report submitted successfully!");
+
+                // Reset form fields
+                document.getElementById('bug-desc').value = '';
+                if (fileInput) fileInput.value = '';
+
+                // Reset file labels
+                document.getElementById('bug-file-name-label').textContent = "Upload snapshot";
+                document.getElementById('bug-file-sublabel').textContent = "Max 5MB. Log diagnostic files or screenshots.";
+
+            } catch (error) {
+                console.error(error);
+                showToast(`Submission failed: ${error.message}`);
+            } finally {
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
         });
 
-        // Handle Need Help Form Submission via mailto fallback
-        document.getElementById('need-help-form').addEventListener('submit', (e) => {
+        // Handle Need Help Form Submission via live public API Gateway endpoint
+        document.getElementById('need-help-form').addEventListener('submit', async (e) => {
             e.preventDefault();
+            const submitBtn = e.target.querySelector('button[type="submit"]');
             const email = document.getElementById('hc-email').value.trim();
             const msg = document.getElementById('hc-msg').value.trim();
 
-            const subject = encodeURIComponent("[Help Request] Busynes Support Callback");
-            const body = encodeURIComponent(
-                `Hi Busynes Team,\n\n` +
-                `I need support with my stadium setup.\n\n` +
-                `Message:\n${msg}\n\n` +
-                `Please contact me at: ${email}`
-            );
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = "Sending...";
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
 
-            // Open Mailto
-            window.location.href = `mailto:support@busynes.com?subject=${subject}&body=${body}`;
+            try {
+                const response = await fetch(`${API_BASE_URL}/support`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        type: 'callback',
+                        email: email,
+                        message: msg
+                    })
+                });
 
-            // Reset Form & show feedback
-            document.getElementById('hc-email').value = '';
-            document.getElementById('hc-msg').value = '';
+                const data = await response.json();
 
-            showToast("Support request drafted! Opening email client.");
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to submit callback request.');
+                }
+
+                showToast("Callback request submitted successfully!");
+                document.getElementById('hc-email').value = '';
+                document.getElementById('hc-msg').value = '';
+
+            } catch (error) {
+                console.error(error);
+                showToast(`Failed: ${error.message}`);
+            } finally {
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
         });
 
         // Trigger file selection for bug screenshot
@@ -593,7 +690,7 @@
                 const file = input.files[0];
                 document.getElementById('bug-file-name-label').textContent = file.name;
                 document.getElementById('bug-file-sublabel').textContent = `File selected (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
-                showToast("Snapshot file successfully attached to report!");
+                showToast("Snapshot file successfully attached!");
             }
         }
 
