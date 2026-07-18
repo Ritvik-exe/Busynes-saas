@@ -421,6 +421,71 @@ def lambda_handler(event, context):
                     'headers' : {'Content-Type' : 'Application/json', 'Access-Control-Allow-Origin' : '*'},
                     'body' : json.dumps({'success' : 'Webhook received and processed'})
                 }
+
+            # Support email requests
+            elif method == 'POST' and path == '/support':
+                body_data = json.loads(event.get('body', {}))
+                user_email = body_data.get('email')
+                user_message = body_data.get('message')
+                request_type = body_data.get('type', 'callback')
+
+                if not user_email or not user_message:
+                    return {
+                        'statusCode' : 400,
+                        'headers' : {'Content-Type' : 'Application/json', 'Access-Control-Allow-Origin' : '*'},
+                        'body' : json.dumps({'error' : 'Email and message fields are required.'})
+                    }
+
+                support_html_email = f"""
+                <html>
+                <head>
+                    <style>
+                        .wrapper {{ font-family: Arial, sans-serif; background-color: #f4f7f6; padding: 30px; }}
+                        .container {{ background-color: #ffffff; padding: 25px; border-radius: 10px; border: 1px solid #e0e0e0; max-width: 550px; margin: auto; }}
+                        .header {{ border-bottom: 2px solid #10b981; padding-bottom: 12px; margin-bottom: 20px; }}
+                        .badge {{ display: inline-block; padding: 4px 8px; background-color: #e6f4ea; color: #137333; font-size: 11px; font-weight: bold; border-radius: 4px; text-transform: uppercase; margin-bottom: 15px; }}
+                        .info-label {{ font-size: 12px; color: #666; font-weight: bold; margin-bottom: 4px; }}
+                        .info-value {{ font-size: 14px; color: #333; margin-bottom: 15px; background: #f9f9f9; padding: 10px; border-radius: 6px; border: 1px solid #f1f1f1; }}
+                        .footer {{ font-size: 10px; color: #999; margin-top: 25px; text-align: center; border-top: 1px solid #eee; padding-top: 15px; }}
+                    </style>
+                </head>
+                <body>
+                    <div class="wrapper">
+                        <div class="container">
+                            <div class="header">
+                                <h2 style="margin:0; color: #111;">Busynes Notification</h2>
+                            </div>
+                            
+                            <div class="badge">{request_type} request</div>
+                            
+                            <div class="info-label">SENDER EMAIL:</div>
+                            <div class="info-value"><strong>{user_email}</strong></div>
+                            
+                            <div class="info-label">MESSAGE DETAILS:</div>
+                            <div class="info-value" style="white-space: pre-wrap;">{user_message}</div>
+                            
+                            <div class="footer">
+                                Busynes Internal Support Alert — Reply directly to this email to contact the user [1].
+                            </div>
+                        </div>
+                    </div>
+                </body>
+                </html>
+                """
+
+                ses_client.send_email(
+                    Source = 'support@busynes.com',
+                    Destination = {'ToAddresses' : ['support@busynes.com']},
+                    ReplyToAddresses = [user_email],
+                    Message = {'Subject': {'Data' : f'[Busynes Alert] New {request_type.capitalize()} request from {user_email}'}},
+                    Body = {'Html' : {'Data' : support_html_email}}
+                )
+
+                return {
+                    'statusCode' : 200,
+                    'headers' : {'Content-Type' : 'Application/json', 'Access-Control-Allow-Origin' : '*'},
+                    'body' : json.dumps({'success' : 'Support request sent successfully'})
+                }
   
             # DELETE method used to delete invoice from DynamoDB and S3
             elif method == 'DELETE' and path == '/':
