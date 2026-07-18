@@ -83,3 +83,12 @@ To inspect or collaborate on the development of Busynes:
     terraform init
     terraform plan
     ```
+
+---
+
+## 🤝 Development Note
+
+This project was built collaboratively by the developer (me) and AI:
+*   **Developer (me)**: Responsible for backend logic (Python Lambda), cloud infrastructure (Terraform), and AWS integrations.
+*   **AI**: Guided the implementation, assisted with debugging/error resolution, and developed the entire Vite + Tailwind frontend.
+*   **Learning & Reference**: Official documentation was utilized throughout to ensure robust implementation, compliance, and best practices.
