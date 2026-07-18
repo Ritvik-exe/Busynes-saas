@@ -424,10 +424,26 @@ def lambda_handler(event, context):
 
             # Support email requests
             elif method == 'POST' and path == '/support':
+                bucket_name = os.environ.get('INVOICE_BUCKET')
                 body_data = json.loads(event.get('body', {}))
                 user_email = body_data.get('email')
                 user_message = body_data.get('message')
                 request_type = body_data.get('type', 'callback')
+                bug_pic = body_data.get('filename')
+                action = body_data.get('action')
+
+                if action == 'get_upload_url':
+                    s3_key = f'bugs/{bug_pic}'
+                    response = s3_client.generate_presigned_url(
+                        'put_object',
+                        Params = {'Bucket' : bucket_name, 'Key' : s3_key},
+                        ExpiresIn = 300
+                )
+                    return {
+                        'statusCode' : 200,
+                        'headers' : {'Content-Type' : 'Application/json', 'Access-Control-Allow-Origin' : '*'},
+                        'body' : json.dumps({'upload_url' : response})
+                    }
 
                 if not user_email or not user_message:
                     return {
@@ -436,50 +452,114 @@ def lambda_handler(event, context):
                         'body' : json.dumps({'error' : 'Email and message fields are required.'})
                     }
 
-                support_html_email = f"""
-                <html>
-                <head>
-                    <style>
-                        .wrapper {{ font-family: Arial, sans-serif; background-color: #f4f7f6; padding: 30px; }}
-                        .container {{ background-color: #ffffff; padding: 25px; border-radius: 10px; border: 1px solid #e0e0e0; max-width: 550px; margin: auto; }}
-                        .header {{ border-bottom: 2px solid #10b981; padding-bottom: 12px; margin-bottom: 20px; }}
-                        .badge {{ display: inline-block; padding: 4px 8px; background-color: #e6f4ea; color: #137333; font-size: 11px; font-weight: bold; border-radius: 4px; text-transform: uppercase; margin-bottom: 15px; }}
-                        .info-label {{ font-size: 12px; color: #666; font-weight: bold; margin-bottom: 4px; }}
-                        .info-value {{ font-size: 14px; color: #333; margin-bottom: 15px; background: #f9f9f9; padding: 10px; border-radius: 6px; border: 1px solid #f1f1f1; }}
-                        .footer {{ font-size: 10px; color: #999; margin-top: 25px; text-align: center; border-top: 1px solid #eee; padding-top: 15px; }}
-                    </style>
-                </head>
-                <body>
-                    <div class="wrapper">
-                        <div class="container">
-                            <div class="header">
-                                <h2 style="margin:0; color: #111;">Busynes Notification</h2>
-                            </div>
-                            
-                            <div class="badge">{request_type} request</div>
-                            
-                            <div class="info-label">SENDER EMAIL:</div>
-                            <div class="info-value"><strong>{user_email}</strong></div>
-                            
-                            <div class="info-label">MESSAGE DETAILS:</div>
-                            <div class="info-value" style="white-space: pre-wrap;">{user_message}</div>
-                            
-                            <div class="footer">
-                                Busynes Internal Support Alert — Reply directly to this email to contact the user [1].
+                if request_type == 'callback':
+                    support_html_email = f"""
+                    <html>
+                    <head>
+                        <style>
+                            .wrapper {{ font-family: Arial, sans-serif; background-color: #f4f7f6; padding: 30px; }}
+                            .container {{ background-color: #ffffff; padding: 25px; border-radius: 10px; border: 1px solid #e0e0e0; max-width: 550px; margin: auto; }}
+                            .header {{ border-bottom: 2px solid #10b981; padding-bottom: 12px; margin-bottom: 20px; }}
+                            .badge {{ display: inline-block; padding: 4px 8px; background-color: #e6f4ea; color: #137333; font-size: 11px; font-weight: bold; border-radius: 4px; text-transform: uppercase; margin-bottom: 15px; }}
+                            .info-label {{ font-size: 12px; color: #666; font-weight: bold; margin-bottom: 4px; }}
+                            .info-value {{ font-size: 14px; color: #333; margin-bottom: 15px; background: #f9f9f9; padding: 10px; border-radius: 6px; border: 1px solid #f1f1f1; }}
+                            .footer {{ font-size: 10px; color: #999; margin-top: 25px; text-align: center; border-top: 1px solid #eee; padding-top: 15px; }}
+                        </style>
+                    </head>
+                    <body>
+                        <div class="wrapper">
+                            <div class="container">
+                                <div class="header">
+                                    <h2 style="margin:0; color: #111;">Busynes Notification</h2>
+                                </div>
+                                
+                                <div class="badge">{request_type} request</div>
+                                
+                                <div class="info-label">SENDER EMAIL:</div>
+                                <div class="info-value"><strong>{user_email}</strong></div>
+                                
+                                <div class="info-label">MESSAGE DETAILS:</div>
+                                <div class="info-value" style="white-space: pre-wrap;">{user_message}</div>
+                                
+                                <div class="footer">
+                                    Busynes Internal Support Alert — Reply directly to this email to contact the user [1].
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </body>
-                </html>
-                """
+                    </body>
+                    </html>
+                    """
 
-                ses_client.send_email(
-                    Source = 'support@busynes.com',
-                    Destination = {'ToAddresses' : ['support@busynes.com']},
-                    ReplyToAddresses = [user_email],
-                    Message = {'Subject': {'Data' : f'[Busynes Alert] New {request_type.capitalize()} request from {user_email}'}},
-                    Body = {'Html' : {'Data' : support_html_email}}
-                )
+                    ses_client.send_email(
+                        Source = 'support@busynes.com',
+                        Destination = {'ToAddresses' : ['support@busynes.com']},
+                        ReplyToAddresses = [user_email],
+                        Message = {'Subject': {'Data' : f'[Busynes Alert] New {request_type.capitalize()} request from {user_email}'},
+                                    'Body' : {'Html' : {'Data' : support_html_email}}})
+
+                elif request_type == 'bug':
+                    image_html = ''
+                    if bug_pic and not action:
+                        s3_key = f'bugs/{bug_pic}'
+                        response = s3_client.generate_presigned_url(
+                            'get_object',
+                            Params = {'Bucket' : bucket_name, 'Key' : s3_key},
+                            ExpiresIn = 604800
+                    )
+
+                    image_html = f"""
+                        <div class="snapshot-container">
+                            <div class="info-label" style="text-align: left;">ATTACHED SNAPSHOT:</div>
+                            <img class="snapshot-image" src="{response}" alt="Bug Snapshot" />
+                        </div>
+                        """
+                    
+                    bug_html_email = f"""
+                    <html>
+                    <head>
+                        <style>
+                            .wrapper {{ font-family: Arial, sans-serif; background-color: #f4f7f6; padding: 30px; }}
+                            .container {{ background-color: #ffffff; padding: 25px; border-radius: 10px; border: 1px solid #e0e0e0; max-width: 550px; margin: auto; }}
+                            .header {{ border-bottom: 2px solid #10b981; padding-bottom: 12px; margin-bottom: 20px; }}
+                            .badge {{ display: inline-block; padding: 4px 8px; background-color: #e6f4ea; color: #137333; font-size: 11px; font-weight: bold; border-radius: 4px; text-transform: uppercase; margin-bottom: 15px; }}
+                            .info-label {{ font-size: 12px; color: #666; font-weight: bold; margin-bottom: 4px; }}
+                            .info-value {{ font-size: 14px; color: #333; margin-bottom: 15px; background: #f9f9f9; padding: 10px; border-radius: 6px; border: 1px solid #f1f1f1; }}
+                            .snapshot-container {{ margin-top: 15px; padding: 10px; background-color: #fcfcfc; border: 1px dashed #ccc; border-radius: 6px; text-align: center; }}
+                            .snapshot-image {{ max-width: 100%; height: auto; border-radius: 4px; border: 1px solid #eee; margin-top: 8px; }}
+                            .footer {{ font-size: 10px; color: #999; margin-top: 25px; text-align: center; border-top: 1px solid #eee; padding-top: 15px; }}
+                        </style>
+                    </head>
+                    <body>
+                        <div class="wrapper">
+                            <div class="container">
+                                <div class="header">
+                                    <h2 style="margin:0; color: #111;">Busynes Notification</h2>
+                                </div>
+                                
+                                <div class="badge">{request_type} request</div>
+                                
+                                <div class="info-label">SENDER EMAIL:</div>
+                                <div class="info-value"><strong>{user_email}</strong></div>
+                                
+                                <div class="info-label">ISSUE DETAILS:</div>
+                                <div class="info-value" style="white-space: pre-wrap;">{user_message}</div>
+                                
+                                {image_html}
+                                
+                                <div class="footer">
+                                    Busynes Internal Support Alert — Reply directly to this email to contact the user [1].
+                                </div>
+                            </div>
+                        </div>
+                    </body>
+                    </html>
+                    """
+                    ses_client.send_email(
+                        Source = 'support@busynes.com',
+                        Destination = {'ToAddresses' : ['support@busynes.com']},
+                        ReplyToAddresses = [user_email],
+                        Message = {'Subject': {'Data' : f'[Busynes Alert] New {request_type.capitalize()} request from {user_email}'},
+                                   'Body' : {'Html' : {'Data' : bug_html_email}}})
 
                 return {
                     'statusCode' : 200,
