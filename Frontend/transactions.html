@@ -358,110 +358,6 @@
                     </div>
                 </section>
             </div>
-
-            <!-- Right Column: AI Insight Sidebar (Interaction-ready) -->
-            <aside
-                class="w-full xl:w-[340px] flex-shrink-0 flex flex-col gap-6 xl:sticky xl:top-0 h-auto xl:h-[calc(100vh-140px)] border-t xl:border-t-0 xl:border-l border-outline-variant pt-6 xl:pt-0 xl:pl-8 overflow-y-auto">
-                <div class="flex items-center justify-between pb-2 border-b border-outline-variant/10">
-                    <h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2 font-bold">
-                        <span class="material-symbols-outlined text-primary-container fill-icon animate-pulse"
-                            data-icon="memory">memory</span>
-                        AI Extraction
-                    </h3>
-                    <span id="extraction-status"
-                        class="bg-primary-container/10 text-primary-container font-label-md text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Sync
-                        Active</span>
-                </div>
-                <!-- Visual: Magnified Document Snippet -->
-                <div
-                    class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 shadow-[0px_4px_20px_rgba(0,0,0,0.05)] relative overflow-hidden">
-                    <div id="visual-ai-badge"
-                        class="absolute top-2 right-2 bg-primary-container text-on-primary text-[10px] font-bold px-2 py-0.5 rounded-full z-10 flex items-center gap-1 shadow-sm">
-                        <span class="material-symbols-outlined text-[10px] fill-icon">check_circle</span>
-                        99.8% Conf
-                    </div>
-                    <div
-                        class="w-full h-32 bg-surface-container-low border border-outline-variant/50 rounded flex items-center justify-center relative bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
-                        <!-- Simulated Document Text -->
-                        <div
-                            class="w-[85%] bg-surface-container-lowest p-3 shadow-md border border-outline-variant transform -rotate-1 opacity-85 transition-all">
-                            <div class="w-1/2 h-2 bg-secondary/20 mb-2 rounded"></div>
-                            <div class="w-3/4 h-2 bg-secondary/20 mb-1 rounded"></div>
-                            <div class="w-2/3 h-2 bg-secondary/20 mb-4 rounded"></div>
-                            <div
-                                class="w-full flex justify-between border-t border-dashed border-secondary/30 pt-2 mt-2">
-                                <div class="w-1/3 h-3 bg-secondary/20 rounded"></div>
-                                <div class="w-1/4 h-3 bg-primary-container/20 rounded ring-1 ring-primary-container/50">
-                                </div> <!-- Highlighted area -->
-                            </div>
-                        </div>
-                    </div>
-                    <p class="font-label-md text-label-md text-on-surface-variant mt-3 text-center">Snippet: Total
-                        Amount Highlight Area</p>
-                </div>
-                <!-- Extracted Data Fields -->
-                <div class="flex-grow space-y-4 pr-1">
-                    <!-- Field 1 -->
-                    <div>
-                        <label
-                            class="block font-label-md text-[11px] font-bold text-on-surface-variant uppercase tracking-wider mb-1"
-                            for="side-supplier">Supplier Name</label>
-                        <input id="side-supplier"
-                            class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-2.5 font-body-sm text-body-sm font-semibold text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors"
-                            type="text" value="Cloudflare Inc.">
-                    </div>
-                    <!-- Field 2 -->
-                    <div>
-                        <label
-                            class="block font-label-md text-[11px] font-bold text-on-surface-variant uppercase tracking-wider mb-1"
-                            for="side-invoice-number">Invoice Number</label>
-                        <input id="side-invoice-number"
-                            class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-2.5 font-body-sm text-body-sm font-semibold text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors"
-                            type="text" value="INV-2023-001">
-                    </div>
-                    <!-- Field 3 -->
-                    <div>
-                        <label
-                            class="block font-label-md text-[11px] font-bold text-on-surface-variant uppercase tracking-wider mb-1"
-                            for="side-vat">Tax ID / VAT</label>
-                        <input id="side-vat"
-                            class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-2.5 font-body-sm text-body-sm font-semibold text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors"
-                            type="text" value="US84930291">
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <!-- Field 4 -->
-                        <div>
-                            <label
-                                class="block font-label-md text-[11px] font-bold text-on-surface-variant uppercase tracking-wider mb-1"
-                                for="side-currency">Currency</label>
-                            <input id="side-currency"
-                                class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-2.5 font-body-sm text-body-sm font-semibold text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors"
-                                type="text" value="GBP (£)">
-                        </div>
-                        <!-- Field 5 -->
-                        <div>
-                            <label
-                                class="block font-label-md text-[11px] font-bold text-on-surface-variant uppercase tracking-wider mb-1"
-                                for="side-tax">Tax Amount</label>
-                            <input id="side-tax"
-                                class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-2.5 font-body-sm text-body-sm font-semibold text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors"
-                                type="text" value="£120.00">
-                        </div>
-                    </div>
-                </div>
-                <!-- Action Buttons -->
-                <div class="pt-4 border-t border-outline-variant mt-auto">
-                    <button onclick="commitInvoice()"
-                        class="w-full bg-primary-container text-on-primary py-2.5 rounded-full font-label-md text-label-md hover:bg-surface-tint transition-colors shadow-sm mb-2 cursor-pointer font-bold">
-                        Verify & Commit
-                    </button>
-                    <!-- Trigger delete directly from Sidebar for active selected invoice -->
-                    <button onclick="deleteActiveInvoiceSidebar()"
-                        class="w-full bg-transparent border border-error text-error py-2.5 rounded-full font-label-md text-label-md hover:bg-error/10 transition-colors cursor-pointer font-semibold">
-                        Delete Invoice
-                    </button>
-                </div>
-            </aside>
         </main>
     </div>
 
@@ -501,7 +397,7 @@
         let loadedInvoicesList = [];
         let currentRowId = 0; // Tracks currently active selected invoice index
 
-        // Select a row and dynamically update sidebar inputs based on live database data
+        // Select a row and dynamically update active row highlights
         function selectInvoiceRow(index) {
             currentRowId = index;
 
@@ -512,27 +408,6 @@
             const selectedRow = document.getElementById('row-' + index);
             if (selectedRow) {
                 selectedRow.classList.add('bg-primary-container/5', 'ring-2', 'ring-primary-container/20');
-            }
-
-            const item = loadedInvoicesList[index];
-            if (item) {
-                const cleanFilename = item.Filename.split('/').pop();
-
-                // Populate dynamic inputs
-                document.getElementById('side-supplier').value = "Processed Invoice";
-                document.getElementById('side-invoice-number').value = cleanFilename.split('.')[0] || "INV-Vault";
-                document.getElementById('side-vat').value = "HMRC-GB-Synced";
-                document.getElementById('side-currency').value = "GBP (£)";
-
-                // Calculate simulated VAT (20% UK Standard)
-                const vatAmount = (parseFloat(item.Amount) * 0.20).toFixed(2);
-                document.getElementById('side-tax').value = `£${vatAmount}`;
-
-                // Update badge and sync status
-                const badge = document.getElementById('visual-ai-badge');
-                badge.textContent = "99.8% Conf";
-                badge.className = "absolute top-2 right-2 bg-primary-container text-on-primary text-[10px] font-bold px-2 py-0.5 rounded-full z-10 flex items-center gap-1 shadow-sm";
-                document.getElementById('extraction-status').textContent = "Synced";
             }
         }
 
@@ -738,7 +613,7 @@
                         tableBody.innerHTML = rowsHtml;
                         totalEntriesBadge.textContent = `Showing ${loadedInvoicesList.length} of ${loadedInvoicesList.length} entries`;
 
-                        // Automatically select first row in sidebar
+                        // Automatically select first row
                         selectInvoiceRow(0);
                     } else {
                         totalEntriesBadge.textContent = "Showing 0 entries";
@@ -752,7 +627,7 @@
 
         // Delete specific invoice from database & S3 (Table action)
         async function deleteInvoice(event, index) {
-            event.stopPropagation(); // Prevent trigger of row selection sidebar
+            event.stopPropagation(); // Prevent trigger of row selection
 
             const item = loadedInvoicesList[index];
             if (!item) return;
@@ -790,13 +665,6 @@
             }
         }
 
-        // Delete currently active selected invoice directly from Sidebar action button
-        function deleteActiveInvoiceSidebar() {
-            if (loadedInvoicesList.length === 0 || currentRowId === null) return;
-            const mockEvent = { stopPropagation: () => { } };
-            deleteInvoice(mockEvent, currentRowId);
-        }
-
         // Filter standard table based on search box or selectors
         function filterTransactions() {
             const searchVal = document.getElementById('transactions-search').value.toLowerCase();
@@ -819,11 +687,6 @@
             // Recalculate entries visible
             const total = document.querySelectorAll('.transaction-row').length;
             document.getElementById('total-entries-badge').textContent = `Showing ${visibleCount} of ${total} entries`;
-        }
-
-        // Commit Invoice action
-        function commitInvoice() {
-            showToast(`Invoice verified and successfully committed to Xero Ledger!`);
         }
 
         // Logout function
