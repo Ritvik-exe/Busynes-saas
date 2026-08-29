@@ -254,7 +254,8 @@ def lambda_handler(event, context):
                     mode = 'subscription',
                     success_url = 'https://busynes.com/dashboard.html?session_id={CHECKOUT_SESSION_ID}',
                     cancel_url = 'https://busynes.com/pricing.html',
-                    client_reference_id = user_id
+                    client_reference_id = user_id,
+                    allow_promotion_codes = True
                 )
                 return {
                     'statusCode' : 200,
