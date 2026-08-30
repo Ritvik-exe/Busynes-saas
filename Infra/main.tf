@@ -1,403 +1,403 @@
 # ========================== Terraform and AWS versions ==========================
-terraform{
-    required_providers{
-        aws = {
-            source = "hashicorp/aws"
-            version = "~> 5.0"
-        }
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
     }
-    backend "s3"{
-        bucket = "busynes-tf-state-ritvik-160835721559-eu-west-2-an"
-        key = "global/s3/terraform.tfstate"
-        region = "eu-west-2"
-    }
+  }
+  backend "s3" {
+    bucket = "busynes-tf-state-ritvik-160835721559-eu-west-2-an"
+    key    = "global/s3/terraform.tfstate"
+    region = "eu-west-2"
+  }
 }
 
 # ========================== AWS Region ==========================
 provider "aws" {
-    region = "eu-west-2"
+  region = "eu-west-2"
 }
 
 # ========================== S3 Bucket ==========================
-resource "aws_s3_bucket" "invoice"{
-    bucket = var.busynes_bucket
+resource "aws_s3_bucket" "invoice" {
+  bucket = var.busynes_bucket
 
-    tags = {
-        Name = var.busynes_bucket
-        Environment = "dev"
-        Project = "busynes"
-        managedby = "terraform"
-    }
-    }
+  tags = {
+    Name        = var.busynes_bucket
+    Environment = "dev"
+    Project     = "busynes"
+    managedby   = "terraform"
+  }
+}
 
 # S3 Versioning
-resource "aws_s3_bucket_versioning" "invoice_version"{
-    bucket = aws_s3_bucket.invoice.id
-    versioning_configuration{
-        status = "Enabled"
-    }
+resource "aws_s3_bucket_versioning" "invoice_version" {
+  bucket = aws_s3_bucket.invoice.id
+  versioning_configuration {
+    status = "Enabled"
+  }
 }
 
-resource "aws_s3_bucket_public_access_block" "invoice_public_block"{
-    bucket = aws_s3_bucket.invoice.id
-    block_public_acls = true
-    block_public_policy = true
-    ignore_public_acls = true
-    restrict_public_buckets = true
+resource "aws_s3_bucket_public_access_block" "invoice_public_block" {
+  bucket                  = aws_s3_bucket.invoice.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
-resource "aws_s3_bucket_cors_configuration" "invoice_cors"{
-    bucket = aws_s3_bucket.invoice.id
-    cors_rule {
-        allowed_headers = ["*"]
-        allowed_methods = ["GET", "PUT", "POST", "HEAD", "DELETE"]
-        allowed_origins = ["https://busynes.com", "http://localhost:5173", "http://localhost:8080", "http://localhost:3000"]
-        expose_headers = ["ETag"]
-        max_age_seconds = 300
-    }
+resource "aws_s3_bucket_cors_configuration" "invoice_cors" {
+  bucket = aws_s3_bucket.invoice.id
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["GET", "PUT", "POST", "HEAD", "DELETE"]
+    allowed_origins = ["https://busynes.com", "http://localhost:5173", "http://localhost:8080", "http://localhost:3000"]
+    expose_headers  = ["ETag"]
+    max_age_seconds = 300
+  }
 }
 
-resource "aws_s3_bucket_lifecycle_configuration" "invoice_lifecycle"{
-    bucket = aws_s3_bucket.invoice.id
-    rule {
-        id = "invoice-6year-retention"
+resource "aws_s3_bucket_lifecycle_configuration" "invoice_lifecycle" {
+  bucket = aws_s3_bucket.invoice.id
+  rule {
+    id = "invoice-6year-retention"
 
-        filter{
-            prefix = "uploads/"
-        }
-
-        status = "Enabled"
-
-        transition {
-            storage_class = "STANDARD_IA"
-            days = 90
-        }
-
-        transition {
-            storage_class = "GLACIER_IR"
-            days = 180
-        }
-
-        expiration{
-            days = 2190
-        }
-
-        noncurrent_version_expiration {
-            noncurrent_days = 90
-        }
+    filter {
+      prefix = "uploads/"
     }
+
+    status = "Enabled"
+
+    transition {
+      storage_class = "STANDARD_IA"
+      days          = 90
+    }
+
+    transition {
+      storage_class = "GLACIER_IR"
+      days          = 180
+    }
+
+    expiration {
+      days = 2190
+    }
+
+    noncurrent_version_expiration {
+      noncurrent_days = 90
+    }
+  }
 }
 
 # ========================== DynamoDB ========================== 
-resource "aws_dynamodb_table" "memory"{
-    name = var.busynes_db
-    hash_key = "ClientID"
-    range_key = "Timestamp"
-    billing_mode = "PAY_PER_REQUEST"
+resource "aws_dynamodb_table" "memory" {
+  name         = var.busynes_db
+  hash_key     = "ClientID"
+  range_key    = "Timestamp"
+  billing_mode = "PAY_PER_REQUEST"
 
-    attribute {
-        name = "ClientID"
-        type = "S"
-    }
+  attribute {
+    name = "ClientID"
+    type = "S"
+  }
 
-    attribute {
-        name = "Timestamp"
-        type = "S"
-    }
+  attribute {
+    name = "Timestamp"
+    type = "S"
+  }
 
-    tags = {
-        Name = var.busynes_db
-        Environment = "dev"
-        Project = "busynes"
-        managedby = "terraform"
-    }
+  tags = {
+    Name        = var.busynes_db
+    Environment = "dev"
+    Project     = "busynes"
+    managedby   = "terraform"
+  }
 }
 
 # ========================== IAM Roles ========================== 
-resource "aws_iam_role" "busynes_lambda_role"{
-    name = var.busynes_lambda_role
-    assume_role_policy = jsonencode({
-        Version = "2012-10-17",
-        Statement = [
-            {
-                Action = "sts:AssumeRole",
-                Effect = "Allow",
-                Principal = {
-                    Service = "lambda.amazonaws.com"
-                }
-            }
-        ]
-    })
-    tags = {
-        Name = var.busynes_lambda_role
-        Environment = "dev"
-        Project = "busynes"
-        managedby = "terraform"
-    }
-    }
+resource "aws_iam_role" "busynes_lambda_role" {
+  name = var.busynes_lambda_role
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = "sts:AssumeRole",
+        Effect = "Allow",
+        Principal = {
+          Service = "lambda.amazonaws.com"
+        }
+      }
+    ]
+  })
+  tags = {
+    Name        = var.busynes_lambda_role
+    Environment = "dev"
+    Project     = "busynes"
+    managedby   = "terraform"
+  }
+}
 
-resource "aws_iam_role" "github_action_role"{
-    name = var.github_actions_role
-    assume_role_policy = jsonencode({
-        Version = "2012-10-17"
-        Statement = [
-            {
-                Action = "sts:AssumeRoleWithWebIdentity"
-                Effect = "Allow"
-                Sid = ""
-                Principal = {
-                    Federated = aws_iam_openid_connect_provider.github_actions.arn
-                }
-                Condition = {
-                    StringEquals = {
-                        "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
-                    }
-                    StringLike = {
-                        "token.actions.githubusercontent.com:sub": "repo:Ritvik-exe/Busynes-saas:*"
-                    }
-                }
+resource "aws_iam_role" "github_action_role" {
+  name = var.github_actions_role
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRoleWithWebIdentity"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Federated = aws_iam_openid_connect_provider.github_actions.arn
+        }
+        Condition = {
+          StringEquals = {
+            "token.actions.githubusercontent.com:aud" : "sts.amazonaws.com"
+          }
+          StringLike = {
+            "token.actions.githubusercontent.com:sub" : "repo:Ritvik-exe/Busynes-saas:*"
+          }
+        }
 
-            }
+      }
     ]
     }
-)
+  )
 
-tags = {
-    Name = var.github_actions_role
+  tags = {
+    Name        = var.github_actions_role
     Environment = "dev"
-    Project = "busynes"
-    managedby = "terraform"
-}
+    Project     = "busynes"
+    managedby   = "terraform"
+  }
 }
 
 # ========================== IAM policies Attachments ==========================
-resource "aws_iam_role_policy_attachment" "busynes_lambda_s3"{
-    role = aws_iam_role.busynes_lambda_role.name
-    policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+resource "aws_iam_role_policy_attachment" "busynes_lambda_s3" {
+  role       = aws_iam_role.busynes_lambda_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
 }
 
-resource "aws_iam_role_policy_attachment" "busynes_lambda_dynamodb"{
-    role = aws_iam_role.busynes_lambda_role.name
-    policy_arn = "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
+resource "aws_iam_role_policy_attachment" "busynes_lambda_dynamodb" {
+  role       = aws_iam_role.busynes_lambda_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
 }
 
-resource "aws_iam_role_policy_attachment" "busynes_lambda_execution"{
-    role = aws_iam_role.busynes_lambda_role.name
-    policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+resource "aws_iam_role_policy_attachment" "busynes_lambda_execution" {
+  role       = aws_iam_role.busynes_lambda_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
-resource "aws_iam_role_policy_attachment" "busynes_lambda_rekognition"{
-    role = aws_iam_role.busynes_lambda_role.name
-    policy_arn = "arn:aws:iam::aws:policy/AmazonRekognitionReadOnlyAccess"
+resource "aws_iam_role_policy_attachment" "busynes_lambda_rekognition" {
+  role       = aws_iam_role.busynes_lambda_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonRekognitionReadOnlyAccess"
 }
 
-resource "aws_iam_role_policy_attachment" "busynes_lambda_ses"{
-    role = aws_iam_role.busynes_lambda_role.name
-    policy_arn = "arn:aws:iam::aws:policy/AmazonSESFullAccess"
+resource "aws_iam_role_policy_attachment" "busynes_lambda_ses" {
+  role       = aws_iam_role.busynes_lambda_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSESFullAccess"
 }
 
-resource "aws_iam_role_policy_attachment" "busynes_github_action"{
-    role = aws_iam_role.github_action_role.name
-    policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+resource "aws_iam_role_policy_attachment" "busynes_github_action" {
+  role       = aws_iam_role.github_action_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
 
-resource "aws_iam_role_policy_attachment" "busynes_lambda_cognito"{
-    role = aws_iam_role.busynes_lambda_role.name
-    policy_arn = "arn:aws:iam::aws:policy/AmazonCognitoReadOnly"
+resource "aws_iam_role_policy_attachment" "busynes_lambda_cognito" {
+  role       = aws_iam_role.busynes_lambda_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonCognitoReadOnly"
 }
 
 # ========================== Lambda Function ==========================
-data "archive_file" "lambda_zip"{
-    type = "zip"
-    source_dir = "${path.module}/../Backend"
-    output_path = "${path.module}/lambda_function.zip"
+data "archive_file" "lambda_zip" {
+  type        = "zip"
+  source_dir  = "${path.module}/../Backend"
+  output_path = "${path.module}/lambda_function.zip"
 }
 
-resource "aws_lambda_function" "busynes_lambda_function"{
-    filename = data.archive_file.lambda_zip.output_path
-    function_name = var.busynes_lambda_function
-    role = aws_iam_role.busynes_lambda_role.arn
-    handler = "lambda_function.lambda_handler"
-    source_code_hash = data.archive_file.lambda_zip.output_base64sha256
+resource "aws_lambda_function" "busynes_lambda_function" {
+  filename         = data.archive_file.lambda_zip.output_path
+  function_name    = var.busynes_lambda_function
+  role             = aws_iam_role.busynes_lambda_role.arn
+  handler          = "lambda_function.lambda_handler"
+  source_code_hash = data.archive_file.lambda_zip.output_base64sha256
 
-    runtime = "python3.12"
+  runtime = "python3.12"
 
-    memory_size = 512
-    timeout = 15
+  memory_size = 512
+  timeout     = 15
 
-    environment {
-        variables = {
-            TABLE_NAME = aws_dynamodb_table.memory.name
-            INVOICE_BUCKET = aws_s3_bucket.invoice.id
-            USER_POOL_ID = aws_cognito_user_pool.busynes_user_pool.id 
-            STRIPE_SECRET_KEY = var.stripe_secret_key
-            STRIPE_WEBHOOK_SECRET = var.stripe_webhook_secret
-        }
+  environment {
+    variables = {
+      TABLE_NAME            = aws_dynamodb_table.memory.name
+      INVOICE_BUCKET        = aws_s3_bucket.invoice.id
+      USER_POOL_ID          = aws_cognito_user_pool.busynes_user_pool.id
+      STRIPE_SECRET_KEY     = var.stripe_secret_key
+      STRIPE_WEBHOOK_SECRET = var.stripe_webhook_secret
     }
+  }
 
-    tags = {
-        Name = var.busynes_lambda_function
-        Environment = "dev"
-        Project = "busynes"
-        managedby = "terraform"
-    }
+  tags = {
+    Name        = var.busynes_lambda_function
+    Environment = "dev"
+    Project     = "busynes"
+    managedby   = "terraform"
+  }
 }
 
 # ========================== Lambda Trigger ==========================
-resource "aws_lambda_permission" "invoice_trigger"{
-    statement_id = var.busynes_lambda_trigger
-    action = "lambda:InvokeFunction"
-    function_name = aws_lambda_function.busynes_lambda_function.arn
-    principal = "s3.amazonaws.com"
-    source_arn = aws_s3_bucket.invoice.arn
+resource "aws_lambda_permission" "invoice_trigger" {
+  statement_id  = var.busynes_lambda_trigger
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.busynes_lambda_function.arn
+  principal     = "s3.amazonaws.com"
+  source_arn    = aws_s3_bucket.invoice.arn
 }
 
-resource "aws_s3_bucket_notification" "bucket_notification"{
-    bucket = aws_s3_bucket.invoice.id
+resource "aws_s3_bucket_notification" "bucket_notification" {
+  bucket = aws_s3_bucket.invoice.id
 
-    lambda_function {
-        lambda_function_arn = aws_lambda_function.busynes_lambda_function.arn
-        events = ["s3:ObjectCreated:*"]
-        }
-    depends_on = [aws_lambda_permission.invoice_trigger]
+  lambda_function {
+    lambda_function_arn = aws_lambda_function.busynes_lambda_function.arn
+    events              = ["s3:ObjectCreated:*"]
+  }
+  depends_on = [aws_lambda_permission.invoice_trigger]
 }
 
 # ========================== HTTP API Gateway ==========================
-resource "aws_apigatewayv2_api" "busynes_api"{
-    name = var.busynes_api
-    protocol_type = "HTTP"
+resource "aws_apigatewayv2_api" "busynes_api" {
+  name          = var.busynes_api
+  protocol_type = "HTTP"
 
-    cors_configuration {
-        allow_headers = ["content-type", "authorization"]
-        allow_methods = ["GET", "POST", "PUT", "OPTIONS", "DELETE"]
-        allow_origins = ["https://busynes.com", "http://localhost:5173", "http://localhost:8080", "http://localhost:3000"]
-        max_age = 300
-    }
+  cors_configuration {
+    allow_headers = ["content-type", "authorization"]
+    allow_methods = ["GET", "POST", "PUT", "OPTIONS", "DELETE"]
+    allow_origins = ["https://busynes.com", "http://localhost:5173", "http://localhost:8080", "http://localhost:3000"]
+    max_age       = 300
+  }
 }
 
-resource "aws_apigatewayv2_integration" "busynes_api_integration"{
-    api_id = aws_apigatewayv2_api.busynes_api.id
-    integration_type = "AWS_PROXY"
-    integration_method = "POST"
-    integration_uri = aws_lambda_function.busynes_lambda_function.invoke_arn
-    payload_format_version = "2.0"
+resource "aws_apigatewayv2_integration" "busynes_api_integration" {
+  api_id                 = aws_apigatewayv2_api.busynes_api.id
+  integration_type       = "AWS_PROXY"
+  integration_method     = "POST"
+  integration_uri        = aws_lambda_function.busynes_lambda_function.invoke_arn
+  payload_format_version = "2.0"
 }
 
-resource "aws_apigatewayv2_route" "busynes_api_get_route"{
-    api_id = aws_apigatewayv2_api.busynes_api.id
-    route_key = "GET /"
-    target = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
-    authorization_type = "JWT"
-    authorizer_id = aws_apigatewayv2_authorizer.busynes_api_authorizer.id
+resource "aws_apigatewayv2_route" "busynes_api_get_route" {
+  api_id             = aws_apigatewayv2_api.busynes_api.id
+  route_key          = "GET /"
+  target             = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
+  authorization_type = "JWT"
+  authorizer_id      = aws_apigatewayv2_authorizer.busynes_api_authorizer.id
 }
 
-resource "aws_apigatewayv2_route" "busynes_api_post_route"{
-    api_id = aws_apigatewayv2_api.busynes_api.id
-    route_key = "POST /"
-    target = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
-    authorization_type = "JWT"
-    authorizer_id = aws_apigatewayv2_authorizer.busynes_api_authorizer.id
+resource "aws_apigatewayv2_route" "busynes_api_post_route" {
+  api_id             = aws_apigatewayv2_api.busynes_api.id
+  route_key          = "POST /"
+  target             = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
+  authorization_type = "JWT"
+  authorizer_id      = aws_apigatewayv2_authorizer.busynes_api_authorizer.id
 }
 
-resource "aws_apigatewayv2_route" "busynes_api_delete_route"{
-    api_id = aws_apigatewayv2_api.busynes_api.id
-    route_key = "DELETE /"
-    target = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
-    authorization_type = "JWT"
-    authorizer_id = aws_apigatewayv2_authorizer.busynes_api_authorizer.id
+resource "aws_apigatewayv2_route" "busynes_api_delete_route" {
+  api_id             = aws_apigatewayv2_api.busynes_api.id
+  route_key          = "DELETE /"
+  target             = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
+  authorization_type = "JWT"
+  authorizer_id      = aws_apigatewayv2_authorizer.busynes_api_authorizer.id
 }
 
-resource "aws_apigatewayv2_route" "stripe_secure_route"{
-    api_id = aws_apigatewayv2_api.busynes_api.id
-    route_key = "POST /checkout"
-    target = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
-    authorization_type = "JWT"
-    authorizer_id = aws_apigatewayv2_authorizer.busynes_api_authorizer.id
+resource "aws_apigatewayv2_route" "stripe_secure_route" {
+  api_id             = aws_apigatewayv2_api.busynes_api.id
+  route_key          = "POST /checkout"
+  target             = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
+  authorization_type = "JWT"
+  authorizer_id      = aws_apigatewayv2_authorizer.busynes_api_authorizer.id
 }
 
-resource "aws_apigatewayv2_route" "stripe_public_route"{
-    api_id = aws_apigatewayv2_api.busynes_api.id
-    route_key = "POST /webhook/stripe"
-    target = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
+resource "aws_apigatewayv2_route" "stripe_public_route" {
+  api_id    = aws_apigatewayv2_api.busynes_api.id
+  route_key = "POST /webhook/stripe"
+  target    = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
 }
 
-resource "aws_apigatewayv2_route" "busynes_support"{
-    api_id = aws_apigatewayv2_api.busynes_api.id
-    route_key = "POST /support"
-    target = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
+resource "aws_apigatewayv2_route" "busynes_support" {
+  api_id    = aws_apigatewayv2_api.busynes_api.id
+  route_key = "POST /support"
+  target    = "integrations/${aws_apigatewayv2_integration.busynes_api_integration.id}"
 }
 
-resource "aws_apigatewayv2_stage" "busynes_api_stage"{
-    api_id = aws_apigatewayv2_api.busynes_api.id
-    name = "$default"
-    auto_deploy = true
+resource "aws_apigatewayv2_stage" "busynes_api_stage" {
+  api_id      = aws_apigatewayv2_api.busynes_api.id
+  name        = "$default"
+  auto_deploy = true
 
-    default_route_settings{
-        throttling_burst_limit = 20
-        throttling_rate_limit = 10
-    }
+  default_route_settings {
+    throttling_burst_limit = 20
+    throttling_rate_limit  = 10
+  }
 
-    tags = {
-        Name = var.busynes_api
-        Environment = "dev"
-        Project = "busynes"
-        managedby = "terraform"
-    }
+  tags = {
+    Name        = var.busynes_api
+    Environment = "dev"
+    Project     = "busynes"
+    managedby   = "terraform"
+  }
 }
 
-resource "aws_apigatewayv2_authorizer" "busynes_api_authorizer"{
-    api_id = aws_apigatewayv2_api.busynes_api.id
-    authorizer_type = "JWT"
-    identity_sources = ["$request.header.Authorization"]
-    name = "busynes-cognito-authorizer"
-    jwt_configuration {
-        audience = [aws_cognito_user_pool_client.busynes_app_client.id]
-        issuer = "https://${aws_cognito_user_pool.busynes_user_pool.endpoint}"
-    }
+resource "aws_apigatewayv2_authorizer" "busynes_api_authorizer" {
+  api_id           = aws_apigatewayv2_api.busynes_api.id
+  authorizer_type  = "JWT"
+  identity_sources = ["$request.header.Authorization"]
+  name             = "busynes-cognito-authorizer"
+  jwt_configuration {
+    audience = [aws_cognito_user_pool_client.busynes_app_client.id]
+    issuer   = "https://${aws_cognito_user_pool.busynes_user_pool.endpoint}"
+  }
 }
 
 
 # Lambda Trigger for API Gateway
-resource "aws_lambda_permission" "lambda_api_trigger"{
-    statement_id = var.lambda_api_trigger
-    action = "lambda:InvokeFunction"
-    function_name = aws_lambda_function.busynes_lambda_function.arn
-    principal = "apigateway.amazonaws.com"
-    source_arn = "${aws_apigatewayv2_api.busynes_api.execution_arn}/*/*"
+resource "aws_lambda_permission" "lambda_api_trigger" {
+  statement_id  = var.lambda_api_trigger
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.busynes_lambda_function.arn
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_apigatewayv2_api.busynes_api.execution_arn}/*/*"
 }
 
 # ========================== GitHub actions ==========================
-resource "aws_iam_openid_connect_provider" "github_actions"{
-    url = "https://token.actions.githubusercontent.com"
-    client_id_list = [
-        "sts.amazonaws.com"
-    ]
-    thumbprint_list = ["6938fd4d98bab03faadb97b34396831e3780aea1"]
+resource "aws_iam_openid_connect_provider" "github_actions" {
+  url = "https://token.actions.githubusercontent.com"
+  client_id_list = [
+    "sts.amazonaws.com"
+  ]
+  thumbprint_list = ["6938fd4d98bab03faadb97b34396831e3780aea1"]
 }
 
 # ========================== Cognito User Pool ==========================
-resource "aws_cognito_user_pool" "busynes_user_pool"{
-    name = var.cognito_user_pool
-    username_attributes = ["email"]
-    auto_verified_attributes = ["email"]
+resource "aws_cognito_user_pool" "busynes_user_pool" {
+  name                     = var.cognito_user_pool
+  username_attributes      = ["email"]
+  auto_verified_attributes = ["email"]
 
-    email_configuration{
-        email_sending_account = "DEVELOPER" 
-        from_email_address = "support@busynes.com"
-        source_arn = "arn:aws:ses:eu-west-2:160835721559:identity/busynes.com"
-    }
+  email_configuration {
+    email_sending_account = "DEVELOPER"
+    from_email_address    = "support@busynes.com"
+    source_arn            = "arn:aws:ses:eu-west-2:160835721559:identity/busynes.com"
+  }
 
-    tags = {
-        Name = var.cognito_user_pool
-        Environment = "dev"
-        Project = "busynes"
-        managedby = "terraform"
-    }
+  tags = {
+    Name        = var.cognito_user_pool
+    Environment = "dev"
+    Project     = "busynes"
+    managedby   = "terraform"
+  }
 }
 
 # ========================== Cognito User Pool Client ==========================
-resource "aws_cognito_user_pool_client" "busynes_app_client"{
-    name = var.cognito_app_client
-    user_pool_id = aws_cognito_user_pool.busynes_user_pool.id
-    generate_secret = false
+resource "aws_cognito_user_pool_client" "busynes_app_client" {
+  name            = var.cognito_app_client
+  user_pool_id    = aws_cognito_user_pool.busynes_user_pool.id
+  generate_secret = false
 }
