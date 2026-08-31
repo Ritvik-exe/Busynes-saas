@@ -31,6 +31,9 @@ jobs:
             - name: Terraform Validate
               run: terraform validate
               working-directory: ./Infra
+            - name: Terraform Format
+              run: terraform fmt
+              working-directory: ./Infra
             - name: Terraform Apply
               run: terraform apply -auto-approve
               working-directory: ./Infra
