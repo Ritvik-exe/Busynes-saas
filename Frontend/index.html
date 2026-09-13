@@ -148,6 +148,10 @@
         .inner-glow {
             box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
         }
+
+        input[type="range"] {
+            accent-color: #187c13;
+        }
     </style>
 </head>
 
@@ -168,6 +172,8 @@
             <div class="hidden lg:flex items-center gap-6 xl:gap-8">
                 <a class="text-primary dark:text-primary-fixed border-b-2 border-primary pb-1 font-label-md text-label-md"
                     href="index.html" id="nav-product">Product</a>
+                <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 px-3 py-2 rounded-md font-label-md text-label-md hover:bg-surface-container-low"
+                    href="#roi-calculator" id="nav-calc">Calculator</a>
                 <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 px-3 py-2 rounded-md font-label-md text-label-md hover:bg-surface-container-low"
                     href="innovation.html" id="nav-lab">Innovation Lab</a>
                 <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 px-3 py-2 rounded-md font-label-md text-label-md hover:bg-surface-container-low"
@@ -194,6 +200,8 @@
                 <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 py-2.5 rounded-lg font-label-md text-label-md hover:bg-surface-container-low px-4 font-bold"
                     href="index.html">Product</a>
                 <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 py-2.5 rounded-lg font-label-md text-label-md hover:bg-surface-container-low px-4 font-bold"
+                    href="#roi-calculator">Calculator</a>
+                <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 py-2.5 rounded-lg font-label-md text-label-md hover:bg-surface-container-low px-4 font-bold"
                     href="innovation.html">Innovation Lab</a>
                 <a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-all duration-200 py-2.5 rounded-lg font-label-md text-label-md hover:bg-surface-container-low px-4 font-bold"
                     href="pricing.html">Pricing</a>
@@ -205,60 +213,143 @@
     </nav>
 
     <main class="pt-28 pb-20">
-        <!-- Hero Section -->
-        <section class="max-w-[1440px] mx-auto px-4 md:px-margin-desktop py-20 flex flex-col items-center text-center">
-            <div class="font-label-md text-label-md text-primary uppercase tracking-widest mb-4">Busynes for Business
+        <!-- Hero Section: Interactive Manual Cost Calculator -->
+        <section id="roi-calculator"
+            class="max-w-[1440px] mx-auto px-4 md:px-margin-desktop pt-10 pb-24 flex flex-col items-center text-center">
+            <div
+                class="inline-block px-3.5 py-1 rounded-full bg-primary-container/10 text-primary font-label-md text-xs font-bold uppercase tracking-wider mb-4">
+                Busynes for Business — Instant Extraction
             </div>
             <h1
                 class="font-display-lg text-display-lg md:text-headline-xl text-on-background max-w-4xl mb-6 tracking-tight">
-                Stop working for your data. Let your data work for your <span class="text-primary">Busynes.</span>
+                Stop typing receipts into spreadsheets. See what manual entry costs your <span
+                    class="text-primary">Busynes.</span>
             </h1>
-            <p class="font-body-lg text-body-lg text-secondary max-w-2xl mb-10">
-                The all-in-one ecosystem to automate your admin, track your growth, and reclaim your Sunday afternoons.
-                Powered by AWS Secure Intelligence.
+            <p class="font-body-lg text-body-lg text-secondary max-w-2xl mb-12">
+                UK businesses spend 10 minutes typing, reconciling, and filing every single receipt. Move the sliders
+                below to calculate your true annual loss.
             </p>
-            <!-- Combined Buttons Container (Side-by-Side on Desktop, Stacked on Mobile) -->
-            <div class="flex flex-col items-center mb-10">
-                <div class="flex flex-col sm:flex-row items-center gap-4">
-                    <!-- 1. The Primary Green Button -->
-                    <a href="signup.html"
-                        class="bg-primary text-white px-6 py-3.5 rounded-full font-semibold hover:bg-primary-container transition-all shadow-md">
-                        Get 10 Free Invoices
-                    </a>
 
-                    <!-- 2. The Restored "View Plans & Pricing" Button -->
-                    <a href="pricing.html"
-                        class="bg-surface-container-lowest border border-outline-variant text-on-surface-variant px-6 py-3.5 rounded-full font-semibold hover:bg-surface-container-low transition-all flex items-center gap-2">
-                        <span class="material-symbols-outlined text-[18px]">payments</span>
-                        View Plans & Pricing
-                    </a>
-                </div>
-
-                <!-- 3. The Text Label (Centered underneath both buttons) -->
-                <p class="text-xs text-on-surface-variant mt-3 font-medium">
-                    No credit card required. Free forever.
-                </p>
-            </div>
+            <!-- Interactive Calculator Hero Card -->
             <div
-                class="w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl border border-outline-variant/20 relative group">
-                <img alt="Busynes Dashboard Interface showing automated data flows and clean UI"
-                    class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-[1.01]"
-                    src="./assets/dashboard-mockup.webp">
-                <div
-                    class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/40 to-transparent pointer-events-none">
+                class="w-full max-w-4xl mx-auto bg-surface border border-outline-variant/50 rounded-2xl p-6 sm:p-10 shadow-2xl text-left">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                    <!-- Left Column: Sliders -->
+                    <div class="space-y-8">
+                        <!-- Slider 1: Monthly Invoices -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label for="calc-volume" class="font-body-sm text-sm font-semibold text-on-background">
+                                    Monthly Invoices / Receipts Processed
+                                </label>
+                                <span id="calc-volume-display"
+                                    class="px-3 py-1 rounded-full bg-primary text-white font-label-md text-xs font-bold shadow-sm">
+                                    80 docs
+                                </span>
+                            </div>
+                            <input type="range" id="calc-volume" min="10" max="500" step="5" value="80"
+                                class="w-full h-2.5 bg-surface-container-high rounded-lg cursor-pointer transition-all">
+                            <div class="flex justify-between text-[11px] text-secondary font-label-md font-medium mt-1">
+                                <span>10</span>
+                                <span>250</span>
+                                <span>500+</span>
+                            </div>
+                        </div>
+
+                        <!-- Slider 2: Hourly Rate -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label for="calc-rate" class="font-body-sm text-sm font-semibold text-on-background">
+                                    Admin / Staff Hourly Wage (£)
+                                </label>
+                                <span id="calc-rate-display"
+                                    class="px-3 py-1 rounded-full bg-primary text-white font-label-md text-xs font-bold shadow-sm">
+                                    £15 / hr
+                                </span>
+                            </div>
+                            <input type="range" id="calc-rate" min="10" max="50" step="1" value="15"
+                                class="w-full h-2.5 bg-surface-container-high rounded-lg cursor-pointer transition-all">
+                            <div class="flex justify-between text-[11px] text-secondary font-label-md font-medium mt-1">
+                                <span>£10/hr (Living Wage)</span>
+                                <span>£25/hr</span>
+                                <span>£50/hr (Owner Rate)</span>
+                            </div>
+                        </div>
+
+                        <!-- Benchmark Tag -->
+                        <div
+                            class="p-4 bg-surface-container-lowest border border-outline-variant/60 rounded-xl flex items-start gap-3">
+                            <span
+                                class="material-symbols-outlined text-primary text-[22px] flex-shrink-0 mt-0.5">verified</span>
+                            <p class="text-xs text-secondary leading-relaxed">
+                                Based on conservative UK accounts payable benchmarks: <strong>10 minutes per
+                                    document</strong> for manual handling, spreadsheet calculation, and HMRC filing.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Live Calculated Results & Primary CTA -->
+                    <div
+                        class="bg-surface-container-lowest border border-outline-variant/50 rounded-xl p-6 sm:p-7 flex flex-col justify-between shadow-sm">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center pb-3 border-b border-outline-variant/30">
+                                <span class="text-xs font-semibold text-secondary uppercase tracking-wider">Time Lost
+                                    Monthly</span>
+                                <span id="calc-hours-lost"
+                                    class="font-headline-md text-lg font-bold text-on-background">13.3 hours</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-3 border-b border-outline-variant/30">
+                                <span class="text-xs font-semibold text-secondary uppercase tracking-wider">Manual Labor
+                                    Cost / Yr</span>
+                                <span id="calc-annual-cost"
+                                    class="font-headline-md text-lg font-bold text-error">£2,400.00</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-3 border-b border-outline-variant/30">
+                                <span class="text-xs font-semibold text-secondary uppercase tracking-wider">Busynes
+                                    Unlimited / Yr</span>
+                                <span class="font-headline-md text-lg font-bold text-primary">£288.00</span>
+                            </div>
+                        </div>
+
+                        <!-- Savings Highlight Box -->
+                        <div class="mt-6 p-4 rounded-xl bg-primary-container/10 border-2 border-primary text-center">
+                            <span class="text-xs font-bold text-primary uppercase tracking-widest block mb-1">Estimated
+                                Net Annual Savings</span>
+                            <span id="calc-net-savings"
+                                class="text-3xl sm:text-4xl font-extrabold text-primary font-headline-xl tracking-tight">
+                                £2,052.00
+                            </span>
+                            <p class="text-[11px] text-secondary mt-1">Reclaimed capital & hours put back into business
+                                growth.</p>
+                        </div>
+
+                        <!-- Primary CTA Buttons -->
+                        <div class="mt-6 space-y-3 text-center">
+                            <a href="signup.html"
+                                class="w-full block bg-primary text-white py-3.5 rounded-full font-semibold hover:bg-primary-container transition-all shadow-md text-sm">
+                                Eliminate This Cost — Get 10 Free Invoices
+                            </a>
+                            <a href="pricing.html"
+                                class="w-full block bg-surface border border-outline-variant text-on-surface-variant py-2.5 rounded-full font-semibold hover:bg-surface-container-low transition-all text-xs">
+                                View Plans & Pricing
+                            </a>
+                            <p class="text-[11px] text-secondary pt-1 font-medium">No credit card required. Free tier
+                                forever.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Problem Section -->
-        <section class="bg-surface py-24">
+        <section class="bg-surface py-24 border-t border-outline-variant/20">
             <div class="max-w-[1440px] mx-auto px-4 md:px-margin-desktop">
                 <div class="text-center mb-16">
                     <h2 class="font-headline-lg text-headline-lg text-on-background mb-4">The Sunday Headache</h2>
                     <p class="font-body-md text-body-md text-secondary max-w-xl mx-auto">The traditional approach to
                         business admin is broken. It's time to stop the manual grind.</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-80 gap-gutter">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Card 1 -->
                     <div
                         class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/30 soft-shadow hover:shadow-md transition-shadow duration-300">
@@ -268,7 +359,7 @@
                         </div>
                         <h3 class="font-headline-md text-headline-md text-on-background mb-3">Manual Data Entry</h3>
                         <p class="font-body-sm text-body-sm text-secondary">Hours lost typing invoices and receipts into
-                            spreadsheets instead of focusing on sports venue growth strategies.</p>
+                            spreadsheets instead of focusing on high-impact business growth.</p>
                     </div>
                     <!-- Card 2 -->
                     <div
@@ -290,7 +381,7 @@
                         </div>
                         <h3 class="font-headline-md text-headline-md text-on-background mb-3">Lost Time</h3>
                         <p class="font-body-sm text-body-sm text-secondary">Weekends sacrificed to administrative
-                            catch-up, draining energy and passion for running your venue logistics.</p>
+                            catch-up, draining energy and passion for running your company operations.</p>
                     </div>
                 </div>
             </div>
@@ -336,7 +427,8 @@
                             </div>
                             <h4 class="font-headline-md text-[18px] font-semibold text-on-background mb-2">Intelligent
                                 Analysis</h4>
-                            <p class="font-body-sm text-body-sm text-secondary">Data extraction powered by AWS Textract
+                            <p class="font-body-sm text-body-sm text-secondary">Data extraction powered by AWS
+                                Rekognition
                                 & Intelligence.</p>
                         </div>
                         <!-- Step 3 -->
@@ -391,7 +483,7 @@
                         <h3 class="font-label-md text-label-md text-on-background font-semibold mb-2">Financial
                             Automation & Invoice Tracking</h3>
                         <p class="font-body-sm text-body-sm text-secondary text-sm">Automated ingestion, matching, and
-                            categorization of all sports venue purchase documents.</p>
+                            categorization of all operational purchase documents.</p>
                     </div>
                     <!-- Locked Cards -->
                     <div
@@ -425,7 +517,7 @@
                         </div>
                         <h3 class="font-label-md text-label-md text-on-surface-variant font-semibold mb-2">Inventory OS
                         </h3>
-                        <p class="font-body-sm text-body-sm text-tertiary text-sm">Real-time stadium equipment tracking
+                        <p class="font-body-sm text-body-sm text-tertiary text-sm">Real-time equipment tracking
                             with predictive ordering and restock capabilities.</p>
                     </div>
                     <div
@@ -490,6 +582,8 @@
                     <li><a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4"
                             href="index.html">Product</a></li>
                     <li><a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4"
+                            href="#roi-calculator">Calculator</a></li>
+                    <li><a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4"
                             href="innovation.html">Innovation Lab</a></li>
                     <li><a class="font-body-sm text-body-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4"
                             href="pricing.html">Pricing</a></li>
@@ -534,6 +628,48 @@
                 }
             });
         }
+
+        // Real-Time ROI Manual Cost Calculator Logic
+        function updateRoiCalculation() {
+            const volumeSlider = document.getElementById('calc-volume');
+            const rateSlider = document.getElementById('calc-rate');
+
+            if (!volumeSlider || !rateSlider) return;
+
+            const volume = parseInt(volumeSlider.value);
+            const rate = parseFloat(rateSlider.value);
+
+            // Update badge displays
+            document.getElementById('calc-volume-display').textContent = `${volume} docs`;
+            document.getElementById('calc-rate-display').textContent = `£${rate.toFixed(0)} / hr`;
+
+            // Core Formula: 10 minutes per document
+            const minutesPerDoc = 10;
+            const hoursMonthly = (volume * minutesPerDoc) / 60;
+            const costMonthly = hoursMonthly * rate;
+            const costAnnual = costMonthly * 12;
+
+            // Busynes Pro cost: £29 * 12 = £288/yr
+            const busynesAnnual = 288;
+            const netSavingsAnnual = Math.max(0, costAnnual - busynesAnnual);
+
+            // Update UI elements
+            document.getElementById('calc-hours-lost').textContent = `${hoursMonthly.toFixed(1)} hours`;
+            document.getElementById('calc-annual-cost').textContent = `£${costAnnual.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            document.getElementById('calc-net-savings').textContent = `£${netSavingsAnnual.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        }
+
+        // Attach event listeners to sliders on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const volumeSlider = document.getElementById('calc-volume');
+            const rateSlider = document.getElementById('calc-rate');
+
+            if (volumeSlider && rateSlider) {
+                volumeSlider.addEventListener('input', updateRoiCalculation);
+                rateSlider.addEventListener('input', updateRoiCalculation);
+                updateRoiCalculation(); // Initial run
+            }
+        });
     </script>
 </body>
 
