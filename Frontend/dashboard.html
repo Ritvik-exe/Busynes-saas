@@ -267,13 +267,13 @@
                         Welcome back, <span id="user-display-name" class="text-primary">Ritvik</span>!
                     </h1>
                     <p class="font-body-md text-body-md text-on-surface-variant mt-1">Here is a quick overview of your
-                        stadium growth & ledger pipeline today.</p>
+                        business spending & ledger pipeline today.</p>
                 </div>
                 <div class="flex items-center gap-3">
-                    <span
-                        class="text-xs bg-emerald-500/10 text-emerald-600 font-label-md font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                        Emerald Tier Plan
+                    <span id="user-plan-badge"
+                        class="text-xs bg-primary/10 text-primary font-label-md font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                        Active Workspace
                     </span>
                 </div>
             </div>
@@ -288,12 +288,12 @@
                         <span
                             class="bg-[#eaf1ff] text-primary px-2 py-[2px] rounded-full font-label-md text-[10px] flex items-center gap-[2px]">
                             <span class="material-symbols-outlined text-[12px] icon-fill">check_circle</span>
-                            Processed
+                            Live
                         </span>
                     </div>
                     <div class="mt-4">
                         <div class="text-3xl font-bold text-on-surface" id="daily-spend-value">£0.00</div>
-                        <p class="text-xs text-on-surface-variant mt-1">AWS Live Sync</p>
+                        <p class="text-xs text-on-surface-variant mt-1">Calculated Today</p>
                     </div>
                 </div>
 
@@ -311,7 +311,7 @@
                     </div>
                 </div>
 
-                <!-- KPI 3 -->
+                <!-- KPI 3: Dynamic Time Saved -->
                 <div
                     class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-[0px_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between">
                     <div class="flex justify-between items-start">
@@ -320,8 +320,8 @@
                             data-icon="schedule">schedule</span>
                     </div>
                     <div class="mt-4">
-                        <div class="text-3xl font-bold text-[#187c13]">14.5 Hrs</div>
-                        <p class="text-xs text-[#187c13] font-semibold mt-1">Sunday Saver Metrics</p>
+                        <div class="text-3xl font-bold text-primary" id="time-saved-value">0.0 Hrs</div>
+                        <p class="text-xs text-secondary font-medium mt-1">10 min/invoice benchmark</p>
                     </div>
                 </div>
 
@@ -329,18 +329,18 @@
                 <div
                     class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-[0px_4px_20px_rgba(0,0,0,0.03)] flex flex-col justify-between">
                     <div class="flex justify-between items-start">
-                        <span class="text-on-surface-variant text-sm font-medium">AI Accuracy</span>
+                        <span class="text-on-surface-variant text-sm font-medium">Extraction Accuracy</span>
                         <span class="material-symbols-outlined text-primary p-2 bg-secondary-container rounded-lg"
                             data-icon="memory">memory</span>
                     </div>
                     <div class="mt-4">
                         <div class="text-3xl font-bold text-on-surface">99.8%</div>
-                        <p class="text-xs text-on-surface-variant mt-1">Continuous Learning Active</p>
+                        <p class="text-xs text-on-surface-variant mt-1">OCR Total Recognition</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Interactive Graph and Category Breakdown Grid -->
+            <!-- Interactive Graph and Support/Feedback Grid -->
             <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <!-- Monthly Revenue Chart Widget -->
                 <div
@@ -362,54 +362,42 @@
                     </div>
                 </div>
 
-                <!-- Category Breakdown Widgets -->
+                <!-- Functional Support & Feature Feedback Widget -->
                 <div
                     class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-[0px_4px_20px_rgba(0,0,0,0.05)] flex flex-col justify-between">
                     <div>
-                        <h3 class="font-headline-md text-base font-bold text-on-surface mb-1 font-bold">The Innovation
-                            Lab</h3>
-                        <p class="text-xs text-on-surface-variant mb-4">What should Busynes build next? Cast your
-                            stadium vote below:</p>
+                        <h3 class="font-headline-md text-base font-bold text-on-surface mb-1">Direct Help & Feedback
+                        </h3>
+                        <p class="text-xs text-on-surface-variant mb-4">Have an extraction query or need a specific
+                            accounting export? Tell our engineering team directly:</p>
                     </div>
-                    <div class="space-y-4">
-                        <!-- Option 1 -->
-                        <div
-                            class="flex items-center justify-between p-3 border border-outline-variant rounded-xl bg-white hover:border-primary/20 transition-all">
-                            <span class="text-sm font-semibold text-on-surface">Tax & VAT Assistant</span>
-                            <button onclick="upvoteFeature(this, 'tax')"
-                                class="flex flex-col items-center justify-center p-2 rounded-lg bg-surface-container-low hover:bg-primary hover:text-white transition-all text-on-surface-variant w-14 h-12 cursor-pointer group">
-                                <span
-                                    class="material-symbols-outlined text-[16px] group-hover:scale-110 transition-transform">keyboard_arrow_up</span>
-                                <span class="font-label-md text-[10px] leading-none mt-1 font-bold val">0</span>
-                            </button>
-                        </div>
-                        <!-- Option 2 -->
-                        <div
-                            class="flex items-center justify-between p-3 border border-outline-variant rounded-xl bg-white hover:border-primary/20 transition-all">
-                            <span class="text-sm font-semibold text-on-surface">RFID Inventory Scanner</span>
-                            <button onclick="upvoteFeature(this, 'scanner')"
-                                class="flex flex-col items-center justify-center p-2 rounded-lg bg-surface-container-low hover:bg-primary hover:text-white transition-all text-on-surface-variant w-14 h-12 cursor-pointer group">
-                                <span
-                                    class="material-symbols-outlined text-[16px] group-hover:scale-110 transition-transform">keyboard_arrow_up</span>
-                                <span class="font-label-md text-[10px] leading-none mt-1 font-bold val">0</span>
-                            </button>
-                        </div>
-                        <!-- Option 3 -->
-                        <div
-                            class="flex items-center justify-between p-3 border border-outline-variant rounded-xl bg-white hover:border-primary/20 transition-all">
-                            <span class="text-sm font-semibold text-on-surface">WhatsApp Invoice Integration</span>
-                            <button onclick="upvoteFeature(this, 'whatsapp')"
-                                class="flex flex-col items-center justify-center p-2 rounded-lg bg-surface-container-low hover:bg-primary hover:text-white transition-all text-on-surface-variant w-14 h-12 cursor-pointer group">
-                                <span
-                                    class="material-symbols-outlined text-[16px] group-hover:scale-110 transition-transform">keyboard_arrow_up</span>
-                                <span class="font-label-md text-[10px] leading-none mt-1 font-bold val">0</span>
-                            </button>
-                        </div>
+
+                    <div class="space-y-3">
+                        <a href="innovation.html#need-help-section"
+                            class="flex items-center justify-between p-3.5 border border-outline-variant/60 rounded-xl bg-surface hover:border-primary transition-all group">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary text-xl">headset_mic</span>
+                                <span class="text-sm font-semibold text-on-surface">Request Support Callback</span>
+                            </div>
+                            <span
+                                class="material-symbols-outlined text-secondary text-sm group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+                        </a>
+
+                        <a href="innovation.html"
+                            class="flex items-center justify-between p-3.5 border border-outline-variant/60 rounded-xl bg-surface hover:border-primary transition-all group">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-amber-600 text-xl">bug_report</span>
+                                <span class="text-sm font-semibold text-on-surface">Report Extraction Issue</span>
+                            </div>
+                            <span
+                                class="material-symbols-outlined text-secondary text-sm group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+                        </a>
                     </div>
-                    <a href="innovation.html"
-                        class="mt-4 text-center block text-xs font-bold text-primary hover:underline">
-                        Open Innovation Hub & Roadmap →
-                    </a>
+
+                    <div class="mt-6 pt-4 border-t border-outline-variant/30 text-center">
+                        <p class="text-[11px] text-secondary">We review user tickets in daily London sprint deployments.
+                        </p>
+                    </div>
                 </div>
             </section>
 
@@ -480,18 +468,6 @@
     </div>
 
     <script>
-        // Upvote feature logic
-        const upvotedKeys = {};
-        function upvoteFeature(btn, key) {
-            if (upvotedKeys[key]) return;
-            upvotedKeys[key] = true;
-            const valSpan = btn.querySelector('.val');
-            let votes = parseInt(valSpan.textContent);
-            valSpan.textContent = votes + 1;
-            btn.classList.add('bg-primary', 'text-white');
-            btn.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
-        }
-
         // Render dynamic monthly trend chart based on live database data
         function renderDynamicChart(invoices) {
             const chartContainer = document.getElementById('monthly-chart-container');
@@ -499,7 +475,6 @@
 
             const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-            // 1. Calculate sliding 6-month window ending at the current month
             const now = new Date();
             const last6Months = [];
             for (let i = 5; i >= 0; i--) {
@@ -512,7 +487,6 @@
                 });
             }
 
-            // 2. Count total invoices for each of the last 6 months
             invoices.forEach(item => {
                 const itemDate = new Date(item.Timestamp);
                 const itemMonth = itemDate.getMonth();
@@ -524,10 +498,8 @@
                 }
             });
 
-            // 3. Find max count to scale heights proportionally
             const maxCount = Math.max(...last6Months.map(m => m.count));
 
-            // 4. Generate HTML for bars
             let chartHtml = '';
             last6Months.forEach(m => {
                 const heightPercent = maxCount === 0 ? 5 : Math.max(5, (m.count / maxCount) * 90);
@@ -554,7 +526,6 @@
 
             chartContainer.innerHTML = chartHtml;
 
-            // Update sliding window subtitle
             const chartHeaderLabel = document.getElementById('chart-header-label');
             if (chartHeaderLabel) {
                 chartHeaderLabel.textContent = `${last6Months[0].name} - ${last6Months[5].name} ${now.getFullYear()}`;
@@ -563,7 +534,6 @@
 
         // Load dashboard stats & dynamic recent invoices list on DOM load
         document.addEventListener('DOMContentLoaded', () => {
-            // Load user display name
             const userName = sessionStorage.getItem('busynes_user_name');
             if (userName) {
                 document.getElementById('user-display-name').textContent = userName;
@@ -571,6 +541,7 @@
 
             const dailySpendVal = document.getElementById('daily-spend-value');
             const monthlyOverheadVal = document.getElementById('monthly-overhead-value');
+            const timeSavedVal = document.getElementById('time-saved-value');
             const tableBody = document.getElementById('transaction-rows');
 
             const apiEndpoint = 'https://aqwkzc2r0d.execute-api.eu-west-2.amazonaws.com/';
@@ -590,7 +561,7 @@
                 .then(data => {
                     console.log('AWS Gateway Live Metrics loaded:', data);
 
-                    // Update metrics cards with 2 decimal places
+                    // 1. Update Spend & Overhead metrics
                     if (data.Today_Total !== undefined) {
                         dailySpendVal.textContent = '£' + parseFloat(data.Today_Total).toLocaleString('en-GB', {
                             minimumFractionDigits: 2,
@@ -604,11 +575,14 @@
                         });
                     }
 
-                    // Render dynamic invoices in Recent Extractions table
+                    // 2. Dynamically compute Time Saved based on actual processed count (10 min benchmark)
+                    const invoiceCount = (data.Invoices && data.Invoices.length) ? data.Invoices.length : 0;
+                    const hoursSaved = (invoiceCount * 10) / 60;
+                    timeSavedVal.textContent = `${hoursSaved.toFixed(1)} Hrs`;
+
+                    // 3. Render dynamic invoices in Recent Extractions table
                     if (data.Invoices && data.Invoices.length > 0) {
-                        // Sort most recent first based on Timestamp
                         const sortedInvoices = data.Invoices.sort((a, b) => new Date(b.Timestamp) - new Date(a.Timestamp));
-                        // Show top 5 recent invoices
                         const recentInvoices = sortedInvoices.slice(0, 5);
 
                         let rowsHtml = '';
@@ -641,25 +615,16 @@
                         });
                         tableBody.innerHTML = rowsHtml;
 
-                        // Render dynamic monthly trend chart
                         renderDynamicChart(data.Invoices);
                     } else {
-                        // If no invoices, render empty state chart
                         renderDynamicChart([]);
                     }
                 })
                 .catch(err => {
                     console.error('Error fetching live metrics:', err);
-                    dailySpendVal.textContent = '£12,450.00';
-                    monthlyOverheadVal.textContent = '£84,200.00';
-
-                    const errorNotice = document.createElement('span');
-                    errorNotice.className = "text-[10px] text-red-600 block mt-1 font-sans";
-                    errorNotice.textContent = "(Serving cached metrics)";
-                    dailySpendVal.parentNode.appendChild(errorNotice.cloneNode(true));
-                    monthlyOverheadVal.parentNode.appendChild(errorNotice);
-
-                    // Fallback chart render
+                    dailySpendVal.textContent = '£0.00';
+                    monthlyOverheadVal.textContent = '£0.00';
+                    timeSavedVal.textContent = '0.0 Hrs';
                     renderDynamicChart([]);
                 });
         });
