@@ -19,7 +19,7 @@ export default defineConfig(() => {
           main: path.resolve(__dirname, 'index.html'),
           dashboard: path.resolve(__dirname, 'dashboard.html'),
           transactions: path.resolve(__dirname, 'transactions.html'),
-          innovation: path.resolve(__dirname, 'innovation.html'),
+          support: path.resolve(__dirname, 'support.html'),
           onboarding: path.resolve(__dirname, 'onboarding.html'),
           pricing: path.resolve(__dirname, 'pricing.html'),
           signup: path.resolve(__dirname, 'signup.html'),
