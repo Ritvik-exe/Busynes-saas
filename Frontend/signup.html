@@ -12,7 +12,7 @@
                     if (parts.length === 3) {
                         const payload = JSON.parse(atob(parts[1]));
                         const now = Math.floor(Date.now() / 1000);
-                        if (payload.exp && payload.exp > now) {
+                        if (payload.exp && payload.exp < now) {
                             // User has a valid session! Bypass login.
                             window.location.href = "dashboard.html";
                         }
@@ -25,7 +25,7 @@
     </script>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Busynes - Get Started</title>
+    <title>Busynes - Get Started Free</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
@@ -44,7 +44,7 @@
             theme: {
                 extend: {
                     "colors": {
-                        "primary-container": "#1B7A16",
+                        "primary-container": "#187c13",
                         "on-primary": "#ffffff",
                         "surface-container-low": "#F1F5F9",
                         "on-surface": "#0F172A",
@@ -89,7 +89,7 @@
 
 <body
     class="bg-slate-50 font-sans text-on-surface antialiased min-h-screen flex flex-col md:flex-row overflow-x-hidden">
-    <!-- Left Side: Brand Panel -->
+    <!-- Left Side: Brand & Trust Panel -->
     <div
         class="relative w-full md:w-1/2 bg-primary-container flex flex-col justify-between p-8 md:p-14 text-white overflow-hidden min-h-[35vh] md:min-h-screen">
         <div class="absolute inset-0 opacity-20 pointer-events-none"
@@ -103,27 +103,33 @@
         </div>
         <div class="relative z-10 my-8 md:my-14 max-w-lg">
             <blockquote class="font-display font-bold text-2xl sm:text-3xl md:text-5xl leading-tight mb-4 md:mb-6">
-                Automated receipt extraction and real-time ledger reconciliation.
+                Automated receipt extraction and real-time ledger calculation.
             </blockquote>
-            <p class="text-base sm:text-lg text-emerald-200 block font-medium">
-                Built for founders to eliminate manual bookkeeping.
+            <p class="text-base sm:text-lg text-emerald-100 block font-medium">
+                Eliminate manual spreadsheet data entry in 3 seconds.
             </p>
         </div>
         <div class="relative z-10 grid grid-cols-2 gap-4 max-w-md">
             <div class="glass-panel p-4 rounded-xl flex items-center gap-3 shadow-sm">
                 <span class="material-symbols-outlined text-white text-[28px]"
-                    style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
-                <span class="text-sm font-semibold text-white tracking-wide">Financial Hub</span>
+                    style="font-variation-settings: 'FILL' 1;">speed</span>
+                <div>
+                    <span class="text-xs text-emerald-200 block">Processing Speed</span>
+                    <span class="text-sm font-semibold text-white tracking-wide">3-Second OCR</span>
+                </div>
             </div>
             <div class="glass-panel p-4 rounded-xl flex items-center gap-3 shadow-sm">
                 <span class="material-symbols-outlined text-white text-[28px]"
-                    style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
-                <span class="text-sm font-semibold text-white tracking-wide">AI Extraction</span>
+                    style="font-variation-settings: 'FILL' 1;">gpp_good</span>
+                <div>
+                    <span class="text-xs text-emerald-200 block">UK Compliance</span>
+                    <span class="text-sm font-semibold text-white tracking-wide">6-Year HMRC S3</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Right Side: Authentication Form -->
+    <!-- Right Side: Clean Authentication Form -->
     <div
         class="w-full md:w-1/2 bg-white flex items-center justify-center p-6 sm:p-10 md:p-14 min-h-[65vh] md:min-h-screen relative">
         <div class="w-full max-w-md">
@@ -142,47 +148,8 @@
             <div class="mb-8">
                 <h1 id="auth-title" class="font-display text-3xl font-bold text-slate-900 mb-2 tracking-tight">Get
                     Started</h1>
-                <p id="auth-subtitle" class="text-sm text-slate-500">Join thousands of founders optimizing their
-                    financial workflow.</p>
-            </div>
-
-            <!-- Social Logins -->
-            <div class="space-y-3 mb-8">
-                <button type="button"
-                    onclick="alert('Social logins are scheduled for our V1.1.0 release. Please use your business email for the V1.0.0 pilot!')"
-                    class="w-full flex items-center justify-center gap-3 py-2.5 px-4 border border-slate-200 rounded-xl hover:bg-slate-50 transition-all text-slate-800 text-sm font-semibold cursor-pointer shadow-2xs">
-                    <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24">
-                        <path fill="#4285F4"
-                            d="M23.745 12.27c0-.745-.065-1.47-.19-2.17H12v4.51h6.615c-.29 1.54-1.14 2.85-2.43 3.715v3.07h3.93c2.3-2.12 3.63-5.25 3.63-9.125z" />
-                        <path fill="#34A853"
-                            d="M12 24c3.305 0 6.075-1.095 8.1-2.965l-3.93-3.07c-1.095.735-2.495 1.17-4.17 1.17-3.21 0-5.935-2.165-6.91-5.075H1.035v3.17C3.065 21.36 7.235 24 12 24z" />
-                        <path fill="#FBBC05"
-                            d="M5.09 14.06c-.245-.735-.385-1.525-.385-2.345s.14-1.61.385-2.345V6.2H1.035A11.965 11.965 0 0 0 0 11.715c0 2.015.485 3.935 1.35 5.63l4.055-3.285z" />
-                        <path fill="#EA4335"
-                            d="M12 4.75c1.795 0 3.41.615 4.675 1.82l3.495-3.495C18.07 1.115 15.3 0 12 0 7.235 0 3.065 2.64 1.035 6.68l4.055 3.17c.975-2.91 3.7-5.1 6.91-5.1z" />
-                    </svg>
-                    Continue with Google
-                </button>
-                <button type="button"
-                    onclick="alert('Social logins are scheduled for our V1.1.0 release. Please use your business email for the V1.0.0 pilot!')"
-                    class="w-full flex items-center justify-center gap-3 py-2.5 px-4 border border-slate-200 rounded-xl hover:bg-slate-50 transition-all text-slate-800 text-sm font-semibold cursor-pointer shadow-2xs">
-                    <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 21 21">
-                        <path fill="#f35325" d="M1 1h9v9H1z" />
-                        <path fill="#81bc06" d="M11 1h9v9h-9z" />
-                        <path fill="#05a6f0" d="M1 11h9v9H1z" />
-                        <path fill="#ffba08" d="M11 11h9v9h-9z" />
-                    </svg>
-                    Continue with Microsoft
-                </button>
-            </div>
-
-            <!-- Separator -->
-            <div class="relative flex items-center py-2 mb-6">
-                <div class="flex-grow border-t border-slate-200"></div>
-                <span
-                    class="flex-shrink-0 mx-4 text-xs font-semibold text-slate-400 bg-white px-2 uppercase tracking-wider">or
-                    use business email</span>
-                <div class="flex-grow border-t border-slate-200"></div>
+                <p id="auth-subtitle" class="text-sm text-slate-500">Calculate your invoice totals in under 60 seconds.
+                </p>
             </div>
 
             <!-- Form -->
@@ -196,10 +163,10 @@
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5"
-                        for="email">Business Email</label>
+                        for="email">Email Address</label>
                     <input
                         class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all shadow-2xs"
-                        id="email" placeholder="sarah@acme.com" type="email" required />
+                        id="email" placeholder="you@example.com" type="email" required />
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5"
@@ -222,12 +189,12 @@
                 <!-- Submit Button -->
                 <button id="auth-submit-btn" type="submit"
                     class="w-full bg-primary-container hover:bg-emerald-800 text-white py-3.5 px-4 rounded-xl text-sm font-bold tracking-wide transition-all active:scale-[0.99] mt-6 shadow-md hover:shadow-lg cursor-pointer flex items-center justify-center gap-2">
-                    <span>Create Account</span>
+                    <span>Create Free Account</span>
                 </button>
             </form>
 
-            <p id="auth-footer-text" class="mt-6 text-center text-xs text-slate-400 max-w-xs mx-auto leading-relaxed">
-                By signing up, you agree to the 14-day Professional Pilot. No credit card required.
+            <p id="auth-footer-text" class="mt-6 text-center text-xs text-slate-500 max-w-xs mx-auto leading-relaxed">
+                10 free processed invoices every month. Free forever. No credit card required.
             </p>
         </div>
     </div>
@@ -257,15 +224,15 @@
                     tabSignIn.className = "flex-1 py-2.5 text-center font-semibold text-sm text-slate-500 hover:text-slate-900 transition-colors cursor-pointer";
                     nameContainer.classList.remove('hidden');
                     authTitle.textContent = "Get Started";
-                    authSubtitle.textContent = "Join thousands of founders optimizing their financial workflow.";
-                    submitBtn.innerHTML = "<span>Create Account</span>";
+                    authSubtitle.textContent = "Calculate your invoice totals in under 60 seconds.";
+                    submitBtn.innerHTML = "<span>Create Free Account</span>";
                     authFooterText.classList.remove('hidden');
                 } else {
                     tabSignIn.className = "flex-1 py-2.5 text-center font-semibold text-sm bg-white text-slate-900 shadow-sm rounded-lg transition-all cursor-pointer";
                     tabSignUp.className = "flex-1 py-2.5 text-center font-semibold text-sm text-slate-500 hover:text-slate-900 transition-colors cursor-pointer";
                     nameContainer.classList.add('hidden');
                     authTitle.textContent = "Welcome Back";
-                    authSubtitle.textContent = "Welcome back! Enter your business credentials to log in.";
+                    authSubtitle.textContent = "Enter your credentials to access your document vault.";
                     submitBtn.innerHTML = "<span>Sign In</span>";
                     authFooterText.classList.add('hidden');
                 }
@@ -285,16 +252,16 @@
 
                 const email = document.getElementById('email').value.trim();
                 const password = document.getElementById('password').value.trim();
-                const fullName = document.getElementById('fullName').value.trim() || (email ? email.split('@')[0] : 'Sarah');
+                const fullName = document.getElementById('fullName').value.trim() || (email ? email.split('@')[0] : 'User');
 
                 if (!email || !password) {
-                    showError("Please enter your business email and password.");
+                    showError("Please enter your email address and password.");
                     return;
                 }
 
                 const AmazonCognitoIdentity = window.AmazonCognitoIdentity;
                 if (!AmazonCognitoIdentity || !AmazonCognitoIdentity.CognitoUserPool) {
-                    console.warn("Cognito SDK not loaded. Using local sessionStorage demo pilot state.");
+                    console.warn("Cognito SDK not loaded. Using local sessionStorage demo state.");
                     const dummyIdToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." + btoa(JSON.stringify({
                         sub: "demo_user_777",
                         name: fullName,
@@ -309,7 +276,6 @@
                     return;
                 }
 
-                // Task 1: Configure Cognito User Pool client to cache session in sessionStorage
                 const poolData = {
                     UserPoolId: "eu-west-2_CL264NQ0Y",
                     ClientId: "4p948h27ndof1i2r3ubeg31h8p",
@@ -319,7 +285,7 @@
 
                 const originalBtnText = submitBtn.innerHTML;
                 submitBtn.disabled = true;
-                submitBtn.innerHTML = `<span class="inline-block animate-spin mr-2">%#8635;</span> ${isSignUpMode ? 'Creating Account...' : 'Authenticating...'}`;
+                submitBtn.innerHTML = `<span class="inline-block animate-spin mr-2">&#8635;</span> ${isSignUpMode ? 'Creating Account...' : 'Authenticating...'}`;
 
                 if (isSignUpMode) {
                     const attributeList = [
@@ -332,12 +298,11 @@
                         submitBtn.innerHTML = originalBtnText;
 
                         if (err) {
-                            showError("AWS Cognito Notice: " + err.message);
+                            showError("AWS Notice: " + err.message);
                             return;
                         }
 
                         if (result.userConfirmed) {
-                            // If the user pool is configured to auto-confirm (or in mock), log them in and proceed
                             const authDetails = new AmazonCognitoIdentity.AuthenticationDetails({
                                 Username: email,
                                 Password: password
@@ -387,7 +352,6 @@
                                 if (payload.name) userName = payload.name;
                             } catch (err) { }
 
-                            // Task 1 & 3: Save active ID Token to sessionStorage
                             sessionStorage.setItem('busynes_id_token', idTokenStr);
                             sessionStorage.setItem('busynes_user_name', userName);
                             sessionStorage.setItem('busynes_client_id', email.replace(/[@.]/g, '_'));
@@ -414,12 +378,12 @@
                         <div class="bg-white border border-slate-200 p-8 max-w-md w-full rounded-2xl shadow-2xl text-center space-y-4">
                             <span class="material-symbols-outlined text-primary-container text-5xl inline-block" style="font-variation-settings: 'FILL' 1;">mark_email_unread</span>
                             <h3 class="font-display text-2xl font-bold text-slate-900">Verify Your Email</h3>
-                            <p class="text-sm text-slate-500">We've sent a 6-digit confirmation code to <strong class="text-slate-900">${email}</strong>. Enter it below to activate your pilot.</p>
+                            <p class="text-sm text-slate-500">We've sent a 6-digit confirmation code to <strong class="text-slate-900">${email}</strong>. Enter it below to activate your free account.</p>
                             <input id="verification-code" type="text" maxlength="6" class="w-full text-center tracking-[0.8em] font-mono text-2xl border border-slate-300 rounded-xl py-3 focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 font-bold text-slate-900" placeholder="000000" />
                             
                             <div id="verify-error-banner" class="hidden text-xs text-red-700 bg-red-50 p-2.5 rounded-lg border border-red-200 font-medium"></div>
 
-                            <button type="button" id="confirm-code-btn" class="w-full bg-primary-container hover:bg-emerald-800 text-white py-3.5 rounded-xl text-sm font-bold transition-colors cursor-pointer shadow-sm">Confirm Code</button>
+                            <button type="button" id="confirm-code-btn" class="w-full bg-primary-container hover:bg-emerald-800 text-white py-3.5 rounded-xl text-sm font-bold transition-colors cursor-pointer shadow-sm">Confirm & Launch Dashboard</button>
                         </div>
                     </div>
                 `;
@@ -451,7 +415,7 @@
                         if (err) {
                             confirmBtn.disabled = false;
                             confirmBtn.textContent = originalBtnText;
-                            verifyErrEl.textContent = "AWS Cognito Notice: " + err.message;
+                            verifyErrEl.textContent = "AWS Notice: " + err.message;
                             verifyErrEl.classList.remove('hidden');
                             return;
                         }
@@ -469,13 +433,11 @@
                                 sessionStorage.setItem('busynes_user_name', fullName);
                                 sessionStorage.setItem('busynes_client_id', email.replace(/[@.]/g, '_'));
 
-                                // Redirect straight to dashboard!
                                 window.location.href = "dashboard.html";
                             },
                             onFailure: (authErr) => {
                                 confirmBtn.disabled = false;
                                 confirmBtn.textContent = originalBtnText;
-                                // Fallback to sign-in tab if auto-auth fails
                                 toggleMode(false);
                                 const overlay = document.getElementById('verification-overlay');
                                 if (overlay) overlay.remove();
